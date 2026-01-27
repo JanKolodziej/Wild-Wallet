@@ -10,14 +10,5 @@
         public int? CategoryId { get; set; }
         public int? AccountId { get; set; }
 
-        public Transactions(DateTime date, decimal amount, int categoryid,int accountid, string title = "")
-        {
-            Date = date;
-            Amount = amount;
-            Title = title;
-            CategoryId = categoryid;
-            AccountId = accountid; 
-
-        }
     }
 }

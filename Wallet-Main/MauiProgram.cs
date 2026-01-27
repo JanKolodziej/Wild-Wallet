@@ -15,6 +15,9 @@ namespace Wallet_Main
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
             builder.Services.AddDbContext<Wallet_lib.WalletContext>();
+            builder.Services.AddTransient<Wallet_lib.WalletService>();
+            builder.Services.AddTransient<MainPageVM>();
+            builder.Services.AddTransient<MainPage>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
