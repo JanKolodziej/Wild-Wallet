@@ -65,7 +65,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Wallet lib\Wallet lib.csproj" />
+	  <ProjectReference Include="..\Wallet lib\Wallet_lib.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -78,6 +78,12 @@
 	  <MauiXaml Update="Resources\Styles\Styles_cards.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Wallet_db.db">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

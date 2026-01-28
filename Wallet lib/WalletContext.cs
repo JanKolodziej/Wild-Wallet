@@ -18,7 +18,9 @@ namespace Wallet_lib
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=wallet_db.db");
+            string dbName = "wallet_db.db";
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, dbName);
+            optionsBuilder.UseSqlite($"Data Source={dbPath}");
         }
 
     }

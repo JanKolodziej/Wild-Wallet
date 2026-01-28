@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36804.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet-Main", "Wallet-Main\Wallet-Main.csproj", "{FE886B81-1260-4F7D-98EC-CD77FFFF8DB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet lib", "Wallet lib\Wallet lib.csproj", "{2D25CF83-8FFA-48C2-B7F1-0A50C58D591A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet_lib", "Wallet lib\Wallet_lib.csproj", "{2D25CF83-8FFA-48C2-B7F1-0A50C58D591A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testy", "Testy\Testy.csproj", "{4F52EAD1-5A54-48A8-A415-9A0AA4B651B7}"
 EndProject
