@@ -7,6 +7,7 @@ using Wallet_lib;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 namespace Wallet_Main
 {
     public partial class MainPageVM:ObservableObject
@@ -19,9 +20,9 @@ namespace Wallet_Main
         private decimal expenses;
 
         private readonly WalletService _service;
-        public ObservableCollection<Wallet_lib.Accounts> Account_list { get; set; }
-        public ObservableCollection<Transactions> Transactions_list { get; set; }
-        public ObservableCollection<Categories> Categories_list { get; set; }
+        public ObservableCollection<Wallet_lib.Accounts> Account_list { get; set; } = new();
+        public ObservableCollection<Transactions> Transactions_list { get; set; } = new();
+        public ObservableCollection<Categories> Categories_list { get; set; } = new();
 
         
 
@@ -29,30 +30,50 @@ namespace Wallet_Main
         public MainPageVM(WalletService service)
         {  
             _service = service;
-            Transactions_list = new ObservableCollection<Transactions>();
-            Categories_list = new ObservableCollection<Categories>();
-            Account_list = new ObservableCollection<Wallet_lib.Accounts>();
-            Import_Accounts();
-            Import_Categories();
-            Import_Transactions();
+
+            Expenses = 0;
+            Balance = 0;
+            Income = 0;
+            Import_Data();
+            foreach(Transactions transaction in Transactions_list)
+            {
+                Calculate(transaction);
+            }
+            
         }
-        public async void Import_Transactions()
+        public async void Import_Data()
         {
-            Transactions_list.Clear();
-            var data = await _service.GetAllTransactionsAsync();
-            Transactions_list = new ObservableCollection<Transactions>(data);
+            var ac = await _service.Get_Accounts_Async();
+            Account_list = new ObservableCollection<Wallet_lib.Accounts>(ac);
+            var cat = await _service.Get_All_Categories_Async();
+            Categories_list = new ObservableCollection<Categories>(cat);
+            var tr = await _service.Get_All_Transactions_Async();
+            Transactions_list = new ObservableCollection<Transactions>(tr);
         }
-        public async void Import_Categories()
+
+        public void Calculate(Transactions transaction)
         {
-            Categories_list.Clear();
-            var data = await _service.GetAllCategoriesAsync();
-            Categories_list = new ObservableCollection<Categories>(data);
+            if (transaction.Amount >= 0)
+            {
+                Income += transaction.Amount;
+            }
+            else if (transaction.Amount < 0)
+            {
+                Expenses += transaction.Amount;
+            }
+            Balance += transaction.Amount;
         }
-        public async void Import_Accounts()
+        [RelayCommand]
+        private void NewTransaction()
         {
-            Account_list.Clear();
-            var data = await _service.GetAccountsAsync();
-            Account_list = new ObservableCollection<Wallet_lib.Accounts>(data);
+            Transactions transaction = new Transactions
+            {
+                Amount = 10,
+                Date=DateTime.Now
+            };
+            _service.Add_Transaction(transaction);
+            Transactions_list.Add(transaction);
+            Calculate(transaction);
         }
     }
 }

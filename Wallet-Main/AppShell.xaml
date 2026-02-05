@@ -10,7 +10,7 @@ FlyoutBehavior="Flyout">
     <Shell.FlyoutHeader>
         <Grid HeightRequest="200" BackgroundColor="SlateGray">
             <Label Text="Witaj Użytkowniku!" 
-                   TextColor="White"
+                   TextColor="{StaticResource White}"
                    VerticalOptions="Center" 
                    HorizontalOptions="Center" />
         </Grid>
@@ -20,12 +20,12 @@ FlyoutBehavior="Flyout">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Ustawienia" >
-        <!--<ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />-->
+    <FlyoutItem Title="" >
+        <!--<ShellContent ContentTemplate="{DataTemplate local:}" />-->
     </FlyoutItem>
 
-    <FlyoutItem Title="O nas">
-        <!--<ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />-->
+    <FlyoutItem Title="">
+        <!--<ShellContent ContentTemplate="{DataTemplate local:}" />-->
     </FlyoutItem>
 
 

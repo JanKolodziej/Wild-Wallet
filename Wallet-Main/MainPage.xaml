@@ -6,12 +6,40 @@
              BackgroundColor="#212735">
 
     <ScrollView>
+       
+            
+        
         <FlexLayout Wrap="Wrap"  AlignItems="Start" Margin="0">
-            <Border Style="{StaticResource ElevatedCardBorderStyle}"> 
-                
-                    <Label Text="Testowy Tekst" Style="{StaticResource CardTitle}"/>
+            
+                <Border Style="{StaticResource ElevatedCardBorderStyle}">
+                <VerticalStackLayout>
+                    <Label Text="Wpływy" Style="{StaticResource CardTitle}"/>
+                    <Label Text="{Binding Income}" Style="{StaticResource CardValueLarge}"/>
+                </VerticalStackLayout>
+                    
+                </Border>
+                <Border Style="{StaticResource ElevatedCardBorderStyle}">
+                <VerticalStackLayout>
+                    <Label Text="Wydatki" Style="{StaticResource CardTitle}"/>
+                    <Label Text="{Binding Expenses}" Style="{StaticResource CardValueLarge}"/>
+                </VerticalStackLayout>
             </Border>
+
+            
+            <Border Style="{StaticResource ElevatedCardBorderStyle}"> 
+                <Label Text="Testowy Tekst" Style="{StaticResource CardTitle}"/>
+            </Border>
+            
+                <Button Text="+"
+               TextColor="White"
+               BackgroundColor="CadetBlue"
+               HorizontalOptions="End"
+               VerticalOptions="End"
+               Command="{Binding NewTransactionCommand}"/>  
+            
+
         </FlexLayout>
+      
     </ScrollView>
 
 </ContentPage>
