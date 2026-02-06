@@ -20,13 +20,15 @@ namespace Wallet_Main
             options.UseSqlite($"Data Source={dbPath}"));
                 
             
-            builder.Services.AddTransient<Wallet_lib.WalletService>();
-            
-            builder.Services.AddTransient<MainPageVM>();
-            builder.Services.AddTransient<MainPage>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+            builder.Services.AddTransient<Wallet_lib.WalletService>();
+            builder.Services.AddTransient<MainPageViewModel>();
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<AddTransactionPage>();
+            builder.Services.AddTransient<AddTransactionViewModel>();
 
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
@@ -38,9 +40,9 @@ namespace Wallet_Main
                 {
                     db.Transactions.AddRange(new List<Wallet_lib.Transactions>
                     {
-                        new Wallet_lib.Transactions { Id=1, Amount = -50.50m },
-                        new Wallet_lib.Transactions { Id=2, Amount = 300.00m },
-                        new Wallet_lib.Transactions { Id=3, Amount = 45.00m }
+                        new Wallet_lib.Transactions { Id=1, Amount = -50.50m,Date=DateTime.Now },
+                        new Wallet_lib.Transactions { Id=2, Amount = 300.00m,Date=DateTime.Now  },
+                        new Wallet_lib.Transactions { Id=3, Amount = 45.00m,Date=DateTime.Now  }
                     });
 
                     db.SaveChanges();

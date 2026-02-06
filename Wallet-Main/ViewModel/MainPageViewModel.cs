@@ -10,7 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 namespace Wallet_Main
 {
-    public partial class MainPageVM:ObservableObject
+    public partial class MainPageViewModel:ObservableObject
     {
         [ObservableProperty]
         private decimal income;
@@ -27,7 +27,7 @@ namespace Wallet_Main
         
 
 
-        public MainPageVM(WalletService service)
+        public MainPageViewModel(WalletService service)
         {  
             _service = service;
 
@@ -39,7 +39,15 @@ namespace Wallet_Main
             {
                 Calculate(transaction);
             }
-            
+
+            Get_Transaction_In_Month(DateTime.Now);
+        }
+
+        public async void Get_Transaction_In_Month(DateTime date)
+        {
+            var data = await _service.Get_Transaction_month(date);
+            Transactions_list = new ObservableCollection<Wallet_lib.Transactions>(data);
+
         }
         public async void Import_Data()
         {
@@ -64,8 +72,9 @@ namespace Wallet_Main
             Balance += transaction.Amount;
         }
         [RelayCommand]
-        private void NewTransaction()
+        private async Task NewTransaction()
         {
+            await Shell.Current.GoToAsync(nameof(AddTransactionPage));
             Transactions transaction = new Transactions
             {
                 Amount = 10,

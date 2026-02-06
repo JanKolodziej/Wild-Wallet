@@ -69,12 +69,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="View\AddTransactionPage.xaml.cs">
+	    <DependentUpon>AddTransactionPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\Styles\Styles_cards.xaml.cs">
 	    <DependentUpon>Styles_cards.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\MainPage.xaml.cs">
+	    <DependentUpon>MainPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="View\AddTransactionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\Styles_cards.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

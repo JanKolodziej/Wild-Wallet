@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local ="clr-namespace:Wallet_Main"
+             x:Class="Wallet_Main.MainPage"
+             xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
+             BackgroundColor="#212735">
+
+    <ScrollView>
+       
+        <FlexLayout Wrap="Wrap"  AlignItems="Start" Margin="0">
+
+
+            <Border Style="{StaticResource CardBorderStyle}" BackgroundColor="{StaticResource AccentGreen}">
+                <VerticalStackLayout>
+                    <Label Text="Wpływy" Style="{StaticResource CardTitle}" />
+                    <Label Text="{Binding Income}" Style="{StaticResource CardValueLarge}"/>
+                </VerticalStackLayout>
+                    
+                </Border>
+                <Border Style="{StaticResource ElevatedCardBorderStyle}">
+                <VerticalStackLayout>
+                    <Label Text="Wydatki" Style="{StaticResource CardTitle}"/>
+                    <Label Text="{Binding Expenses}" Style="{StaticResource CardValueLarge}"/>
+                </VerticalStackLayout>
+            </Border>
+
+
+            <CollectionView 
+                
+                ItemsSource="{Binding Transactions_list}" 
+                Margin="10"
+                WidthRequest="300">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Transactions">
+                        <Border Style="{StaticResource ElevatedCardBorderStyle}">
+                            <VerticalStackLayout>
+                                <Label 
+                                    Style="{StaticResource CardTitle}"
+                                    Text="{Binding Date,StringFormat='{0:MMMM} {0:dd}'}"/>  
+                                <Label 
+                                    Style="{StaticResource CardValueLarge}"
+                                    Text="{Binding Amount}"/>
+                            </VerticalStackLayout>
+                        </Border>
+                        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+
+            <Button Text="+"
+               TextColor="White"
+               BackgroundColor="CadetBlue"
+               HorizontalOptions="End"
+               VerticalOptions="End"
+               Command="{Binding NewTransactionCommand}"/>  
+            
+
+        </FlexLayout>
+      
+    </ScrollView>
+
+</ContentPage>
