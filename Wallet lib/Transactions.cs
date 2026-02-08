@@ -12,6 +12,17 @@ namespace Wallet_lib
         public int? CategoryId { get; set; }
         public int? AccountId { get; set; }
 
+        public Transactions()
+        {
 
+        }
+        public Transactions( DateTime date, decimal amount, string? title, int? categoryId, int? accountId)
+        {
+            Date = date;
+            Amount = amount;
+            Title = title;
+            CategoryId = categoryId;
+            AccountId = accountId;
+        }
     }
 }

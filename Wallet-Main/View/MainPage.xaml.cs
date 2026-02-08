@@ -7,6 +7,14 @@
             InitializeComponent();
             BindingContext = vm;
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if(BindingContext is MainPageViewModel vm)
+            {
+                vm.Refresh_DataCommand.Execute(null);
+            }
+        }
 
     }
 }

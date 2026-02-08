@@ -27,7 +27,7 @@ namespace Wallet_lib
                     Title = t.Title,
                     CategoryId = t.CategoryId,
                     AccountId = t.AccountId
-                }).ToListAsync();
+                }).OrderByDescending(t=>t.Date).ToListAsync();
         }
         
         public async Task<List<Categories>> Get_All_Categories_Async()
@@ -47,6 +47,34 @@ namespace Wallet_lib
 
             }).ToListAsync();
         }
+        /// <summary>
+        /// Calculates balance throughout whole histoty
+        /// </summary>
+        /// <returns></returns>
+        public async Task<decimal> Get_Balance_Async()
+        {
+            return await _context.Transactions.SumAsync(t => t.Amount);
+        }
+        /// <summary>
+        /// Calculates income in a given month
+        /// </summary>
+        /// <returns></returns>
+        public async Task<decimal> Get_Income_Async(DateTime date)
+        {
+            return await _context.Transactions.Where(t => t.Amount > 0 && t.Date.Month == date.Month).SumAsync(t => t.Amount);
+        }
+        /// <summary>
+        /// Calculates expenses in a given month
+        /// </summary>
+        /// <returns></returns>
+        public async Task<decimal> Get_Expenses_Async(DateTime date)
+        {
+            return await _context.Transactions.Where(t => t.Amount < 0 && t.Date.Month == date.Month).SumAsync(t => t.Amount);
+        }
+        /// <summary>
+        /// Adds a new transaction to the data base 
+        /// </summary>
+        /// <param name="transaction">The <see cref="Transactions"/> object to add. Cannot be <c>null</c>.</param>
         public async void Add_Transaction(Transactions transaction)
         {
             _context.Transactions.Add(transaction);

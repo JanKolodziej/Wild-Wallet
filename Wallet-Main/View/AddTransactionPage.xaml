@@ -4,8 +4,30 @@
              x:Class="Wallet_Main.AddTransactionPage"
              xmlns:local="clr-namespace:Wallet_Main"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
-             x:DataType="local:AddTransactionViewModel">
+             x:DataType="local:AddTransactionViewModel"
+             BackgroundColor="#212735">
     <FlexLayout>
-        <Entry Placeholder="Tytul Wydatku"/>
+        <VerticalStackLayout>
+            <Border>
+                    <Entry Placeholder="Tytul Wydatku" Text="{Binding Name}" Style="{StaticResource CardBgElevated}" TextColor="WhiteSmoke" />
+            </Border>
+            <Border Stroke="Grey">
+
+                <Entry  Text="{Binding Amount}" Placeholder="Kwota Wydatku" Style="{StaticResource CardBgElevated}" TextColor="WhiteSmoke" Keyboard="Numeric">
+                </Entry>
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding isAmountValid}" Value="False">
+                        <Setter Property="Stroke" Value="Red"/>
+                    </DataTrigger>
+                </Border.Triggers>
+            </Border>
+            <Border>
+                <DatePicker TextColor="WhiteSmoke" Date="{Binding Date}" />
+            </Border>
+            <Border>
+                <Button Text="Dodaj Tranzakcje" Command="{Binding AddCommand}" IsEnabled="{Binding isAmountValid}" />
+
+            </Border>
+        </VerticalStackLayout>
     </FlexLayout>
 </ContentPage>

@@ -34,55 +34,35 @@ namespace Wallet_Main
             Expenses = 0;
             Balance = 0;
             Income = 0;
-            Import_Data();
-            foreach(Transactions transaction in Transactions_list)
-            {
-                Calculate(transaction);
-            }
+            Import_Data(DateTime.Now);
 
-            Get_Transaction_In_Month(DateTime.Now);
-        }
-
-        public async void Get_Transaction_In_Month(DateTime date)
-        {
-            var data = await _service.Get_Transaction_month(date);
-            Transactions_list = new ObservableCollection<Wallet_lib.Transactions>(data);
 
         }
-        public async void Import_Data()
+
+        public async void Import_Data(DateTime date)
         {
-            var ac = await _service.Get_Accounts_Async();
-            Account_list = new ObservableCollection<Wallet_lib.Accounts>(ac);
             var cat = await _service.Get_All_Categories_Async();
             Categories_list = new ObservableCollection<Categories>(cat);
             var tr = await _service.Get_All_Transactions_Async();
             Transactions_list = new ObservableCollection<Transactions>(tr);
-        }
 
-        public void Calculate(Transactions transaction)
-        {
-            if (transaction.Amount >= 0)
-            {
-                Income += transaction.Amount;
-            }
-            else if (transaction.Amount < 0)
-            {
-                Expenses += transaction.Amount;
-            }
-            Balance += transaction.Amount;
+            var data = await _service.Get_Transaction_month(date);
+            Transactions_list = new ObservableCollection<Wallet_lib.Transactions>(data);
+            Income = await _service.Get_Income_Async(date);
+            Expenses = await _service.Get_Expenses_Async(date);
+            Balance = await _service.Get_Balance_Async();
         }
+        [RelayCommand]
+        public void Refresh_Data()
+        {
+            Import_Data(DateTime.Now);
+        }
+          
         [RelayCommand]
         private async Task NewTransaction()
         {
             await Shell.Current.GoToAsync(nameof(AddTransactionPage));
-            Transactions transaction = new Transactions
-            {
-                Amount = 10,
-                Date=DateTime.Now
-            };
-            _service.Add_Transaction(transaction);
-            Transactions_list.Add(transaction);
-            Calculate(transaction);
+            
         }
     }
 }
