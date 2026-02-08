@@ -15,11 +15,11 @@ namespace Wallet_Main
         [ObservableProperty]
         private DateTime date;
         [ObservableProperty]
-        private string name;
+        private string? name;
         [ObservableProperty]
-        private int categoryId;
+        private int? categoryId;
         [ObservableProperty]
-        private int accountId;
+        private int? accountId;
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(isAmountValid))]
         private string amount;

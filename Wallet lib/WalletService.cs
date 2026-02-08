@@ -92,10 +92,15 @@ namespace Wallet_lib
         }
         public async Task<List<Transactions>> Get_Transaction_month(DateTime date)
         {
-            var data = await _context.Transactions.Where(t=> t.Date.Year ==date.Date.Year && t.Date.Month==date.Date.Month).ToListAsync();
+            var data = await _context.Transactions.Where(t=> t.Date.Year ==date.Date.Year && t.Date.Month==date.Date.Month).
+                OrderByDescending(t=>t.Date).ToListAsync();
             return data;
         }
-
+        //public async Task<Transactions> Get_Last_Transaction()
+        //{
+        //    var data = await _context.Transactions.OrderByDescending(t => t.Date).FirstAsync();
+        //    return data;
+        //}
         
     }
 

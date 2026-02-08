@@ -43,8 +43,8 @@ namespace Wallet_Main
         {
             var cat = await _service.Get_All_Categories_Async();
             Categories_list = new ObservableCollection<Categories>(cat);
-            var tr = await _service.Get_All_Transactions_Async();
-            Transactions_list = new ObservableCollection<Transactions>(tr);
+            var ac = await _service.Get_Accounts_Async();
+            Account_list = new ObservableCollection<Wallet_lib.Accounts>(ac);
 
             var data = await _service.Get_Transaction_month(date);
             Transactions_list = new ObservableCollection<Wallet_lib.Transactions>(data);
@@ -53,9 +53,14 @@ namespace Wallet_Main
             Balance = await _service.Get_Balance_Async();
         }
         [RelayCommand]
-        public void Refresh_Data()
+        public async Task Refresh_Data()
         {
-            Import_Data(DateTime.Now);
+            var data = await _service.Get_Transaction_month(DateTime.Now);
+            Transactions_list.Clear();
+           foreach(var d in data)
+           {
+                Transactions_list.Add(d);
+           }
         }
           
         [RelayCommand]
