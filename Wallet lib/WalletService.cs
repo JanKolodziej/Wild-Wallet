@@ -96,11 +96,9 @@ namespace Wallet_lib
                 OrderByDescending(t=>t.Date).ToListAsync();
             return data;
         }
-        //public async Task<Transactions> Get_Last_Transaction()
-        //{
-        //    var data = await _context.Transactions.OrderByDescending(t => t.Date).FirstAsync();
-        //    return data;
-        //}
+
+            
+
         
     }
 

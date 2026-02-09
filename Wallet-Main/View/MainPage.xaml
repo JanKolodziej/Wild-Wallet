@@ -28,16 +28,24 @@
 
             <CollectionView 
                 
-                ItemsSource="{Binding Transactions_list}" 
+                ItemsSource="{Binding GroupedTransactionsList}" 
                 Margin="10"
-                WidthRequest="300">
+                WidthRequest="300"
+                IsGrouped="True">
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate x:DataType="models:GroupedTransacions">
+                        <Border Style="{StaticResource ElevatedCardBorderStyle}">
+                            <Label Text="{Binding GroupDate,StringFormat='{0:MMMM} {0:dd}'}" Style="{StaticResource CardTitle}"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Transactions">
                         <Border Style="{StaticResource ElevatedCardBorderStyle}">
                             <VerticalStackLayout>
                                 <Label 
                                     Style="{StaticResource CardTitle}"
-                                    Text="{Binding Date,StringFormat='{0:MMMM} {0:dd}'}"/>  
+                                    Text="{Binding Title}"/>  
                                 <Label 
                                     Style="{StaticResource CardValueLarge}"
                                     Text="{Binding Amount}"/>
