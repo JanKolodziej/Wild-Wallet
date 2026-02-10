@@ -4,11 +4,22 @@
              xmlns:local ="clr-namespace:Wallet_Main"
              x:Class="Wallet_Main.MainPage"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
-             BackgroundColor="#212735">
+             BackgroundColor="#212735"
+             xmlns:lvc ="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui">
 
     <ScrollView>
        
         <FlexLayout Wrap="Wrap"  AlignItems="Start" Margin="0">
+            <Border Style="{StaticResource ElevatedCardBorderStyle}">
+                <lvc:CartesianChart 
+                    Series="{Binding SeriesList}" 
+                    XAxes="{Binding XAxes}" 
+                    HeightRequest="400" 
+                    WidthRequest="400" 
+                    Background="{StaticResource CardBgElevated}"/>
+            </Border>
+            
+
 
 
             <Border Style="{StaticResource CardBorderStyle}" BackgroundColor="{StaticResource AccentGreen}">
@@ -62,7 +73,7 @@
                BackgroundColor="CadetBlue"
                HorizontalOptions="End"
                VerticalOptions="End"
-               Command="{Binding NewTransactionCommand}"/>  
+               Command="{Binding New_TransactionCommand}"/>  
             
 
         </FlexLayout>

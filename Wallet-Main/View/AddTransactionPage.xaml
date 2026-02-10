@@ -8,15 +8,18 @@
              BackgroundColor="#212735">
     <FlexLayout>
         <VerticalStackLayout>
+            <Border Style="{StaticResource CardBgElevated}">
+                <Picker  ItemsSource="{Binding Accounts}"  ItemDisplayBinding="{Binding Name}" TextColor="WhiteSmoke" />
+            </Border>
             <Border>
-                    <Entry Placeholder="Tytul Wydatku" Text="{Binding Name}" Style="{StaticResource CardBgElevated}" TextColor="WhiteSmoke" />
+                    <Entry Placeholder="Tytul Wydatku" Text="{Binding Title}" Style="{StaticResource CardBgElevated}" TextColor="WhiteSmoke" />
             </Border>
             <Border Stroke="Grey">
 
                 <Entry  Text="{Binding Amount}" Placeholder="Kwota Wydatku" Style="{StaticResource CardBgElevated}" TextColor="WhiteSmoke" Keyboard="Numeric">
                 </Entry>
                 <Border.Triggers>
-                    <DataTrigger TargetType="Border" Binding="{Binding isAmountValid}" Value="False">
+                    <DataTrigger TargetType="Border" Binding="{Binding isAmountValid}" Value="False" >
                         <Setter Property="Stroke" Value="Red"/>
                     </DataTrigger>
                 </Border.Triggers>
@@ -24,9 +27,11 @@
             <Border>
                 <DatePicker TextColor="WhiteSmoke" Date="{Binding Date}" />
             </Border>
+            <Border Style="{StaticResource CardBgElevated}">
+                <Picker  ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Name}" TextColor="WhiteSmoke"/>
+            </Border>
             <Border>
                 <Button Text="Dodaj Tranzakcje" Command="{Binding AddCommand}" IsEnabled="{Binding isAmountValid}" />
-
             </Border>
         </VerticalStackLayout>
     </FlexLayout>

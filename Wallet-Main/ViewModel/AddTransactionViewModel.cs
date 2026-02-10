@@ -15,7 +15,7 @@ namespace Wallet_Main
         [ObservableProperty]
         private DateTime date;
         [ObservableProperty]
-        private string? name;
+        private string? title;
         [ObservableProperty]
         private int? categoryId;
         [ObservableProperty]
@@ -25,7 +25,8 @@ namespace Wallet_Main
         private string amount;
 
         public bool isAmountValid => decimal.TryParse(Amount, out _);
-        
+        public ObservableCollection<Categories> Categories { get; set; } = new();
+        public ObservableCollection<Wallet_lib.Accounts> Accounts { get; set; } = new();
 
 
 
@@ -34,14 +35,21 @@ namespace Wallet_Main
         {
             Date = DateTime.Now;
             _service = service;
+            Load_Data();
         }
-
+        public async void Load_Data()
+        {
+            var cat = await _service.Get_All_Categories_Async();
+            Categories = new ObservableCollection<Categories>(cat);
+            var acc = await _service.Get_Accounts_Async();
+            Accounts = new ObservableCollection<Wallet_lib.Accounts>(acc);
+        }
         [RelayCommand]
         public async Task Add()
         {
             if(isAmountValid)
             {
-                _service.Add_Transaction(new(Date, decimal.Parse(Amount), Name, CategoryId, AccountId));
+                _service.Add_Transaction(new(Date, decimal.Parse(Amount), Title, CategoryId, AccountId));
                 await Shell.Current.GoToAsync("..");
             }
             

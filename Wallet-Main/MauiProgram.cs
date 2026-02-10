@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LiveChartsCore.SkiaSharpView.Maui;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace Wallet_Main
 {
@@ -9,6 +11,8 @@ namespace Wallet_Main
         {
             var builder = MauiApp.CreateBuilder();
             builder
+                .UseSkiaSharp()
+                .UseLiveCharts()
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
@@ -35,7 +39,7 @@ namespace Wallet_Main
             {
                 var db = scope.ServiceProvider.GetRequiredService<Wallet_lib.WalletContext>();
                 db.Database.EnsureCreated();
-
+               
                 if (!db.Transactions.Any())
                 {
                     db.Transactions.AddRange(new List<Wallet_lib.Transactions>
@@ -46,12 +50,38 @@ namespace Wallet_Main
                     });
 
                     db.SaveChanges();
-                    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe do bazy");
+                    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe tranzakcji do bazy");
+                }
+                if(!db.Categories.Any())
+                {
+                    db.Categories.AddRange(new List<Wallet_lib.Categories>
+                    {
+                        new Wallet_lib.Categories { Id =1,Name="Zakupy" },
+                        new Wallet_lib.Categories { Id =2,Name="Transport" },
+                        new Wallet_lib.Categories { Id =3,Name="Rachunki" }
+
+                    });
+                    db.SaveChanges();
+                    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe kategorii do bazy");
+                }
+                if (!db.Accounts.Any())
+                {
+                    db.Accounts.AddRange(new List<Wallet_lib.Accounts>
+                    {
+                        new Wallet_lib.Accounts { Id =1,Name="Konto Główne" },
+                        new Wallet_lib.Accounts { Id =2,Name="Konto Oszczędnościowe" }
+
+                    });
+                    db.SaveChanges();
+                    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe kont do bazy");
                 }
 
                 var count = db.Transactions.Count();
                 System.Diagnostics.Debug.WriteLine($"Aktualna liczba rekordów w bazie urządzenia: {count}");
+
+
             }
+
             return app;
         }
     }
