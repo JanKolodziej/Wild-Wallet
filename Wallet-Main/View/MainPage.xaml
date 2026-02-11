@@ -5,7 +5,8 @@
              x:Class="Wallet_Main.MainPage"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
              BackgroundColor="#212735"
-             xmlns:lvc ="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui">
+             xmlns:lvc ="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             x:DataType="local:MainPageViewModel">
 
     <ScrollView>
        
@@ -42,7 +43,8 @@
                 ItemsSource="{Binding GroupedTransactionsList}" 
                 Margin="10"
                 WidthRequest="300"
-                IsGrouped="True">
+                IsGrouped="True"
+                EmptyView="Brak Tranzakcji do wyświetlenia">
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate x:DataType="models:GroupedTransacions">
                         <Border Style="{StaticResource ElevatedCardBorderStyle}">
@@ -52,6 +54,13 @@
                 </CollectionView.GroupHeaderTemplate>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Transactions">
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItem Text="Delete" BackgroundColor="IndianRed"  
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPageViewModel}}, Path=Delete_TransactionCommand}"
+                                           CommandParameter="{Binding .}"/>
+                            </SwipeView.LeftItems>
+                        
                         <Border Style="{StaticResource ElevatedCardBorderStyle}">
                             <VerticalStackLayout>
                                 <Label 
@@ -62,7 +71,7 @@
                                     Text="{Binding Amount}"/>
                             </VerticalStackLayout>
                         </Border>
-                        
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

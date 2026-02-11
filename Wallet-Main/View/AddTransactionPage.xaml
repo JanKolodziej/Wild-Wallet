@@ -9,7 +9,7 @@
     <FlexLayout>
         <VerticalStackLayout>
             <Border Style="{StaticResource CardBgElevated}">
-                <Picker  ItemsSource="{Binding Accounts}"  ItemDisplayBinding="{Binding Name}" TextColor="WhiteSmoke" />
+                <Picker  ItemsSource="{Binding Accounts}" ItemDisplayBinding="{Binding Name}" TextColor="WhiteSmoke" />
             </Border>
             <Border>
                     <Entry Placeholder="Tytul Wydatku" Text="{Binding Title}" Style="{StaticResource CardBgElevated}" TextColor="WhiteSmoke" />
@@ -28,10 +28,11 @@
                 <DatePicker TextColor="WhiteSmoke" Date="{Binding Date}" />
             </Border>
             <Border Style="{StaticResource CardBgElevated}">
-                <Picker  ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Name}" TextColor="WhiteSmoke"/>
+                <Picker  Title="Wybierz kategorie" ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Name}" TextColor="WhiteSmoke">
+                </Picker>
             </Border>
             <Border>
-                <Button Text="Dodaj Tranzakcje" Command="{Binding AddCommand}" IsEnabled="{Binding isAmountValid}" />
+                <Button Text="Dodaj Tranzakcje" Command="{Binding AddCommand}" IsEnabled="{Binding IsAmountValid}" />
             </Border>
         </VerticalStackLayout>
     </FlexLayout>

@@ -21,10 +21,10 @@ namespace Wallet_Main
         [ObservableProperty]
         private int? accountId;
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(isAmountValid))]
+        [NotifyPropertyChangedFor(nameof(IsAmountValid))]
         private string amount;
 
-        public bool isAmountValid => decimal.TryParse(Amount, out _);
+        public bool IsAmountValid => decimal.TryParse(Amount, out _);
         public ObservableCollection<Categories> Categories { get; set; } = new();
         public ObservableCollection<Wallet_lib.Accounts> Accounts { get; set; } = new();
 
@@ -47,7 +47,7 @@ namespace Wallet_Main
         [RelayCommand]
         public async Task Add()
         {
-            if(isAmountValid)
+            if(IsAmountValid)
             {
                 _service.Add_Transaction(new(Date, decimal.Parse(Amount), Title, CategoryId, AccountId));
                 await Shell.Current.GoToAsync("..");

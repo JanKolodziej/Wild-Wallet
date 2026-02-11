@@ -1,16 +1,17 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.SkiaSharpView;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Wallet_lib;
-using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.Defaults;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Wallet_Main
 {
     public partial class MainPageViewModel:ObservableObject
@@ -27,9 +28,10 @@ namespace Wallet_Main
         public ObservableCollection<Categories> CategoriesList { get; set; } = new();
         public ObservableCollection<GroupedTransacions> GroupedTransactionsList { get; set; } = new();
         public ObservableCollection<Transactions> TransactionsList { get; set; } = new();
-
-        public ISeries[] SeriesList { get; set; } 
-        public Axis[] XAxes { get; set; } 
+        [ObservableProperty]
+        private IEnumerable<ISeries> seriesList;
+        [ObservableProperty]
+        private Axis[] xAxes;
 
 
         public MainPageViewModel(WalletService service)
@@ -39,9 +41,6 @@ namespace Wallet_Main
             Expenses = 0;
             Balance = 0;
             Income = 0;
-            Import_Data(DateTime.Now);
-
-
         }
 
         public async void Import_Data(DateTime date)
@@ -67,12 +66,12 @@ namespace Wallet_Main
             Income = await _service.Get_Income_Async(date);
             Expenses = await _service.Get_Expenses_Async(date);
             Balance = await _service.Get_Balance_Async();
-            Create_chart(); 
+            await Create_chart(); 
         }
         [RelayCommand]
         public void Refresh_Data()
         {
-            Import_Data(DateTime.Now);
+             Import_Data(DateTime.Now);
         }
           
         [RelayCommand]
@@ -81,12 +80,12 @@ namespace Wallet_Main
             await Shell.Current.GoToAsync(nameof(AddTransactionPage));
             
         }
-        public void Create_chart()
+        public async Task Create_chart()
         {
-            double amount = 0;
+            double amount = Convert.ToDouble( await _service.Get_Balance_To_Date(DateTime.Now));
             LineSeries<DateTimePoint> series = new();
             ObservableCollection<DateTimePoint> values = new();
-            foreach(var trans in TransactionsList)
+            foreach(var trans in TransactionsList.Reverse())
             {
                 amount += (double)trans.Amount;
                 if(values.Any())
@@ -110,8 +109,27 @@ namespace Wallet_Main
             };
             XAxes = new Axis[]
             {
+                
                 new DateTimeAxis(TimeSpan.FromDays(1), date=> date.ToString("dd"))
             };
+        }
+
+        [RelayCommand]
+        private async Task  Delete_Transaction(Transactions transaction)
+        {
+            await _service.Delete_Transaction(transaction);
+            GroupedTransacions  group = GroupedTransactionsList.First(g=>g.Contains(transaction));
+            group.Remove(transaction);
+            if (group.Count() ==0)
+            {
+                GroupedTransactionsList.Remove(group);
+            }
+            TransactionsList.Remove(transaction);
+
+            Income = await _service.Get_Income_Async(DateTime.Now);
+            Expenses = await _service.Get_Expenses_Async(DateTime.Now);
+            Balance = await _service.Get_Balance_Async();
+            await Create_chart();
         }
     }
 }

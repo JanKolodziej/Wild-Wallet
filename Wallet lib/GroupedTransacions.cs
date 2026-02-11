@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Wallet_lib
 {
-    public class GroupedTransacions:List<Transactions>
+    public class GroupedTransacions:ObservableCollection<Transactions>
     {
         public DateTime GroupDate {get;set;}
-        public GroupedTransacions(DateTime date, List<Transactions> transactions):base(transactions)
+        public GroupedTransacions(DateTime date, IEnumerable<Transactions> transactions):base(transactions)
         {
             GroupDate = date;
         }

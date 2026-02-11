@@ -27,7 +27,7 @@ namespace Wallet_lib
                     Title = t.Title,
                     CategoryId = t.CategoryId,
                     AccountId = t.AccountId
-                }).OrderByDescending(t=>t.Date).ToListAsync();
+                }).OrderBy(t=>t.Date).ToListAsync();
         }
         
         public async Task<List<Categories>> Get_All_Categories_Async()
@@ -97,7 +97,18 @@ namespace Wallet_lib
             return data;
         }
 
-            
+        public async Task Delete_Transaction(Transactions transaction)
+        {
+            _context.Transactions.Remove(transaction);
+            await _context.SaveChangesAsync();
+        }
+        public async Task<decimal> Get_Balance_To_Date(DateTime date)
+        {
+            var data = await _context.Transactions.Where(t => (t.Date.Month < date.Date.Month 
+            && t.Date.Year <= date.Date.Year) || t.Date.Year < date.Date.Year).SumAsync(t=>t.Amount);
+            return data;
+
+        }
 
         
     }
