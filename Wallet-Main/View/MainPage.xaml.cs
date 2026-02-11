@@ -17,7 +17,7 @@
         }
         private bool _isMenuOpen = false;
 
-        private async void MainFab_Clicked(object sender, EventArgs e)
+        public async void MainFab_Clicked(object sender, EventArgs e)
         {
             _isMenuOpen = !_isMenuOpen;
 

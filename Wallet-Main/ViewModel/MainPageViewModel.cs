@@ -70,6 +70,7 @@ namespace Wallet_Main
         [RelayCommand]
         private async Task New_Transaction()
         {
+            
             await Shell.Current.GoToAsync(nameof(AddTransactionPage));
 
         }

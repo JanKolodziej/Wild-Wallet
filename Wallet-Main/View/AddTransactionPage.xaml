@@ -5,35 +5,151 @@
              xmlns:local="clr-namespace:Wallet_Main"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
              x:DataType="local:AddTransactionViewModel"
-             BackgroundColor="#212735">
-    <FlexLayout>
-        <VerticalStackLayout>
-            <Border Style="{StaticResource CardBgElevated}">
-                <Picker  ItemsSource="{Binding Accounts}" ItemDisplayBinding="{Binding Name}" TextColor="WhiteSmoke" />
-            </Border>
-            <Border>
-                    <Entry Placeholder="Tytul Wydatku" Text="{Binding Title}" Style="{StaticResource CardBgElevated}" TextColor="WhiteSmoke" />
-            </Border>
-            <Border Stroke="Grey">
+             BackgroundColor="#1A1F2B">
 
-                <Entry  Text="{Binding Amount}" Placeholder="Kwota Wydatku" Style="{StaticResource CardBgElevated}" TextColor="WhiteSmoke" Keyboard="Numeric">
-                </Entry>
-                <Border.Triggers>
-                    <DataTrigger TargetType="Border" Binding="{Binding IsAmountValid}" Value="False" >
-                        <Setter Property="Stroke" Value="Red"/>
-                    </DataTrigger>
-                </Border.Triggers>
-            </Border>
-            <Border>
-                <DatePicker TextColor="WhiteSmoke" Date="{Binding Date}" />
-            </Border>
-            <Border Style="{StaticResource CardBgElevated}">
-                <Picker  Title="Wybierz kategorie" ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Name}" TextColor="WhiteSmoke">
-                </Picker>
-            </Border>
-            <Border>
-                <Button Text="Dodaj Tranzakcje" Command="{Binding AddCommand}" IsEnabled="{Binding IsAmountValid}" />
-            </Border>
-        </VerticalStackLayout>
-    </FlexLayout>
+    <Grid RowDefinitions="*, Auto">
+
+        <ScrollView>
+            <VerticalStackLayout Spacing="20" Padding="25">
+
+                <Label Text="Podaj kwotę" 
+                       TextColor="Gray" 
+                       HorizontalOptions="Center" 
+                       FontSize="14"/>
+
+                <Border StrokeShape="RoundRectangle 20"
+                        StrokeThickness="2"
+                        Stroke="#2E3748"
+                        BackgroundColor="#212735"
+                        HeightRequest="100"
+                        Padding="20,0">
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding IsAmountValid}" Value="False">
+                            <Setter Property="Stroke" Value="#EF5350"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Border" Binding="{Binding IsAmountValid}" Value="True">
+                            <Setter Property="Stroke" Value="#00BFA5"/>
+                        </DataTrigger>
+                    </Border.Triggers>
+
+                    <Grid ColumnDefinitions="Auto, *">
+                        <Label Grid.Column="0" 
+                               Text="PLN" 
+                               TextColor="#00BFA5" 
+                               FontSize="24" 
+                               VerticalOptions="Center" 
+                               FontAttributes="Bold"
+                               Margin="0,0,10,0"/>
+
+                        <Entry Grid.Column="1"
+                               Text="{Binding Amount}" 
+                               Placeholder="0.00" 
+                               PlaceholderColor="#4B5563"
+                               TextColor="White"
+                               FontSize="40"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               Keyboard="Numeric"
+                               BackgroundColor="Transparent"/>
+                    </Grid>
+                </Border>
+
+                <Label Text="Szczegóły transakcji" 
+                       TextColor="Gray" 
+                       Margin="0,10,0,0" 
+                       FontSize="14" 
+                       FontAttributes="Bold"/>
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15,5">
+                        <Grid RowDefinitions="Auto, Auto">
+                            <Label Text="Tytuł" TextColor="#6B7280" FontSize="11"/>
+                            <Entry Grid.Row="1" 
+                                   Text="{Binding Title}" 
+                                   Placeholder="Np. Zakupy Biedronka" 
+                                   TextColor="White"
+                                   BackgroundColor="Transparent"
+                                   FontSize="16"/>
+                        </Grid>
+                    </Border>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+
+                        <Border Grid.Column="0" Style="{StaticResource ElevatedCardBorderStyle}" Padding="10">
+                            <VerticalStackLayout>
+                                <Label Text="Data" TextColor="#6B7280" FontSize="11"/>
+                                <DatePicker Date="{Binding Date}" 
+                                            TextColor="White" 
+                                            Format="dd.MM.yyyy"
+                                            BackgroundColor="Transparent"/>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Column="1" Style="{StaticResource ElevatedCardBorderStyle}" Padding="10">
+                            <VerticalStackLayout>
+                                <Label Text="Konto" TextColor="#6B7280" FontSize="11"/>
+                                <Picker ItemsSource="{Binding Accounts}" 
+                                        ItemDisplayBinding="{Binding Name}" 
+                                        TextColor="White"
+                                        TitleColor="#4B5563"
+                                        BackgroundColor="Transparent"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15,10">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                <Label Text="Kategoria" TextColor="#6B7280" FontSize="11"/>
+                                <Picker ItemsSource="{Binding Categories}" 
+                                        ItemDisplayBinding="{Binding Name}" 
+                                        TextColor="White"
+                                        TitleColor="#4B5563"
+                                        BackgroundColor="Transparent"/>
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="1" Text="▼" TextColor="Gray" VerticalOptions="Center" FontSize="10"/>
+                        </Grid>
+                    </Border>
+
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border Grid.Row="1" 
+                Padding="20" 
+                BackgroundColor="#262D3D" 
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 20,20,0,0">
+            <Border.Shadow>
+                <Shadow Brush="Black" Offset="0,-5" Opacity="0.3" Radius="10"/>
+            </Border.Shadow>
+
+            <Button Text="Zapisz transakcję" 
+                    Command="{Binding AddCommand}" 
+                    IsEnabled="{Binding IsAmountValid}"
+                    BackgroundColor="#2C3448"
+                    TextColor="Gray"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    HeightRequest="55">
+                <Button.Triggers>
+                    <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                        <Setter Property="BackgroundColor" Value="#2C3448" />
+                        <Setter Property="TextColor" Value="Gray" />
+                    </Trigger>
+                    <Trigger TargetType="Button" Property="IsEnabled" Value="True">
+                        <Setter Property="BackgroundColor" Value="#00BFA5" />
+                        <Setter Property="TextColor" Value="White" />
+                    </Trigger>
+                </Button.Triggers>
+            </Button>
+        </Border>
+
+    </Grid>
 </ContentPage>
