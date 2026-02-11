@@ -10,7 +10,7 @@
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if(BindingContext is MainPageViewModel vm)
+            if (BindingContext is MainPageViewModel vm)
             {
                 vm.Refresh_DataCommand.Execute(null);
             }
@@ -23,42 +23,35 @@
 
             if (_isMenuOpen)
             {
-                // 1. Obracamy główny przycisk w "X"
+                
                 await MainFab.RotateTo(45, 250, Easing.CubicOut);
 
-                // 2. Odblokowujemy klikalność przycisków
                 IncomeBtn.InputTransparent = false;
                 ExpenseBtn.InputTransparent = false;
 
-                // 3. Wypychamy przyciski w górę (Grid pozwala na nakładanie pozycji)
-                // Wydatek leci na -70, Wpływ wyżej na -130
-                Task.WhenAll(
-                    ExpenseBtn.FadeTo(1, 250),
-                    ExpenseBtn.ScaleTo(1, 250, Easing.SpringOut),
-                    ExpenseBtn.TranslateTo(0, -70, 250, Easing.CubicOut),
+                
+                _ = ExpenseBtn.TranslateTo(0, -70, 250, Easing.CubicOut);
+                _ = ExpenseBtn.FadeTo(1, 250);
+                _ = ExpenseBtn.ScaleTo(1, 250);
 
-                    IncomeBtn.FadeTo(1, 250),
-                    IncomeBtn.ScaleTo(1, 250, Easing.SpringOut),
-                    IncomeBtn.TranslateTo(0, -130, 250, Easing.CubicOut)
-                );
+                _ = IncomeBtn.TranslateTo(0, -130, 250, Easing.CubicOut);
+                _ = IncomeBtn.FadeTo(1, 250);
+                _ = IncomeBtn.ScaleTo(1, 250);
             }
             else
             {
-                // Powrót do stanu początkowego
                 await MainFab.RotateTo(0, 250, Easing.CubicIn);
 
                 IncomeBtn.InputTransparent = true;
                 ExpenseBtn.InputTransparent = true;
 
-                await Task.WhenAll(
-                    IncomeBtn.FadeTo(0, 200),
-                    IncomeBtn.ScaleTo(0, 200),
-                    IncomeBtn.TranslateTo(0, 0, 200),
+                _ = IncomeBtn.TranslateTo(0, 0, 200);
+                _ = IncomeBtn.FadeTo(0, 200);
+                _ = IncomeBtn.ScaleTo(0, 200);
 
-                    ExpenseBtn.FadeTo(0, 200),
-                    ExpenseBtn.ScaleTo(0, 200),
-                    ExpenseBtn.TranslateTo(0, 0, 200)
-                );
+                _ = ExpenseBtn.TranslateTo(0, 0, 200);
+                _ = ExpenseBtn.FadeTo(0, 200);
+                _ = ExpenseBtn.ScaleTo(0, 200);
             }
         }
 

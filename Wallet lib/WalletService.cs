@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Wallet_lib
 {
@@ -20,16 +14,16 @@ namespace Wallet_lib
         public async Task<List<Transactions>> Get_All_Transactions_Async()
         {
             return await _context.Transactions.Select(t => new Transactions
-                {
-                    Id = t.Id,
-                    Date = t.Date,
-                    Amount = t.Amount,
-                    Title = t.Title,
-                    CategoryId = t.CategoryId,
-                    AccountId = t.AccountId
-                }).OrderBy(t=>t.Date).ToListAsync();
+            {
+                Id = t.Id,
+                Date = t.Date,
+                Amount = t.Amount,
+                Title = t.Title,
+                CategoryId = t.CategoryId,
+                AccountId = t.AccountId
+            }).OrderBy(t => t.Date).ToListAsync();
         }
-        
+
         public async Task<List<Categories>> Get_All_Categories_Async()
         {
             return await _context.Categories.Select(c => new Categories
@@ -42,7 +36,7 @@ namespace Wallet_lib
         {
             return await _context.Accounts.Select(a => new Accounts
             {
-                Id =a.Id,
+                Id = a.Id,
                 Name = a.Name,
 
             }).ToListAsync();
@@ -92,8 +86,8 @@ namespace Wallet_lib
         }
         public async Task<List<Transactions>> Get_Transaction_month(DateTime date)
         {
-            var data = await _context.Transactions.Where(t=> t.Date.Year ==date.Date.Year && t.Date.Month==date.Date.Month).
-                OrderByDescending(t=>t.Date).ToListAsync();
+            var data = await _context.Transactions.Where(t => t.Date.Year == date.Date.Year && t.Date.Month == date.Date.Month).
+                OrderByDescending(t => t.Date).ToListAsync();
             return data;
         }
 
@@ -104,13 +98,13 @@ namespace Wallet_lib
         }
         public async Task<decimal> Get_Balance_To_Date(DateTime date)
         {
-            var data = await _context.Transactions.Where(t => (t.Date.Month < date.Date.Month 
-            && t.Date.Year <= date.Date.Year) || t.Date.Year < date.Date.Year).SumAsync(t=>t.Amount);
+            var data = await _context.Transactions.Where(t => (t.Date.Month < date.Date.Month
+            && t.Date.Year <= date.Date.Year) || t.Date.Year < date.Date.Year).SumAsync(t => t.Amount);
             return data;
 
         }
 
-        
+
     }
 
 }

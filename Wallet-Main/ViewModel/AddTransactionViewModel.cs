@@ -1,16 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wallet_lib;
 
 namespace Wallet_Main
 {
-    public partial class AddTransactionViewModel:ObservableObject
+    public partial class AddTransactionViewModel : ObservableObject
     {
         [ObservableProperty]
         private DateTime date;
@@ -47,13 +42,13 @@ namespace Wallet_Main
         [RelayCommand]
         public async Task Add()
         {
-            if(IsAmountValid)
+            if (IsAmountValid)
             {
                 _service.Add_Transaction(new(Date, decimal.Parse(Amount), Title, CategoryId, AccountId));
                 await Shell.Current.GoToAsync("..");
             }
-            
+
         }
-       
+
     }
 }

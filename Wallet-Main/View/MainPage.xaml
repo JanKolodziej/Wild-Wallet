@@ -4,116 +4,149 @@
              xmlns:local ="clr-namespace:Wallet_Main"
              x:Class="Wallet_Main.MainPage"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
-             BackgroundColor="#212735"
+             BackgroundColor="#1A1F2B"
              xmlns:lvc ="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              x:DataType="local:MainPageViewModel">
 
-    <ScrollView>
-       
-        <FlexLayout Wrap="Wrap"  AlignItems="Start" Margin="0">
-            <Border Style="{StaticResource ElevatedCardBorderStyle}">
-                <lvc:CartesianChart 
-                    Series="{Binding SeriesList}" 
-                    XAxes="{Binding XAxes}" 
-                    HeightRequest="400" 
-                    WidthRequest="400" 
-                    Background="{StaticResource CardBgElevated}"/>
-            </Border>
-            
+    <Grid>
 
+        <CollectionView ItemsSource="{Binding GroupedTransactionsList}" 
+                        IsGrouped="True"
+                        Margin="10">
 
-
-            <Border Style="{StaticResource CardBorderStyle}" BackgroundColor="{StaticResource AccentGreen}">
-                <VerticalStackLayout>
-                    <Label Text="Wpływy" Style="{StaticResource CardTitle}" />
-                    <Label Text="{Binding Income}" Style="{StaticResource CardValueLarge}"/>
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" Margin="0,50,0,0">
+                    <Label Text="Brak transakcji" TextColor="White" FontSize="18" HorizontalOptions="Center"/>
+                    <Label Text="Dodaj transakcje aby je tutaj zobaczyć" TextColor="Gray" HorizontalOptions="Center"/>
                 </VerticalStackLayout>
-                    
-                </Border>
-                <Border Style="{StaticResource ElevatedCardBorderStyle}">
-                <VerticalStackLayout>
-                    <Label Text="Wydatki" Style="{StaticResource CardTitle}"/>
-                    <Label Text="{Binding Expenses}" Style="{StaticResource CardValueLarge}"/>
-                </VerticalStackLayout>
-            </Border>
+            </CollectionView.EmptyView>
 
+            <CollectionView.Header>
+                <VerticalStackLayout Spacing="20" Padding="10">
 
-            <CollectionView 
-                
-                ItemsSource="{Binding GroupedTransactionsList}" 
-                Margin="10"
-                WidthRequest="300"
-                IsGrouped="True"
-                EmptyView="Brak Tranzakcji do wyświetlenia">
-                <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate x:DataType="models:GroupedTransacions">
-                        <Border Style="{StaticResource ElevatedCardBorderStyle}">
-                            <Label Text="{Binding GroupDate,StringFormat='{0:MMMM} {0:dd}'}" Style="{StaticResource CardTitle}"/>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.GroupHeaderTemplate>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Transactions">
-                        <SwipeView>
-                            <SwipeView.LeftItems>
-                                <SwipeItem Text="Delete" BackgroundColor="IndianRed"  
-                                           Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPageViewModel}}, Path=Delete_TransactionCommand}"
-                                           CommandParameter="{Binding .}"/>
-                            </SwipeView.LeftItems>
-                        
-                        <Border Style="{StaticResource ElevatedCardBorderStyle}">
+                    <Border Style="{StaticResource ElevatedCardBorderStyle}">
+                        <lvc:CartesianChart 
+                            Series="{Binding SeriesList}" 
+                            XAxes="{Binding XAxes}" 
+                            HeightRequest="350"
+                            Background="{StaticResource CardBgElevated}"/>
+                    </Border>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                        <Border Grid.Column="0" Style="{StaticResource CardBorderStyle}" BackgroundColor="{StaticResource AccentGreen}">
                             <VerticalStackLayout>
-                                <Label 
-                                    Style="{StaticResource CardTitle}"
-                                    Text="{Binding Title}"/>  
-                                <Label 
-                                    Style="{StaticResource CardValueLarge}"
-                                    Text="{Binding Amount}"/>
+                                <Label Text="Wpływy" Style="{StaticResource CardTitle}" />
+                                <Label Text="{Binding Income, StringFormat='{0:N2}'}" Style="{StaticResource CardValueLarge}"/>
                             </VerticalStackLayout>
                         </Border>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            
-            <!--Speed Dial FAB-->
-            <Grid HorizontalOptions="End"
+
+                        <Border Grid.Column="1" Style="{StaticResource ElevatedCardBorderStyle}">
+                            <VerticalStackLayout>
+                                <Label Text="Wydatki" Style="{StaticResource CardTitle}"/>
+                                <Label Text="{Binding Expenses, StringFormat='{0:N2}'}" Style="{StaticResource CardValueLarge}"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <Label Text="Historia" TextColor="Gray" Margin="5,10,0,0" FontAttributes="Bold"/>
+                </VerticalStackLayout>
+            </CollectionView.Header>
+
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="models:GroupedTransacions">
+                    <Label Text="{Binding GroupDate,StringFormat='{0:MMMM} {0:dd}'}" 
+                           TextColor="Gray" FontSize="12" FontAttributes="Bold" Margin="15,10,0,5"/>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Transactions">
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem Text="Delete" 
+                                           BackgroundColor="IndianRed"  
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPageViewModel}}, Path=Delete_TransactionCommand}"
+                                           CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+
+                        <Border Style="{StaticResource ElevatedCardBorderStyle}" Margin="0,5">
+                            <Grid ColumnDefinitions="*, Auto" Padding="5">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Style="{StaticResource CardTitle}" Text="{Binding Title}"/>
+                                    <Label Text="Transakcja" TextColor="Gray" FontSize="10"/>
+                                </VerticalStackLayout>
+
+                                <Label Grid.Column="1" 
+                                       Style="{StaticResource CardValueLarge}" 
+                                       Text="{Binding Amount, StringFormat='{0:N2} zł'}"
+                                       VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.Footer>
+                <BoxView HeightRequest="100" Color="Transparent"/>
+            </CollectionView.Footer>
+        </CollectionView>
+
+        <Grid HorizontalOptions="End"
+              VerticalOptions="End"
+              Margin="25"
+              WidthRequest="200" 
+              HeightRequest="250"
+              InputTransparent="True"
+              CascadeInputTransparent="False">
+            <HorizontalStackLayout x:Name="IncomeBtn" 
+                                   Spacing="10" 
+                                   HorizontalOptions="End" 
+                                   VerticalOptions="End"
+                                   Opacity="0"
+                                   Scale="0"
+                                   InputTransparent="True"
+                                   >
+                <Label Text="Wpływ" VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                <Button Text="+" 
+                        Command="{Binding New_IncomeCommand}"
+                        BackgroundColor="#2E7D32"
+                        CornerRadius="25" HeightRequest="50" WidthRequest="50" InputTransparent="False"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout x:Name="ExpenseBtn" 
+                                   Spacing="10"
+                                   HorizontalOptions="End" 
+                                   VerticalOptions="End"
+                                   Opacity="0"
+                                   Scale="0"
+                                   InputTransparent="True">
+                <Label Text="Wydatek" VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                <Button Text="-" 
+                        Command="{Binding New_ExpenseCommand}"
+                        BackgroundColor="#C62828"
+                        CornerRadius="25" HeightRequest="50" WidthRequest="50" InputTransparent="False"/>
+            </HorizontalStackLayout>
+
+            <Button x:Name="MainFab"
+                    Text="+"
+                    TextColor="White"
+                    FontSize="26"
+                    BackgroundColor="#00BFA5"
+                    HeightRequest="60"
+                    WidthRequest="60"
+                    CornerRadius="30"
+                    HorizontalOptions="End"
                     VerticalOptions="End"
-                    Margin="25"
-                    WidthRequest="200" 
-                    HeightRequest="250">
-                
-                <HorizontalStackLayout Spacing="10" x:Name="IncomeBtn">
-                    <Label Text="Wpływ" VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
-                    <Button Text="+" 
-                    Command="{Binding New_IncomeCommand}"
-                    BackgroundColor="#2E7D32"
-                    CornerRadius="25" HeightRequest="50" WidthRequest="50"/>
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="10" x:Name="ExpenseBtn">
-                    <Label Text="Wydatek" VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
-                    <Button Text="-" 
-                    Command="{Binding New_ExpenseCommand}"
-                    BackgroundColor="#C62828"
-                    CornerRadius="25" HeightRequest="50" WidthRequest="50"/>
-                </HorizontalStackLayout>
+                    Clicked="MainFab_Clicked"
+                    InputTransparent="False">
+                <Button.Shadow>
+                    <Shadow Brush="Black" Offset="0,5" Opacity="0.5" Radius="5"/>
+                </Button.Shadow>
+            </Button>
+        </Grid>
 
-                <Button x:Name="MainFab"
-                Text="+"
-                TextColor="White"
-                BackgroundColor="#00BFA5"
-                HeightRequest="60"
-                WidthRequest="60"
-                CornerRadius="30"
-                Clicked="MainFab_Clicked">
-                    <Button.Shadow>
-                        <Shadow Brush="Black" Offset="0,5" Opacity="0.5" Radius="5"/>
-                    </Button.Shadow>
-                </Button>
-            </Grid>
-
-        </FlexLayout>
-      
-    </ScrollView>
+    </Grid>
 
 </ContentPage>

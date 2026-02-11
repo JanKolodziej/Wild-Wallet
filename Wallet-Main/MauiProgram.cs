@@ -22,8 +22,8 @@ namespace Wallet_Main
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "Wallet_db.db");
             builder.Services.AddDbContext<Wallet_lib.WalletContext>(options =>
             options.UseSqlite($"Data Source={dbPath}"));
-                
-            
+
+
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -39,7 +39,7 @@ namespace Wallet_Main
             {
                 var db = scope.ServiceProvider.GetRequiredService<Wallet_lib.WalletContext>();
                 db.Database.EnsureCreated();
-               
+
                 if (!db.Transactions.Any())
                 {
                     db.Transactions.AddRange(new List<Wallet_lib.Transactions>
@@ -52,7 +52,7 @@ namespace Wallet_Main
                     db.SaveChanges();
                     System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe tranzakcji do bazy");
                 }
-                if(!db.Categories.Any())
+                if (!db.Categories.Any())
                 {
                     db.Categories.AddRange(new List<Wallet_lib.Categories>
                     {

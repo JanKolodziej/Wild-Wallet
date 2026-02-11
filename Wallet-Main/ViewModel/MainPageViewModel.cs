@@ -3,18 +3,11 @@ using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Wallet_lib;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Wallet_Main
 {
-    public partial class MainPageViewModel:ObservableObject
+    public partial class MainPageViewModel : ObservableObject
     {
         [ObservableProperty]
         private decimal income;
@@ -35,7 +28,7 @@ namespace Wallet_Main
 
 
         public MainPageViewModel(WalletService service)
-        {  
+        {
             _service = service;
 
             Expenses = 0;
@@ -66,29 +59,29 @@ namespace Wallet_Main
             Income = await _service.Get_Income_Async(date);
             Expenses = await _service.Get_Expenses_Async(date);
             Balance = await _service.Get_Balance_Async();
-            await Create_chart(); 
+            await Create_chart();
         }
         [RelayCommand]
         public void Refresh_Data()
         {
-             Import_Data(DateTime.Now);
+            Import_Data(DateTime.Now);
         }
-          
+
         [RelayCommand]
         private async Task New_Transaction()
         {
             await Shell.Current.GoToAsync(nameof(AddTransactionPage));
-            
+
         }
         public async Task Create_chart()
         {
-            double amount = Convert.ToDouble( await _service.Get_Balance_To_Date(DateTime.Now));
+            double amount = Convert.ToDouble(await _service.Get_Balance_To_Date(DateTime.Now));
             LineSeries<DateTimePoint> series = new();
             ObservableCollection<DateTimePoint> values = new();
-            foreach(var trans in TransactionsList.Reverse())
+            foreach (var trans in TransactionsList.Reverse())
             {
                 amount += (double)trans.Amount;
-                if(values.Any())
+                if (values.Any())
                 {
                     if (values.Last().DateTime.Date == trans.Date.Date)
                     {
@@ -96,20 +89,20 @@ namespace Wallet_Main
                         continue;
                     }
                 }
-                
-                
+
+
                 DateTimePoint element = new(trans.Date, amount);
                 values.Add(element);
-                    
+
             }
-            series.Values= values;
+            series.Values = values;
             SeriesList = new ISeries[]
             {
                 series
             };
             XAxes = new Axis[]
             {
-                
+
                 new DateTimeAxis(TimeSpan.FromDays(1), date=> date.ToString("dd"))
             };
         }
@@ -119,12 +112,12 @@ namespace Wallet_Main
         /// <param name="transaction"></param>
         /// <returns></returns>
         [RelayCommand]
-        private async Task  Delete_Transaction(Transactions transaction)
+        private async Task Delete_Transaction(Transactions transaction)
         {
             await _service.Delete_Transaction(transaction);
-            GroupedTransacions  group = GroupedTransactionsList.First(g=>g.Contains(transaction));
+            GroupedTransacions group = GroupedTransactionsList.First(g => g.Contains(transaction));
             group.Remove(transaction);
-            if (group.Count() ==0)
+            if (group.Count() == 0)
             {
                 GroupedTransactionsList.Remove(group);
             }
@@ -139,14 +132,14 @@ namespace Wallet_Main
         [RelayCommand]
         private async Task New_Income()
         {
-            
+
             await Shell.Current.GoToAsync($"{nameof(AddTransactionPage)}?type=income");
         }
 
         [RelayCommand]
         private async Task New_Expense()
         {
-            
+
             await Shell.Current.GoToAsync($"{nameof(AddTransactionPage)}?type=expense");
         }
     }
