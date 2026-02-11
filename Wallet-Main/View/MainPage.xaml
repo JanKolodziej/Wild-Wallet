@@ -76,14 +76,41 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             
+            <!--Speed Dial FAB-->
+            <Grid HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="25"
+                    WidthRequest="200" 
+                    HeightRequest="250">
+                
+                <HorizontalStackLayout Spacing="10" x:Name="IncomeBtn">
+                    <Label Text="Wpływ" VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                    <Button Text="+" 
+                    Command="{Binding New_IncomeCommand}"
+                    BackgroundColor="#2E7D32"
+                    CornerRadius="25" HeightRequest="50" WidthRequest="50"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="10" x:Name="ExpenseBtn">
+                    <Label Text="Wydatek" VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                    <Button Text="-" 
+                    Command="{Binding New_ExpenseCommand}"
+                    BackgroundColor="#C62828"
+                    CornerRadius="25" HeightRequest="50" WidthRequest="50"/>
+                </HorizontalStackLayout>
 
-            <Button Text="+"
-               TextColor="White"
-               BackgroundColor="CadetBlue"
-               HorizontalOptions="End"
-               VerticalOptions="End"
-               Command="{Binding New_TransactionCommand}"/>  
-            
+                <Button x:Name="MainFab"
+                Text="+"
+                TextColor="White"
+                BackgroundColor="#00BFA5"
+                HeightRequest="60"
+                WidthRequest="60"
+                CornerRadius="30"
+                Clicked="MainFab_Clicked">
+                    <Button.Shadow>
+                        <Shadow Brush="Black" Offset="0,5" Opacity="0.5" Radius="5"/>
+                    </Button.Shadow>
+                </Button>
+            </Grid>
 
         </FlexLayout>
       

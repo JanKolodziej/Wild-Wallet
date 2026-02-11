@@ -113,7 +113,11 @@ namespace Wallet_Main
                 new DateTimeAxis(TimeSpan.FromDays(1), date=> date.ToString("dd"))
             };
         }
-
+        /// <summary>
+        /// Delates transaction and refreshes content on page
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <returns></returns>
         [RelayCommand]
         private async Task  Delete_Transaction(Transactions transaction)
         {
@@ -130,6 +134,20 @@ namespace Wallet_Main
             Expenses = await _service.Get_Expenses_Async(DateTime.Now);
             Balance = await _service.Get_Balance_Async();
             await Create_chart();
+        }
+
+        [RelayCommand]
+        private async Task New_Income()
+        {
+            
+            await Shell.Current.GoToAsync($"{nameof(AddTransactionPage)}?type=income");
+        }
+
+        [RelayCommand]
+        private async Task New_Expense()
+        {
+            
+            await Shell.Current.GoToAsync($"{nameof(AddTransactionPage)}?type=expense");
         }
     }
 }

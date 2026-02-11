@@ -19,7 +19,7 @@
                 <Entry  Text="{Binding Amount}" Placeholder="Kwota Wydatku" Style="{StaticResource CardBgElevated}" TextColor="WhiteSmoke" Keyboard="Numeric">
                 </Entry>
                 <Border.Triggers>
-                    <DataTrigger TargetType="Border" Binding="{Binding isAmountValid}" Value="False" >
+                    <DataTrigger TargetType="Border" Binding="{Binding IsAmountValid}" Value="False" >
                         <Setter Property="Stroke" Value="Red"/>
                     </DataTrigger>
                 </Border.Triggers>
