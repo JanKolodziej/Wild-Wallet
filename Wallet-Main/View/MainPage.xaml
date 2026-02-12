@@ -96,9 +96,10 @@
         <Grid HorizontalOptions="End"
               VerticalOptions="End"
               Margin="25"
-              WidthRequest="200" 
-              HeightRequest="250"
+              WidthRequest="250" 
+              HeightRequest="300"
               InputTransparent="True"
+              ZIndex="999"
               CascadeInputTransparent="False">
             <HorizontalStackLayout x:Name="IncomeBtn" 
                                    Spacing="10" 

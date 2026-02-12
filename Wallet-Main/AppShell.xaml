@@ -20,8 +20,8 @@ FlyoutBehavior="Flyout">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="" >
-        <!--<ShellContent ContentTemplate="{DataTemplate local:}" />-->
+    <FlyoutItem Title="Statystyki" >
+        <ShellContent ContentTemplate="{DataTemplate local:StatisticPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="">

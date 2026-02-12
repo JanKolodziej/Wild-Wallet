@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using Wallet_Main.ViewModel;
 
 namespace Wallet_Main
 {
@@ -33,6 +34,8 @@ namespace Wallet_Main
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<AddTransactionPage>();
             builder.Services.AddTransient<AddTransactionViewModel>();
+            builder.Services.AddTransient<StatisticPage>();
+            builder.Services.AddTransient<StatisticViewModel>();
 
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())

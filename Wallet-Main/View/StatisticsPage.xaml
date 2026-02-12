@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet_Main.StatisticPage"
+             xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
+             BackgroundColor="#1A1F2B"
+             xmlns:lvc ="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui">
+    <VerticalStackLayout>
+        <Border>
+
+
+            <lvc:CartesianChart Series="{Binding SeriesList}" XAxes="{Binding XAxes}" HeightRequest="350"
+                Background="{StaticResource CardBgElevated}"/>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>

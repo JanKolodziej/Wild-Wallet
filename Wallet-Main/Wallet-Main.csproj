@@ -79,6 +79,9 @@
 	  <Compile Update="View\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\StatisticsPage.xaml.cs">
+	    <DependentUpon>StatisticsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -86,6 +89,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\Styles_cards.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\StatisticsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -9,5 +9,6 @@ namespace Wallet_lib
         {
             GroupDate = date;
         }
+
     }
 }
