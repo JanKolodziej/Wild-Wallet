@@ -3,6 +3,9 @@ using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.Painting.Effects;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -65,28 +68,56 @@ namespace Wallet_Main.ViewModel
         public void Create_Chart()
         {
             double amount = 0;
-            LineSeries<DateTimePoint> series = new();
-            ObservableCollection<DateTimePoint> values = new();
+            //LineSeries<DateTimePoint> series = new();
+            ObservableCollection<double> values = new();
             foreach (var monthStat in MonthlyStatList)
             {
                 amount +=(double) monthStat.Balance;
-                DateTime date = new(monthStat.Year, monthStat.Month,15);
-                DateTimePoint element = new(date, amount);
-                values.Add(element);
+                //DateTime date = new(monthStat.Year, monthStat.Month,15);
+                //DateTimePoint element = new(date, amount);
+                //values.Add(element);
+                values.Add(amount);
 
             }
-            series.Values = values;
+            double a, b;
+
+            (a, b) = Wallet_lib.StatisticsService.Line_Fit(values.Select(v => (decimal)v).ToList());
+            int n = MonthlyStatList.Count();
+            List<int> xValues = new();
+            for (int i = 0; i < n+3; i++)
+            {
+                xValues.Add(i);
+            }
+            double[] ForecastY = xValues.Select(x => x * a + b).ToArray();
+            //series.Values = values;
             SeriesList = new ISeries[]
             {
-                series
+                new ScatterSeries<double>
+                {
+                    Values = values,
+                    Name = "Wydatki miesięczne",
+                    Fill = new SolidColorPaint(SKColors.White),
+                    MinGeometrySize = 10
+                },
+                 new LineSeries<double>
+                {
+                    Values = ForecastY,
+                    Fill = null,
+                    Stroke = new SolidColorPaint(SKColors.CadetBlue, 3) { PathEffect = new DashEffect(new float[] { 10, 5 }) },
+                    GeometrySize = 10,
+                    Name = "Prognoza"
+                }
+
             };
             XAxes = new Axis[]
             {
 
-                new DateTimeAxis(TimeSpan.FromDays(30), date=> date.ToString("MM yyyy"))
+                
             };
         }
 
+       
+        
 
     }
 }
