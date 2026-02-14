@@ -10,7 +10,8 @@
 
 
             <lvc:CartesianChart Series="{Binding SeriesList}" XAxes="{Binding XAxes}" HeightRequest="350"
-                Background="{StaticResource CardBgElevated}"/>
+                Background="{StaticResource CardBgElevated}" LegendTextPaint="WhiteSmoke" YAxes="{Binding YAxes}">
+            </lvc:CartesianChart>
         </Border>
     </VerticalStackLayout>
 </ContentPage>

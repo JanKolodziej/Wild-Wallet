@@ -11,7 +11,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Wallet_lib;
 
 namespace Wallet_Main.ViewModel
 {
@@ -25,6 +27,8 @@ namespace Wallet_Main.ViewModel
         private IEnumerable<ISeries> seriesList;
         [ObservableProperty]
         private  Axis[] xAxes;
+        [ObservableProperty]
+        private Axis[] yAxes;
 
         public StatisticViewModel(Wallet_lib.WalletService service)
         {
@@ -70,49 +74,131 @@ namespace Wallet_Main.ViewModel
             double amount = 0;
             //LineSeries<DateTimePoint> series = new();
             ObservableCollection<double> values = new();
+            ObservableCollection<string> labels = new();
             foreach (var monthStat in MonthlyStatList)
             {
                 amount +=(double) monthStat.Balance;
-                //DateTime date = new(monthStat.Year, monthStat.Month,15);
-                //DateTimePoint element = new(date, amount);
-                //values.Add(element);
+                labels.Add($"{monthStat.Month}/{monthStat.Year}");
                 values.Add(amount);
 
             }
+            DateTime lastDate = new(MonthlyStatList.Last().Year, MonthlyStatList.Last().Month, 1);
+            for (int i = 0; i < 3; i++)
+            {
+                lastDate = lastDate.AddMonths(1);
+                labels.Add($"{lastDate.Month}/{lastDate.Year}");
+            }
+            labels.Add($"{MonthlyStatList.Last().Month+1}/{MonthlyStatList.Last().Year}");
             double a, b;
 
-            (a, b) = Wallet_lib.StatisticsService.Line_Fit(values.Select(v => (decimal)v).ToList());
+            (a, b) = Wallet_lib.StatisticsService.Line_Fit(values.ToList());
             int n = MonthlyStatList.Count();
             List<int> xValues = new();
             for (int i = 0; i < n+3; i++)
             {
                 xValues.Add(i);
             }
-            double[] ForecastY = xValues.Select(x => x * a + b).ToArray();
-            //series.Values = values;
+            List<double> ForecastY = xValues.Select(x => x * a + b).ToList();
+            double u = StatisticsService.Uncertainty(values.ToList() , ForecastY);
+            List<double> upperBound = new();
+            List<double> lowerBound = new();
+
+            // Indeks ostatniego prawdziwego punktu (np. jeśli masz 5 punktów, to indeks 4)
+            int lastRealIndex = values.Count;
+
+            for (int i = 0; i < n + 3; i++)
+            {
+                
+
+                // LOGIKA ODCIĘCIA:
+                if (i < lastRealIndex)
+                {
+                    // Przeszłość: "Zamykamy" wstęgę.
+                    // Góra i Dół są równe linii trendu.
+                    // Maska (Dół) idealnie przykryje Górę, więc nic nie będzie widać.
+                    upperBound.Add(ForecastY[i]);
+                    lowerBound.Add(ForecastY[i]);
+                }
+                else
+                {
+                    // Obliczamy ile miesięcy minęło od ostatniego prawdziwego punktu
+                    int monthsIntoFuture = i - lastRealIndex;
+
+                    // Mnożymy niepewność przez czas -> powstaje "stożek"
+                    // (Możesz dodać +1, żeby startowało od razu szeroko, albo zostawić 0 żeby startowało z punktu)
+                    double currentUncertainty = u * 2 * (1 + (monthsIntoFuture * 0.4));
+
+                    upperBound.Add(ForecastY[i] + currentUncertainty);
+                    lowerBound.Add(ForecastY[i] - currentUncertainty);
+                }
+            }
+
             SeriesList = new ISeries[]
             {
-                new ScatterSeries<double>
-                {
-                    Values = values,
-                    Name = "Wydatki miesięczne",
-                    Fill = new SolidColorPaint(SKColors.White),
-                    MinGeometrySize = 10
-                },
-                 new LineSeries<double>
+
+            new LineSeries<double> { 
+                Values = lowerBound, 
+                Fill  = new SolidColorPaint(SKColor.Parse("#273446")), 
+                ZIndex=-1 ,
+                Stroke = null,
+                GeometryFill = null,
+                GeometryStroke = null,
+            },
+            
+            new LineSeries<double>
+            {
+                Values = upperBound,
+                Name = $"Niepewność \u00B1{u*2:N1}", 
+                Fill = new SolidColorPaint(SKColors.CadetBlue.WithAlpha(40)),
+                Stroke = null,
+                GeometryFill = null,
+                GeometryStroke = null,
+                ZIndex=-2
+            },
+                new LineSeries<double>
                 {
                     Values = ForecastY,
                     Fill = null,
                     Stroke = new SolidColorPaint(SKColors.CadetBlue, 3) { PathEffect = new DashEffect(new float[] { 10, 5 }) },
                     GeometrySize = 10,
-                    Name = "Prognoza"
+                    Name = "Prognoza",
+                    
+                },
+                 new ScatterSeries<double>
+                {
+                    Values = values,
+                    Name = "Wydatki miesięczne",
+                    Fill = new SolidColorPaint(SKColors.White),
+                    MinGeometrySize = 10,
+                    ZIndex=3
                 }
 
             };
             XAxes = new Axis[]
             {
-
-                
+                new Axis
+                {
+                    Labels = labels,
+                    Name = "Miesiąc",
+                    LabelsPaint = new SolidColorPaint(SKColors.WhiteSmoke),
+                    NamePaint = new SolidColorPaint(SKColors.WhiteSmoke),
+                    LabelsRotation = 45
+                }
+            };
+            YAxes = new Axis[]
+            {
+                new Axis
+                {
+                    Name = "Balans",
+                    NamePaint = new SolidColorPaint(SKColors.WhiteSmoke),
+                    LabelsPaint = new SolidColorPaint(SKColors.WhiteSmoke),
+                    Labeler = value => value.ToString("C"),
+                    SeparatorsPaint = new SolidColorPaint(SKColors.WhiteSmoke)
+                    {
+                        PathEffect = new DashEffect(new float[] { 5, 5 }),
+                        ZIndex = 1
+                    }
+                }
             };
         }
 
