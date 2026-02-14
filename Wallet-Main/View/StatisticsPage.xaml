@@ -2,16 +2,84 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet_Main.StatisticPage"
+             xmlns:local="clr-namespace:Wallet_Main"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
              BackgroundColor="#1A1F2B"
-             xmlns:lvc ="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui">
-    <VerticalStackLayout>
-        <Border>
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui">
 
+    <Grid RowDefinitions="*">
 
-            <lvc:CartesianChart Series="{Binding SeriesList}" XAxes="{Binding XAxes}" HeightRequest="350"
-                Background="{StaticResource CardBgElevated}" LegendTextPaint="WhiteSmoke" YAxes="{Binding YAxes}">
-            </lvc:CartesianChart>
-        </Border>
-    </VerticalStackLayout>
+        <CollectionView ItemsSource="{Binding MonthlyStatList}"
+                        Margin="15">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                    <Label Text="📊" FontSize="60" HorizontalOptions="Center"/>
+                    <Label Text="Brak danych do wyświetlenia" 
+                           TextColor="Gray" 
+                           FontSize="18" 
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.Header>
+                <VerticalStackLayout  >
+                    <Label Text="Przewidywanie bilansu" 
+                           TextColor="WhiteSmoke" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           Margin="5,0"/>
+
+                    <Border Style="{StaticResource ElevatedCardBorderStyle}" >
+
+                        <lvc:CartesianChart Series="{Binding SeriesList}" 
+                                            XAxes="{Binding XAxes}" 
+                                            YAxes="{Binding YAxes}"
+                                            Background="{StaticResource CardBgElevated}"
+                                            HeightRequest="300"
+                                            TooltipPosition="Top">
+                        </lvc:CartesianChart>
+                    </Border>
+                </VerticalStackLayout>
+            </CollectionView.Header>
+            
+
+            <CollectionView.ItemTemplate Margin="15" >
+                <DataTemplate x:DataType="models:MonthlyStat">
+                    <Border Style="{StaticResource ElevatedCardBorderStyle}">
+
+                        <Grid ColumnDefinitions="Auto, *, *" Padding="15" ColumnSpacing="15">
+
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" WidthRequest="80">
+                                <Label Text="{Binding Month_mmmm}" 
+                                       TextColor="White" 
+                                       Style="{StaticResource CardTitle}" 
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       HorizontalOptions="Start"
+                                       LineBreakMode="TailTruncation"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="Przychód" FontSize="10" TextColor="#80CBC4" TextTransform="Uppercase"/>
+                                <Label Text="{Binding Income, StringFormat='{0:C0}'}" 
+                                       TextColor="#00BFA5" 
+                                       FontAttributes="Bold"
+                                       FontSize="15"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="2">
+                                <Label Text="Wydatki" FontSize="10" TextColor="#EF9A9A" TextTransform="Uppercase"/>
+                                <Label Text="{Binding Expenses, StringFormat='{0:C0}'}" 
+                                       TextColor="#EF5350" 
+                                       FontAttributes="Bold"
+                                       FontSize="15"/>
+                            </VerticalStackLayout>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </Grid>
 </ContentPage>

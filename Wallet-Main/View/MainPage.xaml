@@ -99,14 +99,14 @@
               WidthRequest="250" 
               HeightRequest="300"
               InputTransparent="True"
-              ZIndex="999"
               CascadeInputTransparent="False">
             <HorizontalStackLayout x:Name="IncomeBtn" 
                                    Spacing="10" 
                                    HorizontalOptions="End" 
                                    VerticalOptions="End"
                                    Opacity="0"
-                                   Scale="0"
+                                   Scale="0.8"
+                                   ZIndex="1"
                                    InputTransparent="True"
                                    >
                 <Label Text="Wpływ" VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
@@ -121,8 +121,9 @@
                                    HorizontalOptions="End" 
                                    VerticalOptions="End"
                                    Opacity="0"
-                                   Scale="0"
-                                   InputTransparent="True">
+                                   ZIndex="1"
+                                   Scale="0.8"
+                                 InputTransparent="True">
                 <Label Text="Wydatek" VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
                 <Button Text="-" 
                         Command="{Binding New_ExpenseCommand}"
@@ -141,6 +142,7 @@
                     HorizontalOptions="End"
                     VerticalOptions="End"
                     Clicked="MainFab_Clicked"
+                    ZIndex="2"
                     InputTransparent="False">
                 <Button.Shadow>
                     <Shadow Brush="Black" Offset="0,5" Opacity="0.5" Radius="5"/>

@@ -20,8 +20,8 @@ namespace Wallet_Main.ViewModel
     public partial class StatisticViewModel:ObservableObject
     {
         private readonly Wallet_lib.WalletService _service;
-        public ObservableCollection<Wallet_lib.Transactions> TransactionsList =new();
-        public ObservableCollection<Wallet_lib.MonthlyStat> MonthlyStatList =new();
+        public ObservableCollection<Wallet_lib.Transactions> TransactionsList { get; set; } = new();
+        public ObservableCollection<Wallet_lib.MonthlyStat> MonthlyStatList { get; set; } =new();
 
         [ObservableProperty]
         private IEnumerable<ISeries> seriesList;
@@ -169,7 +169,7 @@ namespace Wallet_Main.ViewModel
                     Values = values,
                     Name = "Wydatki miesięczne",
                     Fill = new SolidColorPaint(SKColors.White),
-                    MinGeometrySize = 10,
+                    MinGeometrySize = 5,
                     ZIndex=3
                 }
 
@@ -179,20 +179,20 @@ namespace Wallet_Main.ViewModel
                 new Axis
                 {
                     Labels = labels,
-                    Name = "Miesiąc",
                     LabelsPaint = new SolidColorPaint(SKColors.WhiteSmoke),
                     NamePaint = new SolidColorPaint(SKColors.WhiteSmoke),
-                    LabelsRotation = 45
+                    LabelsRotation = 45,
+                    TextSize=10
                 }
             };
             YAxes = new Axis[]
             {
                 new Axis
                 {
-                    Name = "Balans",
                     NamePaint = new SolidColorPaint(SKColors.WhiteSmoke),
                     LabelsPaint = new SolidColorPaint(SKColors.WhiteSmoke),
                     Labeler = value => value.ToString("C"),
+                    TextSize=10,
                     SeparatorsPaint = new SolidColorPaint(SKColors.WhiteSmoke)
                     {
                         PathEffect = new DashEffect(new float[] { 5, 5 }),
