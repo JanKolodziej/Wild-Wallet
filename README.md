@@ -15,8 +15,8 @@ The app allows users to track financial flows in real-time, analyze expenses via
 
 | 📊 Main Dashboard | ➕ Add Transaction | 📝 Transaction History |
 |:---:|:---:|:---:|
-| <img src="assets/screen1.png" alt="Dashboard" width="280"> | <img src="assets/screen2.png" alt="Add Transaction" width="280"> | <img src="assets/screen3.png" alt="History List" width="280"> |
-| *Trend analysis & Balance* | *Quick expense entry* | *Detailed operation list* |
+| <img src="assets/screen1.png" alt="Dashboard" width="280"> | <img src="assets/screen2.png" alt="History List" width="280"> | <img src="assets/screen3.png" alt="Balance projection" width="280"> |
+| *Trend analysis & Balance* | *Detailed operation list* | *Future Balance Projection* |
 
 ---
 
