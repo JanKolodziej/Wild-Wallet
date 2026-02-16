@@ -13,7 +13,7 @@ The app allows users to track financial flows in real-time, analyze expenses via
 
 ## 📱 App Overview (Screenshots)
 
-| 📊 Main Dashboard | ➕ Add Transaction | 📝 Transaction History |
+| 📊 Main Dashboard | 📝 Transaction History | 📈 Balance Projection|
 |:---:|:---:|:---:|
 | <img src="assets/screen1.png" alt="Dashboard" width="280"> | <img src="assets/screen2.png" alt="History List" width="280"> | <img src="assets/screen3.png" alt="Balance projection" width="280"> |
 | *Trend analysis & Balance* | *Detailed operation list* | *Future Balance Projection* |
@@ -37,6 +37,7 @@ The project is built following software engineering best practices:
 - [x] **Smart Dashboard:** Tiles with a quick summary of the current balance.
 - [x] **Local Database:** All data is stored securely on the device (SQLite).
 - [x] **Dark Mode:** User interface designed in a modern "Fintech Dark" theme.
+- [x] **Linear Regression** App can estimate your future balance based on historic data
 
 ---
 
@@ -47,7 +48,7 @@ I am currently working on expanding the application's capabilities:
 * [ ] **Full Transaction Editing:** Ability to modify amount, date, and category.
 * [ ] **Wallets:** Multi-account support (Cash, Bank Account, Savings).
 * [ ] **Category Management:** Custom categories with icons and colors.
-* [ ] **Statistics Module:** Unlocking advanced insights after collecting 3 months of data.
+* [ ] **Google Play** My biggest dream *aside from beeing employed*
 
 ---
 
