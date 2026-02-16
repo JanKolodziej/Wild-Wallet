@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Maui.Platform;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Wallet_lib
 {
@@ -23,13 +25,33 @@ namespace Wallet_lib
                 AccountId = t.AccountId
             }).OrderBy(t => t.Date).ToListAsync();
         }
-
         public async Task<List<Categories>> Get_All_Categories_Async()
         {
-            return await _context.Categories.Select(c => new Categories
+            var data=  await _context.Categories.Select(c => new Categories
             {
                 Id = c.Id,
                 Name = c.Name,
+                Type = c.Type,
+            }).ToListAsync();
+            return data;
+        }
+
+        public async Task<List<Categories>> Get_All_Income_Categories_Async()
+        {
+            return await _context.Categories.Where(c=> c.Type=="Income").Select(c => new Categories
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Type = c.Type
+            }).ToListAsync();
+        }
+        public async Task<List<Categories>> Get_All_Expense_Categories_Async()
+        {
+            return await _context.Categories.Where(c => c.Type == "Expense").Select(c => new Categories
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Type = c.Type
             }).ToListAsync();
         }
         public async Task<List<Accounts>> Get_Accounts_Async()
@@ -101,6 +123,20 @@ namespace Wallet_lib
             var data = await _context.Transactions.Where(t => (t.Date.Month < date.Date.Month
             && t.Date.Year <= date.Date.Year) || t.Date.Year < date.Date.Year).SumAsync(t => t.Amount);
             return data;
+
+        }
+        public async Task Update_Transaction(Transactions transaction)
+        {
+            var data = await _context.Transactions.Where(t=> t.Id == transaction.Id).FirstOrDefaultAsync();
+            if(data != null)
+            {
+                data.Title = transaction.Title;
+                data.Amount = transaction.Amount;
+                data.CategoryId = transaction.CategoryId;
+                data.AccountId = transaction.AccountId;
+                data.Date = transaction.Date;
+            }
+           await _context.SaveChangesAsync();
 
         }
 

@@ -23,6 +23,7 @@ namespace Wallet_Main
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "Wallet_db.db");
             builder.Services.AddDbContext<Wallet_lib.WalletContext>(options =>
             options.UseSqlite($"Data Source={dbPath}"));
+            System.Diagnostics.Debug.WriteLine($"MOJA BAZA: {dbPath}");
 
 
 
@@ -41,6 +42,7 @@ namespace Wallet_Main
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<Wallet_lib.WalletContext>();
+                //db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
 
                 if (!db.Transactions.Any())
@@ -59,9 +61,13 @@ namespace Wallet_Main
                 {
                     db.Categories.AddRange(new List<Wallet_lib.Categories>
                     {
-                        new Wallet_lib.Categories { Id =1,Name="Zakupy" },
-                        new Wallet_lib.Categories { Id =2,Name="Transport" },
-                        new Wallet_lib.Categories { Id =3,Name="Rachunki" }
+                        new Wallet_lib.Categories { Id =1,Name="Zakupy", Type="Expense" },
+                        new Wallet_lib.Categories { Id =2,Name="Transport" , Type="Expense"},
+                        new Wallet_lib.Categories { Id =3,Name="Rachunki", Type="Expense" },
+                        new Wallet_lib.Categories { Id =4,Name="Wypłata", Type="Income" },
+                        new Wallet_lib.Categories { Id =5,Name="Odsetki" , Type="Income"},
+                        new Wallet_lib.Categories { Id =6,Name="Przychody finansowe", Type="Income" }
+
 
                     });
                     db.SaveChanges();

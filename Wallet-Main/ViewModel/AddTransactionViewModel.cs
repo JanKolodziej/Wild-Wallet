@@ -5,8 +5,16 @@ using Wallet_lib;
 
 namespace Wallet_Main
 {
+    [QueryProperty(nameof(TransactionToEdit), "TransactionToEdit")]
+    [QueryProperty(nameof(TypeOfTransaction), "NewTransaction")]
+
     public partial class AddTransactionViewModel : ObservableObject
     {
+        [ObservableProperty]
+        private Transactions? transactionToEdit;
+        [ObservableProperty]
+        private string typeOfTransaction;
+
         [ObservableProperty]
         private DateTime date;
         [ObservableProperty]
@@ -31,11 +39,46 @@ namespace Wallet_Main
             Date = DateTime.Now;
             _service = service;
             Load_Data();
+            
+        }
+        partial void OnTransactionToEditChanged(Transactions? value)
+        {
+            if (value != null)
+            {
+                Date = value.Date;
+                Title = value.Title;
+                CategoryId = value.CategoryId;
+                AccountId = value.AccountId;
+                Amount = Math.Abs(value.Amount).ToString();
+
+
+            }
+        }
+        async partial void OnTypeOfTransactionChanged(string value)
+        {
+            if (value == "Expense")
+            {
+                var cat = await _service.Get_All_Expense_Categories_Async();
+                Categories.Clear();
+                foreach(var category in cat)
+                {
+                    Categories.Add(category);
+                }
+            }
+            else if (value == "Income")
+            {
+                var cat = await _service.Get_All_Income_Categories_Async();
+                Categories.Clear();
+                foreach (var category in cat)
+                {
+                    Categories.Add(category);
+                }
+            }
         }
         public async void Load_Data()
         {
-            var cat = await _service.Get_All_Categories_Async();
-            Categories = new ObservableCollection<Categories>(cat);
+
+
             var acc = await _service.Get_Accounts_Async();
             Accounts = new ObservableCollection<Wallet_lib.Accounts>(acc);
         }
@@ -44,8 +87,34 @@ namespace Wallet_Main
         {
             if (IsAmountValid)
             {
-                _service.Add_Transaction(new(Date, decimal.Parse(Amount), Title, CategoryId, AccountId));
-                await Shell.Current.GoToAsync("..");
+                decimal _amount = decimal.Parse(Amount);
+                
+                if (TransactionToEdit == null)
+                {
+                    if (TypeOfTransaction == "Expense" && _amount > 0)
+                    {
+                        _amount = -_amount;
+                    }
+
+                    _service.Add_Transaction(new(Date, _amount, Title, CategoryId, AccountId));
+                    await Shell.Current.GoToAsync("..");
+                }
+                else 
+                {
+                    if(TransactionToEdit.Amount<0)
+                    {
+                        _amount = -_amount;
+                    }
+                    TransactionToEdit.Id = TransactionToEdit.Id;
+                    TransactionToEdit.AccountId = AccountId;
+                    TransactionToEdit.CategoryId= CategoryId;
+                    TransactionToEdit.Amount = _amount;
+                    TransactionToEdit.Date=Date;
+                    TransactionToEdit.Title = Title;
+
+                    await _service.Update_Transaction(TransactionToEdit);
+                }
+                
             }
 
         }

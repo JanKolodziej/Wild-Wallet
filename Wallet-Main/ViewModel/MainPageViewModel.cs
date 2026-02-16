@@ -133,15 +133,32 @@ namespace Wallet_Main
         [RelayCommand]
         private async Task New_Income()
         {
-
-            await Shell.Current.GoToAsync($"{nameof(AddTransactionPage)}?type=income");
+            Dictionary<string, object> info = new();
+            info.Add("NewTransaction", "Income");
+            await Shell.Current.GoToAsync(nameof(AddTransactionPage), info);
         }
 
         [RelayCommand]
         private async Task New_Expense()
         {
-
-            await Shell.Current.GoToAsync($"{nameof(AddTransactionPage)}?type=expense");
+            Dictionary<string, object> info = new();
+            info.Add( "NewTransaction", "Expense" );
+            await Shell.Current.GoToAsync(nameof(AddTransactionPage),info);
+        }
+        [RelayCommand]
+        private async Task Edit_Transaction(Transactions transaction)
+        {
+            Dictionary<string, object> info = new();
+            info.Add("TransactionToEdit", transaction);
+            if(transaction.Amount<0)
+            {
+                info.Add("NewTransaction", "Expense");
+            }
+            else
+            {
+                info.Add("NewTransaction", "Income");
+            }
+                await Shell.Current.GoToAsync(nameof(AddTransactionPage), info);
         }
     }
 }
