@@ -38,10 +38,10 @@ namespace Wallet_Main
 
         public async void Import_Data(DateTime date)
         {
-            var cat = await _service.Get_All_Categories_Async();
-            CategoriesList = new ObservableCollection<Categories>(cat);
-            var ac = await _service.Get_Accounts_Async();
-            AccountList = new ObservableCollection<Wallet_lib.Accounts>(ac);
+            //var cat = await _service.Get_All_Categories_Async();
+            //CategoriesList = new ObservableCollection<Categories>(cat);
+            //var ac = await _service.Get_Accounts_Async();
+            //AccountList = new ObservableCollection<Wallet_lib.Accounts>(ac);
             var data = await _service.Get_Transaction_month(DateTime.Now);
             TransactionsList.Clear();
             foreach (var d in data)
@@ -67,13 +67,6 @@ namespace Wallet_Main
             Import_Data(DateTime.Now);
         }
 
-        [RelayCommand]
-        private async Task New_Transaction()
-        {
-            
-            await Shell.Current.GoToAsync(nameof(AddTransactionPage));
-
-        }
         public async Task Create_chart()
         {
             double amount = Convert.ToDouble(await _service.Get_Balance_To_Date(DateTime.Now));

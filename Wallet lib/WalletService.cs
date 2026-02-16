@@ -108,7 +108,7 @@ namespace Wallet_lib
         }
         public async Task<List<Transactions>> Get_Transaction_month(DateTime date)
         {
-            var data = await _context.Transactions.Where(t => t.Date.Year == date.Date.Year && t.Date.Month == date.Date.Month).
+            var data = await _context.Transactions.AsNoTracking().Where(t => t.Date.Year == date.Date.Year && t.Date.Month == date.Date.Month).
                 OrderByDescending(t => t.Date).ToListAsync();
             return data;
         }

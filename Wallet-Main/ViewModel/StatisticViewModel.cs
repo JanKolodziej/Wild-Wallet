@@ -30,11 +30,29 @@ namespace Wallet_Main.ViewModel
         [ObservableProperty]
         private Axis[] yAxes;
 
+        [ObservableProperty]
+        private bool isNotEnoughData=true;
+
+        [ObservableProperty]
+        private double chartOpacity = 1.0; 
+
+        [ObservableProperty]
+        private double dataCollectionProgress; 
+
+        [ObservableProperty]
+        private string daysLeftText;
+
+
         public StatisticViewModel(Wallet_lib.WalletService service)
         {
             _service = service;
             Load_Data();
-            Create_Chart();
+            Do_I_Load_the_chart();
+            if(!IsNotEnoughData)
+            {
+                Create_Chart();
+            }
+            
         }
 
         public async void Load_Data()
@@ -69,8 +87,26 @@ namespace Wallet_Main.ViewModel
             }
 
         }
+        public void Do_I_Load_the_chart()
+        {
+            int n = MonthlyStatList.Count;
+            if (n > 2)
+            {
+                IsNotEnoughData = false;
+            }
+            else
+            {
+                DateTime date = TransactionsList.First().Date.AddMonths(3);
+                DateTime requiredDate = new(date.Year, date.Month, 1);
+                int requiredDays = (requiredDate - TransactionsList.Last().Date).Days;
+                int days = (requiredDate - DateTime.Now.Date).Days;
+                DaysLeftText = $"Pozostało {days} dni do odblokowania tej zawartości";
+                DataCollectionProgress = (requiredDays - days) / requiredDays;
+            }
+        }
         public void Create_Chart()
         {
+            
             double amount = 0;
             //LineSeries<DateTimePoint> series = new();
             ObservableCollection<double> values = new();

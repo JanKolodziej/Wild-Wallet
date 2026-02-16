@@ -9,6 +9,7 @@
         }
         protected override void OnAppearing()
         {
+
             base.OnAppearing();
             if (BindingContext is MainPageViewModel vm)
             {

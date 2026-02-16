@@ -88,23 +88,19 @@ namespace Wallet_Main
             if (IsAmountValid)
             {
                 decimal _amount = decimal.Parse(Amount);
-                
+                if (TypeOfTransaction == "Expense" && _amount > 0)
+                {
+                    _amount = -_amount;
+                }
+
                 if (TransactionToEdit == null)
                 {
-                    if (TypeOfTransaction == "Expense" && _amount > 0)
-                    {
-                        _amount = -_amount;
-                    }
 
                     _service.Add_Transaction(new(Date, _amount, Title, CategoryId, AccountId));
                     await Shell.Current.GoToAsync("..");
                 }
                 else 
                 {
-                    if(TransactionToEdit.Amount<0)
-                    {
-                        _amount = -_amount;
-                    }
                     TransactionToEdit.Id = TransactionToEdit.Id;
                     TransactionToEdit.AccountId = AccountId;
                     TransactionToEdit.CategoryId= CategoryId;
@@ -113,6 +109,7 @@ namespace Wallet_Main
                     TransactionToEdit.Title = Title;
 
                     await _service.Update_Transaction(TransactionToEdit);
+                    await Shell.Current.GoToAsync("..");
                 }
                 
             }

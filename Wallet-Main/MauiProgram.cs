@@ -31,8 +31,8 @@ namespace Wallet_Main
             builder.Logging.AddDebug();
 #endif
             builder.Services.AddTransient<Wallet_lib.WalletService>();
-            builder.Services.AddTransient<MainPageViewModel>();
-            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddSingleton<MainPage>();
             builder.Services.AddTransient<AddTransactionPage>();
             builder.Services.AddTransient<AddTransactionViewModel>();
             builder.Services.AddTransient<StatisticPage>();

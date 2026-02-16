@@ -18,11 +18,6 @@ namespace Wallet_lib
         public static (double, double) Line_Fit(List<double> monthsBalance)
         {
             int n = monthsBalance.Count();
-            if (n < 2)
-            {
-                throw new Exception();
-            }
-
             List<int> xValues = new();
             for (int i = 0; i < n; i++)
             {

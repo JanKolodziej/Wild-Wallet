@@ -29,16 +29,42 @@
                            FontAttributes="Bold"
                            Margin="5,0"/>
 
-                    <Border Style="{StaticResource ElevatedCardBorderStyle}" >
+                    <Grid HeightRequest="350">
 
-                        <lvc:CartesianChart Series="{Binding SeriesList}" 
-                                            XAxes="{Binding XAxes}" 
-                                            YAxes="{Binding YAxes}"
-                                            Background="{StaticResource CardBgElevated}"
-                                            HeightRequest="300"
-                                            TooltipPosition="Top">
-                        </lvc:CartesianChart>
-                    </Border>
+                        <lvc:CartesianChart 
+                            Series="{Binding SeriesList}" 
+                            XAxes="{Binding XAxes}" 
+                            LegendPosition="Hidden"
+                            TooltipPosition="Top"
+                            Opacity="{Binding ChartOpacity}"/>
+
+                        <Border IsVisible="{Binding IsNotEnoughData}"
+                            BackgroundColor="#CC1A1F2B" 
+                            StrokeThickness="0"
+                            VerticalOptions="Fill"
+                            HorizontalOptions="Fill"
+                            ZIndex="99">
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Padding="30">
+                                <Label Text="📊" FontSize="50" HorizontalOptions="Center"/>
+
+                                <Label Text="Zbieramy dane..." 
+                                   TextColor="White" 
+                                   FontSize="20" 
+                                   FontAttributes="Bold" 
+                                   HorizontalOptions="Center"/>
+
+                                <Label Text="Aby odblokować zaawansowaną analizę statystyczną i trendy, korzystaj z aplikacji aktywnie przez minimum 3 miesiące." 
+                                TextColor="#B0BEC5" 
+                                FontSize="14" 
+                                HorizontalTextAlignment="Center" 
+                                HorizontalOptions="Center"/>     
+
+                                <ProgressBar Progress="{Binding DataCollectionProgress}" ProgressColor="#00BFA5" WidthRequest="150"/>
+                                <Label Text="{Binding DaysLeftText}" TextColor="#546E7A" FontSize="12" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </Grid>
                 </VerticalStackLayout>
             </CollectionView.Header>
             
