@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using Wallet_lib;
@@ -20,12 +21,12 @@ namespace Wallet_Main
         [ObservableProperty]
         private string? title;
         [ObservableProperty]
-        private int? categoryId;
-        [ObservableProperty]
         private int? accountId;
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsAmountValid))]
         private string amount;
+        [ObservableProperty]
+        private Categories selectedCategory;
 
         public bool IsAmountValid => decimal.TryParse(Amount, out _);
         public ObservableCollection<Categories> Categories { get; set; } = new();
@@ -41,13 +42,23 @@ namespace Wallet_Main
             Load_Data();
             
         }
+        [RelayCommand]
+        public async void Show_Category_PopUp()
+        {
+            CategoryPopUp pop = new(Categories.ToList());
+            var result = await Shell.Current.ShowPopupAsync(pop);
+            if(result is Wallet_lib.Categories selected)
+            {
+                SelectedCategory = selected;
+            }
+        }
         partial void OnTransactionToEditChanged(Transactions? value)
         {
             if (value != null)
             {
                 Date = value.Date;
                 Title = value.Title;
-                CategoryId = value.CategoryId;
+                SelectedCategory = value.Category;
                 AccountId = value.AccountId;
                 Amount = Math.Abs(value.Amount).ToString();
 
@@ -74,6 +85,7 @@ namespace Wallet_Main
                     Categories.Add(category);
                 }
             }
+            Show_Category_PopUp();
         }
         public async void Load_Data()
         {
@@ -96,14 +108,14 @@ namespace Wallet_Main
                 if (TransactionToEdit == null)
                 {
 
-                    _service.Add_Transaction(new(Date, _amount, Title, CategoryId, AccountId));
+                    _service.Add_Transaction(new(Date, _amount, Title, SelectedCategory.Id, AccountId));
                     await Shell.Current.GoToAsync("..");
                 }
                 else 
                 {
                     TransactionToEdit.Id = TransactionToEdit.Id;
                     TransactionToEdit.AccountId = AccountId;
-                    TransactionToEdit.CategoryId= CategoryId;
+                    TransactionToEdit.CategoryId= SelectedCategory.Id;
                     TransactionToEdit.Amount = _amount;
                     TransactionToEdit.Date=Date;
                     TransactionToEdit.Title = Title;

@@ -1,4 +1,6 @@
-﻿namespace Wallet_lib
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Wallet_lib
 {
 
     public class Transactions
@@ -9,6 +11,9 @@
         public string? Title { get; set; }
         public int? CategoryId { get; set; }
         public int? AccountId { get; set; }
+
+        [ForeignKey(nameof(CategoryId))]
+        public Categories Category { get; set; }
 
         public Transactions()
         {

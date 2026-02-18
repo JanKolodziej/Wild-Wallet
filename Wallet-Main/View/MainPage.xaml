@@ -106,15 +106,18 @@
                             </Border.GestureRecognizers>
                             <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="15">
 
-                                <Border Grid.Column="0" 
-                                        HeightRequest="40" 
-                                        WidthRequest="40" 
-                                        StrokeShape="RoundRectangle 20" 
-                                        BackgroundColor="#37474F"
-                                        StrokeThickness="0">
-                                    <Label Text="💰" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18"/>
+                                <Border Grid.Column="0" StrokeShape="RoundRectangle 30"
+                                    HeightRequest="40" WidthRequest="40"
+                                    BackgroundColor="{Binding Category.Color}"
+                                    StrokeThickness="0"
+                                    HorizontalOptions="Center" 
+                                    VerticalOptions="Center">
+                                       <Label Text="{Binding Category.Icon}" 
+                                       FontSize="25" 
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"
+                                          Margin="0,0,0,5" />
                                 </Border>
-
                                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
                                     <Label Text="{Binding Title}" TextColor="White" FontAttributes="Bold" FontSize="15"/>
                                     <Label Text="Transakcja" TextColor="#90A4AE" FontSize="11"/>

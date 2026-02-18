@@ -101,17 +101,29 @@
                     </Grid>
 
                     <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15,10">
-                        <Grid ColumnDefinitions="*, Auto">
-                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Show_Category_PopUpCommand}"/>
+                        </Border.GestureRecognizers>
+                        <Grid ColumnDefinitions="*">
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" Spacing="10">
                                 <Label Text="Kategoria" TextColor="#6B7280" FontSize="11"/>
-                                <Picker ItemsSource="{Binding Categories}" 
-                                        ItemDisplayBinding="{Binding Name}" 
-                                        TextColor="White"
-                                        TitleColor="#4B5563"
-                                        BackgroundColor="Transparent"/>
+                                <HorizontalStackLayout Spacing="20">
+                                <Border Grid.Column="0" StrokeShape="RoundRectangle 30"
+                                    HeightRequest="40" WidthRequest="40"
+                                    BackgroundColor="{Binding SelectedCategory.Color}"
+                                    StrokeThickness="0"
+                                    HorizontalOptions="Center" 
+                                    VerticalOptions="Center">
+                                    <Label Text="{Binding SelectedCategory.Icon}" 
+                                       FontSize="25" 
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"
+                                          Margin="0,0,0,5" />
+                                </Border>
+                                    <Label Text="{Binding SelectedCategory.Name}"  TextColor="White" Margin="0,7"/>
+                                </HorizontalStackLayout>
                             </VerticalStackLayout>
-
-                            <Label Grid.Column="1" Text="▼" TextColor="Gray" VerticalOptions="Center" FontSize="10"/>
+                            
                         </Grid>
                     </Border>
 

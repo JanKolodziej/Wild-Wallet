@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using Wallet_Main.ViewModel;
+using CommunityToolkit.Maui;
 
 namespace Wallet_Main
 {
@@ -15,6 +16,7 @@ namespace Wallet_Main
                 .UseSkiaSharp()
                 .UseLiveCharts()
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -42,31 +44,27 @@ namespace Wallet_Main
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<Wallet_lib.WalletContext>();
-                //db.Database.EnsureDeleted();
+                db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
 
-                if (!db.Transactions.Any())
-                {
-                    db.Transactions.AddRange(new List<Wallet_lib.Transactions>
-                    {
-                        new Wallet_lib.Transactions { Id=1, Amount = -50.50m,Date=DateTime.Now },
-                        new Wallet_lib.Transactions { Id=2, Amount = 300.00m,Date=DateTime.Now  },
-                        new Wallet_lib.Transactions { Id=3, Amount = 45.00m,Date=DateTime.Now  }
-                    });
-
-                    db.SaveChanges();
-                    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe tranzakcji do bazy");
-                }
+                
                 if (!db.Categories.Any())
                 {
                     db.Categories.AddRange(new List<Wallet_lib.Categories>
                     {
-                        new Wallet_lib.Categories { Id =1,Name="Zakupy", Type="Expense" },
-                        new Wallet_lib.Categories { Id =2,Name="Transport" , Type="Expense"},
-                        new Wallet_lib.Categories { Id =3,Name="Rachunki", Type="Expense" },
-                        new Wallet_lib.Categories { Id =4,Name="Wypłata", Type="Income" },
-                        new Wallet_lib.Categories { Id =5,Name="Odsetki" , Type="Income"},
-                        new Wallet_lib.Categories { Id =6,Name="Przychody finansowe", Type="Income" }
+                        new() { Name="Zakupy",    Type="Expense", Icon="🛒", Color="#FFA726" }, 
+                        new() { Name="Jedzenie",  Type="Expense", Icon="🍔", Color="#EF5350" }, 
+                        new() { Name="Dom",       Type="Expense", Icon="🏠", Color="#42A5F5" }, 
+                        new() { Name="Transport", Type="Expense", Icon="⛽", Color="#7E57C2" }, 
+                        new() { Name="Zdrowie",   Type="Expense", Icon="💊", Color="#26C6DA" }, 
+                        new() { Name="Rozrywka",  Type="Expense", Icon="🎬", Color="#EC407A" }, 
+                        new() { Name="Abonamenty",Type="Expense", Icon="📱", Color="#FF7043" }, 
+                        new() { Name="Inne",      Type="Expense", Icon="📦", Color="#BDBDBD" }, 
+
+                        new() { Name="Wypłata",   Type="Income",  Icon="💵 ", Color="#66BB6A" }, 
+                        new() { Name="Biznes",    Type="Income",  Icon="📈", Color="#9CCC65" }, 
+                        new() { Name="Prezenty",  Type="Income",  Icon="🎁", Color="#AB47BC" }, 
+                        new() { Name="Odsetki",   Type="Income",  Icon="🏦", Color="#29B6F6" }  
 
 
                     });
@@ -83,6 +81,18 @@ namespace Wallet_Main
                     });
                     db.SaveChanges();
                     System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe kont do bazy");
+                }
+                if (!db.Transactions.Any())
+                {
+                    db.Transactions.AddRange(new List<Wallet_lib.Transactions>
+                    {
+                        new Wallet_lib.Transactions { Id=1, Amount = -50.50m,Date=DateTime.Now,CategoryId=1},
+                        new Wallet_lib.Transactions { Id=2, Amount = 300.00m,Date=DateTime.Now, CategoryId=8 },
+                        new Wallet_lib.Transactions { Id=3, Amount = 45.00m,Date=DateTime.Now,CategoryId=9  }
+                    });
+
+                    db.SaveChanges();
+                    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe tranzakcji do bazy");
                 }
 
                 var count = db.Transactions.Count();

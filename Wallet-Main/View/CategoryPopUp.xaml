@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="Wallet_Main.CategoryPopUp"
+               Color="Transparent"
+               CanBeDismissedByTappingOutsideOfPopup="True"
+               VerticalOptions="End">
+
+
+    <Border StrokeShape="RoundRectangle 20,20,0,0"
+            BackgroundColor="#1E222D"
+            VerticalOptions="End" 
+            HorizontalOptions="Fill"
+            Padding="0">
+
+        <Grid RowDefinitions="Auto, *">
+
+            <BoxView Grid.Row="0" 
+                     Color="Gray" 
+                     HeightRequest="5" 
+                     WidthRequest="50" 
+                     CornerRadius="2" 
+                     HorizontalOptions="Center" 
+                     Margin="0,10,0,10"/>
+
+            <Label Grid.Row="0" 
+                   Text="Wybierz Kategorię" 
+                   TextColor="White" 
+                   FontAttributes="Bold" 
+                   FontSize="18" 
+                   HorizontalOptions="Center" 
+                   Margin="0,25,0,10"/>
+
+            <CollectionView Grid.Row="1" 
+                            x:Name="CategoriesCollection"
+                            SelectionMode="Single"
+                            ItemsSource="{Binding Categories}"
+                            SelectionChanged="OnCategorySelected" >
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Spacing="5">
+                            <Border StrokeShape="RoundRectangle 30"
+                                    HeightRequest="60" WidthRequest="60"
+                                    BackgroundColor="{Binding Color}"
+                                    StrokeThickness="0">
+                                <Label Text="{Binding Icon}" 
+                                       FontSize="28" 
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"/>
+                            </Border>
+
+                            <Label Text="{Binding Name}" 
+                                   TextColor="White" 
+                                   FontSize="12" 
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Border>
+
+</toolkit:Popup>

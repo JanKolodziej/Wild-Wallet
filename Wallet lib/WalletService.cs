@@ -32,6 +32,8 @@ namespace Wallet_lib
                 Id = c.Id,
                 Name = c.Name,
                 Type = c.Type,
+                Icon = c.Icon,
+                Color= c.Color,
             }).ToListAsync();
             return data;
         }
@@ -42,7 +44,9 @@ namespace Wallet_lib
             {
                 Id = c.Id,
                 Name = c.Name,
-                Type = c.Type
+                Type = c.Type,
+                Icon = c.Icon,
+                Color = c.Color
             }).ToListAsync();
         }
         public async Task<List<Categories>> Get_All_Expense_Categories_Async()
@@ -51,7 +55,9 @@ namespace Wallet_lib
             {
                 Id = c.Id,
                 Name = c.Name,
-                Type = c.Type
+                Type = c.Type,
+                Icon = c.Icon,
+                Color = c.Color
             }).ToListAsync();
         }
         public async Task<List<Accounts>> Get_Accounts_Async()
@@ -108,7 +114,7 @@ namespace Wallet_lib
         }
         public async Task<List<Transactions>> Get_Transaction_month(DateTime date)
         {
-            var data = await _context.Transactions.AsNoTracking().Where(t => t.Date.Year == date.Date.Year && t.Date.Month == date.Date.Month).
+            var data = await _context.Transactions.AsNoTracking().Include(t=>t.Category).Where(t => t.Date.Year == date.Date.Year && t.Date.Month == date.Date.Month).
                 OrderByDescending(t => t.Date).ToListAsync();
             return data;
         }

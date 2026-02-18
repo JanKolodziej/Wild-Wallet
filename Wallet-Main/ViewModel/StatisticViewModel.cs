@@ -100,6 +100,11 @@ namespace Wallet_Main.ViewModel
                 DateTime requiredDate = new(date.Year, date.Month, 1);
                 int requiredDays = (requiredDate - TransactionsList.Last().Date).Days;
                 int days = (requiredDate - DateTime.Now.Date).Days;
+                if(days>requiredDays)
+                {
+                    DaysLeftText = "Dodaj tranzakcje w zaległych miesiącach aby odblokować";
+                    DataCollectionProgress = 0.8;
+                }
                 DaysLeftText = $"Pozostało {days} dni do odblokowania tej zawartości";
                 DataCollectionProgress = (requiredDays - days) / requiredDays;
             }

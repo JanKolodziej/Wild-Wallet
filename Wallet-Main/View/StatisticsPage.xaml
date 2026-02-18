@@ -36,6 +36,7 @@
                             XAxes="{Binding XAxes}" 
                             LegendPosition="Hidden"
                             TooltipPosition="Top"
+                            BackgroundColor="#273446"
                             Opacity="{Binding ChartOpacity}"/>
 
                         <Border IsVisible="{Binding IsNotEnoughData}"
