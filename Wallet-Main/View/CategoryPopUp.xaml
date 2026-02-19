@@ -9,10 +9,14 @@
 
 
     <Border StrokeShape="RoundRectangle 20,20,0,0"
+            x:Name="MainPop"
             BackgroundColor="#1E222D"
             VerticalOptions="End" 
             HorizontalOptions="Fill"
             Padding="0">
+        <Border.GestureRecognizers>
+            <PanGestureRecognizer PanUpdated="OnPanUpdated"/>
+        </Border.GestureRecognizers>
 
         <Grid RowDefinitions="Auto, *">
 
