@@ -11,7 +11,7 @@
             BackgroundColor="#1E222D"
             StrokeThickness="0"
             VerticalOptions="End"
-            x:Name="MainPop"
+            x:Name="Pop"
             HorizontalOptions="Fill">
 
         <Border.GestureRecognizers>

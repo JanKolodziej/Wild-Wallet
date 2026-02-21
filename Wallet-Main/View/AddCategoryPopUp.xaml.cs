@@ -63,7 +63,7 @@ public partial class AddCategoryPopUp : Popup
 
     public async void CloseWithAnimation(Categories? category)
     {
-        await MainPop.TranslateTo(0, 600, 250, Easing.CubicIn);
+        await Pop.TranslateTo(0, 600, 250, Easing.CubicIn);
         Close(category);
     }
     public async void OnPanUpdated(object sender, PanUpdatedEventArgs e)
@@ -73,7 +73,7 @@ public partial class AddCategoryPopUp : Popup
             case GestureStatus.Running:
                 if (e.TotalY > 0)
                 {
-                    MainPop.TranslationY = e.TotalY;
+                    Pop.TranslationY = e.TotalY;
                     currentY = e.TotalY;
 
                 }
@@ -85,7 +85,7 @@ public partial class AddCategoryPopUp : Popup
                 }
                 else
                 {
-                    await MainPop.TranslateTo(0, 0, 200, Easing.CubicOut);
+                    await Pop.TranslateTo(0, 0, 200, Easing.CubicOut);
                 }
                 currentY = 0;
                 break;

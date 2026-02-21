@@ -7,6 +7,7 @@ namespace Wallet_Main
 		private double currentY;
 
         public List<Wallet_lib.Categories> Categories { get; set; }
+		private bool newCategoryNull = false;
         public CategoryPopUp(List<Wallet_lib.Categories> cat)
 		{
 			InitializeComponent();
@@ -26,6 +27,11 @@ namespace Wallet_Main
 		}
 		public async void CloseLogic(Wallet_lib.Categories? category)
 		{
+			if(newCategoryNull)
+			{
+				newCategoryNull = false;
+				return;
+			}
             if (category != null)
             {
 				if(category.Name=="Dodaj Kategorie")
@@ -40,8 +46,20 @@ namespace Wallet_Main
 						Close(cat);
 						return;
 					}
+					else
+					{
+						newCategoryNull = true;
+                        CategoriesCollection.SelectedItem = null;
+						
+                        return;
+						
+					}
 				}
-                Close(category);
+				else
+				{
+                    Close(category);
+                }
+				
             }
             Wallet_lib.Categories? categorieDefault = Categories.Where(c => c.Name == "Inne").FirstOrDefault();
 
