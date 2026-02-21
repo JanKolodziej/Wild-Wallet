@@ -9,5 +9,13 @@
         public string Icon { get; set; }
         public string Color { get; set; }
 
+        public Categories(string name, string type, string icon, string color)
+        {
+            Name = name;
+            Type = type;
+            Icon = icon;
+            Color = color;
+        }
+        public Categories() { }
     }
 }

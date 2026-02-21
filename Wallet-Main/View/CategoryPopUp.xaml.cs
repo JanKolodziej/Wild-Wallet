@@ -1,18 +1,20 @@
 ﻿using CommunityToolkit.Maui.Views;
+using System.Threading.Tasks;
 namespace Wallet_Main
 {
 	public partial class CategoryPopUp : Popup
 	{
 		private double currentY;
-		public List<Wallet_lib.Categories> Categories { get; set; }
-		public CategoryPopUp(List<Wallet_lib.Categories> categoryList)
+
+        public List<Wallet_lib.Categories> Categories { get; set; }
+        public CategoryPopUp(List<Wallet_lib.Categories> cat)
 		{
 			InitializeComponent();
-            Wallet_lib.Categories newCategory = new() {Name = "Dodaj Kategorie",Color = "#2E7D32", Icon= "📝", Type="Income" };
-			categoryList.Add(newCategory);
-			Categories = categoryList;
-			
-			BindingContext = this;
+            Categories= cat;
+            Wallet_lib.Categories newCategory = new() { Name = "Dodaj Kategorie", Color = "#2E7D32", Icon = "📝", Type = cat.Last().Type };
+            Categories.Add(newCategory);
+
+            BindingContext = this;
             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
             Size = new Size(mainDisplayInfo.Width / mainDisplayInfo.Density, 450);
         }
@@ -22,15 +24,28 @@ namespace Wallet_Main
 			Wallet_lib.Categories? selectedCategory = e.CurrentSelection.FirstOrDefault() as Wallet_lib.Categories;
 			CloseLogic(selectedCategory);
 		}
-		public void CloseLogic(Wallet_lib.Categories? categorie)
+		public async void CloseLogic(Wallet_lib.Categories? category)
 		{
-            if (categorie != null)
+            if (category != null)
             {
-                Close(categorie);
+				if(category.Name=="Dodaj Kategorie")
+				{
+
+					AddCategoryPopUp add = new(Categories.Last().Type);
+					//Dictionary<string, object> info = new();
+					//info.Add("TypeOfCategory",Categories.Last().Type);
+					var result = await Shell.Current.ShowPopupAsync(add); 
+					if(result is Wallet_lib.Categories cat)
+					{
+						Close(cat);
+						return;
+					}
+				}
+                Close(category);
             }
             Wallet_lib.Categories? categorieDefault = Categories.Where(c => c.Name == "Inne").FirstOrDefault();
 
-            if (categorie == null && categorieDefault != null)
+            if (category == null && categorieDefault != null)
             {
                 Close(categorieDefault);
             }

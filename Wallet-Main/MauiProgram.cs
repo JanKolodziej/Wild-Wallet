@@ -39,6 +39,8 @@ namespace Wallet_Main
             builder.Services.AddTransient<AddTransactionViewModel>();
             builder.Services.AddTransient<StatisticPage>();
             builder.Services.AddTransient<StatisticViewModel>();
+            //builder.Services.AddTransientPopup<CategoryPopUp, CategoryPopUpViewModel>();
+            //builder.Services.AddTransientPopup<AddCategoryPopUp, AddCategoryViewModel>();
 
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())

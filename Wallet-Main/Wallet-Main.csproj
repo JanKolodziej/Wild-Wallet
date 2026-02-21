@@ -71,6 +71,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="View\AddCategoryPopUp.xaml.cs">
+	    <DependentUpon>AddCategoryPopUp.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\AddTransactionPage.xaml.cs">
 	    <DependentUpon>AddTransactionPage.xaml</DependentUpon>
 	  </Compile>
@@ -86,6 +89,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="View\AddCategoryPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\AddTransactionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

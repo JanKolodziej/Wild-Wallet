@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="Wallet_Main.AddCategoryPopUp"
+               Color="Transparent"
+               CanBeDismissedByTappingOutsideOfPopup="True"
+               VerticalOptions="End">
+
+    <Border StrokeShape="RoundRectangle 25,25,0,0"
+            BackgroundColor="#1E222D"
+            StrokeThickness="0"
+            VerticalOptions="End"
+            x:Name="MainPop"
+            HorizontalOptions="Fill">
+
+        <Border.GestureRecognizers>
+            <PanGestureRecognizer PanUpdated="OnPanUpdated"/>
+        </Border.GestureRecognizers>
+
+        <VerticalStackLayout Spacing="20" Padding="25,15,25,40">
+
+            <BoxView Color="#404040"
+                     HeightRequest="5"
+                     WidthRequest="40"
+                     CornerRadius="2.5"
+                     HorizontalOptions="Center"
+                     Opacity="0.5"/>
+
+            <Label Text="Nowa Kategoria"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   FontSize="22"
+                   HorizontalOptions="Center"/>
+
+            <Border StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#2A2F3C"
+                    StrokeThickness="0"
+                    HeightRequest="50"
+                    Padding="15,0">
+                <Entry x:Name="CategoryName"
+                       Placeholder="Wpisz nazwę..."
+                      
+                       PlaceholderColor="#808080"
+                       TextColor="White"
+                       FontSize="16"
+                       VerticalOptions="Center"/>
+            </Border>
+
+            <VerticalStackLayout Spacing="10">
+                <Label Text="KOLOR" TextColor="#808080" FontSize="12" FontAttributes="Bold"/>
+
+                <CollectionView SelectionMode="Single"
+                                x:Name="SelectedColor"
+                                ItemsSource="{Binding ColorsList}"
+                                HeightRequest="60">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="15"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Ellipse Fill="{Binding .}" 
+                                     WidthRequest="45" 
+                                     HeightRequest="45" 
+                                     StrokeThickness="3">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="Stroke" Value="Transparent"/>
+                                                <Setter Property="WidthRequest" Value="45"/>
+                                                <Setter Property="HeightRequest" Value="45"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="Stroke" Value="White"/>
+                                                <Setter Property="WidthRequest" Value="50"/>
+                                                <Setter Property="HeightRequest" Value="50"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Ellipse>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="10">
+                <Label Text="IKONA" TextColor="#808080" FontSize="12" FontAttributes="Bold"/>
+
+                <CollectionView SelectionMode="Single"
+                                x:Name="SelectedIcon"
+                                ItemsSource="{Binding IconsList}"
+                                HeightRequest="65">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeShape="RoundRectangle 10" 
+                                    StrokeThickness="0"
+                                    WidthRequest="50" 
+                                    HeightRequest="50">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#3E4558" />
+                                                <Setter Property="Opacity" Value="1.0" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <Label Text="{Binding .}" 
+                                       FontSize="28" 
+                                       VerticalOptions="Center" 
+                                       HorizontalOptions="Center" />
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <Button Text="Zapisz"
+                    BackgroundColor="#4F6CFF"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    HeightRequest="50"
+                    Margin="0,10,0,0"
+                    IsEnabled="True"
+                    Clicked="OnSaveClicked">
+
+
+                <Button.Triggers>
+                    <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                        <Setter Property="BackgroundColor" Value="#2C3448" />
+                        <Setter Property="TextColor" Value="Gray" />
+                    </Trigger>
+                    <Trigger TargetType="Button" Property="IsEnabled" Value="True">
+                        <Setter Property="BackgroundColor" Value="#4F6CFF" />
+                        <Setter Property="TextColor" Value="White" />
+                    </Trigger>
+                </Button.Triggers>
+            </Button>
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

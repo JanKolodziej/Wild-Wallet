@@ -1,8 +1,10 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using Wallet_lib;
+using Wallet_Main.ViewModel;
 
 namespace Wallet_Main
 {
@@ -43,13 +45,23 @@ namespace Wallet_Main
             
         }
         [RelayCommand]
-        public async void Show_Category_PopUp()
+        public async Task Show_Category_PopUp()
         {
             CategoryPopUp pop = new(Categories.ToList());
+            //Dictionary<string, object> info = new();
+            //info.Add("CategoriesList", Categories);
+            //var result = await _popupService.ShowPopupAsync<CategoryPopUpViewModel>(info);
             var result = await Shell.Current.ShowPopupAsync(pop);
+
             if(result is Wallet_lib.Categories selected)
             {
                 SelectedCategory = selected;
+                if(!Categories.Contains(SelectedCategory))
+                {
+                    Categories.Add(SelectedCategory);
+                    _service.Add_Category(SelectedCategory);
+                }
+                
             }
         }
         partial void OnTransactionToEditChanged(Transactions? value)
@@ -85,7 +97,7 @@ namespace Wallet_Main
                     Categories.Add(category);
                 }
             }
-            Show_Category_PopUp();
+            await Show_Category_PopUp();
         }
         public async void Load_Data()
         {
