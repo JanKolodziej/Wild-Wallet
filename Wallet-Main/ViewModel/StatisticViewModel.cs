@@ -33,8 +33,6 @@ namespace Wallet_Main.ViewModel
         [ObservableProperty]
         private bool isNotEnoughData=true;
 
-        [ObservableProperty]
-        private double chartOpacity = 1.0; 
 
         [ObservableProperty]
         private double dataCollectionProgress; 

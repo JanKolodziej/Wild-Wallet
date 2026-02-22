@@ -37,7 +37,7 @@
                             LegendPosition="Hidden"
                             TooltipPosition="Top"
                             BackgroundColor="#273446"
-                            Opacity="{Binding ChartOpacity}"/>
+                            Opacity="1"/>
 
                         <Border IsVisible="{Binding IsNotEnoughData}"
                             BackgroundColor="#CC1A1F2B" 

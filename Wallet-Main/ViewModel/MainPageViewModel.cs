@@ -20,11 +20,14 @@ namespace Wallet_Main
         [ObservableProperty]
         private ObservableCollection<GroupedTransacions> groupedTransactionsList;
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ZeroTransactions))]
         private ObservableCollection<Transactions> transactionsList;
         [ObservableProperty]
         private IEnumerable<ISeries> seriesList;
         [ObservableProperty]
         private Axis[] xAxes;
+        
+        public bool ZeroTransactions => !TransactionsList.Any();
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(DateLabel))]

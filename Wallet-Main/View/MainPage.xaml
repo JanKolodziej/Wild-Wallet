@@ -17,13 +17,7 @@
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="12"/>
             </CollectionView.ItemsLayout>
 
-            <CollectionView.EmptyView>
-                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Margin="0,80,0,0">
-                    <Label Text="💸" FontSize="80" HorizontalOptions="Center"/>
-                    <Label Text="Brak transakcji" TextColor="White" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center"/>
-                    <Label Text="Kliknij + aby dodać pierwszą transakcję" TextColor="#B0BEC5" HorizontalOptions="Center"/>
-                </VerticalStackLayout>
-            </CollectionView.EmptyView>
+            
 
             <CollectionView.Header>
                 <VerticalStackLayout Spacing="20" Padding="20,10,20,20">
@@ -69,21 +63,40 @@
 
 
 
-                    <Border Style="{StaticResource ElevatedCardBorderStyle}">
-                        <Border.Shadow>
-                            <Shadow Brush="Black" Offset="0,4" Opacity="0.3" Radius="10"/>
-                        </Border.Shadow>
-                        <VerticalStackLayout>
-                            <Label Text="Przegląd Finansów" TextColor="#ECEFF1" FontAttributes="Bold" Margin="10,5"/>
-                            <lvc:CartesianChart Series="{Binding SeriesList}" 
-                                                XAxes="{Binding XAxes}" 
-                                                Background="#273446"
-                                                HeightRequest="300"
-                                                LegendPosition="Hidden"
-                                                TooltipPosition="Top">
-                            </lvc:CartesianChart>
-                        </VerticalStackLayout>
-                    </Border>
+                    <Grid HeightRequest="350">
+
+                        <lvc:CartesianChart 
+                            Series="{Binding SeriesList}" 
+                            XAxes="{Binding XAxes}" 
+                            LegendPosition="Hidden"
+                            TooltipPosition="Top"
+                            BackgroundColor="#273446"
+                            Opacity="1"/>
+
+                        <Border IsVisible="{Binding ZeroTransactions}"
+                        BackgroundColor="#CC1A1F2B" 
+                        StrokeThickness="0"
+                        VerticalOptions="Fill"
+                        HorizontalOptions="Fill"
+                        ZIndex="99">
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Padding="30">
+                                <Label Text="📊" FontSize="50" HorizontalOptions="Center"/>
+
+                                <Label Text="Zbieramy dane..." 
+                                   TextColor="White" 
+                                   FontSize="20" 
+                                   FontAttributes="Bold" 
+                                   HorizontalOptions="Center"/>
+
+                                <Label Text="Aby odblokować wykres wydatków dodaj conajmniej jedną tranzakcje." 
+                                    TextColor="#B0BEC5" 
+                                    FontSize="14" 
+                                    HorizontalTextAlignment="Center" 
+                                    HorizontalOptions="Center"/>
+
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
 
                     <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
 
