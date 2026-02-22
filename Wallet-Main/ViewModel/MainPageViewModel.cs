@@ -18,7 +18,7 @@ namespace Wallet_Main
 
         private readonly WalletService _service;
         [ObservableProperty]
-        private ObservableCollection<GroupedTransacions> groupedTransactionsList = new ObservableCollection<GroupedTransacions>();
+        private ObservableCollection<GroupedTransactions> groupedTransactionsList = new ObservableCollection<GroupedTransactions>();
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ZeroTransactions))]
         private ObservableCollection<Transactions> transactionsList = new ObservableCollection<Transactions>();
@@ -64,9 +64,9 @@ namespace Wallet_Main
             var data = await _service.Get_Transaction_month(Date);
             TransactionsList = new ObservableCollection<Transactions>(data);
 
-            var groups = data.GroupBy(t => t.Date.Date).Select(t => new GroupedTransacions(t.Key, t.ToList())).
+            var groups = data.GroupBy(t => t.Date.Date).Select(t => new GroupedTransactions(t.Key, t.ToList())).
                 OrderByDescending(t => t.GroupDate).ToList();
-            GroupedTransactionsList = new ObservableCollection<GroupedTransacions>(groups);
+            GroupedTransactionsList = new ObservableCollection<GroupedTransactions>(groups);
 
             Income = await _service.Get_Income_Async(Date);
             Expenses = await _service.Get_Expenses_Async(Date);
@@ -122,7 +122,7 @@ namespace Wallet_Main
         private async Task Delete_Transaction(Transactions transaction)
         {
             await _service.Delete_Transaction(transaction);
-            GroupedTransacions group = GroupedTransactionsList.First(g => g.Contains(transaction));
+            GroupedTransactions group = GroupedTransactionsList.First(g => g.Contains(transaction));
             group.Remove(transaction);
             if (group.Count() == 0)
             {

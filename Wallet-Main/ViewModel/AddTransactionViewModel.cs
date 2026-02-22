@@ -39,9 +39,7 @@ namespace Wallet_Main
         {
             Date = DateTime.Now;
             _service = service;
-            TypeOfTransaction = string.Empty; // Inicjalizacja żeby pozbyć się warninga
             Amount = string.Empty;
-            SelectedCategory = new Categories();
             Load_Data();
 
         }

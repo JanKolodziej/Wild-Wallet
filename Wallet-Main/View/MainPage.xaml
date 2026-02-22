@@ -128,7 +128,7 @@
             </CollectionView.Header>
 
             <CollectionView.GroupHeaderTemplate>
-                <DataTemplate x:DataType="models:GroupedTransacions">
+                <DataTemplate x:DataType="models:GroupedTransactions">
                     <Grid Padding="20,15,20,5">
                         <Border BackgroundColor="#252A36" StrokeShape="RoundRectangle 10" Padding="10,5" HorizontalOptions="Start">
                             <Label Text="{Binding GroupDate, StringFormat='{0:dd MMMM}'}" 

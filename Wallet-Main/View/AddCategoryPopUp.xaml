@@ -40,7 +40,7 @@
                     Padding="15,0">
                 <Entry x:Name="CategoryName"
                        Placeholder="Wpisz nazwę..."
-                      
+                      TextChanged="On_Form_Changed"
                        PlaceholderColor="#808080"
                        TextColor="White"
                        FontSize="16"
@@ -51,6 +51,7 @@
                 <Label Text="KOLOR" TextColor="#808080" FontSize="12" FontAttributes="Bold"/>
 
                 <CollectionView SelectionMode="Single"
+                                SelectionChanged="On_Form_Changed"
                                 x:Name="SelectedColor"
                                 ItemsSource="{Binding ColorsList}"
                                 HeightRequest="60">
@@ -92,6 +93,7 @@
 
                 <CollectionView SelectionMode="Single"
                                 x:Name="SelectedIcon"
+                                SelectionChanged="On_Form_Changed"
                                 ItemsSource="{Binding IconsList}"
                                 HeightRequest="65">
                     <CollectionView.ItemsLayout>
@@ -131,14 +133,15 @@
             </VerticalStackLayout>
 
             <Button Text="Zapisz"
+                    x:Name="Zapisz_Button"
                     BackgroundColor="#4F6CFF"
                     TextColor="White"
                     FontAttributes="Bold"
                     CornerRadius="12"
                     HeightRequest="50"
                     Margin="0,10,0,0"
-                    IsEnabled="True"
-                    Clicked="OnSaveClicked">
+                    IsEnabled="False"
+                    Clicked="On_Save_Clicked">
 
 
                 <Button.Triggers>

@@ -68,7 +68,7 @@ namespace Wallet_lib
             }).ToListAsync();
         }
         /// <summary>
-        /// Calculates balance throughout whole histoty
+        /// Calculates balance throughout whole history
         /// </summary>
         /// <returns></returns>
         public async Task<decimal> Get_Balance_Async()
