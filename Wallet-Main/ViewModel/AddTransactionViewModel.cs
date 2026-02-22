@@ -1,10 +1,8 @@
-﻿using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using Wallet_lib;
-using Wallet_Main.ViewModel;
 
 namespace Wallet_Main
 {
@@ -41,27 +39,27 @@ namespace Wallet_Main
         {
             Date = DateTime.Now;
             _service = service;
+            TypeOfTransaction = string.Empty; // Inicjalizacja żeby pozbyć się warninga
+            Amount = string.Empty;
+            SelectedCategory = new Categories();
             Load_Data();
-            
+
         }
         [RelayCommand]
         public async Task Show_Category_PopUp()
         {
             CategoryPopUp pop = new(Categories.ToList());
-            //Dictionary<string, object> info = new();
-            //info.Add("CategoriesList", Categories);
-            //var result = await _popupService.ShowPopupAsync<CategoryPopUpViewModel>(info);
             var result = await Shell.Current.ShowPopupAsync(pop);
 
-            if(result is Wallet_lib.Categories selected)
+            if (result is Wallet_lib.Categories selected)
             {
                 SelectedCategory = selected;
-                if(!Categories.Contains(SelectedCategory))
+                if (!Categories.Contains(SelectedCategory))
                 {
                     Categories.Add(SelectedCategory);
                     _service.Add_Category(SelectedCategory);
                 }
-                
+
             }
         }
         partial void OnTransactionToEditChanged(Transactions? value)
@@ -83,7 +81,7 @@ namespace Wallet_Main
             {
                 var cat = await _service.Get_All_Expense_Categories_Async();
                 Categories.Clear();
-                foreach(var category in cat)
+                foreach (var category in cat)
                 {
                     Categories.Add(category);
                 }
@@ -123,19 +121,19 @@ namespace Wallet_Main
                     _service.Add_Transaction(new(Date, _amount, Title, SelectedCategory.Id, AccountId));
                     await Shell.Current.GoToAsync("..");
                 }
-                else 
+                else
                 {
                     TransactionToEdit.Id = TransactionToEdit.Id;
                     TransactionToEdit.AccountId = AccountId;
-                    TransactionToEdit.CategoryId= SelectedCategory.Id;
+                    TransactionToEdit.CategoryId = SelectedCategory.Id;
                     TransactionToEdit.Amount = _amount;
-                    TransactionToEdit.Date=Date;
+                    TransactionToEdit.Date = Date;
                     TransactionToEdit.Title = Title;
 
                     await _service.Update_Transaction(TransactionToEdit);
                     await Shell.Current.GoToAsync("..");
                 }
-                
+
             }
 
         }

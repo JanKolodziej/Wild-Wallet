@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Maui.Platform;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Wallet_lib
 {
@@ -27,20 +25,20 @@ namespace Wallet_lib
         }
         public async Task<List<Categories>> Get_All_Categories_Async()
         {
-            var data=  await _context.Categories.Select(c => new Categories
+            var data = await _context.Categories.Select(c => new Categories
             {
                 Id = c.Id,
                 Name = c.Name,
                 Type = c.Type,
                 Icon = c.Icon,
-                Color= c.Color,
+                Color = c.Color,
             }).ToListAsync();
             return data;
         }
 
         public async Task<List<Categories>> Get_All_Income_Categories_Async()
         {
-            return await _context.Categories.Where(c=> c.Type=="Income").Select(c => new Categories
+            return await _context.Categories.Where(c => c.Type == "Income").Select(c => new Categories
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -114,7 +112,7 @@ namespace Wallet_lib
         }
         public async Task<List<Transactions>> Get_Transaction_month(DateTime date)
         {
-            var data = await _context.Transactions.AsNoTracking().Include(t=>t.Category).Where(t => t.Date.Year == date.Date.Year && t.Date.Month == date.Date.Month).
+            var data = await _context.Transactions.AsNoTracking().Include(t => t.Category).Where(t => t.Date.Year == date.Date.Year && t.Date.Month == date.Date.Month).
                 OrderByDescending(t => t.Date).ToListAsync();
             return data;
         }
@@ -133,8 +131,8 @@ namespace Wallet_lib
         }
         public async Task Update_Transaction(Transactions transaction)
         {
-            var data = await _context.Transactions.Where(t=> t.Id == transaction.Id).FirstOrDefaultAsync();
-            if(data != null)
+            var data = await _context.Transactions.Where(t => t.Id == transaction.Id).FirstOrDefaultAsync();
+            if (data != null)
             {
                 data.Title = transaction.Title;
                 data.Amount = transaction.Amount;
@@ -142,7 +140,7 @@ namespace Wallet_lib
                 data.AccountId = transaction.AccountId;
                 data.Date = transaction.Date;
             }
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
         }
 

@@ -1,22 +1,19 @@
 ﻿using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System.Xml.Linq;
 using Wallet_lib;
-using Wallet_Main.ViewModel;
 
 namespace Wallet_Main;
 
 public partial class AddCategoryPopUp : Popup
 {
     private double currentY;
-  
-    
+
+
     //private Color selectedColor;
-    
+
     //private string selectedIcon;
-    
+
     //private string name;
-    
+
     private string Type;
     public List<Color> ColorsList { get; set; } = new List<Color>
     {
@@ -52,11 +49,11 @@ public partial class AddCategoryPopUp : Popup
     };
 
     public AddCategoryPopUp(string type)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         Type = type;
-		BindingContext = this;
-        
+        BindingContext = this;
+
         var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
         Size = new Size(mainDisplayInfo.Width / mainDisplayInfo.Density, 450);
     }
@@ -91,12 +88,12 @@ public partial class AddCategoryPopUp : Popup
                 break;
         }
     }
-    public  void OnSaveClicked(object sender, EventArgs e)
+    public void OnSaveClicked(object sender, EventArgs e)
     {
-        Color color =(Color) SelectedColor.SelectedItem;
+        Color color = (Color)SelectedColor.SelectedItem;
         Wallet_lib.Categories category = new(CategoryName.Text, Type, SelectedIcon.SelectedItem.ToString(), color.ToHex());
-        Close(category );
+        Close(category);
     }
 
- 
+
 }

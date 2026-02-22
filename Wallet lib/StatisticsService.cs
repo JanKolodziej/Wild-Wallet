@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wallet_lib
+﻿namespace Wallet_lib
 {
     public class StatisticsService
     {
@@ -62,9 +56,9 @@ namespace Wallet_lib
                 sum_x += i;
             }
             S = Math.Sqrt(S / (n - 2));
-            u_a = S * Math.Sqrt(n/((n*sum_x2)-sum_x*sum_x));
+            u_a = S * Math.Sqrt(n / ((n * sum_x2) - sum_x * sum_x));
             u_b = S * Math.Sqrt(sum_x2 / ((n * sum_x2) - sum_x * sum_x));
-            return Math.Sqrt(u_a*u_a+u_b*u_b);
+            return Math.Sqrt(u_a * u_a + u_b * u_b);
         }
     }
 }

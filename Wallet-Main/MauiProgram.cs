@@ -1,9 +1,9 @@
-﻿using LiveChartsCore.SkiaSharpView.Maui;
+﻿using CommunityToolkit.Maui;
+using LiveChartsCore.SkiaSharpView.Maui;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using Wallet_Main.ViewModel;
-using CommunityToolkit.Maui;
 
 namespace Wallet_Main
 {
@@ -49,24 +49,24 @@ namespace Wallet_Main
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
 
-                
+
                 if (!db.Categories.Any())
                 {
                     db.Categories.AddRange(new List<Wallet_lib.Categories>
                     {
-                        new() { Name="Zakupy",    Type="Expense", Icon="🛒", Color="#FFA726" }, 
-                        new() { Name="Jedzenie",  Type="Expense", Icon="🍔", Color="#EF5350" }, 
-                        new() { Name="Dom",       Type="Expense", Icon="🏠", Color="#42A5F5" }, 
-                        new() { Name="Transport", Type="Expense", Icon="⛽", Color="#7E57C2" }, 
-                        new() { Name="Zdrowie",   Type="Expense", Icon="💊", Color="#26C6DA" }, 
-                        new() { Name="Rozrywka",  Type="Expense", Icon="🎬", Color="#EC407A" }, 
-                        new() { Name="Abonamenty",Type="Expense", Icon="📱", Color="#FF7043" }, 
-                        new() { Name="Inne",      Type="Expense", Icon="📦", Color="#BDBDBD" }, 
+                        new() { Name="Zakupy",    Type="Expense", Icon="🛒", Color="#FFA726" },
+                        new() { Name="Jedzenie",  Type="Expense", Icon="🍔", Color="#EF5350" },
+                        new() { Name="Dom",       Type="Expense", Icon="🏠", Color="#42A5F5" },
+                        new() { Name="Transport", Type="Expense", Icon="⛽", Color="#7E57C2" },
+                        new() { Name="Zdrowie",   Type="Expense", Icon="💊", Color="#26C6DA" },
+                        new() { Name="Rozrywka",  Type="Expense", Icon="🎬", Color="#EC407A" },
+                        new() { Name="Abonamenty",Type="Expense", Icon="📱", Color="#FF7043" },
+                        new() { Name="Inne",      Type="Expense", Icon="📦", Color="#BDBDBD" },
 
-                        new() { Name="Wypłata",   Type="Income",  Icon="💵 ", Color="#66BB6A" }, 
-                        new() { Name="Biznes",    Type="Income",  Icon="📈", Color="#9CCC65" }, 
-                        new() { Name="Prezenty",  Type="Income",  Icon="🎁", Color="#AB47BC" }, 
-                        new() { Name="Odsetki",   Type="Income",  Icon="🏦", Color="#29B6F6" }  
+                        new() { Name="Wypłata",   Type="Income",  Icon="💵 ", Color="#66BB6A" },
+                        new() { Name="Biznes",    Type="Income",  Icon="📈", Color="#9CCC65" },
+                        new() { Name="Prezenty",  Type="Income",  Icon="🎁", Color="#AB47BC" },
+                        new() { Name="Odsetki",   Type="Income",  Icon="🏦", Color="#29B6F6" }
 
 
                     });

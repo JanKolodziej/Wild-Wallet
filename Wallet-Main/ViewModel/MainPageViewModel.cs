@@ -18,25 +18,25 @@ namespace Wallet_Main
 
         private readonly WalletService _service;
         [ObservableProperty]
-        private ObservableCollection<GroupedTransacions> groupedTransactionsList;
+        private ObservableCollection<GroupedTransacions> groupedTransactionsList = new ObservableCollection<GroupedTransacions>();
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ZeroTransactions))]
-        private ObservableCollection<Transactions> transactionsList;
+        private ObservableCollection<Transactions> transactionsList = new ObservableCollection<Transactions>();
         [ObservableProperty]
-        private IEnumerable<ISeries> seriesList;
+        private IEnumerable<ISeries> seriesList = Array.Empty<ISeries>();
         [ObservableProperty]
-        private Axis[] xAxes;
-        
+        private Axis[] xAxes = Array.Empty<Axis>();
+
         public bool ZeroTransactions => !TransactionsList.Any();
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(DateLabel))]
         private DateTime date;
-        public string DateLabel=>DateFormater(Date);
+        public string DateLabel => DateFormater(Date);
 
-         private static string DateFormater(DateTime date)
+        private static string DateFormater(DateTime date)
         {
-            if(date.Year==DateTime.Now.Year)
+            if (date.Year == DateTime.Now.Year)
             {
                 return date.ToString("MMMM");
             }
@@ -63,7 +63,7 @@ namespace Wallet_Main
             //AccountList = new ObservableCollection<Wallet_lib.Accounts>(ac);
             var data = await _service.Get_Transaction_month(Date);
             TransactionsList = new ObservableCollection<Transactions>(data);
-            
+
             var groups = data.GroupBy(t => t.Date.Date).Select(t => new GroupedTransacions(t.Key, t.ToList())).
                 OrderByDescending(t => t.GroupDate).ToList();
             GroupedTransactionsList = new ObservableCollection<GroupedTransacions>(groups);
@@ -148,15 +148,15 @@ namespace Wallet_Main
         private async Task New_Expense()
         {
             Dictionary<string, object> info = new();
-            info.Add( "NewTransaction", "Expense" );
-            await Shell.Current.GoToAsync(nameof(AddTransactionPage),info);
+            info.Add("NewTransaction", "Expense");
+            await Shell.Current.GoToAsync(nameof(AddTransactionPage), info);
         }
         [RelayCommand]
         private async Task Edit_Transaction(Transactions transaction)
         {
             Dictionary<string, object> info = new();
             info.Add("TransactionToEdit", transaction);
-            if(transaction.Amount<0)
+            if (transaction.Amount < 0)
             {
                 info.Add("NewTransaction", "Expense");
             }
@@ -164,7 +164,7 @@ namespace Wallet_Main
             {
                 info.Add("NewTransaction", "Income");
             }
-                await Shell.Current.GoToAsync(nameof(AddTransactionPage), info);
+            await Shell.Current.GoToAsync(nameof(AddTransactionPage), info);
         }
         [RelayCommand]
         private async Task Previous_Month()

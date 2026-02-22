@@ -24,13 +24,13 @@
 
             if (_isMenuOpen)
             {
-                
+
                 await MainFab.RotateTo(45, 250, Easing.CubicOut);
 
                 IncomeBtn.InputTransparent = false;
                 ExpenseBtn.InputTransparent = false;
 
-                
+
                 _ = ExpenseBtn.TranslateTo(0, -70, 250, Easing.CubicOut);
                 _ = ExpenseBtn.FadeTo(1, 250);
                 _ = ExpenseBtn.ScaleTo(1, 250);
