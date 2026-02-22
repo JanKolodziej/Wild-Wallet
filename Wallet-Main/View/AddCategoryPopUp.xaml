@@ -54,12 +54,13 @@
                                 SelectionChanged="On_Form_Changed"
                                 x:Name="SelectedColor"
                                 ItemsSource="{Binding ColorsList}"
+                                x:DataType="Color"
                                 HeightRequest="60">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="15"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="Color">
                             <Ellipse Fill="{Binding .}" 
                                      WidthRequest="45" 
                                      HeightRequest="45" 

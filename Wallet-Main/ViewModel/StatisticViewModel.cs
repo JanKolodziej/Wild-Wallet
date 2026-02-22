@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
@@ -7,13 +8,13 @@ using SkiaSharp;
 using System.Collections.ObjectModel;
 using Wallet_lib;
 
-namespace Wallet_Main.ViewModel
+namespace Wallet_Main
 {
     public partial class StatisticViewModel : ObservableObject
     {
         private readonly Wallet_lib.WalletService _service;
         public ObservableCollection<Wallet_lib.Transactions> TransactionsList { get; set; } = new();
-        public ObservableCollection<Wallet_lib.MonthlyStat> MonthlyStatList { get; set; } = new();
+        public ObservableCollection<MonthlyStatService> MonthlyStatList { get; set; } = new();
 
         [ObservableProperty]
         private IEnumerable<ISeries> seriesList = Array.Empty<ISeries>();
@@ -53,7 +54,7 @@ namespace Wallet_Main.ViewModel
                 TransactionsList.Add(transaction);
                 if (MonthlyStatList.Any())
                 {
-                    if (MonthlyStatList.Last().Month != transaction.Date.Month)
+                    if (MonthlyStatList.Last().MonthlyStat.Month != transaction.Date.Month)
                     {
                         MonthlyStatList.Add(new(transaction.Date));
                     }
@@ -65,16 +66,26 @@ namespace Wallet_Main.ViewModel
                 }
                 if (transaction.Amount > 0)
                 {
-                    MonthlyStatList.Last().Income += transaction.Amount;
+                    MonthlyStatList.Last().MonthlyStat.Income += transaction.Amount;
                 }
                 else
                 {
-                    MonthlyStatList.Last().Expenses += transaction.Amount;
+                    MonthlyStatList.Last().MonthlyStat.Expenses += transaction.Amount;
+                }
+                CategoriesStat? k = MonthlyStatList.Last().MonthlyStat.CategoriesStats.FirstOrDefault(c => c.Category == transaction.Category);
+                if(k == null)
+                {
+                    MonthlyStatList.Last().MonthlyStat.CategoriesStats.Add(new(transaction.Category, transaction.Amount));
+                }
+                else
+                {
+                    k.Balance += transaction.Amount;
                 }
 
 
-            }
 
+            }
+            
         }
         public void Do_I_Load_the_chart()
         {
@@ -102,23 +113,22 @@ namespace Wallet_Main.ViewModel
         {
 
             double amount = 0;
-            //LineSeries<DateTimePoint> series = new();
             ObservableCollection<double> values = new();
             ObservableCollection<string> labels = new();
             foreach (var monthStat in MonthlyStatList)
             {
-                amount += (double)monthStat.Balance;
-                labels.Add($"{monthStat.Month}/{monthStat.Year}");
+                amount += (double)monthStat.MonthlyStat.Balance;
+                labels.Add($"{monthStat.MonthlyStat.Month}/{monthStat.MonthlyStat.Year}");
                 values.Add(amount);
 
             }
-            DateTime lastDate = new(MonthlyStatList.Last().Year, MonthlyStatList.Last().Month, 1);
+            DateTime lastDate = new(MonthlyStatList.Last().MonthlyStat.Year, MonthlyStatList.Last().MonthlyStat.Month, 1);
             for (int i = 0; i < 3; i++)
             {
                 lastDate = lastDate.AddMonths(1);
                 labels.Add($"{lastDate.Month}/{lastDate.Year}");
             }
-            labels.Add($"{MonthlyStatList.Last().Month + 1}/{MonthlyStatList.Last().Year}");
+            labels.Add($"{MonthlyStatList.Last().MonthlyStat.Month + 1}/{MonthlyStatList.Last().MonthlyStat.Year}");
             double a, b;
 
             (a, b) = Wallet_lib.StatisticsService.Line_Fit(values.ToList());
@@ -133,29 +143,21 @@ namespace Wallet_Main.ViewModel
             List<double> upperBound = new();
             List<double> lowerBound = new();
 
-            // Indeks ostatniego prawdziwego punktu (np. jeśli masz 5 punktów, to indeks 4)
             int lastRealIndex = values.Count;
 
             for (int i = 0; i < n + 3; i++)
             {
 
 
-                // LOGIKA ODCIĘCIA:
                 if (i < lastRealIndex)
                 {
-                    // Przeszłość: "Zamykamy" wstęgę.
-                    // Góra i Dół są równe linii trendu.
-                    // Maska (Dół) idealnie przykryje Górę, więc nic nie będzie widać.
                     upperBound.Add(ForecastY[i]);
                     lowerBound.Add(ForecastY[i]);
                 }
                 else
                 {
-                    // Obliczamy ile miesięcy minęło od ostatniego prawdziwego punktu
                     int monthsIntoFuture = i - lastRealIndex;
 
-                    // Mnożymy niepewność przez czas -> powstaje "stożek"
-                    // (Możesz dodać +1, żeby startowało od razu szeroko, albo zostawić 0 żeby startowało z punktu)
                     double currentUncertainty = u * 2 * (1 + (monthsIntoFuture * 0.4));
 
                     upperBound.Add(ForecastY[i] + currentUncertainty);
@@ -232,8 +234,14 @@ namespace Wallet_Main.ViewModel
             };
         }
 
-
-
+        [RelayCommand]
+        private void Expand_Month(MonthlyStatService monthlyStat)
+        {
+            if(monthlyStat != null)
+            {
+                monthlyStat.IsExpanded = !monthlyStat.IsExpanded;
+            }
+        }
 
     }
 }

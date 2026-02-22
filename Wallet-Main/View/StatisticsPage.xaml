@@ -71,13 +71,18 @@
             
 
             <CollectionView.ItemTemplate Margin="15" >
-                <DataTemplate x:DataType="models:MonthlyStat">
+                <DataTemplate x:DataType="local:MonthlyStatService">
+                    <VerticalStackLayout>
                     <Border Style="{StaticResource ElevatedCardBorderStyle}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:StatisticViewModel}}, Path=Expand_MonthCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </Border.GestureRecognizers>
 
                         <Grid ColumnDefinitions="Auto, *, *" Padding="15" ColumnSpacing="15">
 
                             <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" WidthRequest="80">
-                                <Label Text="{Binding Month_mmmm}" 
+                                <Label Text="{Binding MonthlyStat.Month_mmmm}" 
                                        TextColor="White" 
                                        Style="{StaticResource CardTitle}" 
                                        FontAttributes="Bold"
@@ -88,7 +93,7 @@
 
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
                                 <Label Text="Przychód" FontSize="10" TextColor="#80CBC4" TextTransform="Uppercase"/>
-                                <Label Text="{Binding Income, StringFormat='{0:C0}'}" 
+                                <Label Text="{Binding MonthlyStat.Income, StringFormat='{0:C0}'}" 
                                        TextColor="#00BFA5" 
                                        FontAttributes="Bold"
                                        FontSize="15"/>
@@ -96,7 +101,7 @@
 
                             <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="2">
                                 <Label Text="Wydatki" FontSize="10" TextColor="#EF9A9A" TextTransform="Uppercase"/>
-                                <Label Text="{Binding Expenses, StringFormat='{0:C0}'}" 
+                                <Label Text="{Binding MonthlyStat.Expenses, StringFormat='{0:C0}'}" 
                                        TextColor="#EF5350" 
                                        FontAttributes="Bold"
                                        FontSize="15"/>
@@ -104,6 +109,40 @@
 
                         </Grid>
                     </Border>
+                    
+                    <VerticalStackLayout 
+                            IsVisible="{Binding IsExpanded}" 
+                            BindableLayout.ItemsSource="{Binding MonthlyStat.CategoriesStats}"
+                            Margin="10,5,10,10">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="models:CategoriesStat">
+                                <Border Style="{StaticResource ElevatedCardBorderStyle}">
+                                    <Grid ColumnDefinitions="*,*" Padding="5">
+                                            <VerticalStackLayout Spacing="5" Grid.Column="0">
+                                                <Border StrokeShape="RoundRectangle 30"
+                                                    HeightRequest="60" WidthRequest="60"
+                                                    BackgroundColor="{Binding Category.Color}"
+                                                    StrokeThickness="0">
+
+                                                    <Label Text="{Binding Category.Icon}" 
+                                                        FontSize="28" 
+                                                        HorizontalOptions="Center" 
+                                                        VerticalOptions="Center"/>
+                                                </Border>
+                                                <Label Text="{Binding Category.Name}" 
+                                                TextColor="White" 
+                                                FontSize="12" 
+                                                HorizontalOptions="Center"/>
+                                            </VerticalStackLayout>
+                                            <Label Grid.Column="1" Text="{Binding Balance, StringFormat='{0:C}'}" VerticalOptions="Center" FontAttributes="Bold" TextColor="White" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                    </VerticalStackLayout>
+                    </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 

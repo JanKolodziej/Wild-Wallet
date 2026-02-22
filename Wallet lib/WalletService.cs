@@ -13,14 +13,15 @@ namespace Wallet_lib
 
         public async Task<List<Transactions>> Get_All_Transactions_Async()
         {
-            return await _context.Transactions.Select(t => new Transactions
+            return await _context.Transactions.Include(t => t.Category).Select(t => new Transactions
             {
                 Id = t.Id,
                 Date = t.Date,
                 Amount = t.Amount,
                 Title = t.Title,
                 CategoryId = t.CategoryId,
-                AccountId = t.AccountId
+                AccountId = t.AccountId,
+                Category=t.Category,
             }).OrderBy(t => t.Date).ToListAsync();
         }
         public async Task<List<Categories>> Get_All_Categories_Async()

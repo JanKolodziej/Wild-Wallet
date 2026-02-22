@@ -3,7 +3,6 @@ using LiveChartsCore.SkiaSharpView.Maui;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
-using Wallet_Main.ViewModel;
 
 namespace Wallet_Main
 {
