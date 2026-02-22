@@ -9,7 +9,7 @@
              x:DataType="local:MainPageViewModel">
 
     <Grid>
-        <CollectionView ItemsSource="{Binding GroupedTransactionsList}" 
+        <CollectionView ItemsSource="{Binding GroupedTransactionsList}" Grid.Row="1"
                         IsGrouped="True"
                         SelectionMode="None">
 
@@ -27,6 +27,47 @@
 
             <CollectionView.Header>
                 <VerticalStackLayout Spacing="20" Padding="20,10,20,20">
+
+                    <Border StrokeShape="RoundRectangle 25"
+                        BackgroundColor="#252A36"
+                        StrokeThickness="0"
+                        HorizontalOptions="Center"
+                        Margin="0,0,0,15"
+                        HeightRequest="50">
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="0,4" Opacity="0.3" Radius="8"/>
+                        </Border.Shadow>
+
+                        <Grid ColumnDefinitions="50, 140, 50">
+
+                            <Button Grid.Column="0"
+                                Text="&#x276E;" 
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                TextColor="#80CBC4"
+                                BackgroundColor="Transparent"
+                                Command="{Binding Previous_MonthCommand}" />
+
+                            <Label Grid.Column="1"
+                               Text="{Binding DateLabel}"
+                               TextColor="White"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               TextTransform="Uppercase" />
+
+                            <Button Grid.Column="2"
+                                Text="&#x276F;"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                TextColor="#80CBC4"
+                                BackgroundColor="Transparent"
+                                Command="{Binding Next_MonthCommand}" />
+                        </Grid>
+                    </Border>
+
+
 
                     <Border Style="{StaticResource ElevatedCardBorderStyle}">
                         <Border.Shadow>

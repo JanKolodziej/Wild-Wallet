@@ -17,59 +17,69 @@ namespace Wallet_Main
         private decimal expenses;
 
         private readonly WalletService _service;
-        public ObservableCollection<Wallet_lib.Accounts> AccountList { get; set; } = new();
-        public ObservableCollection<Categories> CategoriesList { get; set; } = new();
-        public ObservableCollection<GroupedTransacions> GroupedTransactionsList { get; set; } = new();
-        public ObservableCollection<Transactions> TransactionsList { get; set; } = new();
+        [ObservableProperty]
+        private ObservableCollection<GroupedTransacions> groupedTransactionsList;
+        [ObservableProperty]
+        private ObservableCollection<Transactions> transactionsList;
         [ObservableProperty]
         private IEnumerable<ISeries> seriesList;
         [ObservableProperty]
         private Axis[] xAxes;
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(DateLabel))]
+        private DateTime date;
+        public string DateLabel=>DateFormater(Date);
+
+         private static string DateFormater(DateTime date)
+        {
+            if(date.Year==DateTime.Now.Year)
+            {
+                return date.ToString("MMMM");
+            }
+            else
+            {
+                return date.ToString("MMM yyyy");
+            }
+        }
 
         public MainPageViewModel(WalletService service)
         {
             _service = service;
-
+            Date = DateTime.Now;
             Expenses = 0;
             Balance = 0;
             Income = 0;
         }
 
-        public async void Import_Data(DateTime date)
+        public async Task Import_Data()
         {
             //var cat = await _service.Get_All_Categories_Async();
             //CategoriesList = new ObservableCollection<Categories>(cat);
             //var ac = await _service.Get_Accounts_Async();
             //AccountList = new ObservableCollection<Wallet_lib.Accounts>(ac);
-            var data = await _service.Get_Transaction_month(DateTime.Now);
-            TransactionsList.Clear();
-            foreach (var d in data)
-            {
-                TransactionsList.Add(d);
-            }
-            GroupedTransactionsList.Clear();
+            var data = await _service.Get_Transaction_month(Date);
+            TransactionsList = new ObservableCollection<Transactions>(data);
+            
             var groups = data.GroupBy(t => t.Date.Date).Select(t => new GroupedTransacions(t.Key, t.ToList())).
                 OrderByDescending(t => t.GroupDate).ToList();
-            foreach (var g in groups)
-            {
-                GroupedTransactionsList.Add(g);
-            }
+            GroupedTransactionsList = new ObservableCollection<GroupedTransacions>(groups);
 
-            Income = await _service.Get_Income_Async(date);
-            Expenses = await _service.Get_Expenses_Async(date);
-            Balance = await _service.Get_Balance_Async();
+            Income = await _service.Get_Income_Async(Date);
+            Expenses = await _service.Get_Expenses_Async(Date);
+            Balance = await _service.Get_Balance_To_Date(Date);
             await Create_chart();
         }
         [RelayCommand]
-        public void Refresh_Data()
+        public async Task Refresh_Data()
         {
-            Import_Data(DateTime.Now);
+            await Import_Data();
         }
 
         public async Task Create_chart()
         {
-            double amount = Convert.ToDouble(await _service.Get_Balance_To_Date(DateTime.Now));
+            //if (!TransactionsList.Any()) return;
+            double amount = Convert.ToDouble(await _service.Get_Balance_To_Date(Date));
             LineSeries<DateTimePoint> series = new();
             ObservableCollection<DateTimePoint> values = new();
             foreach (var trans in TransactionsList.Reverse())
@@ -117,8 +127,8 @@ namespace Wallet_Main
             }
             TransactionsList.Remove(transaction);
 
-            Income = await _service.Get_Income_Async(DateTime.Now);
-            Expenses = await _service.Get_Expenses_Async(DateTime.Now);
+            Income = await _service.Get_Income_Async(Date);
+            Expenses = await _service.Get_Expenses_Async(Date);
             Balance = await _service.Get_Balance_Async();
             await Create_chart();
         }
@@ -152,6 +162,18 @@ namespace Wallet_Main
                 info.Add("NewTransaction", "Income");
             }
                 await Shell.Current.GoToAsync(nameof(AddTransactionPage), info);
+        }
+        [RelayCommand]
+        private async Task Previous_Month()
+        {
+            Date = Date.AddMonths(-1);
+            await Import_Data();
+        }
+        [RelayCommand]
+        private async Task Next_Month()
+        {
+            Date = Date.AddMonths(1);
+            await Import_Data();
         }
     }
 }
