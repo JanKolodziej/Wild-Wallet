@@ -102,9 +102,14 @@ public partial class AddCategoryPopUp : Popup
     }
     public void On_Save_Clicked(object sender, EventArgs e)
     {
-        Color color = (Color)SelectedColor.SelectedItem;
-        Wallet_lib.Categories category = new(CategoryName.Text, Type, SelectedIcon.SelectedItem.ToString(), color.ToHex());
-        Close(category);
+        string? icon = SelectedIcon.SelectedItem.ToString();
+        if ( icon != null)
+        {
+            Color color = (Color)SelectedColor.SelectedItem;
+            Wallet_lib.Categories category = new(CategoryName.Text, Type, icon, color.ToHex());
+            Close(category);
+        }
+        
     }
 
 

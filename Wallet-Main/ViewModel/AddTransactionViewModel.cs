@@ -14,7 +14,7 @@ namespace Wallet_Main
         [ObservableProperty]
         private Transactions? transactionToEdit;
         [ObservableProperty]
-        private string typeOfTransaction;
+        private string? typeOfTransaction;
 
         [ObservableProperty]
         private DateTime date;
@@ -26,7 +26,7 @@ namespace Wallet_Main
         [NotifyPropertyChangedFor(nameof(IsAmountValid))]
         private string amount;
         [ObservableProperty]
-        private Categories selectedCategory;
+        private Categories? selectedCategory;
 
         public bool IsAmountValid => decimal.TryParse(Amount, out _);
         public ObservableCollection<Categories> Categories { get; set; } = new();
@@ -73,27 +73,30 @@ namespace Wallet_Main
 
             }
         }
-        async partial void OnTypeOfTransactionChanged(string value)
+        async partial void OnTypeOfTransactionChanged(string? value)
         {
-            if (value == "Expense")
+            if (value != null)
             {
-                var cat = await _service.Get_All_Expense_Categories_Async();
-                Categories.Clear();
-                foreach (var category in cat)
+                if (value == "Expense")
                 {
-                    Categories.Add(category);
+                    var cat = await _service.Get_All_Expense_Categories_Async();
+                    Categories.Clear();
+                    foreach (var category in cat)
+                    {
+                        Categories.Add(category);
+                    }
                 }
-            }
-            else if (value == "Income")
-            {
-                var cat = await _service.Get_All_Income_Categories_Async();
-                Categories.Clear();
-                foreach (var category in cat)
+                else if (value == "Income")
                 {
-                    Categories.Add(category);
+                    var cat = await _service.Get_All_Income_Categories_Async();
+                    Categories.Clear();
+                    foreach (var category in cat)
+                    {
+                        Categories.Add(category);
+                    }
                 }
+                await Show_Category_PopUp();
             }
-            await Show_Category_PopUp();
         }
         public async void Load_Data()
         {
@@ -105,7 +108,7 @@ namespace Wallet_Main
         [RelayCommand]
         public async Task Add()
         {
-            if (IsAmountValid)
+            if (IsAmountValid && SelectedCategory != null)
             {
                 decimal _amount = decimal.Parse(Amount);
                 if (TypeOfTransaction == "Expense" && _amount > 0)

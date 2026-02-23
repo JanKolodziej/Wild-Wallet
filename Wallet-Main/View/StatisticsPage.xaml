@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet_Main.StatisticPage"
              xmlns:local="clr-namespace:Wallet_Main"
+             x:DataType="local:StatisticViewModel"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
              BackgroundColor="#1A1F2B"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui">
@@ -109,39 +110,50 @@
 
                         </Grid>
                     </Border>
-                    
-                    <VerticalStackLayout 
-                            IsVisible="{Binding IsExpanded}" 
-                            BindableLayout.ItemsSource="{Binding MonthlyStat.CategoriesStats}"
-                            Margin="10,5,10,10">
 
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="models:CategoriesStat">
-                                <Border Style="{StaticResource ElevatedCardBorderStyle}">
-                                    <Grid ColumnDefinitions="*,*" Padding="5">
-                                            <VerticalStackLayout Spacing="5" Grid.Column="0">
-                                                <Border StrokeShape="RoundRectangle 30"
-                                                    HeightRequest="60" WidthRequest="60"
-                                                    BackgroundColor="{Binding Category.Color}"
-                                                    StrokeThickness="0">
+                        <VerticalStackLayout IsVisible="{Binding IsExpanded}"
+                     BindableLayout.ItemsSource="{Binding MonthlyStat.CategoriesStats}"
+                     Margin="35,5,5,15">
 
-                                                    <Label Text="{Binding Category.Icon}" 
-                                                        FontSize="28" 
-                                                        HorizontalOptions="Center" 
-                                                        VerticalOptions="Center"/>
-                                                </Border>
-                                                <Label Text="{Binding Category.Name}" 
-                                                TextColor="White" 
-                                                FontSize="12" 
-                                                HorizontalOptions="Center"/>
-                                            </VerticalStackLayout>
-                                            <Label Grid.Column="1" Text="{Binding Balance, StringFormat='{0:C}'}" VerticalOptions="Center" FontAttributes="Bold" TextColor="White" />
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="models:CategoriesStat">
+                                    <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="0" Margin="0, 2">
 
-                    </VerticalStackLayout>
+                                        <Grid ColumnDefinitions="Auto, *, Auto" Padding="10, 5" ColumnSpacing="10">
+
+                                            <Border Grid.Column="0"
+                                                StrokeShape="RoundRectangle 20"
+                                                HeightRequest="40" WidthRequest="40"
+                                                BackgroundColor="{Binding Category.Color}"
+                                                StrokeThickness="0"
+                                                VerticalOptions="Center">
+
+                                                <Label Text="{Binding Category.Icon}"
+                                                   FontSize="20"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   Margin="0,0,0,1"/>
+                                            </Border>
+
+                                            <Label Grid.Column="1"
+                                               Text="{Binding Category.Name}"
+                                               TextColor="#CFD8DC"
+                                               FontSize="13"
+                                               VerticalOptions="Center"
+                                               LineBreakMode="TailTruncation"/>
+
+                                            <Label Grid.Column="2"
+                                               Text="{Binding Balance, StringFormat='{0:C}'}"
+                                               VerticalOptions="Center"
+                                               FontAttributes="Bold"
+                                               FontSize="13"
+                                               TextColor="White" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -37,8 +37,6 @@ namespace Wallet_Main
                 {
 
                     AddCategoryPopUp add = new(Categories.Last().Type);
-                    //Dictionary<string, object> info = new();
-                    //info.Add("TypeOfCategory",Categories.Last().Type);
                     var result = await Shell.Current.ShowPopupAsync(add);
                     if (result is Wallet_lib.Categories cat)
                     {
@@ -57,6 +55,7 @@ namespace Wallet_Main
                 else
                 {
                     Close(category);
+                    return;
                 }
 
             }
