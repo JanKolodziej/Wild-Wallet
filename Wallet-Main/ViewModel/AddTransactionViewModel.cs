@@ -12,7 +12,9 @@ namespace Wallet_Main
     public partial class AddTransactionViewModel : ObservableObject
     {
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsNewTransaction))]
         private Transactions? transactionToEdit;
+        public bool IsNewTransaction => TransactionToEdit == null;
         [ObservableProperty]
         private string? typeOfTransaction;
 
@@ -27,6 +29,12 @@ namespace Wallet_Main
         private string amount;
         [ObservableProperty]
         private Categories? selectedCategory;
+        //Automated Transactions
+        [ObservableProperty]
+        private bool isAutomatedTransaction;
+        [ObservableProperty]
+        private int frequency;
+
 
         public bool IsAmountValid => decimal.TryParse(Amount, out _);
         public ObservableCollection<Categories> Categories { get; set; } = new();
@@ -40,6 +48,7 @@ namespace Wallet_Main
             Date = DateTime.Now;
             _service = service;
             Amount = string.Empty;
+            IsAutomatedTransaction = false;
             Load_Data();
 
         }
@@ -95,7 +104,11 @@ namespace Wallet_Main
                         Categories.Add(category);
                     }
                 }
-                await Show_Category_PopUp();
+                if(TransactionToEdit==null)
+                {
+                    await Show_Category_PopUp();
+                }
+                
             }
         }
         public async void Load_Data()
@@ -118,8 +131,22 @@ namespace Wallet_Main
 
                 if (TransactionToEdit == null)
                 {
-
-                    _service.Add_Transaction(new(Date, _amount, Title, SelectedCategory.Id, AccountId));
+                    if(IsAutomatedTransaction)
+                    {
+                        AutomatedTransaction automatedTransaction = new()
+                        { Name = Title, 
+                            Amount = _amount,
+                            NextTime = Date, 
+                            CategoryId = SelectedCategory.Id, 
+                            Frequency =(FrequencyOnceA) Frequency, 
+                            AccountId = AccountId 
+                        };
+                    }
+                    else
+                    {
+                        _service.Add_Transaction(new(Date, _amount, Title, SelectedCategory.Id, AccountId));
+                    }
+                        
                     await Shell.Current.GoToAsync("..");
                 }
                 else

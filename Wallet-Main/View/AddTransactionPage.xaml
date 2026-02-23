@@ -108,23 +108,67 @@
                             <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" Spacing="10">
                                 <Label Text="Kategoria" TextColor="#6B7280" FontSize="11"/>
                                 <HorizontalStackLayout Spacing="20">
-                                <Border Grid.Column="0" StrokeShape="RoundRectangle 30"
+                                    <Border Grid.Column="0" StrokeShape="RoundRectangle 30"
                                     HeightRequest="40" WidthRequest="40"
                                     BackgroundColor="{Binding SelectedCategory.Color}"
                                     StrokeThickness="0"
                                     HorizontalOptions="Center" 
                                     VerticalOptions="Center">
-                                    <Label Text="{Binding SelectedCategory.Icon}" 
+                                        <Label Text="{Binding SelectedCategory.Icon}" 
                                        FontSize="25" 
                                        HorizontalOptions="Center" 
                                        VerticalOptions="Center"
                                           Margin="0,0,0,5" />
-                                </Border>
+                                    </Border>
                                     <Label Text="{Binding SelectedCategory.Name}"  TextColor="White" Margin="0,7"/>
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
                             
                         </Grid>
+                    </Border>
+                    <Border Style="{StaticResource ElevatedCardBorderStyle}" 
+                            Padding="15,10" 
+                            IsVisible="{Binding IsNewTransaction}" >
+                        <VerticalStackLayout Spacing="10">
+
+                            <Grid ColumnDefinitions="*, Auto">
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <Label Text="Płatność cykliczna" 
+                                       TextColor="White" 
+                                       FontSize="14"/>
+                                    <Label Text="Dodawaj automatycznie" 
+                                       TextColor="#6B7280" 
+                                       FontSize="11"/>
+                                </VerticalStackLayout>
+
+                                <Switch Grid.Column="1" 
+                                IsToggled="{Binding IsAutomatedTransaction}"
+                                OnColor="#00BFA5"
+                                ThumbColor="White"/>
+                            </Grid>
+
+                            <VerticalStackLayout 
+                                IsVisible="{Binding IsAutomatedTransaction}"
+                             Spacing="5">
+
+                                <BoxView HeightRequest="1" Color="#2E3748" Margin="0,5"/>
+                                <Label Text="Częstotliwość" TextColor="#6B7280" FontSize="11"/>
+
+                                <Picker SelectedIndex="{Binding Frequency}"
+                                    TextColor="White"
+                                    TitleColor="#4B5563"
+                                    Title="Wybierz okres"
+                                    BackgroundColor="Transparent">
+                                    <Picker.Items>
+                                        <x:String>Codziennie</x:String>
+                                        <x:String>Co tydzień</x:String>
+                                        <x:String>Co miesiąc</x:String>
+                                        <x:String>Co rok</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </VerticalStackLayout>
+
+                        </VerticalStackLayout>
                     </Border>
 
                 </VerticalStackLayout>

@@ -76,6 +76,7 @@ namespace Wallet_Main
         [RelayCommand]
         public async Task Refresh_Data()
         {
+            await _service.ProcessAutomatedTransactions();
             await Import_Data();
         }
 

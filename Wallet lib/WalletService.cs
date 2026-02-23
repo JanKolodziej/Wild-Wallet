@@ -111,6 +111,12 @@ namespace Wallet_lib
             _context.Categories.Add(categories);
             await _context.SaveChangesAsync();
         }
+        public async Task Add_AutomatedTransaction(AutomatedTransaction automatedTransaction)
+        {
+            await _context.AutomatedTransactions.AddAsync(automatedTransaction);
+            await _context.SaveChangesAsync();
+            await ProcessAutomatedTransactions();
+        }
         public async Task<List<Transactions>> Get_Transaction_month(DateTime date)
         {
             var data = await _context.Transactions.AsNoTracking().Include(t => t.Category).Where(t => t.Date.Year == date.Date.Year && t.Date.Month == date.Date.Month).
@@ -143,6 +149,41 @@ namespace Wallet_lib
             }
             await _context.SaveChangesAsync();
 
+        }
+
+        public async Task ProcessAutomatedTransactions()
+        {
+            var duePayments = await _context.AutomatedTransactions.Where(p=>p.NextTime.Date>=DateTime.Now.Date.Date).ToListAsync();
+            if(duePayments.Any())
+            {
+                foreach(var item in duePayments)
+                {
+                    while (item.NextTime.Date < DateTime.Now.Date)
+                    {
+                        Transactions transaction = new(item.NextTime, item.Amount, $"{item.Name} |Tranzakcja Automatyczna|" , item.CategoryId, item.AccountId);
+                        Add_Transaction(transaction);
+                        item.NextTime = CalculateNextPayment(item.NextTime, item.Frequency);
+                    }
+                    
+                }
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private DateTime CalculateNextPayment(DateTime dateTime, FrequencyOnceA onceA)
+        {
+            switch(onceA)
+            {
+                case FrequencyOnceA.Day:
+                    return dateTime.AddDays(1);
+                case FrequencyOnceA.Week:
+                    return dateTime.AddDays(7);
+                case FrequencyOnceA.Month:
+                    return dateTime.AddMonths(1);
+                case FrequencyOnceA.Year:
+                    return dateTime.AddYears(1);
+            }
+            throw new Exception();
         }
 
     }

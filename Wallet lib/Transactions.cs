@@ -9,7 +9,7 @@ namespace Wallet_lib
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
         public string? Title { get; set; }
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public int? AccountId { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
@@ -19,7 +19,7 @@ namespace Wallet_lib
         {
 
         }
-        public Transactions(DateTime date, decimal amount, string? title, int? categoryId, int? accountId)
+        public Transactions(DateTime date, decimal amount, string? title, int categoryId, int? accountId)
         {
             Date = date;
             Amount = amount;
