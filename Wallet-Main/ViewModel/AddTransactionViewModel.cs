@@ -8,6 +8,8 @@ namespace Wallet_Main
 {
     [QueryProperty(nameof(TransactionToEdit), "TransactionToEdit")]
     [QueryProperty(nameof(TypeOfTransaction), "NewTransaction")]
+    [QueryProperty(nameof(IsAutomatedTransaction), "IsAutomatedTransaction")]
+
 
     public partial class AddTransactionViewModel : ObservableObject
     {
@@ -139,8 +141,10 @@ namespace Wallet_Main
                             NextTime = Date, 
                             CategoryId = SelectedCategory.Id, 
                             Frequency =(FrequencyOnceA) Frequency, 
-                            AccountId = AccountId 
+                            AccountId = AccountId ,
+                            
                         };
+                        await _service.Add_AutomatedTransaction(automatedTransaction);
                     }
                     else
                     {
@@ -151,14 +155,31 @@ namespace Wallet_Main
                 }
                 else
                 {
-                    TransactionToEdit.Id = TransactionToEdit.Id;
-                    TransactionToEdit.AccountId = AccountId;
-                    TransactionToEdit.CategoryId = SelectedCategory.Id;
-                    TransactionToEdit.Amount = _amount;
-                    TransactionToEdit.Date = Date;
-                    TransactionToEdit.Title = Title;
+                    //TODo edycja automatycznych tranzakcji
+                    if (IsAutomatedTransaction)
+                    {
+                        AutomatedTransaction automatedTransaction = new()
+                        {
+                            Name = Title,
+                            Amount = _amount,
+                            NextTime = Date.Date,
+                            CategoryId = SelectedCategory.Id,
+                            Frequency = (FrequencyOnceA)Frequency,
+                            AccountId = AccountId
+                        };
+                    }
+                    else
+                    {
+                        TransactionToEdit.Id = TransactionToEdit.Id;
+                        TransactionToEdit.AccountId = AccountId;
+                        TransactionToEdit.CategoryId = SelectedCategory.Id;
+                        TransactionToEdit.Amount = _amount;
+                        TransactionToEdit.Date = Date;
+                        TransactionToEdit.Title = Title;
 
-                    await _service.Update_Transaction(TransactionToEdit);
+                        await _service.Update_Transaction(TransactionToEdit);
+                    }
+
                     await Shell.Current.GoToAsync("..");
                 }
 

@@ -3,6 +3,7 @@ using LiveChartsCore.SkiaSharpView.Maui;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using Wallet_lib;
 
 namespace Wallet_Main
 {
@@ -38,6 +39,9 @@ namespace Wallet_Main
             builder.Services.AddTransient<AddTransactionViewModel>();
             builder.Services.AddTransient<StatisticPage>();
             builder.Services.AddTransient<StatisticViewModel>();
+            builder .Services.AddTransient<ScheduledViewModel>();
+            builder.Services.AddTransient<ScheduledPage>();
+
             //builder.Services.AddTransientPopup<CategoryPopUp, CategoryPopUpViewModel>();
             //builder.Services.AddTransientPopup<AddCategoryPopUp, AddCategoryViewModel>();
 
@@ -82,6 +86,11 @@ namespace Wallet_Main
                     });
                     db.SaveChanges();
                     System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe kont do bazy");
+                }
+                if(!db.AutomatedTransactions.Any())
+                {
+                    db.AutomatedTransactions.Add(new() { Id=1, Amount=1000,NextTime=DateTime.Now,CategoryId=10,Frequency=FrequencyOnceA.Month, AccountId=2,Name="Wypłata" });
+                    db.SaveChanges();
                 }
                 if (!db.Transactions.Any())
                 {

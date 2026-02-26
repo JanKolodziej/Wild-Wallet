@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Wallet_Main"
+             xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
+             x:Class="Wallet_Main.ScheduledPage"
+             x:DataType="local:ScheduledViewModel"
+             BackgroundColor="#1A1F2B">
+
+    <Grid>
+        <CollectionView ItemsSource="{Binding AutomatedTransactionsList}"
+                IsGrouped="True">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="12"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Padding="30, 100, 30, 30">
+                    <Label Text="⏳" FontSize="60" HorizontalOptions="Center"/>
+                    <Label Text="Brak zaplanowanych płatności" 
+                   TextColor="White" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center"/>
+                    <Label Text="Dodaj automatyczną transakcję, a system sam zadba o Twoje cykliczne rachunki i subskrypcje." 
+                   TextColor="#B0BEC5" 
+                   FontSize="14" 
+                   HorizontalTextAlignment="Center" 
+                   HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="models:GroupedAutomatedTransactions">
+                    <Border BackgroundColor="#262D3D" 
+                    StrokeThickness="0" 
+                    Margin="20,15,20,5" 
+                    Padding="15,8" 
+                    StrokeShape="RoundRectangle 10">
+                        <Label Text="{Binding FrequencyLabel}" 
+                       TextColor="#00BFA5" 
+                       FontAttributes="Bold" 
+                       FontSize="13" 
+                       TextTransform="Uppercase"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:AutomatedTransaction">
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem Text="Usuń" 
+                                   BackgroundColor="#EF5350"  
+                                   Command="{Binding Source={RelativeSource AncestorType={x:Type local:ScheduledViewModel}}, Path=Delete_TransactionCommand}"
+                                   CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+
+                        <Border Style="{StaticResource ElevatedCardBorderStyle}" Margin="20,0" StrokeThickness="0" Padding="15">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ScheduledViewModel}}, Path=Edit_TransactionCommand}" CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+
+                            <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="15">
+                                <Border Grid.Column="0" StrokeShape="RoundRectangle 30" HeightRequest="40" WidthRequest="40" BackgroundColor="{Binding Category.Color}" StrokeThickness="0" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="{Binding Category.Icon}" FontSize="25" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,5" />
+                                </Border>
+
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                    <Label Text="{Binding Name}" TextColor="White" FontAttributes="Bold" FontSize="15"/>
+                                    <Label Text="Transakcja automatyczna" TextColor="#90A4AE" FontSize="11"/>
+                                </VerticalStackLayout>
+
+                                <Label Grid.Column="2" Text="{Binding Amount, StringFormat='{0:C0}'}" TextColor="White" FontAttributes="Bold" FontSize="15" VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+    
+</ContentPage>

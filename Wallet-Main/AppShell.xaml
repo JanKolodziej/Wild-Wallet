@@ -25,8 +25,8 @@ FlyoutBehavior="Flyout">
         <ShellContent ContentTemplate="{DataTemplate local:StatisticPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="">
-        <!--<ShellContent ContentTemplate="{DataTemplate local:}" />-->
+    <FlyoutItem Title="Zaplanowane Płatności">
+        <ShellContent ContentTemplate="{DataTemplate local:ScheduledPage}" />
     </FlyoutItem>
 
 
