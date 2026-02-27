@@ -170,6 +170,11 @@ namespace Wallet_lib
             await _context.SaveChangesAsync();
 
         }
+        public async Task Update_Automated_Transaction(AutomatedTransaction automatedTransaction)
+        {
+            _context.AutomatedTransactions.Update(automatedTransaction);
+            await _context.SaveChangesAsync();
+        }
 
         public async Task ProcessAutomatedTransactions()
         {

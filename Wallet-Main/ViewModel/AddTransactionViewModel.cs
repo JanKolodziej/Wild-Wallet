@@ -7,8 +7,10 @@ using Wallet_lib;
 namespace Wallet_Main
 {
     [QueryProperty(nameof(TransactionToEdit), "TransactionToEdit")]
-    [QueryProperty(nameof(TypeOfTransaction), "NewTransaction")]
     [QueryProperty(nameof(IsAutomatedTransaction), "IsAutomatedTransaction")]
+    [QueryProperty(nameof(AutomatedTransaction1), "AutomatedTransactionToEdit")]
+    [QueryProperty(nameof(TypeOfTransaction), "NewTransaction")]
+    
 
 
     public partial class AddTransactionViewModel : ObservableObject
@@ -36,6 +38,9 @@ namespace Wallet_Main
         private bool isAutomatedTransaction;
         [ObservableProperty]
         private int frequency;
+
+        [ObservableProperty]
+        private AutomatedTransaction? automatedTransaction1;
 
 
         public bool IsAmountValid => decimal.TryParse(Amount, out _);
@@ -71,6 +76,7 @@ namespace Wallet_Main
 
             }
         }
+
         partial void OnTransactionToEditChanged(Transactions? value)
         {
             if (value != null)
@@ -82,6 +88,18 @@ namespace Wallet_Main
                 Amount = Math.Abs(value.Amount).ToString();
 
 
+            }
+        }
+        partial void OnAutomatedTransaction1Changed( AutomatedTransaction? value)
+        {
+            if(value != null)
+            {
+                Date = value.NextTime;
+                Title = value.Name;
+                SelectedCategory = value.Category;
+                AccountId = value.AccountId;
+                Amount = Math.Abs(value.Amount).ToString();
+                Frequency = (int)value.Frequency;
             }
         }
         async partial void OnTypeOfTransactionChanged(string? value)
@@ -106,7 +124,7 @@ namespace Wallet_Main
                         Categories.Add(category);
                     }
                 }
-                if(TransactionToEdit==null)
+                if(TransactionToEdit==null && AutomatedTransaction1 == null)
                 {
                     await Show_Category_PopUp();
                 }
@@ -131,7 +149,7 @@ namespace Wallet_Main
                     _amount = -_amount;
                 }
 
-                if (TransactionToEdit == null)
+                if (TransactionToEdit == null && AutomatedTransaction1 == null)
                 {
                     if(IsAutomatedTransaction)
                     {
@@ -155,18 +173,19 @@ namespace Wallet_Main
                 }
                 else
                 {
-                    //TODo edycja automatycznych tranzakcji
                     if (IsAutomatedTransaction)
                     {
-                        AutomatedTransaction automatedTransaction = new()
+                        AutomatedTransaction1.AccountId = AccountId;
+                        AutomatedTransaction1.CategoryId = SelectedCategory.Id;
+                        if(AutomatedTransaction1.Frequency != (FrequencyOnceA) Frequency)
                         {
-                            Name = Title,
-                            Amount = _amount,
-                            NextTime = Date.Date,
-                            CategoryId = SelectedCategory.Id,
-                            Frequency = (FrequencyOnceA)Frequency,
-                            AccountId = AccountId
-                        };
+                            AutomatedTransaction1.Frequency = (FrequencyOnceA) Frequency;
+                            AutomatedTransaction1.NextTime = Date;
+                        }
+                        AutomatedTransaction1.Amount = _amount;
+                        AutomatedTransaction1.Name = Title;
+                        await _service.Update_Automated_Transaction(AutomatedTransaction1);
+
                     }
                     else
                     {

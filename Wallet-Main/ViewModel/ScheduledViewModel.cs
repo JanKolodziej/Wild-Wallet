@@ -43,10 +43,10 @@ namespace Wallet_Main
 
         }
         [RelayCommand]
-        private async Task Edit_Transaction(Transactions transaction)
+        private async Task Edit_Transaction(AutomatedTransaction transaction)
         {
             Dictionary<string, object> info = new();
-            info.Add("TransactionToEdit", transaction);
+            info.Add("AutomatedTransactionToEdit", transaction);
             if (transaction.Amount < 0)
             {
                 info.Add("NewTransaction", "Expense");
