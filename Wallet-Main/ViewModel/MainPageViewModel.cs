@@ -15,6 +15,11 @@ namespace Wallet_Main
         private decimal balance;
         [ObservableProperty]
         private decimal expenses;
+       
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasUpcomingTransactions))]
+        private ObservableCollection<AutomatedTransaction> upcomingTransactionsList = new ObservableCollection<AutomatedTransaction>();
+        public bool HasUpcomingTransactions => UpcomingTransactionsList.Any();
 
         private readonly WalletService _service;
         [ObservableProperty]
@@ -71,6 +76,8 @@ namespace Wallet_Main
             Income = await _service.Get_Income_Async(Date);
             Expenses = await _service.Get_Expenses_Async(Date);
             Balance = await _service.Get_Balance_To_Date(Date);
+            var upcoming = await _service.Get_Close_Automated_Transactions();
+            UpcomingTransactionsList = new ObservableCollection<AutomatedTransaction>(upcoming);
             await Create_chart();
         }
         [RelayCommand]

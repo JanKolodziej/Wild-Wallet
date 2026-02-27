@@ -21,20 +21,20 @@ namespace Wallet_lib
                 Title = t.Title,
                 CategoryId = t.CategoryId,
                 AccountId = t.AccountId,
-                Category=t.Category,
+                Category = t.Category,
             }).OrderBy(t => t.Date).ToListAsync();
         }
         public async Task<List<AutomatedTransaction>> Get_All_Automated_Transactions_Async()
         {
-            return await _context.AutomatedTransactions.Include(t => t.Category).Select(t=> new AutomatedTransaction
+            return await _context.AutomatedTransactions.Include(t => t.Category).Select(t => new AutomatedTransaction
             {
                 Id = t.Id,
-                AccountId= t.AccountId,
-                Category=t.Category,
-                CategoryId=t.CategoryId,
+                AccountId = t.AccountId,
+                Category = t.Category,
+                CategoryId = t.CategoryId,
                 NextTime = t.NextTime,
                 Frequency = t.Frequency,
-                Amount=t.Amount,
+                Amount = t.Amount,
                 Name = t.Name,
 
             }).ToListAsync();
@@ -128,7 +128,7 @@ namespace Wallet_lib
         }
         public async Task Add_AutomatedTransaction(AutomatedTransaction automatedTransaction)
         {
-             _context.AutomatedTransactions.Add(automatedTransaction);
+            _context.AutomatedTransactions.Add(automatedTransaction);
             await _context.SaveChangesAsync();
             await ProcessAutomatedTransactions();
         }
@@ -178,18 +178,18 @@ namespace Wallet_lib
 
         public async Task ProcessAutomatedTransactions()
         {
-            var duePayments = await _context.AutomatedTransactions.Where(p=>p.NextTime.Date<=DateTime.Now.Date.Date).ToListAsync();
-            if(duePayments.Any())
+            var duePayments = await _context.AutomatedTransactions.Where(p => p.NextTime.Date <= DateTime.Now.Date.Date).ToListAsync();
+            if (duePayments.Any())
             {
-                foreach(var item in duePayments)
+                foreach (var item in duePayments)
                 {
                     while (item.NextTime.Date <= DateTime.Now.Date)
                     {
-                        Transactions transaction = new(item.NextTime, item.Amount, $"{item.Name} |Tranzakcja Automatyczna|" , item.CategoryId, item.AccountId);
+                        Transactions transaction = new(item.NextTime, item.Amount, $"{item.Name} |Tranzakcja Automatyczna|", item.CategoryId, item.AccountId);
                         Add_Transaction(transaction);
                         item.NextTime = CalculateNextPayment(item.NextTime, item.Frequency);
                     }
-                    
+
                 }
                 await _context.SaveChangesAsync();
             }
@@ -197,7 +197,7 @@ namespace Wallet_lib
 
         private DateTime CalculateNextPayment(DateTime dateTime, FrequencyOnceA onceA)
         {
-            switch(onceA)
+            switch (onceA)
             {
                 case FrequencyOnceA.Day:
                     return dateTime.AddDays(1);
@@ -211,6 +211,14 @@ namespace Wallet_lib
             throw new Exception();
         }
 
-    }
 
+        public async Task<List<AutomatedTransaction>> Get_Close_Automated_Transactions()
+        {
+            var nearPayments = await _context.AutomatedTransactions.Include(t => t.Category)
+                .Where(p => p.NextTime.Date <= DateTime.Now.Date.Date.AddDays(7))
+                .OrderByDescending(t=>t.NextTime).ToListAsync();
+            return nearPayments;
+
+        }
+    }
 }

@@ -124,7 +124,64 @@
                     </Grid>
 
                     <Label Text="Ostatnie operacje" TextColor="#B0BEC5" FontSize="14" FontAttributes="Bold" Margin="5,10,0,0"/>
+                    <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15" Margin="0, 15, 0, 5" StrokeThickness="0" IsVisible="{Binding HasUpcomingTransactions}">
+                        <VerticalStackLayout Spacing="15" >
+
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Grid.Column="0" Text="Nadchodzące (7 dni)" TextColor="White" FontAttributes="Bold" FontSize="14"/>
+                                <Label Grid.Column="1" Text="📅" FontSize="14"/>
+                            </Grid>
+
+
+                            <VerticalStackLayout 
+                                         BindableLayout.ItemsSource="{Binding UpcomingTransactionsList}"
+                                         Spacing="10">
+
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="models:AutomatedTransaction">
+                                        <Grid ColumnDefinitions="Auto,Auto, *, Auto" ColumnSpacing="15">
+
+                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" WidthRequest="35">
+                                                <Label Text="{Binding NextTime, StringFormat='{0:dd}'}" 
+                                               TextColor="White" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center"/>
+                                                <Label Text="{Binding NextTime, StringFormat='{0:MMM}'}" 
+                                               TextColor="#00BFA5" FontSize="9" TextTransform="Uppercase" HorizontalOptions="Center"/>
+                                            </VerticalStackLayout>
+
+                                            <Border Grid.Column="0" StrokeShape="RoundRectangle 30"
+                                                    HeightRequest="40" WidthRequest="40"
+                                                    BackgroundColor="{Binding Category.Color}"
+                                                    StrokeThickness="0"
+                                                    HorizontalOptions="Center" 
+                                                    VerticalOptions="Center">
+                                                <Label Text="{Binding Category.Icon}" 
+                                                   FontSize="25" 
+                                                   HorizontalOptions="Center" 
+                                                   VerticalOptions="Center"
+                                                      Margin="0,0,0,5" />
+                                            </Border>
+                                            <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="2">
+                                                <Label Text="{Binding Name}" TextColor="White" FontAttributes="Bold" FontSize="15"/>
+                                                <Label Text="Transakcja" TextColor="#90A4AE" FontSize="11"/>
+                                            </VerticalStackLayout>
+
+                                            <Label Grid.Column="3" 
+                                                   Text="{Binding Amount, StringFormat='{0:C0}'}"
+                                                   TextColor="White"
+                                                   FontAttributes="Bold"
+                                                   FontSize="15"
+                                                   VerticalOptions="Center"/>
+
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+
+                        </VerticalStackLayout>
+                    </Border>
                 </VerticalStackLayout>
+                
             </CollectionView.Header>
 
             <CollectionView.GroupHeaderTemplate>
