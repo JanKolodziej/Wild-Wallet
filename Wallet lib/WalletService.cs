@@ -216,9 +216,51 @@ namespace Wallet_lib
         {
             var nearPayments = await _context.AutomatedTransactions.Include(t => t.Category)
                 .Where(p => p.NextTime.Date <= DateTime.Now.Date.Date.AddDays(7))
-                .OrderByDescending(t=>t.NextTime).ToListAsync();
+                .OrderByDescending(t => t.NextTime).ToListAsync();
             return nearPayments;
 
+        }
+
+        public async Task<List<Budget>> Get_All_Budgets_Async()
+        {
+            var data = await _context.Budgets.Include(b => b.Category).Select(b => new Budget
+            {
+                Id = b.Id,
+                CategoryId = b.CategoryId,
+                Goal = b.Goal,
+                Category = b.Category
+            }).ToListAsync();
+            return data;
+        }
+        public async Task<List<BudgetWrapper>> Get_All_Budget_Wrapper()
+        {
+            var budgets = await _context.Budgets.Include(b => b.Category).ToListAsync();
+            List<BudgetWrapper> budgetWrappers = new List<BudgetWrapper>();
+            foreach (var item in budgets)
+            {
+                decimal spent = await _context.Transactions.Where(t => t.CategoryId == item.CategoryId && t.Date.Month == DateTime.Now.Month).SumAsync(t => t.Amount);
+                budgetWrappers.Add(new BudgetWrapper(item, spent));
+            }
+            return budgetWrappers;
+        }
+
+
+
+        public async Task Delete_Budget(Budget budget)
+        {
+            _context.Budgets.Remove(budget);
+            await _context.SaveChangesAsync();
+        }
+        public async Task Add_Budget(Budget budget)
+        {
+            budget.Category = null;
+            _context.Budgets.Add(budget);
+            await _context.SaveChangesAsync();
+        }
+        public async Task Update_Budget(Budget budget)
+        {
+            _context.Budgets.Update(budget);
+            await _context.SaveChangesAsync();
         }
     }
 }

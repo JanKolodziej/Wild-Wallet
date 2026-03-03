@@ -39,8 +39,10 @@ namespace Wallet_Main
             builder.Services.AddTransient<AddTransactionViewModel>();
             builder.Services.AddTransient<StatisticPage>();
             builder.Services.AddTransient<StatisticViewModel>();
-            builder .Services.AddTransient<ScheduledViewModel>();
+            builder.Services.AddTransient<ScheduledViewModel>();
             builder.Services.AddTransient<ScheduledPage>();
+            builder.Services.AddTransient<BudgetViewModel>();
+            builder.Services.AddTransient<BudgetPage>();
 
             //builder.Services.AddTransientPopup<CategoryPopUp, CategoryPopUpViewModel>();
             //builder.Services.AddTransientPopup<AddCategoryPopUp, AddCategoryViewModel>();
@@ -107,7 +109,13 @@ namespace Wallet_Main
 
                 var count = db.Transactions.Count();
                 System.Diagnostics.Debug.WriteLine($"Aktualna liczba rekordów w bazie urządzenia: {count}");
-
+                if(!db.Budgets.Any())
+                {
+                    db.Budgets.Add(new() { Id = 1, CategoryId = 1, Goal = 500 });
+                    db.Budgets.Add(new() { Id = 2, CategoryId = 2, Goal = 300 });
+                    db.SaveChanges();
+                    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe budżetów do bazy");
+                }
 
             }
 

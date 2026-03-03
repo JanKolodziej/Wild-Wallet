@@ -28,6 +28,10 @@ FlyoutBehavior="Flyout">
     <FlyoutItem Title="Zaplanowane Płatności">
         <ShellContent ContentTemplate="{DataTemplate local:ScheduledPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Budżety">
+        <ShellContent ContentTemplate="{DataTemplate local:BudgetPage}" />
+    </FlyoutItem>
+
 
 
 

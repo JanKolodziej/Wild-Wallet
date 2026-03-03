@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
+               x:Class="Wallet_Main.AddBudgetPopUp"
+               Color="Transparent"
+               CanBeDismissedByTappingOutsideOfPopup="True"
+               VerticalOptions="End">
+
+    <Border x:Name="MainPop"
+            StrokeShape="RoundRectangle 20,20,0,0"
+            BackgroundColor="#1E222D"
+            VerticalOptions="End" 
+            HorizontalOptions="Fill"
+            StrokeThickness="0"
+            Margin="0"
+            Padding="0">
+
+        <Border.GestureRecognizers>
+            <PanGestureRecognizer PanUpdated="OnPanUpdated"/>
+        </Border.GestureRecognizers>
+
+        <Grid RowDefinitions="Auto, *">
+
+            <BoxView Grid.Row="0" 
+                     Color="Gray" 
+                     HeightRequest="5" 
+                     WidthRequest="50" 
+                     CornerRadius="2" 
+                     HorizontalOptions="Center" 
+                     Margin="0,15,0,5"/>
+
+            <VerticalStackLayout Grid.Row="1" Spacing="25" Padding="25, 10, 25, 40">
+
+                <Label Text="Nowy Budżet" 
+                       TextColor="White" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center"/>
+
+                <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15,10">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Show_Category_PopUpCommand}"/>
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="*">
+                        <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" Spacing="10">
+                            <Label Text="Kategoria" TextColor="#6B7280" FontSize="11"/>
+                            <HorizontalStackLayout Spacing="20">
+                                <Border Grid.Column="0" StrokeShape="RoundRectangle 30"
+                                        HeightRequest="40" WidthRequest="40"
+                                        BackgroundColor="{Binding SelectedCategory.Color}"
+                                        StrokeThickness="0"
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="Center">
+                                    <Label Text="{Binding SelectedCategory.Icon}" 
+                                           FontSize="25" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center"
+                                           Margin="0,0,0,5" />
+                                </Border>
+                                <Label Text="{Binding SelectedCategory.Name}" TextColor="White" Margin="0,7"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Miesięczny limit (PLN)" TextColor="#B0BEC5" FontSize="12"/>
+                    <Border StrokeShape="RoundRectangle 10" BackgroundColor="#252A36" StrokeThickness="0" HeightRequest="50">
+                        <Entry x:Name="AmountEntry"
+                               TextChanged="AmountEntry_TextChanged"
+                               Placeholder="0.00"
+                               PlaceholderColor="#6B7280"
+                               TextColor="#00BFA5"
+                               FontAttributes="Bold"
+                               Keyboard="Numeric"
+                               Margin="10,0"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <Button x:Name="SaveButton"
+                        IsEnabled="False"
+                        Text="Zapisz" 
+                        HeightRequest="50"
+                        Margin="0,10,0,0"
+                        BackgroundColor="#2C3448" 
+                        TextColor="Gray" 
+                        CornerRadius="10" 
+                        FontAttributes="Bold"
+                        Clicked="OnSaveClicked">
+                    <Button.Triggers>
+                        <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                            <Setter Property="BackgroundColor" Value="#2C3448" />
+                            <Setter Property="TextColor" Value="Gray" />
+                        </Trigger>
+                        <Trigger TargetType="Button" Property="IsEnabled" Value="True">
+                            <Setter Property="BackgroundColor" Value="#00BFA5" />
+                            <Setter Property="TextColor" Value="White" />
+                        </Trigger>
+                    </Button.Triggers>
+                </Button>
+
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+</toolkit:Popup>

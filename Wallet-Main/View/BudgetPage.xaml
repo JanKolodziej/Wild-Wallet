@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet_Main.BudgetPage"
+             xmlns:local="clr-namespace:Wallet_Main"
+             xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
+             BackgroundColor="#1A1F2B">
+
+    <Grid>
+        
+
+    <CollectionView ItemsSource="{Binding Budgets}">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:BudgetWrapper">
+                <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15" Margin="10" StrokeThickness="0">
+                    <VerticalStackLayout Spacing="10">
+
+                        <Grid ColumnDefinitions="Auto, *, Auto">
+
+                            <Border Grid.Column="0" StrokeShape="RoundRectangle 20" HeightRequest="40" WidthRequest="40" BackgroundColor="{Binding Budget.Category.Color}" StrokeThickness="0">
+                                <Label Text="{Binding Budget.Category.Icon}" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
+                                <Label Text="{Binding Budget.Category.Name}" TextColor="White" FontAttributes="Bold" FontSize="15"/>
+                                <Label Text="{Binding Spent, StringFormat='Wydano: {0:C0}'}" TextColor="#90A4AE" FontSize="12"/>
+                            </VerticalStackLayout>
+
+
+                        </Grid>
+
+                        <ProgressBar Progress="{Binding Percentage}" 
+                     ProgressColor="{Binding ProgressColor}" 
+                     HeightRequest="8" 
+                     BackgroundColor="#2E3748"/>
+
+                    </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:BudgetViewModel}}, Path=Show_Add_Budget_PopUpCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+        <Button 
+            Margin="20"
+            Text="+"
+            TextColor="White"
+            FontSize="30"
+            BackgroundColor="#00BFA5"
+            HeightRequest="60"
+            WidthRequest="60"
+            CornerRadius="30"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            Command="{Binding Show_Add_Budget_PopUpCommand}"
+            ZIndex="2"
+            InputTransparent="False">
+            <Button.Shadow>
+                <Shadow Brush="Black" Offset="0,5" Opacity="0.5" Radius="8"/>
+            </Button.Shadow>
+        </Button>
+    </Grid>
+</ContentPage>

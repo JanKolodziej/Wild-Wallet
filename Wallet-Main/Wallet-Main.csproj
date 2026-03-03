@@ -71,6 +71,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="View\AddBudgetPopUp.xaml.cs">
+	    <DependentUpon>AddBudgetPopUp.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\ScheduledPage.xaml.cs">
 	    <DependentUpon>ScheduledPage.xaml</DependentUpon>
 	  </Compile>
@@ -92,6 +95,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="View\BudgetPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\AddBudgetPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\ScheduledPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

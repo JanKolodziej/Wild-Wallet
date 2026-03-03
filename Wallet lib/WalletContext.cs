@@ -8,6 +8,7 @@ namespace Wallet_lib
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Accounts> Accounts { get; set; }
         public DbSet<AutomatedTransaction> AutomatedTransactions { get; set; }
+        public DbSet<Budget> Budgets { get; set; }
         public WalletContext(DbContextOptions<WalletContext> options) : base(options)
         {
         }
