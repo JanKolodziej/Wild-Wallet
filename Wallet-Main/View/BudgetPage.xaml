@@ -12,19 +12,19 @@
     <CollectionView ItemsSource="{Binding Budgets}">
 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:BudgetWrapper">
+                <DataTemplate x:DataType="local:BudgetWrapperDisplay">
                 <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15" Margin="10" StrokeThickness="0">
                     <VerticalStackLayout Spacing="10">
 
                         <Grid ColumnDefinitions="Auto, *, Auto">
 
-                            <Border Grid.Column="0" StrokeShape="RoundRectangle 20" HeightRequest="40" WidthRequest="40" BackgroundColor="{Binding Budget.Category.Color}" StrokeThickness="0">
-                                <Label Text="{Binding Budget.Category.Icon}" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Border Grid.Column="0" StrokeShape="RoundRectangle 20" HeightRequest="40" WidthRequest="40" BackgroundColor="{Binding BudgetWrapper.Budget.Category.Color}" StrokeThickness="0">
+                                <Label Text="{Binding BudgetWrapper.Budget.Category.Icon}" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
                             </Border>
 
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
-                                <Label Text="{Binding Budget.Category.Name}" TextColor="White" FontAttributes="Bold" FontSize="15"/>
-                                <Label Text="{Binding Spent, StringFormat='Wydano: {0:C0}'}" TextColor="#90A4AE" FontSize="12"/>
+                                <Label Text="{Binding BudgetWrapper.Budget.Category.Name}" TextColor="White" FontAttributes="Bold" FontSize="15"/>
+                                    <Label Text="{Binding BudgetWrapper.Spent, StringFormat='Wydano: {0:C0}'}" TextColor="#90A4AE" FontSize="12"/>
                             </VerticalStackLayout>
 
 
@@ -40,8 +40,8 @@
 
                                     <AbsoluteLayout HeightRequest="8">
 
-                                        <ProgressBar Progress="{Binding Percentage}" 
-                                             ProgressColor="{Binding ProgressColor}" 
+                                        <ProgressBar Progress="{Binding BudgetWrapper.Percentage}" 
+                                             ProgressColor="{Binding BudgetWrapper.ProgressColor}" 
                                              BackgroundColor="Transparent"
                                              AbsoluteLayout.LayoutFlags="All"
                                              AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
@@ -49,7 +49,7 @@
                                         <BoxView Color="White"
                                              WidthRequest="2"
                                              AbsoluteLayout.LayoutFlags="PositionProportional, HeightProportional"
-                                             AbsoluteLayout.LayoutBounds="{Binding Source={RelativeSource AncestorType={x:Type local:BudgetViewModel}}, Path=ExpectedProgressBounds}">  
+                                             AbsoluteLayout.LayoutBounds="{Binding MarkerBounds}">  
                                             <BoxView.Shadow>
                                                 <Shadow Brush="Black" Offset="0,0" Radius="2" Opacity="0.8"/>
                                             </BoxView.Shadow>
@@ -58,7 +58,7 @@
                                     </AbsoluteLayout>
                                 </Border>
 
-                                <Label Text="{Binding Budget.Goal, StringFormat='Cel: {0:C0}'}" 
+                                <Label Text="{Binding BudgetWrapper.Budget.Goal, StringFormat='Cel: {0:C0}'}" 
                                    TextColor="#90A4AE" 
                                    FontSize="11" 
                                    HorizontalOptions="End"/>

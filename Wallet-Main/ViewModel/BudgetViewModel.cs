@@ -13,18 +13,8 @@ namespace Wallet_Main
     public partial class BudgetViewModel :ObservableObject
     {
         [ObservableProperty]
-        private List<Wallet_lib.BudgetWrapper> budgets;
+        private List<BudgetWrapperDisplay> budgets;
         Wallet_lib.WalletService _service;
-        public Rect ExpectedProgressBounds
-        {
-            get
-            {
-                int currentDay = DateTime.Today.Day;
-                int daysInMonth = DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month);
-
-                return new Rect((double)currentDay / daysInMonth, 0, 2, 1);
-            }
-        }
         public BudgetViewModel(Wallet_lib.WalletService service)
         {
             _service = service;
@@ -32,13 +22,14 @@ namespace Wallet_Main
         }
         public async Task Load_Data()
         {
-            Budgets = await _service.Get_All_Budget_Wrapper();
+            var data = await _service.Get_All_Budget_Wrapper();
+            Budgets = new(data.Select(b => new BudgetWrapperDisplay { BudgetWrapper = b }));
         }
         [RelayCommand]
-        public async Task Show_Add_Budget_PopUp(Wallet_lib.BudgetWrapper? budget)
+        public async Task Show_Add_Budget_PopUp(BudgetWrapperDisplay? budget)
         {
             var categories = await _service.Get_All_Expense_Categories_Async();
-            AddBudgetPopUp pop = new(categories, _service, budget?.Budget);
+            AddBudgetPopUp pop = new(categories, _service, budget?.BudgetWrapper.Budget);
             var result = await Shell.Current.ShowPopupAsync(pop);
 
             if (result is Wallet_lib.Budget newBudget)
@@ -50,11 +41,11 @@ namespace Wallet_Main
                 else
                 {
 
-                    var budgetToUpdate = Budgets.FirstOrDefault(b => b.Budget.Id == budget.Budget.Id);
+                    var budgetToUpdate = Budgets.FirstOrDefault(b => b.BudgetWrapper.Budget.Id == budget.BudgetWrapper.Budget.Id);
                     if (budgetToUpdate != null)
                     {
-                        budgetToUpdate.Budget.CategoryId = newBudget.CategoryId;
-                        budgetToUpdate.Budget.Goal = newBudget.Goal;
+                        budgetToUpdate.BudgetWrapper.Budget.CategoryId = newBudget.CategoryId;
+                        budgetToUpdate.BudgetWrapper.Budget.Goal = newBudget.Goal;
                     }
                 }
                     await Load_Data();
