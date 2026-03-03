@@ -15,6 +15,16 @@ namespace Wallet_Main
         [ObservableProperty]
         private List<Wallet_lib.BudgetWrapper> budgets;
         Wallet_lib.WalletService _service;
+        public Rect ExpectedProgressBounds
+        {
+            get
+            {
+                int currentDay = DateTime.Today.Day;
+                int daysInMonth = DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month);
+
+                return new Rect((double)currentDay / daysInMonth, 0, 2, 1);
+            }
+        }
         public BudgetViewModel(Wallet_lib.WalletService service)
         {
             _service = service;

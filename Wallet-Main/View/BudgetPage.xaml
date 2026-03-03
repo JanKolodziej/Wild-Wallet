@@ -30,12 +30,42 @@
 
                         </Grid>
 
-                        <ProgressBar Progress="{Binding Percentage}" 
-                     ProgressColor="{Binding ProgressColor}" 
-                     HeightRequest="8" 
-                     BackgroundColor="#2E3748"/>
+                            <VerticalStackLayout Spacing="5">
 
-                    </VerticalStackLayout>
+                                <Border Stroke="#4B5563" 
+                                    StrokeThickness="1" 
+                                    StrokeShape="RoundRectangle 4"
+                                    BackgroundColor="#2E3748"
+                                    Padding="0">
+
+                                    <AbsoluteLayout HeightRequest="8">
+
+                                        <ProgressBar Progress="{Binding Percentage}" 
+                                             ProgressColor="{Binding ProgressColor}" 
+                                             BackgroundColor="Transparent"
+                                             AbsoluteLayout.LayoutFlags="All"
+                                             AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
+
+                                        <BoxView Color="White"
+                                             WidthRequest="2"
+                                             AbsoluteLayout.LayoutFlags="PositionProportional, HeightProportional"
+                                             AbsoluteLayout.LayoutBounds="{Binding Source={RelativeSource AncestorType={x:Type local:BudgetViewModel}}, Path=ExpectedProgressBounds}">  
+                                            <BoxView.Shadow>
+                                                <Shadow Brush="Black" Offset="0,0" Radius="2" Opacity="0.8"/>
+                                            </BoxView.Shadow>
+                                        </BoxView>
+
+                                    </AbsoluteLayout>
+                                </Border>
+
+                                <Label Text="{Binding Budget.Goal, StringFormat='Cel: {0:C0}'}" 
+                                   TextColor="#90A4AE" 
+                                   FontSize="11" 
+                                   HorizontalOptions="End"/>
+
+                            </VerticalStackLayout>
+
+                        </VerticalStackLayout>
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:BudgetViewModel}}, Path=Show_Add_Budget_PopUpCommand}"
                                 CommandParameter="{Binding .}"/>

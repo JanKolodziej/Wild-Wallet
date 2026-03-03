@@ -63,15 +63,17 @@
 
 
 
-                    <Grid HeightRequest="350">
+                    <Grid HeightRequest="200">
 
                         <lvc:CartesianChart 
                             Series="{Binding SeriesList}" 
                             XAxes="{Binding XAxes}" 
+                            YAxes="{Binding YAxes}"
                             LegendPosition="Hidden"
                             TooltipPosition="Top"
                             BackgroundColor="#273446"
-                            Opacity="1"/>
+                            Opacity="1">
+                        </lvc:CartesianChart>
 
                         <Border IsVisible="{Binding ZeroTransactions}"
                         BackgroundColor="#CC1A1F2B" 
@@ -122,6 +124,67 @@
                             </VerticalStackLayout>
                         </Border>
                     </Grid>
+                    <VerticalStackLayout Spacing="10" Margin="0,15,0,5" IsVisible="{Binding HasBudgets}">
+
+                        <Grid ColumnDefinitions="*, Auto" Margin="15,0">
+                            <Label Grid.Column="0" Text="Twoje Budżety" TextColor="White" FontAttributes="Bold" FontSize="14"/>
+                            <Label Grid.Column="1" Text="🎯" FontSize="14"/>
+                        </Grid>
+
+                        <ScrollView Orientation="Horizontal" >
+                            <HorizontalStackLayout BindableLayout.ItemsSource="{Binding BudgetWrapperList}" 
+                               Spacing="15" 
+                               Padding="15,0,15,15">
+
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="local:BudgetWrapperDisplay">
+
+                                        <Border Style="{StaticResource ElevatedCardBorderStyle}" 
+                                            Padding="15" 
+                                            WidthRequest="220" 
+                                            StrokeThickness="0">
+                                            <VerticalStackLayout Spacing="10">
+
+                                                <Grid ColumnDefinitions="Auto, *">
+                                                    <Border Grid.Column="0" StrokeShape="RoundRectangle 20" HeightRequest="40" WidthRequest="40" BackgroundColor="{Binding Budget.Category.Color}" StrokeThickness="0">
+                                                        <Label Text="{Binding BudgetWrapper.Budget.Category.Icon}" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                    </Border>
+
+                                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
+                                                        <Label Text="{Binding BudgetWrapper.Budget.Category.Name}" TextColor="White" FontAttributes="Bold" FontSize="14" LineBreakMode="TailTruncation"/>
+                                                        <Label Text="{Binding BudgetWrapper.Spent, StringFormat='Wydano: {0:C0}'}" TextColor="#90A4AE" FontSize="11"/>
+                                                    </VerticalStackLayout>
+                                                </Grid>
+
+                                                <Border Stroke="#4B5563" StrokeThickness="1" StrokeShape="RoundRectangle 4" BackgroundColor="#2E3748" Padding="0">
+                                                    <AbsoluteLayout HeightRequest="8">
+
+                                                        <ProgressBar Progress="{Binding BudgetWrapper.Percentage}" 
+                                                             ProgressColor="{Binding BudgetWrapper.ProgressColor}" 
+                                                             BackgroundColor="Transparent"
+                                                             AbsoluteLayout.LayoutFlags="All"
+                                                             AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
+
+                                                        <BoxView Color="White" WidthRequest="2"
+                                                             AbsoluteLayout.LayoutFlags="PositionProportional, HeightProportional"
+                                                             AbsoluteLayout.LayoutBounds="{Binding MarkerBounds}">
+                                                            <BoxView.Shadow>
+                                                                <Shadow Brush="Black" Offset="0,0" Radius="2" Opacity="0.8"/>
+                                                            </BoxView.Shadow>
+                                                        </BoxView>
+                                                    </AbsoluteLayout>
+                                                </Border>
+
+                                                <Label Text="{Binding BudgetWrapper.Budget.Goal, StringFormat='Cel: {0:C0}'}" TextColor="#6B7280" FontSize="10" HorizontalOptions="End"/>
+
+                                            </VerticalStackLayout>
+                                        </Border>
+
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </HorizontalStackLayout>
+                        </ScrollView>
+                    </VerticalStackLayout>
 
                     <Label Text="Ostatnie operacje" TextColor="#B0BEC5" FontSize="14" FontAttributes="Bold" Margin="5,10,0,0"/>
                     <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15" Margin="0, 15, 0, 5" StrokeThickness="0" IsVisible="{Binding HasUpcomingTransactions}">
@@ -178,8 +241,11 @@
                                 </BindableLayout.ItemTemplate>
                             </VerticalStackLayout>
 
+                            
+
                         </VerticalStackLayout>
                     </Border>
+
                 </VerticalStackLayout>
                 
             </CollectionView.Header>

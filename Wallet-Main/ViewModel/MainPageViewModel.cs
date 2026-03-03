@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
 using System.Collections.ObjectModel;
 using Wallet_lib;
 namespace Wallet_Main
@@ -21,6 +22,12 @@ namespace Wallet_Main
         private ObservableCollection<AutomatedTransaction> upcomingTransactionsList = new ObservableCollection<AutomatedTransaction>();
         public bool HasUpcomingTransactions => UpcomingTransactionsList.Any();
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasBudgets))]
+        private ObservableCollection<BudgetWrapperDisplay> budgetWrapperList = new ObservableCollection<BudgetWrapperDisplay>();
+
+        public bool HasBudgets => BudgetWrapperList.Any();
+
         private readonly WalletService _service;
         [ObservableProperty]
         private ObservableCollection<GroupedTransactions> groupedTransactionsList = new ObservableCollection<GroupedTransactions>();
@@ -31,6 +38,8 @@ namespace Wallet_Main
         private IEnumerable<ISeries> seriesList = Array.Empty<ISeries>();
         [ObservableProperty]
         private Axis[] xAxes = Array.Empty<Axis>();
+        [ObservableProperty]
+        private Axis[] yAxes = Array.Empty<Axis>();
 
         public bool ZeroTransactions => !TransactionsList.Any();
 
@@ -78,6 +87,10 @@ namespace Wallet_Main
             Balance = await _service.Get_Balance_To_Date(Date);
             var upcoming = await _service.Get_Close_Automated_Transactions();
             UpcomingTransactionsList = new ObservableCollection<AutomatedTransaction>(upcoming);
+
+            var budgets = await _service.Get_All_Budget_Wrapper();
+            BudgetWrapperList = new ObservableCollection<BudgetWrapperDisplay>(budgets.Select(b => new BudgetWrapperDisplay { BudgetWrapper = b }));
+
             await Create_chart();
         }
         [RelayCommand]
@@ -119,6 +132,25 @@ namespace Wallet_Main
             {
 
                 new DateTimeAxis(TimeSpan.FromDays(1), date=> date.ToString("dd"))
+                {
+                    LabelsPaint = new SolidColorPaint
+                    {
+                        Color = SkiaSharp.SKColors.Gray,
+                        StrokeThickness = 2
+                    }
+                }
+            };
+            YAxes = new Axis[]
+            {
+
+                new Axis
+                {
+                    LabelsPaint = new SolidColorPaint
+                    {
+                        Color = SkiaSharp.SKColors.Gray,
+                        StrokeThickness = 2
+                    }
+                }
             };
         }
         /// <summary>
