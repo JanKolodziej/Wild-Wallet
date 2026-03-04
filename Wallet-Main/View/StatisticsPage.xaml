@@ -6,7 +6,8 @@
              x:DataType="local:StatisticViewModel"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
              BackgroundColor="#1A1F2B"
-             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui">
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">
 
     <Grid RowDefinitions="*">
 
@@ -49,13 +50,13 @@
                             <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Padding="30">
                                 <Label Text="📊" FontSize="50" HorizontalOptions="Center"/>
 
-                                <Label Text="Zbieramy dane..." 
+                                <Label Text="{x:Static strings:AppResources.CollectingData}" 
                                    TextColor="White" 
                                    FontSize="20" 
                                    FontAttributes="Bold" 
                                    HorizontalOptions="Center"/>
 
-                                <Label Text="Aby odblokować zaawansowaną analizę statystyczną i trendy, korzystaj z aplikacji aktywnie przez minimum 3 miesiące." 
+                                <Label Text="{x:Static strings:AppResources.StatisticPageEmpty}" 
                                 TextColor="#B0BEC5" 
                                 FontSize="14" 
                                 HorizontalTextAlignment="Center" 
@@ -93,7 +94,7 @@
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                                <Label Text="Przychód" FontSize="10" TextColor="#80CBC4" TextTransform="Uppercase"/>
+                                    <Label Text="{x:Static strings:AppResources.Income}" FontSize="10" TextColor="#80CBC4" TextTransform="Uppercase"/>
                                 <Label Text="{Binding MonthlyStat.Income, StringFormat='{0:C0}'}" 
                                        TextColor="#00BFA5" 
                                        FontAttributes="Bold"
@@ -101,7 +102,7 @@
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="2">
-                                <Label Text="Wydatki" FontSize="10" TextColor="#EF9A9A" TextTransform="Uppercase"/>
+                                <Label Text="{x:Static strings:AppResources.Expenses}" FontSize="10" TextColor="#EF9A9A" TextTransform="Uppercase"/>
                                 <Label Text="{Binding MonthlyStat.Expenses, StringFormat='{0:C0}'}" 
                                        TextColor="#EF5350" 
                                        FontAttributes="Bold"

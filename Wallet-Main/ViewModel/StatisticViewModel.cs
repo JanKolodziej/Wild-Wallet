@@ -102,10 +102,10 @@ namespace Wallet_Main
                 int days = (requiredDate - DateTime.Now.Date).Days;
                 if (days > requiredDays)
                 {
-                    DaysLeftText = "Dodaj tranzakcje w zaległych miesiącach aby odblokować";
+                    DaysLeftText = Resources.Strings.AppResources.PreviousMonths;
                     DataCollectionProgress = 0.8;
                 }
-                DaysLeftText = $"Pozostało {days} dni do odblokowania tej zawartości";
+                DaysLeftText = $" {days} {Resources.Strings.AppResources.DaysLeft}";
                 DataCollectionProgress = (requiredDays - days) / requiredDays;
             }
         }
