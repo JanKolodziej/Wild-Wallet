@@ -219,4 +219,46 @@
   <data name="Delete" xml:space="preserve">
     <value>Usuń</value>
   </data>
+  <data name="TitleExample" xml:space="preserve">
+    <value>np. Zakupy Biedronka</value>
+  </data>
+  <data name="BalanceProjection" xml:space="preserve">
+    <value>Przewidywanie Bilansu</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>Brak danych do wyświetlenia</value>
+  </data>
+  <data name="ChooseFrequency" xml:space="preserve">
+    <value>Wybierz Częstotliwość</value>
+  </data>
+  <data name="Daily" xml:space="preserve">
+    <value>Codziennie</value>
+  </data>
+  <data name="Weekly" xml:space="preserve">
+    <value>Co tydzień</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>Co miesiąc</value>
+  </data>
+  <data name="Yearly" xml:space="preserve">
+    <value>Co rok</value>
+  </data>
+  <data name="NoAutomatedtransaction" xml:space="preserve">
+    <value>Brak zaplanowanych płatności</value>
+  </data>
+  <data name="AddAutomatedTransactionHint" xml:space="preserve">
+    <value>Dodaj automatyczną transakcję, a system sam zadba o Twoje cykliczne rachunki i subskrypcje.</value>
+  </data>
+  <data name="EnterCategoryName" xml:space="preserve">
+    <value>Wpisz nazwe nowej kategorii</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Kolor</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Ikonka</value>
+  </data>
+  <data name="NewBudget" xml:space="preserve">
+    <value>Nowy Budżet</value>
+  </data>
 </root>

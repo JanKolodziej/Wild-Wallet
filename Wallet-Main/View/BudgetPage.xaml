@@ -4,7 +4,8 @@
              x:Class="Wallet_Main.BudgetPage"
              xmlns:local="clr-namespace:Wallet_Main"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
-             BackgroundColor="#1A1F2B">
+             BackgroundColor="#1A1F2B"
+             xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">
 
     <Grid>
         

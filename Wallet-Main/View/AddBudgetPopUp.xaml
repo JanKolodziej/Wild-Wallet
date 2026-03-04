@@ -6,7 +6,8 @@
                x:Class="Wallet_Main.AddBudgetPopUp"
                Color="Transparent"
                CanBeDismissedByTappingOutsideOfPopup="True"
-               VerticalOptions="End">
+               VerticalOptions="End"
+               xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">
 
     <Border x:Name="MainPop"
             StrokeShape="RoundRectangle 20,20,0,0"
@@ -33,8 +34,7 @@
 
             <VerticalStackLayout Grid.Row="1" Spacing="25" Padding="25, 10, 25, 40">
 
-                <Label Text="Nowy Budżet" 
-                       TextColor="White" 
+                <Label Text="{x:Static strings:AppResources.NewBudget}"
                        FontSize="20" 
                        FontAttributes="Bold" 
                        HorizontalOptions="Center"/>
@@ -66,7 +66,7 @@
                 </Border>
 
                 <VerticalStackLayout Spacing="5">
-                    <Label Text="Miesięczny limit (PLN)" TextColor="#B0BEC5" FontSize="12"/>
+                    <Label Text="{x:Static strings:AppResources.MonthlyLimit}" TextColor="#B0BEC5" FontSize="12"/>
                     <Border StrokeShape="RoundRectangle 10" BackgroundColor="#252A36" StrokeThickness="0" HeightRequest="50">
                         <Entry x:Name="AmountEntry"
                                TextChanged="AmountEntry_TextChanged"
@@ -81,7 +81,7 @@
 
                 <Button x:Name="SaveButton"
                         IsEnabled="False"
-                        Text="Zapisz" 
+                        Text="{x:Static strings:AppResources.Save}" 
                         HeightRequest="50"
                         Margin="0,10,0,0"
                         BackgroundColor="#2C3448" 

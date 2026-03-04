@@ -7,7 +7,8 @@
                Color="Transparent"
                x:DataType="local:AddCategoryPopUp"
                CanBeDismissedByTappingOutsideOfPopup="True"
-               VerticalOptions="End">
+               VerticalOptions="End"
+               xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">
 
     <Border StrokeShape="RoundRectangle 25,25,0,0"
             BackgroundColor="#1E222D"
@@ -29,7 +30,7 @@
                      HorizontalOptions="Center"
                      Opacity="0.5"/>
 
-            <Label Text="Nowa Kategoria"
+            <Label Text="{x:Static strings:AppResources.NewCategory}"
                    TextColor="White"
                    FontAttributes="Bold"
                    FontSize="22"
@@ -41,7 +42,7 @@
                     HeightRequest="50"
                     Padding="15,0">
                 <Entry x:Name="CategoryName"
-                       Placeholder="Wpisz nazwę..."
+                       Placeholder="{x:Static strings:AppResources.EnterCategoryName}"
                       TextChanged="On_Form_Changed"
                        PlaceholderColor="#808080"
                        TextColor="White"
@@ -50,7 +51,7 @@
             </Border>
 
             <VerticalStackLayout Spacing="10">
-                <Label Text="KOLOR" TextColor="#808080" FontSize="12" FontAttributes="Bold"/>
+                <Label Text="{x:Static strings:AppResources.Color}" TextColor="#808080" FontSize="12" FontAttributes="Bold"/>
 
                 <CollectionView SelectionMode="Single"
                                 SelectionChanged="On_Form_Changed"
@@ -91,7 +92,7 @@
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="10">
-                <Label Text="IKONA" TextColor="#808080" FontSize="12" FontAttributes="Bold"/>
+                <Label Text="{x:Static strings:AppResources.Icon}" TextColor="#808080" FontSize="12" FontAttributes="Bold"/>
 
                 <CollectionView SelectionMode="Single"
                                 x:Name="SelectedIcon"
@@ -134,7 +135,7 @@
                 </CollectionView>
             </VerticalStackLayout>
 
-            <Button Text="Zapisz"
+            <Button Text="{x:Static strings:AppResources.Save}"
                     x:Name="Zapisz_Button"
                     BackgroundColor="#4F6CFF"
                     TextColor="White"

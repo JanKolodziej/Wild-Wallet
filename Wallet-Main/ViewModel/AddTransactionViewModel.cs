@@ -47,7 +47,13 @@ namespace Wallet_Main
         public ObservableCollection<Categories> Categories { get; set; } = new();
         public ObservableCollection<Wallet_lib.Accounts> Accounts { get; set; } = new();
 
-
+        public List<string> TypesFrequency = new() 
+        { 
+            Resources.Strings.AppResources.Daily,
+            Resources.Strings.AppResources.Weekly, 
+            Resources.Strings.AppResources.Monthly,
+            Resources.Strings.AppResources.Yearly 
+        };
 
         private readonly Wallet_lib.WalletService _service;
         public AddTransactionViewModel(Wallet_lib.WalletService service)

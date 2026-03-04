@@ -219,4 +219,46 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="TitleExample" xml:space="preserve">
+    <value>e.g. 7-eleven groceries</value>
+  </data>
+  <data name="BalanceProjection" xml:space="preserve">
+    <value>Balance Projection</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>No data to show</value>
+  </data>
+  <data name="ChooseFrequency" xml:space="preserve">
+    <value>Choose Frequency</value>
+  </data>
+  <data name="Daily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="Weekly" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="Yearly" xml:space="preserve">
+    <value>Yearly</value>
+  </data>
+  <data name="NoAutomatedtransaction" xml:space="preserve">
+    <value>No Scheduled Transaction </value>
+  </data>
+  <data name="AddAutomatedTransactionHint" xml:space="preserve">
+    <value>Add an scheduled transaction and the system will take care of your recurring bills and subscriptions.</value>
+  </data>
+  <data name="EnterCategoryName" xml:space="preserve">
+    <value>Enter new category name</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="NewBudget" xml:space="preserve">
+    <value>New Budget</value>
+  </data>
 </root>

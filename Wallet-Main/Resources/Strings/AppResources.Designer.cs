@@ -70,6 +70,24 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add an scheduled transaction and the system will take care of your recurring bills and subscriptions..
+        /// </summary>
+        internal static string AddAutomatedTransactionHint {
+            get {
+                return ResourceManager.GetString("AddAutomatedTransactionHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Balance Projection.
+        /// </summary>
+        internal static string BalanceProjection {
+            get {
+                return ResourceManager.GetString("BalanceProjection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Goal.
         /// </summary>
         internal static string BudgetGoal {
@@ -97,11 +115,38 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Choose Frequency.
+        /// </summary>
+        internal static string ChooseFrequency {
+            get {
+                return ResourceManager.GetString("ChooseFrequency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Collecting Data....
         /// </summary>
         internal static string CollectingData {
             get {
                 return ResourceManager.GetString("CollectingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Color.
+        /// </summary>
+        internal static string Color {
+            get {
+                return ResourceManager.GetString("Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Daily.
+        /// </summary>
+        internal static string Daily {
+            get {
+                return ResourceManager.GetString("Daily", resourceCulture);
             }
         }
         
@@ -129,6 +174,15 @@ namespace Wallet_Main.Resources.Strings {
         internal static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Enter new category name.
+        /// </summary>
+        internal static string EnterCategoryName {
+            get {
+                return ResourceManager.GetString("EnterCategoryName", resourceCulture);
             }
         }
         
@@ -178,6 +232,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Icon.
+        /// </summary>
+        internal static string Icon {
+            get {
+                return ResourceManager.GetString("Icon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Income.
         /// </summary>
         internal static string Income {
@@ -205,6 +268,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Monthly.
+        /// </summary>
+        internal static string Monthly {
+            get {
+                return ResourceManager.GetString("Monthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Monthly Limit.
         /// </summary>
         internal static string MonthlyLimit {
@@ -214,11 +286,38 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu New Budget.
+        /// </summary>
+        internal static string NewBudget {
+            get {
+                return ResourceManager.GetString("NewBudget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu New Category.
         /// </summary>
         internal static string NewCategory {
             get {
                 return ResourceManager.GetString("NewCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu No Scheduled Transaction .
+        /// </summary>
+        internal static string NoAutomatedtransaction {
+            get {
+                return ResourceManager.GetString("NoAutomatedtransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu No data to show.
+        /// </summary>
+        internal static string NoData {
+            get {
+                return ResourceManager.GetString("NoData", resourceCulture);
             }
         }
         
@@ -322,6 +421,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu e.g. 7-eleven groceries.
+        /// </summary>
+        internal static string TitleExample {
+            get {
+                return ResourceManager.GetString("TitleExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu To unlock balance chart add at least one transaction.
         /// </summary>
         internal static string ToUnlockChart {
@@ -354,6 +462,24 @@ namespace Wallet_Main.Resources.Strings {
         internal static string UpcomingTransactions {
             get {
                 return ResourceManager.GetString("UpcomingTransactions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Weekly.
+        /// </summary>
+        internal static string Weekly {
+            get {
+                return ResourceManager.GetString("Weekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Yearly.
+        /// </summary>
+        internal static string Yearly {
+            get {
+                return ResourceManager.GetString("Yearly", resourceCulture);
             }
         }
         

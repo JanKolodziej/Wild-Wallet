@@ -5,14 +5,15 @@
              xmlns:local="clr-namespace:Wallet_Main"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
              x:DataType="local:AddTransactionViewModel"
-             BackgroundColor="#1A1F2B">
+             BackgroundColor="#1A1F2B"
+             xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">
 
     <Grid RowDefinitions="*, Auto">
 
         <ScrollView>
             <VerticalStackLayout Spacing="20" Padding="25">
 
-                <Label Text="Podaj kwotę" 
+                <Label Text="{x:Static strings:AppResources.EnterTheAmount}" 
                        TextColor="Gray" 
                        HorizontalOptions="Center" 
                        FontSize="14"/>
@@ -56,7 +57,7 @@
                     </Grid>
                 </Border>
 
-                <Label Text="Szczegóły transakcji" 
+                <Label Text="{x:Static strings:AppResources.TransactionDetails}" 
                        TextColor="Gray" 
                        Margin="0,10,0,0" 
                        FontSize="14" 
@@ -66,10 +67,10 @@
 
                     <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15,5">
                         <Grid RowDefinitions="Auto, Auto">
-                            <Label Text="Tytuł" TextColor="#6B7280" FontSize="11"/>
+                            <Label Text="{x:Static strings:AppResources.Title}" TextColor="#6B7280" FontSize="11"/>
                             <Entry Grid.Row="1" 
                                    Text="{Binding Title}" 
-                                   Placeholder="Np. Zakupy Biedronka" 
+                                   Placeholder="{x:Static strings:AppResources.TitleExample}" 
                                    TextColor="White"
                                    BackgroundColor="Transparent"
                                    FontSize="16"/>
@@ -90,7 +91,7 @@
 
                         <Border Grid.Column="1" Style="{StaticResource ElevatedCardBorderStyle}" Padding="10">
                             <VerticalStackLayout>
-                                <Label Text="Konto" TextColor="#6B7280" FontSize="11"/>
+                                <Label Text="{x:Static strings:AppResources.Account}" TextColor="#6B7280" FontSize="11"/>
                                 <Picker ItemsSource="{Binding Accounts}" 
                                         ItemDisplayBinding="{Binding Name}" 
                                         TextColor="White"
@@ -106,7 +107,7 @@
                         </Border.GestureRecognizers>
                         <Grid ColumnDefinitions="*">
                             <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" Spacing="10">
-                                <Label Text="Kategoria" TextColor="#6B7280" FontSize="11"/>
+                                <Label Text="{x:Static strings:AppResources.Category}" TextColor="#6B7280" FontSize="11"/>
                                 <HorizontalStackLayout Spacing="20">
                                     <Border Grid.Column="0" StrokeShape="RoundRectangle 30"
                                     HeightRequest="40" WidthRequest="40"
@@ -133,7 +134,7 @@
 
                             <Grid ColumnDefinitions="*, Auto">
                                 <VerticalStackLayout VerticalOptions="Center">
-                                    <Label Text="Płatność cykliczna" 
+                                    <Label Text="{x:Static strings:AppResources.ScheduledTransaction}" 
                                        TextColor="White" 
                                        FontSize="14"/>
                                     <Label Text="Dodawaj automatycznie" 
@@ -152,20 +153,15 @@
                              Spacing="5">
 
                                 <BoxView HeightRequest="1" Color="#2E3748" Margin="0,5"/>
-                                <Label Text="Częstotliwość" TextColor="#6B7280" FontSize="11"/>
+                                <Label Text="{x:Static strings:AppResources.Frequency}" TextColor="#6B7280" FontSize="11"/>
 
                                 <Picker SelectedIndex="{Binding Frequency}"
                                     TextColor="White"
                                     TitleColor="#4B5563"
-                                    Title="Wybierz okres"
-                                    BackgroundColor="Transparent">
-                                    <Picker.Items>
-                                        <x:String>Codziennie</x:String>
-                                        <x:String>Co tydzień</x:String>
-                                        <x:String>Co miesiąc</x:String>
-                                        <x:String>Co rok</x:String>
-                                    </Picker.Items>
-                                </Picker>
+                                    Title="{x:Static strings:AppResources.ChooseFrequency}"
+                                    BackgroundColor="Transparent" 
+                                        ItemsSource="{Binding TypesFrequency}"/>
+
                             </VerticalStackLayout>
 
                         </VerticalStackLayout>
@@ -185,7 +181,7 @@
                 <Shadow Brush="Black" Offset="0,-5" Opacity="0.3" Radius="10"/>
             </Border.Shadow>
 
-            <Button Text="Zapisz transakcję" 
+            <Button Text="{x:Static strings:AppResources.SaveTransaction}" 
                     Command="{Binding AddCommand}" 
                     IsEnabled="{Binding IsAmountValid}"
                     BackgroundColor="#2C3448"

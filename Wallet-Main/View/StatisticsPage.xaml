@@ -16,7 +16,7 @@
             <CollectionView.EmptyView>
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
                     <Label Text="📊" FontSize="60" HorizontalOptions="Center"/>
-                    <Label Text="Brak danych do wyświetlenia" 
+                    <Label Text="{x:Static strings:AppResources.NoData}" 
                            TextColor="Gray" 
                            FontSize="18" 
                            HorizontalOptions="Center"/>
@@ -25,7 +25,7 @@
 
             <CollectionView.Header>
                 <VerticalStackLayout  >
-                    <Label Text="Przewidywanie bilansu" 
+                    <Label Text="{x:Static strings:AppResources.BalanceProjection}" 
                            TextColor="WhiteSmoke" 
                            FontSize="18" 
                            FontAttributes="Bold"

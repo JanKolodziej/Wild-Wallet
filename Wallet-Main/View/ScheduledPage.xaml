@@ -5,7 +5,8 @@
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
              x:Class="Wallet_Main.ScheduledPage"
              x:DataType="local:ScheduledViewModel"
-             BackgroundColor="#1A1F2B">
+             BackgroundColor="#1A1F2B"
+             xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">
 
     <Grid>
         <CollectionView ItemsSource="{Binding AutomatedTransactionsList}"
@@ -18,12 +19,12 @@
             <CollectionView.EmptyView>
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Padding="30, 100, 30, 30">
                     <Label Text="⏳" FontSize="60" HorizontalOptions="Center"/>
-                    <Label Text="Brak zaplanowanych płatności" 
+                    <Label Text="{x:Static strings:AppResources.NoAutomatedtransaction}" 
                    TextColor="White" 
                    FontSize="18" 
                    FontAttributes="Bold" 
                    HorizontalOptions="Center"/>
-                    <Label Text="Dodaj automatyczną transakcję, a system sam zadba o Twoje cykliczne rachunki i subskrypcje." 
+                    <Label Text="{x:Static strings:AppResources.AddAutomatedTransactionHint}" 
                    TextColor="#B0BEC5" 
                    FontSize="14" 
                    HorizontalTextAlignment="Center" 
@@ -52,10 +53,27 @@
                     <SwipeView>
                         <SwipeView.LeftItems>
                             <SwipeItems Mode="Execute">
-                                <SwipeItem Text="Usuń" 
-                                   BackgroundColor="#EF5350"  
-                                   Command="{Binding Source={RelativeSource AncestorType={x:Type local:ScheduledViewModel}}, Path=Delete_TransactionCommand}"
-                                   CommandParameter="{Binding .}"/>
+                                <SwipeItemView BackgroundColor="#EF5350"
+                                       Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPageViewModel}}, Path=Delete_TransactionCommand}"
+                                       CommandParameter="{Binding .}">      
+
+                                    <VerticalStackLayout VerticalOptions="Center" 
+                                         HorizontalOptions="Center" 
+                                         WidthRequest="90" 
+                                         Spacing="5">
+
+                                        <Label Text="🗑️" 
+                                           FontSize="24" 
+                                           HorizontalOptions="Center" />
+
+                                        <Label Text="{x:Static strings:AppResources.Delete}" 
+                                           TextColor="White" 
+                                           FontSize="13" 
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center" />
+                                    </VerticalStackLayout>
+
+                                </SwipeItemView>
                             </SwipeItems>
                         </SwipeView.LeftItems>
 
@@ -71,7 +89,7 @@
 
                                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
                                     <Label Text="{Binding Name}" TextColor="White" FontAttributes="Bold" FontSize="15"/>
-                                    <Label Text="Transakcja automatyczna" TextColor="#90A4AE" FontSize="11"/>
+                                    <Label Text="{x:Static strings:AppResources.ScheduledTransaction}" TextColor="#90A4AE" FontSize="11"/>
                                 </VerticalStackLayout>
 
                                 <Label Grid.Column="2" Text="{Binding Amount, StringFormat='{0:C0}'}" TextColor="White" FontAttributes="Bold" FontSize="15" VerticalOptions="Center"/>
