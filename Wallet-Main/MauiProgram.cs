@@ -63,8 +63,8 @@ namespace Wallet_Main
                         new() { Name=Resources.Strings.CategoryNames.EatingOutCategory,  Type="Expense", Icon="🍔", Color="#EF5350" },
                         new() { Name=Resources.Strings.CategoryNames.HouseCategory,       Type="Expense", Icon="🏠", Color="#42A5F5" },
                         new() { Name=Resources.Strings.CategoryNames.TransportCategory, Type="Expense", Icon="🚗", Color="#7E57C2" },
-                        new() { Name=Resources.Strings.CategoryNames.SportCategory, Type="Expense", Icon="🏀", Color="#7E5B32" },
-                        new() { Name=Resources.Strings.CategoryNames.HobbyCategory, Type="Expense", Icon="🎮", Color="#7F57A2" },
+                        new() { Name=Resources.Strings.CategoryNames.SportCategory, Type="Expense", Icon="🏀", Color="#7E5B32" }, //change
+                        new() { Name=Resources.Strings.CategoryNames.HobbyCategory, Type="Expense", Icon="🎮", Color="#7F57A2" },//change
                         new() { Name=Resources.Strings.CategoryNames.EntertainmentCategory,  Type="Expense", Icon="🎬", Color="#EC407A" },
                         new() { Name=Resources.Strings.CategoryNames.SubscrbtionCategory,Type="Expense", Icon="📱", Color="#FF7043" },
                         new() { Name=Resources.Strings.CategoryNames.GiftsCategory,  Type="Expense",  Icon="🎁", Color="#AB47BC" },
@@ -73,7 +73,8 @@ namespace Wallet_Main
                         new() { Name=Resources.Strings.CategoryNames.PaycheckCategory,   Type="Income",  Icon="💵 ", Color="#66BB6A" },
                         new() { Name=Resources.Strings.CategoryNames.BisnesCategory,    Type="Income",  Icon="📈", Color="#9CCC65" },
                         new() { Name=Resources.Strings.CategoryNames.GiftsCategory,  Type="Income",  Icon="🎁", Color="#AB47BC" },
-                        new() { Name=Resources.Strings.CategoryNames.InterestCategory,   Type="Income",  Icon="🏦", Color="#29B6F6" }
+                        new() { Name=Resources.Strings.CategoryNames.InterestCategory,   Type="Income",  Icon="🏦", Color="#29B6F6" },
+                        new() { Name=Resources.Strings.CategoryNames.OtherCategory,   Type="Income",  Icon="💸", Color="#29B6F6" }//change
 
 
                     });

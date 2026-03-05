@@ -141,11 +141,13 @@ namespace Wallet_lib
 
         public async Task Delete_Transaction(Transactions transaction)
         {
+            transaction.Category = null;
             _context.Transactions.Remove(transaction);
             await _context.SaveChangesAsync();
         }
         public async Task Delete_Automated_Transaction(AutomatedTransaction automatedTransaction)
         {
+            automatedTransaction.Category = null;
             _context.AutomatedTransactions.Remove(automatedTransaction);
             await _context.SaveChangesAsync();
         }
@@ -248,6 +250,7 @@ namespace Wallet_lib
 
         public async Task Delete_Budget(Budget budget)
         {
+            budget.Category = null;
             _context.Budgets.Remove(budget);
             await _context.SaveChangesAsync();
         }

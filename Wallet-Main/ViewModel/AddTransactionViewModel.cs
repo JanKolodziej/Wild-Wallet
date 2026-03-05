@@ -80,6 +80,10 @@ namespace Wallet_Main
                 }
 
             }
+            else if(result == null)
+            {
+                SelectedCategory = Categories.FirstOrDefault(c => c.Name == Resources.Strings.CategoryNames.OtherCategory && c.Type == Categories.Last().Type);
+            }
         }
 
         partial void OnTransactionToEditChanged(Transactions? value)
