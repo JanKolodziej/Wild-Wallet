@@ -106,7 +106,14 @@ namespace Wallet_Main
             double amount = Convert.ToDouble(await _service.Get_Balance_To_Date(Date));
             LineSeries<DateTimePoint> series = new();
             ObservableCollection<DateTimePoint> values = new();
-            foreach (var trans in TransactionsList.Reverse())
+            List<Transactions> transactionsChart = new(TransactionsList.ToList());
+            DateTime firstDayOfMonth = new(Date.Year, Date.Month, 1);
+            if (transactionsChart.Last().Date.Date != firstDayOfMonth)
+            {
+                values.Add(new(firstDayOfMonth, amount));
+            }
+            transactionsChart.Reverse();
+            foreach (Transactions trans in transactionsChart)
             {
                 amount += (double)trans.Amount;
                 if (values.Any())
@@ -123,6 +130,7 @@ namespace Wallet_Main
                 values.Add(element);
 
             }
+            
             series.Values = values;
             SeriesList = new ISeries[]
             {
