@@ -59,19 +59,21 @@ namespace Wallet_Main
                 {
                     db.Categories.AddRange(new List<Wallet_lib.Categories>
                     {
-                        new() { Name="Zakupy",    Type="Expense", Icon="🛒", Color="#FFA726" },
-                        new() { Name="Jedzenie",  Type="Expense", Icon="🍔", Color="#EF5350" },
-                        new() { Name="Dom",       Type="Expense", Icon="🏠", Color="#42A5F5" },
-                        new() { Name="Transport", Type="Expense", Icon="⛽", Color="#7E57C2" },
-                        new() { Name="Zdrowie",   Type="Expense", Icon="💊", Color="#26C6DA" },
-                        new() { Name="Rozrywka",  Type="Expense", Icon="🎬", Color="#EC407A" },
-                        new() { Name="Abonamenty",Type="Expense", Icon="📱", Color="#FF7043" },
-                        new() { Name="Inne",      Type="Expense", Icon="📦", Color="#BDBDBD" },
+                        new() { Name=Resources.Strings.CategoryNames.ShoppingCategory,    Type="Expense", Icon="🛒", Color="#FFA726" },
+                        new() { Name=Resources.Strings.CategoryNames.EatingOutCategory,  Type="Expense", Icon="🍔", Color="#EF5350" },
+                        new() { Name=Resources.Strings.CategoryNames.HouseCategory,       Type="Expense", Icon="🏠", Color="#42A5F5" },
+                        new() { Name=Resources.Strings.CategoryNames.TransportCategory, Type="Expense", Icon="🚗", Color="#7E57C2" },
+                        new() { Name=Resources.Strings.CategoryNames.SportCategory, Type="Expense", Icon="🏀", Color="#7E5B32" },
+                        new() { Name=Resources.Strings.CategoryNames.HobbyCategory, Type="Expense", Icon="🎮", Color="#7F57A2" },
+                        new() { Name=Resources.Strings.CategoryNames.EntertainmentCategory,  Type="Expense", Icon="🎬", Color="#EC407A" },
+                        new() { Name=Resources.Strings.CategoryNames.SubscrbtionCategory,Type="Expense", Icon="📱", Color="#FF7043" },
+                        new() { Name=Resources.Strings.CategoryNames.GiftsCategory,  Type="Expense",  Icon="🎁", Color="#AB47BC" },
+                        new() { Name=Resources.Strings.CategoryNames.OtherCategory,      Type="Expense", Icon="📦", Color="#BDBDBD" },
 
-                        new() { Name="Wypłata",   Type="Income",  Icon="💵 ", Color="#66BB6A" },
-                        new() { Name="Biznes",    Type="Income",  Icon="📈", Color="#9CCC65" },
-                        new() { Name="Prezenty",  Type="Income",  Icon="🎁", Color="#AB47BC" },
-                        new() { Name="Odsetki",   Type="Income",  Icon="🏦", Color="#29B6F6" }
+                        new() { Name=Resources.Strings.CategoryNames.PaycheckCategory,   Type="Income",  Icon="💵 ", Color="#66BB6A" },
+                        new() { Name=Resources.Strings.CategoryNames.BisnesCategory,    Type="Income",  Icon="📈", Color="#9CCC65" },
+                        new() { Name=Resources.Strings.CategoryNames.GiftsCategory,  Type="Income",  Icon="🎁", Color="#AB47BC" },
+                        new() { Name=Resources.Strings.CategoryNames.InterestCategory,   Type="Income",  Icon="🏦", Color="#29B6F6" }
 
 
                     });

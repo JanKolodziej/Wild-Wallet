@@ -36,7 +36,7 @@
 
                     <Grid ColumnDefinitions="Auto, *">
                         <Label Grid.Column="0" 
-                               Text="PLN" 
+                               Text="{Binding IsoCurencySymbol}" 
                                TextColor="#00BFA5" 
                                FontSize="24" 
                                VerticalOptions="Center" 
@@ -81,7 +81,7 @@
 
                         <Border Grid.Column="0" Style="{StaticResource ElevatedCardBorderStyle}" Padding="10">
                             <VerticalStackLayout>
-                                <Label Text="Data" TextColor="#6B7280" FontSize="11"/>
+                                <Label Text="{x:Static strings:AppResources.Date_Time}" TextColor="#6B7280" FontSize="11"/>
                                 <DatePicker Date="{Binding Date}" 
                                             TextColor="White" 
                                             Format="dd.MM.yyyy"
@@ -137,7 +137,7 @@
                                     <Label Text="{x:Static strings:AppResources.ScheduledTransaction}" 
                                        TextColor="White" 
                                        FontSize="14"/>
-                                    <Label Text="Dodawaj automatycznie" 
+                                    <Label Text="{x:Static strings:AppResources.ScheduledTransactionDescribtion}" 
                                        TextColor="#6B7280" 
                                        FontSize="11"/>
                                 </VerticalStackLayout>

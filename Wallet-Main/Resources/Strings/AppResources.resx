@@ -261,4 +261,7 @@
   <data name="NewBudget" xml:space="preserve">
     <value>New Budget</value>
   </data>
+  <data name="ScheduledTransactionDescribtion" xml:space="preserve">
+    <value>Add transaction today and once a  day,week ...</value>
+  </data>
 </root>

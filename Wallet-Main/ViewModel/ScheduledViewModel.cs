@@ -15,7 +15,7 @@ namespace Wallet_Main
     {
         private readonly WalletService _service;
         [ObservableProperty]
-        private ObservableCollection<GroupedAutomatedTransactions> automatedTransactionsList = new ObservableCollection<GroupedAutomatedTransactions>();
+        private ObservableCollection<GroupedAutomatedTransactions> automatedTransactionsList = new();
         public ScheduledViewModel(WalletService service)
         {
             _service = service;

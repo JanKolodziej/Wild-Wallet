@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using Wallet_lib;
+using System.Globalization;
 
 namespace Wallet_Main
 {
@@ -10,9 +11,6 @@ namespace Wallet_Main
     [QueryProperty(nameof(IsAutomatedTransaction), "IsAutomatedTransaction")]
     [QueryProperty(nameof(AutomatedTransaction1), "AutomatedTransactionToEdit")]
     [QueryProperty(nameof(TypeOfTransaction), "NewTransaction")]
-    
-
-
     public partial class AddTransactionViewModel : ObservableObject
     {
         [ObservableProperty]
@@ -47,13 +45,14 @@ namespace Wallet_Main
         public ObservableCollection<Categories> Categories { get; set; } = new();
         public ObservableCollection<Wallet_lib.Accounts> Accounts { get; set; } = new();
 
-        public List<string> TypesFrequency = new() 
-        { 
+        public List<string> TypesFrequency { get; } =
+        [
             Resources.Strings.AppResources.Daily,
             Resources.Strings.AppResources.Weekly, 
             Resources.Strings.AppResources.Monthly,
             Resources.Strings.AppResources.Yearly 
-        };
+        ];
+        public string IsoCurencySymbol { get; } = new RegionInfo(CultureInfo.CurrentCulture.Name).ISOCurrencySymbol;
 
         private readonly Wallet_lib.WalletService _service;
         public AddTransactionViewModel(Wallet_lib.WalletService service)

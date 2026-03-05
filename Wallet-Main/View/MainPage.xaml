@@ -153,7 +153,17 @@
 
                                                     <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
                                                         <Label Text="{Binding BudgetWrapper.Budget.Category.Name}" TextColor="White" FontAttributes="Bold" FontSize="14" LineBreakMode="TailTruncation"/>
-                                                        <Label Text="{Binding BudgetWrapper.Spent, StringFormat='Wydano: {0:C0}'}" TextColor="#90A4AE" FontSize="11"/>
+                                                        <Label TextColor="#90A4AE" FontSize="12">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{x:Static strings:AppResources.Spent}" />
+
+                                                                    <Span Text=": " />
+
+                                                                    <Span Text="{Binding BudgetWrapper.Spent, StringFormat='{0:C0}'}" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
                                                     </VerticalStackLayout>
                                                 </Grid>
 

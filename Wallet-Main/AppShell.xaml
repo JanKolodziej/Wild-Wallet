@@ -6,29 +6,30 @@
     xmlns:local="clr-namespace:Wallet_Main"
     Title="Wallet_Main"
     BackgroundColor="#1A1F2B"
+    xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings"
 FlyoutBehavior="Flyout">
 
     <Shell.FlyoutHeader>
         <Grid HeightRequest="200" BackgroundColor="SlateGray">
-            <Label Text="Witaj Użytkowniku!" 
+            <Label Text="{x:Static strings:AppResources.Hello}" 
                    TextColor="{StaticResource White}"
                    VerticalOptions="Center" 
                    HorizontalOptions="Center" />
         </Grid>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Strona Główna">
+    <FlyoutItem Title="{x:Static strings:AppResources.MainPage}">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Statystyki" >
+    <FlyoutItem Title="{x:Static strings:AppResources.Statistics}" >
         <ShellContent ContentTemplate="{DataTemplate local:StatisticPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Zaplanowane Płatności">
+    <FlyoutItem Title="{x:Static strings:AppResources.ScheduledTransactions}">
         <ShellContent ContentTemplate="{DataTemplate local:ScheduledPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Budżety">
+    <FlyoutItem Title="{x:Static strings:AppResources.YourBudgets}">
         <ShellContent ContentTemplate="{DataTemplate local:BudgetPage}" />
     </FlyoutItem>
 

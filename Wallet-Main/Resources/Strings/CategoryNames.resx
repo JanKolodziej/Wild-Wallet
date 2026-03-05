@@ -117,151 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>Konto</value>
+  <data name="EatingOutCategory" xml:space="preserve">
+    <value>Eating out</value>
   </data>
-  <data name="BudgetGoal" xml:space="preserve">
-    <value>Cel</value>
+  <data name="GroceriesCateory" xml:space="preserve">
+    <value>Groceries</value>
   </data>
-  <data name="Category" xml:space="preserve">
-    <value>Kategoria</value>
+  <data name="HobbyCategory" xml:space="preserve">
+    <value>Hobby</value>
   </data>
-  <data name="ChooseCategory" xml:space="preserve">
-    <value>Wybierz Kategorie</value>
+  <data name="HouseCategory" xml:space="preserve">
+    <value>House</value>
   </data>
-  <data name="Date_Time" xml:space="preserve">
-    <value>Data</value>
+  <data name="OtherCategory" xml:space="preserve">
+    <value>Other</value>
   </data>
-  <data name="EnterTheAmount" xml:space="preserve">
-    <value>Podaj Kwote</value>
+  <data name="EntertainmentCategory" xml:space="preserve">
+    <value>Entertainment</value>
   </data>
-  <data name="Expense" xml:space="preserve">
-    <value>Wydatek</value>
+  <data name="RentCategory" xml:space="preserve">
+    <value>Rent</value>
   </data>
-  <data name="Expenses" xml:space="preserve">
-    <value>Wydatki</value>
+  <data name="ShoppingCategory" xml:space="preserve">
+    <value>Shopping</value>
   </data>
-  <data name="Frequency" xml:space="preserve">
-    <value>Częstotliwość</value>
+  <data name="SubscrbtionCategory" xml:space="preserve">
+    <value>Subscrbtions</value>
   </data>
-  <data name="Hello" xml:space="preserve">
-    <value>Witaj!</value>
+  <data name="TransportCategory" xml:space="preserve">
+    <value>Transport</value>
   </data>
-  <data name="Income" xml:space="preserve">
-    <value>Wpływ</value>
+  <data name="SportCategory" xml:space="preserve">
+    <value>Sport</value>
   </data>
-  <data name="Incomes" xml:space="preserve">
-    <value>Wpływy</value>
+  <data name="PaycheckCategory" xml:space="preserve">
+    <value>Paycheck</value>
   </data>
-  <data name="MonthlyLimit" xml:space="preserve">
-    <value>Miesięczny Limit</value>
+  <data name="BisnesCategory" xml:space="preserve">
+    <value>Bisnes</value>
   </data>
-  <data name="NewCategory" xml:space="preserve">
-    <value>Nowa Kategoria</value>
+  <data name="InterestCategory" xml:space="preserve">
+    <value>Interest</value>
   </data>
-  <data name="RecentOperations" xml:space="preserve">
-    <value>Ostatnie Transakcje </value>
+  <data name="PartTimeJob" xml:space="preserve">
+    <value>Part-time job</value>
   </data>
-  <data name="RecurringPayment" xml:space="preserve">
-    <value>Płatność Cykliczna</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Zapisz</value>
-  </data>
-  <data name="SaveTransaction" xml:space="preserve">
-    <value>Zapisz Transakcje</value>
-  </data>
-  <data name="ScheduledTransaction" xml:space="preserve">
-    <value>Zaplanowana Tranzakcja</value>
-  </data>
-  <data name="Spent" xml:space="preserve">
-    <value>Wydano</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Tytuł</value>
-  </data>
-  <data name="Transaction" xml:space="preserve">
-    <value>Transakcja</value>
-  </data>
-  <data name="TransactionDetails" xml:space="preserve">
-    <value>Szczegóły Transakcji </value>
-  </data>
-  <data name="YourBudgets" xml:space="preserve">
-    <value>Twoje Budżety</value>
-  </data>
-  <data name="CollectingData" xml:space="preserve">
-    <value>Zbieramy Dane...</value>
-  </data>
-  <data name="StatisticPageEmpty" xml:space="preserve">
-    <value>Aby odblokować zaawansowaną analizę statystyczną i trendy, korzystaj z aplikacji aktywnie przez minimum 3 miesiące.</value>
-  </data>
-  <data name="MainPage" xml:space="preserve">
-    <value>Strona Główna</value>
-  </data>
-  <data name="Statistics" xml:space="preserve">
-    <value>Statystyki</value>
-  </data>
-  <data name="ScheduledTransactions" xml:space="preserve">
-    <value>Zaplanowane Płatności</value>
-  </data>
-  <data name="DaysLeft" xml:space="preserve">
-    <value>dni pozostało do odblokowania tej zawartości</value>
-  </data>
-  <data name="PreviousMonths" xml:space="preserve">
-    <value>Dodaj transakcje w poprzednich miesiącach aby odblokować</value>
-  </data>
-  <data name="ToUnlockChart" xml:space="preserve">
-    <value>Aby odblokować wykres wydatków dodaj conajmniej jedną tranzakcje</value>
-  </data>
-  <data name="UpcomingTransactions" xml:space="preserve">
-    <value>Nadchodzące wydatki</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Usuń</value>
-  </data>
-  <data name="TitleExample" xml:space="preserve">
-    <value>np. Zakupy Biedronka</value>
-  </data>
-  <data name="BalanceProjection" xml:space="preserve">
-    <value>Przewidywanie Bilansu</value>
-  </data>
-  <data name="NoData" xml:space="preserve">
-    <value>Brak danych do wyświetlenia</value>
-  </data>
-  <data name="ChooseFrequency" xml:space="preserve">
-    <value>Wybierz Częstotliwość</value>
-  </data>
-  <data name="Daily" xml:space="preserve">
-    <value>Codziennie</value>
-  </data>
-  <data name="Weekly" xml:space="preserve">
-    <value>Co tydzień</value>
-  </data>
-  <data name="Monthly" xml:space="preserve">
-    <value>Co miesiąc</value>
-  </data>
-  <data name="Yearly" xml:space="preserve">
-    <value>Co rok</value>
-  </data>
-  <data name="NoAutomatedtransaction" xml:space="preserve">
-    <value>Brak zaplanowanych płatności</value>
-  </data>
-  <data name="AddAutomatedTransactionHint" xml:space="preserve">
-    <value>Dodaj automatyczną transakcję, a system sam zadba o Twoje cykliczne rachunki i subskrypcje.</value>
-  </data>
-  <data name="EnterCategoryName" xml:space="preserve">
-    <value>Wpisz nazwe nowej kategorii</value>
-  </data>
-  <data name="Color" xml:space="preserve">
-    <value>Kolor</value>
-  </data>
-  <data name="Icon" xml:space="preserve">
-    <value>Ikonka</value>
-  </data>
-  <data name="NewBudget" xml:space="preserve">
-    <value>Nowy Budżet</value>
-  </data>
-  <data name="ScheduledTransactionDescribtion" xml:space="preserve">
-    <value>Dodaj transakcje dzisiaj i co tydzien,miesiac...</value>
+  <data name="GiftsCategory" xml:space="preserve">
+    <value>Gifts</value>
   </data>
 </root>

@@ -33,7 +33,7 @@
             </CollectionView.EmptyView>
 
             <CollectionView.GroupHeaderTemplate>
-                <DataTemplate x:DataType="models:GroupedAutomatedTransactions">
+                <DataTemplate x:DataType="local:GroupedAutomatedTransactions">
                     <Border BackgroundColor="#262D3D" 
                     StrokeThickness="0" 
                     Margin="20,15,20,5" 

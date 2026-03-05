@@ -20,7 +20,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>Wallet-Main</ApplicationTitle>
+		<ApplicationTitle>Wild_Wallet</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.walletmain</ApplicationId>
@@ -77,6 +77,11 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>AppResources.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="Resources\Strings\CategoryNames.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>CategoryNames.resx</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\AddBudgetPopUp.xaml.cs">
 	    <DependentUpon>AddBudgetPopUp.xaml</DependentUpon>
 	  </Compile>
@@ -104,6 +109,10 @@
 	  <EmbeddedResource Update="Resources\Strings\AppResources.resx">
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Strings\CategoryNames.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>CategoryNames.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	</ItemGroup>
 

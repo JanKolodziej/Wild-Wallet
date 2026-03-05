@@ -376,6 +376,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add transaction today and once a  day,week ....
+        /// </summary>
+        internal static string ScheduledTransactionDescribtion {
+            get {
+                return ResourceManager.GetString("ScheduledTransactionDescribtion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Scheduled Transactions.
         /// </summary>
         internal static string ScheduledTransactions {

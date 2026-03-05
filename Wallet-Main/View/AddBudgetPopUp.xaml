@@ -36,6 +36,7 @@
 
                 <Label Text="{x:Static strings:AppResources.NewBudget}"
                        FontSize="20" 
+                       TextColor="White"
                        FontAttributes="Bold" 
                        HorizontalOptions="Center"/>
 
@@ -45,7 +46,7 @@
                     </Border.GestureRecognizers>
                     <Grid ColumnDefinitions="*">
                         <VerticalStackLayout Grid.Column="0" VerticalOptions="Center" Spacing="10">
-                            <Label Text="Kategoria" TextColor="#6B7280" FontSize="11"/>
+                            <Label Text="{x:Static strings:AppResources.Category}" TextColor="#6B7280" FontSize="11"/>
                             <HorizontalStackLayout Spacing="20">
                                 <Border Grid.Column="0" StrokeShape="RoundRectangle 30"
                                         HeightRequest="40" WidthRequest="40"
