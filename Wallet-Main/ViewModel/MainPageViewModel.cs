@@ -83,7 +83,7 @@ namespace Wallet_Main
             GroupedTransactionsList = new ObservableCollection<GroupedTransactions>(groups);
 
             Income = await _service.Get_Income_Async(Date);
-            Expenses = await _service.Get_Expenses_Async(Date);
+            Expenses =Math.Abs(await _service.Get_Expenses_Async(Date));
             Balance = await _service.Get_Balance_To_Date(Date);
             var upcoming = await _service.Get_Close_Automated_Transactions();
             UpcomingTransactionsList = new ObservableCollection<AutomatedTransaction>(upcoming);
@@ -180,7 +180,7 @@ namespace Wallet_Main
             var data = await _service.Get_Transaction_month(Date);
             TransactionsList = new ObservableCollection<Transactions>(data);
             Income = await _service.Get_Income_Async(Date);
-            Expenses = await _service.Get_Expenses_Async(Date);
+            Expenses = Math.Abs(await _service.Get_Expenses_Async(Date));
             Balance = await _service.Get_Balance_To_Date(Date);
 
 

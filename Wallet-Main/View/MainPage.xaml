@@ -103,27 +103,50 @@
                     </Border>
                     <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
 
-                        <Border Grid.Column="0" StrokeShape="RoundRectangle 15" BackgroundColor="#2E7D32" StrokeThickness="0" Padding="15">
+                        <Border Grid.Column="0" StrokeShape="RoundRectangle 15" StrokeThickness="0" Padding="15">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#43A047" Offset="0.0" />
+                                    <GradientStop Color="#1B5E20" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Background>
                             <Border.Shadow>
-                                <Shadow Brush="#2E7D32" Offset="0,4" Opacity="0.4" Radius="8"/>
+                                <Shadow Brush="#43A047" Offset="0,4" Opacity="0.5" Radius="8"/>
                             </Border.Shadow>
+
                             <VerticalStackLayout Spacing="5">
-                                <Label Text="{x:Static strings:AppResources.Incomes}" TextColor="#E8F5E9" FontSize="12" Opacity="0.9"/>
-                                <Label Text="{Binding Income, StringFormat='{0:C0}'}"
-                                       TextColor="White" FontSize="18" FontAttributes="Bold"/>
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <Border Grid.Column="0" StrokeShape="RoundRectangle 8" BackgroundColor="#33FFFFFF" HeightRequest="28" WidthRequest="28" StrokeThickness="0" Margin="0,0,10,0">
+                                        <Label Text="↗" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,2,2"/>
+                                    </Border>
+                                    <Label Grid.Column="1" Text="{x:Static strings:AppResources.Incomes}" TextColor="#E8F5E9" FontSize="12" FontAttributes="Bold" VerticalOptions="Center" TextTransform="Uppercase"/>
+                                </Grid>
+                                <Label Text="{Binding Income, StringFormat='{0:C0}'}" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="0,5,0,0"/>
                             </VerticalStackLayout>
                         </Border>
 
-                        <Border Grid.Column="1" StrokeShape="RoundRectangle 15" BackgroundColor="#C62828" StrokeThickness="0" Padding="15">
+                        <Border Grid.Column="1" StrokeShape="RoundRectangle 15" StrokeThickness="0" Padding="15">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#E53935" Offset="0.0" />
+                                    <GradientStop Color="#B71C1C" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Background>
                             <Border.Shadow>
-                                <Shadow Brush="#C62828" Offset="0,4" Opacity="0.4" Radius="8"/>
+                                <Shadow Brush="#E53935" Offset="0,4" Opacity="0.5" Radius="8"/>
                             </Border.Shadow>
+
                             <VerticalStackLayout Spacing="5">
-                                <Label Text="{x:Static strings:AppResources.Expenses}" TextColor="#FFEBEE" FontSize="12" Opacity="0.9"/>
-                                <Label Text="{Binding Expenses, StringFormat='{0:C0}'}"
-                                       TextColor="White" FontSize="18" FontAttributes="Bold"/>
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <Border Grid.Column="0" StrokeShape="RoundRectangle 8" BackgroundColor="#33FFFFFF" HeightRequest="28" WidthRequest="28" StrokeThickness="0" Margin="0,0,10,0">
+                                        <Label Text="↘" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Margin="2,0,0,2"/>
+                                    </Border>
+                                    <Label Grid.Column="1" Text="{x:Static strings:AppResources.Expenses}" TextColor="#FFEBEE" FontSize="12" FontAttributes="Bold" VerticalOptions="Center" TextTransform="Uppercase"/>
+                                </Grid>
+                                <Label Text="{Binding Expenses, StringFormat='{0:C0}'}" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="0,5,0,0"/>
                             </VerticalStackLayout>
                         </Border>
+
                     </Grid>
                     <VerticalStackLayout Spacing="10" Margin="0,15,0,5" IsVisible="{Binding HasBudgets}">
 
@@ -286,9 +309,10 @@
                                          WidthRequest="90" 
                                          Spacing="5">
 
-                                        <Label Text="🗑️" 
-                                           FontSize="24" 
-                                           HorizontalOptions="Center" />
+                                        <Image Source="delete.svg" 
+                                               HeightRequest="20" 
+                                               WidthRequest="20" 
+                                               HorizontalOptions="Center"/> 
 
                                         <Label Text="{x:Static strings:AppResources.Delete}" 
                                        TextColor="White" 

@@ -59,7 +59,7 @@
                 <Grid ColumnDefinitions="Auto, Auto, *">
                     <BoxView x:Name="Indicator" Grid.Column="0" WidthRequest="4" BackgroundColor="#00BFA5" CornerRadius="2" Margin="0,0,15,0" IsVisible="False" />
 
-                    <Image Grid.Column="1" Source="{Binding Icon}" WidthRequest="22" HeightRequest="22" Margin="0,0,15,0" />
+                    <Image Grid.Column="1" Source="{Binding FlyoutIcon}" WidthRequest="22" HeightRequest="22" Margin="0,0,15,0" />
 
                     <Label x:Name="MenuLabel" Grid.Column="2" Text="{Binding Title}" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" TextColor="#90A4AE" />
                 </Grid>
@@ -67,19 +67,19 @@
         </DataTemplate>
     </Shell.ItemTemplate>
 
-    <FlyoutItem Title="{x:Static strings:AppResources.MainPage}" FlyoutIcon="home.png">
+    <FlyoutItem Title="{x:Static strings:AppResources.MainPage}" FlyoutIcon="home.svg">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{x:Static strings:AppResources.Statistics}" FlyoutIcon="chart.png">
+    <FlyoutItem Title="{x:Static strings:AppResources.Statistics}" FlyoutIcon="chart_data.svg">
         <ShellContent ContentTemplate="{DataTemplate local:StatisticPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{x:Static strings:AppResources.ScheduledTransactions}" FlyoutIcon="calendar.png">
+    <FlyoutItem Title="{x:Static strings:AppResources.ScheduledTransactions}" FlyoutIcon="calendar_month.svg">
         <ShellContent ContentTemplate="{DataTemplate local:ScheduledPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{x:Static strings:AppResources.YourBudgets}" FlyoutIcon="target.png">
+    <FlyoutItem Title="{x:Static strings:AppResources.YourBudgets}" FlyoutIcon="target.svg">
         <ShellContent ContentTemplate="{DataTemplate local:BudgetPage}" />
     </FlyoutItem>
 
