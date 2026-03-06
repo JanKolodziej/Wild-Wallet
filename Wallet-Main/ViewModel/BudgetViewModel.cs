@@ -51,5 +51,10 @@ namespace Wallet_Main
                     await Load_Data();
             }
         }
+
+        public async Task Budget_Sugestion()
+        {
+
+        }
     }
 }

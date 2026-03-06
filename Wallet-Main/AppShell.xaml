@@ -4,36 +4,83 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Wallet_Main"
-    Title="Wallet_Main"
-    BackgroundColor="#1A1F2B"
     xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings"
-FlyoutBehavior="Flyout">
+    Title="Wallet_Main"
+    
+    BackgroundColor="#252A36"
+    
+    FlyoutBackgroundColor="#1A1F2B"
+    
+    Shell.ForegroundColor="White"
+    FlyoutBehavior="Flyout">
 
     <Shell.FlyoutHeader>
-        <Grid HeightRequest="200" BackgroundColor="SlateGray">
-            <Label Text="{x:Static strings:AppResources.Hello}" 
-                   TextColor="{StaticResource White}"
-                   VerticalOptions="Center" 
-                   HorizontalOptions="Center" />
+        <Grid HeightRequest="200" BackgroundColor="#1A1F2B" Padding="20,40,20,20">
+            <VerticalStackLayout Spacing="10" VerticalOptions="End">
+
+                <Border StrokeShape="RoundRectangle 35" HeightRequest="70" WidthRequest="70" BackgroundColor="#252A36" StrokeThickness="0" HorizontalOptions="Start">
+                    <Label Text="👤" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Border>
+
+                <Label Text="{x:Static strings:AppResources.Hello}" TextColor="White" FontSize="22" FontAttributes="Bold" />
+                <Label Text="{x:Static strings:AppResources.TameYourExpenses}" TextColor="#00BFA5" FontSize="12" FontAttributes="Bold" />
+
+            </VerticalStackLayout>
         </Grid>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="{x:Static strings:AppResources.MainPage}">
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="15">
+
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="MenuLabel" Property="Label.TextColor" Value="#90A4AE" />
+                                    <Setter TargetName="Indicator" Property="BoxView.IsVisible" Value="False" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter TargetName="MenuLabel" Property="Label.TextColor" Value="#00BFA5" />
+                                    <Setter TargetName="Indicator" Property="BoxView.IsVisible" Value="True" />
+                                    <Setter Property="BackgroundColor" Value="#252A36" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+
+                <Grid ColumnDefinitions="Auto, Auto, *">
+                    <BoxView x:Name="Indicator" Grid.Column="0" WidthRequest="4" BackgroundColor="#00BFA5" CornerRadius="2" Margin="0,0,15,0" IsVisible="False" />
+
+                    <Image Grid.Column="1" Source="{Binding Icon}" WidthRequest="22" HeightRequest="22" Margin="0,0,15,0" />
+
+                    <Label x:Name="MenuLabel" Grid.Column="2" Text="{Binding Title}" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" TextColor="#90A4AE" />
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <FlyoutItem Title="{x:Static strings:AppResources.MainPage}" FlyoutIcon="home.png">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{x:Static strings:AppResources.Statistics}" >
+    <FlyoutItem Title="{x:Static strings:AppResources.Statistics}" FlyoutIcon="chart.png">
         <ShellContent ContentTemplate="{DataTemplate local:StatisticPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{x:Static strings:AppResources.ScheduledTransactions}">
+    <FlyoutItem Title="{x:Static strings:AppResources.ScheduledTransactions}" FlyoutIcon="calendar.png">
         <ShellContent ContentTemplate="{DataTemplate local:ScheduledPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="{x:Static strings:AppResources.YourBudgets}">
+
+    <FlyoutItem Title="{x:Static strings:AppResources.YourBudgets}" FlyoutIcon="target.png">
         <ShellContent ContentTemplate="{DataTemplate local:BudgetPage}" />
     </FlyoutItem>
-
-
-
 
 </Shell>

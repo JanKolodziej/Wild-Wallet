@@ -102,7 +102,7 @@ namespace Wallet_Main
 
         public async Task Create_chart()
         {
-            //if (!TransactionsList.Any()) return;
+            if (!TransactionsList.Any()) return;
             double amount = Convert.ToDouble(await _service.Get_Balance_To_Date(Date));
             LineSeries<DateTimePoint> series = new();
             ObservableCollection<DateTimePoint> values = new();
@@ -177,10 +177,13 @@ namespace Wallet_Main
                 GroupedTransactionsList.Remove(group);
             }
             TransactionsList.Remove(transaction);
-
+            var data = await _service.Get_Transaction_month(Date);
+            TransactionsList = new ObservableCollection<Transactions>(data);
             Income = await _service.Get_Income_Async(Date);
             Expenses = await _service.Get_Expenses_Async(Date);
-            Balance = await _service.Get_Balance_Async();
+            Balance = await _service.Get_Balance_To_Date(Date);
+
+
             await Create_chart();
         }
 

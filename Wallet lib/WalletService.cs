@@ -141,9 +141,12 @@ namespace Wallet_lib
 
         public async Task Delete_Transaction(Transactions transaction)
         {
-            transaction.Category = null;
-            _context.Transactions.Remove(transaction);
-            await _context.SaveChangesAsync();
+            var trackedtransaction = _context.Transactions.FirstOrDefault(t => t.Id == transaction.Id);
+            if (trackedtransaction != null)
+            {
+                _context.Transactions.Remove(trackedtransaction);
+                await _context.SaveChangesAsync();
+            }
         }
         public async Task Delete_Automated_Transaction(AutomatedTransaction automatedTransaction)
         {

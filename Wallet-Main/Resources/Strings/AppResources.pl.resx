@@ -264,4 +264,10 @@
   <data name="ScheduledTransactionDescribtion" xml:space="preserve">
     <value>Dodaj transakcje dzisiaj i co tydzien,miesiac...</value>
   </data>
+  <data name="TameYourExpenses" xml:space="preserve">
+    <value>Ujarzmij swoje wydatki</value>
+  </data>
+  <data name="WildWallet" xml:space="preserve">
+    <value>Wild Wallet</value>
+  </data>
 </root>

@@ -421,6 +421,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tame your expenses.
+        /// </summary>
+        internal static string TameYourExpenses {
+            get {
+                return ResourceManager.GetString("TameYourExpenses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Title.
         /// </summary>
         internal static string Title {
@@ -480,6 +489,15 @@ namespace Wallet_Main.Resources.Strings {
         internal static string Weekly {
             get {
                 return ResourceManager.GetString("Weekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wild Wallet.
+        /// </summary>
+        internal static string WildWallet {
+            get {
+                return ResourceManager.GetString("WildWallet", resourceCulture);
             }
         }
         

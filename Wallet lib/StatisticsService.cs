@@ -11,7 +11,7 @@
         /// <exception cref="Exception">Thrown when the input list is empty.</exception>
         public static (double, double) Line_Fit(List<double> monthsBalance)
         {
-            int n = monthsBalance.Count();
+            int n = monthsBalance.Count;
             List<int> xValues = new();
             for (int i = 0; i < n; i++)
             {
@@ -36,6 +36,12 @@
             double b = EY - a * EX;
             return (a, b);
         }
+        /// <summary>
+        /// Calculates the Uncertainty of the fit
+        /// </summary>
+        /// <param name="actualValues"></param>
+        /// <param name="predictedValues"></param>
+        /// <returns></returns>
         public static double Uncertainty(List<double> actualValues, List<double> predictedValues)
         {
             int n = actualValues.Count();
@@ -60,5 +66,18 @@
             u_b = S * Math.Sqrt(sum_x2 / ((n * sum_x2) - sum_x * sum_x));
             return Math.Sqrt(u_a * u_a + u_b * u_b);
         }
+
+
+
+        //TO DO 
+        // Napisać funckje która przewiduje jaki powinien być budżet 
+        // Zrobić regresje liniową przez wszystkie tranzakcje z danej kategorii w miesiącach
+        // i na podstawie tego przewiduje wartość w tym miesiącu
+        // Można dodać jakiś współczynnik zmniejszający wynik tak aby użytkownik dążył do niżeszej kwoty np 0.95
+
+
     }
 }
+    
+
+
