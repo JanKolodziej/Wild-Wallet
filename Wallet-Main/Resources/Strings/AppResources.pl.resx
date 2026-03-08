@@ -172,7 +172,7 @@
     <value>Zapisz Transakcje</value>
   </data>
   <data name="ScheduledTransaction" xml:space="preserve">
-    <value>Zaplanowana Tranzakcja</value>
+    <value>Zaplanowana Transakcja</value>
   </data>
   <data name="Spent" xml:space="preserve">
     <value>Wydano</value>
@@ -269,5 +269,14 @@
   </data>
   <data name="WildWallet" xml:space="preserve">
     <value>Wild Wallet</value>
+  </data>
+  <data name="AddFirstTransaction" xml:space="preserve">
+    <value>Dodaj pierwszą transakcje</value>
+  </data>
+  <data name="MonthlyBalance" xml:space="preserve">
+    <value>Miesięczny Bilans</value>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>Balans</value>
   </data>
 </root>

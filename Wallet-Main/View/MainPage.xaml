@@ -85,7 +85,7 @@
                             <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Padding="30">
                                 <Label Text="📊" FontSize="50" HorizontalOptions="Center"/>
 
-                                    <Label Text="{x:Static strings:AppResources.CollectingData}"
+                                    <Label Text="{x:Static strings:AppResources.AddFirstTransaction}"
                                    TextColor="White" 
                                    FontSize="20" 
                                    FontAttributes="Bold" 

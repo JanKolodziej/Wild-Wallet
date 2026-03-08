@@ -79,6 +79,24 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add First Transaction.
+        /// </summary>
+        internal static string AddFirstTransaction {
+            get {
+                return ResourceManager.GetString("AddFirstTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Balance.
+        /// </summary>
+        internal static string Balance {
+            get {
+                return ResourceManager.GetString("Balance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Balance Projection.
         /// </summary>
         internal static string BalanceProjection {
@@ -273,6 +291,15 @@ namespace Wallet_Main.Resources.Strings {
         internal static string Monthly {
             get {
                 return ResourceManager.GetString("Monthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Monthly Balance .
+        /// </summary>
+        internal static string MonthlyBalance {
+            get {
+                return ResourceManager.GetString("MonthlyBalance", resourceCulture);
             }
         }
         

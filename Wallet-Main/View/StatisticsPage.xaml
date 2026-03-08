@@ -6,6 +6,7 @@
              x:DataType="local:StatisticViewModel"
              xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
              BackgroundColor="#1A1F2B"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">
 
@@ -15,7 +16,6 @@
                         Margin="15">
             <CollectionView.EmptyView>
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
-                    <Label Text="📊" FontSize="60" HorizontalOptions="Center"/>
                     <Label Text="{x:Static strings:AppResources.NoData}" 
                            TextColor="Gray" 
                            FontSize="18" 
@@ -24,51 +24,78 @@
             </CollectionView.EmptyView>
 
             <CollectionView.Header>
-                <VerticalStackLayout  >
-                    <Label Text="{x:Static strings:AppResources.BalanceProjection}" 
-                           TextColor="WhiteSmoke" 
-                           FontSize="18" 
-                           FontAttributes="Bold"
-                           Margin="5,0"/>
+                <VerticalStackLayout Spacing="20" Padding="15">
 
-                    <Grid HeightRequest="350">
+                    <Border Style="{StaticResource CardBorderStyle}" IsVisible="{Binding IsNotEnoughData, Converter={toolkit:InvertedBoolConverter}}">
+                        <Grid HeightRequest="350">
+                            <VerticalStackLayout Spacing="10">
+                                <Label Text="{x:Static strings:AppResources.MonthlyBalance}" 
+                                   TextColor="WhiteSmoke" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold"
+                                   Margin="5,0"/>
 
-                        <lvc:CartesianChart 
-                            Series="{Binding SeriesList}" 
-                            XAxes="{Binding XAxes}" 
-                            YAxes="{Binding YAxes}"
-                            LegendPosition="Hidden"
-                            TooltipPosition="Top"
-                            BackgroundColor="#273446"
-                            Opacity="1"/>
-
-                        <Border IsVisible="{Binding IsNotEnoughData}"
-                            BackgroundColor="#CC1A1F2B" 
-                            StrokeThickness="0"
-                            VerticalOptions="Fill"
-                            HorizontalOptions="Fill"
-                            ZIndex="99">
-                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Padding="30">
-                                <Label Text="📊" FontSize="50" HorizontalOptions="Center"/>
-
-                                <Label Text="{x:Static strings:AppResources.CollectingData}" 
-                                   TextColor="White" 
-                                   FontSize="20" 
-                                   FontAttributes="Bold" 
-                                   HorizontalOptions="Center"/>
-
-                                <Label Text="{x:Static strings:AppResources.StatisticPageEmpty}" 
-                                TextColor="#B0BEC5" 
-                                FontSize="14" 
-                                HorizontalTextAlignment="Center" 
-                                HorizontalOptions="Center"/>     
-
-                                <ProgressBar Progress="{Binding DataCollectionProgress}" ProgressColor="#00BFA5" WidthRequest="150"/>
-                                <Label Text="{Binding DaysLeftText}" TextColor="#546E7A" FontSize="12" HorizontalOptions="Center"/>
+                                <lvc:CartesianChart
+                                    Series="{Binding SeriesListHistogram}"
+                                    XAxes="{Binding XAxesHistogram}"
+                                    YAxes="{Binding YAxesHistogram}"
+                                    TooltipPosition="Top"
+                                    BackgroundColor="#273446"
+                                    Opacity="1"
+                                    HeightRequest="250"/>
                             </VerticalStackLayout>
-                        </Border>
+                        </Grid>
+                    </Border>
 
-                    </Grid>
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="{x:Static strings:AppResources.BalanceProjection}" 
+                               TextColor="WhiteSmoke" 
+                               FontSize="18" 
+                               FontAttributes="Bold"
+                               Margin="5,0"/>
+
+                            <Grid HeightRequest="350">
+                                <lvc:CartesianChart 
+                                    Series="{Binding SeriesList}" 
+                                    XAxes="{Binding XAxes}" 
+                                    YAxes="{Binding YAxes}"
+                                    LegendPosition="Hidden"
+                                    TooltipPosition="Top"
+                                    BackgroundColor="#273446"
+                                    Opacity="1"/>
+
+                                <Border IsVisible="{Binding IsNotEnoughData}"
+                                    BackgroundColor="#CC1A1F2B" 
+                                    StrokeThickness="0"
+                                    VerticalOptions="Fill"
+                                    HorizontalOptions="Fill"
+                                    ZIndex="99">
+
+                                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Padding="30">
+                                        <Label Text="📊" FontSize="50" HorizontalOptions="Center"/>
+
+                                        <Label Text="{x:Static strings:AppResources.CollectingData}" 
+                                           TextColor="White" 
+                                           FontSize="20" 
+                                           FontAttributes="Bold" 
+                                           HorizontalOptions="Center"/>
+
+                                        <Label Text="{x:Static strings:AppResources.StatisticPageEmpty}" 
+                                           TextColor="#B0BEC5" 
+                                           FontSize="14" 
+                                           HorizontalTextAlignment="Center" 
+                                           HorizontalOptions="Center"/>
+
+                                        <ProgressBar Progress="{Binding DataCollectionProgress}" ProgressColor="#00BFA5" WidthRequest="150"/>
+
+                                        <Label Text="{Binding DaysLeftText}" TextColor="#546E7A" FontSize="12" HorizontalOptions="Center"/>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
                 </VerticalStackLayout>
             </CollectionView.Header>
             

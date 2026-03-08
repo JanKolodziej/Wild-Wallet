@@ -92,33 +92,33 @@ namespace Wallet_Main
                     db.SaveChanges();
                     System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe kont do bazy");
                 }
-                if(!db.AutomatedTransactions.Any())
-                {
-                    db.AutomatedTransactions.Add(new() { Id=1, Amount=1000,NextTime=DateTime.Now,CategoryId=10,Frequency=FrequencyOnceA.Month, AccountId=2,Name="Wypłata" });
-                    db.SaveChanges();
-                }
-                if (!db.Transactions.Any())
-                {
-                    db.Transactions.AddRange(new List<Wallet_lib.Transactions>
-                    {
-                        new Wallet_lib.Transactions { Id=1, Amount = -50.50m,Date=DateTime.Now,CategoryId=1},
-                        new Wallet_lib.Transactions { Id=2, Amount = 300.00m,Date=DateTime.Now, CategoryId=8 },
-                        new Wallet_lib.Transactions { Id=3, Amount = 45.00m,Date=DateTime.Now,CategoryId=9  }
-                    });
+                //if(!db.AutomatedTransactions.Any())
+                //{
+                //    db.AutomatedTransactions.Add(new() { Id=1, Amount=1000,NextTime=DateTime.Now,CategoryId=10,Frequency=FrequencyOnceA.Month, AccountId=2,Name="Wypłata" });
+                //    db.SaveChanges();
+                //}
+                //if (!db.Transactions.Any())
+                //{
+                //    db.Transactions.AddRange(new List<Wallet_lib.Transactions>
+                //    {
+                //        new Wallet_lib.Transactions { Id=1, Amount = -50.50m,Date=DateTime.Now,CategoryId=1},
+                //        new Wallet_lib.Transactions { Id=2, Amount = 300.00m,Date=DateTime.Now, CategoryId=8 },
+                //        new Wallet_lib.Transactions { Id=3, Amount = 45.00m,Date=DateTime.Now,CategoryId=9  }
+                //    });
 
-                    db.SaveChanges();
-                    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe tranzakcji do bazy");
-                }
+                //    db.SaveChanges();
+                //    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe tranzakcji do bazy");
+                //}
 
-                var count = db.Transactions.Count();
-                System.Diagnostics.Debug.WriteLine($"Aktualna liczba rekordów w bazie urządzenia: {count}");
-                if(!db.Budgets.Any())
-                {
-                    db.Budgets.Add(new() { Id = 1, CategoryId = 1, Goal = 500 });
-                    db.Budgets.Add(new() { Id = 2, CategoryId = 2, Goal = 300 });
-                    db.SaveChanges();
-                    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe budżetów do bazy");
-                }
+                //var count = db.Transactions.Count();
+                //System.Diagnostics.Debug.WriteLine($"Aktualna liczba rekordów w bazie urządzenia: {count}");
+                //if(!db.Budgets.Any())
+                //{
+                //    db.Budgets.Add(new() { Id = 1, CategoryId = 1, Goal = 500 });
+                //    db.Budgets.Add(new() { Id = 2, CategoryId = 2, Goal = 300 });
+                //    db.SaveChanges();
+                //    System.Diagnostics.Debug.WriteLine("✅ Pomyślnie dodano dane startowe budżetów do bazy");
+                //}
 
             }
 

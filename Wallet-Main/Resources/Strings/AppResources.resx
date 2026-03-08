@@ -270,4 +270,13 @@
   <data name="WildWallet" xml:space="preserve">
     <value>Wild Wallet</value>
   </data>
+  <data name="AddFirstTransaction" xml:space="preserve">
+    <value>Add First Transaction</value>
+  </data>
+  <data name="MonthlyBalance" xml:space="preserve">
+    <value>Monthly Balance </value>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>Balance</value>
+  </data>
 </root>

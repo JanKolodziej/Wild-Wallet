@@ -24,6 +24,12 @@ namespace Wallet_Main
         private Axis[] yAxes = Array.Empty<Axis>();
 
         [ObservableProperty]
+        private IEnumerable<ISeries> seriesListHistogram = Array.Empty<ISeries>();
+        [ObservableProperty]
+        private Axis[] xAxesHistogram = Array.Empty<Axis>();
+        [ObservableProperty]
+        private Axis[] yAxesHistogram = Array.Empty<Axis>();
+        [ObservableProperty]
         private bool isNotEnoughData = true;
 
         [ObservableProperty]
@@ -41,6 +47,7 @@ namespace Wallet_Main
             if (!IsNotEnoughData)
             {
                 Create_Chart();
+                Histogram_Chart();
             }
 
         }
@@ -87,6 +94,40 @@ namespace Wallet_Main
             }
             
         }
+        public void Histogram_Chart()
+        {
+            SeriesListHistogram = new ISeries[]
+            {
+                new ColumnSeries<double>
+                {
+                    Values = MonthlyStatList.Select(m => (double)m.MonthlyStat.Balance).ToList(),
+                    Name = Resources.Strings.AppResources.Balance
+                }
+            };
+            XAxesHistogram = new Axis[]
+            {
+                new Axis
+                {
+                    Labels = MonthlyStatList.Select(m => $"{m.MonthlyStat.Month}/{m.MonthlyStat.Year}").ToArray(),
+                    LabelsPaint = new SolidColorPaint(SKColors.WhiteSmoke),
+                    NamePaint = new SolidColorPaint(SKColors.WhiteSmoke),
+                    LabelsRotation = 45,
+                    TextSize=10
+
+                }
+            };
+            YAxesHistogram = new Axis[]
+            {
+                new Axis
+                {
+                    Labeler = value => value.ToString("C0"), 
+                    LabelsPaint = new SolidColorPaint(SKColors.LightGray),
+                    TextSize = 12,
+                    MinLimit=0,
+                    ZeroPaint = new SolidColorPaint(SKColors.White) { StrokeThickness = 2 }
+                }
+            };
+        }
         public void Do_I_Load_the_chart()
         {
             int n = MonthlyStatList.Count;
@@ -96,17 +137,28 @@ namespace Wallet_Main
             }
             else
             {
-                DateTime date = TransactionsList.First().Date.AddMonths(3);
-                DateTime requiredDate = new(date.Year, date.Month, 1);
-                int requiredDays = (requiredDate - TransactionsList.Last().Date).Days;
-                int days = (requiredDate - DateTime.Now.Date).Days;
-                if (days > requiredDays)
+                
+                if (TransactionsList.Any())
                 {
-                    DaysLeftText = Resources.Strings.AppResources.PreviousMonths;
-                    DataCollectionProgress = 0.8;
+                     DateTime date = TransactionsList.First().Date.AddMonths(3);
+                    DateTime requiredDate = new(date.Year, date.Month, 1);
+                    int requiredDays = (requiredDate - TransactionsList.Last().Date).Days;
+                    int days = (requiredDate - DateTime.Now.Date).Days;
+                    if (days > requiredDays)
+                    {
+                        DaysLeftText = Resources.Strings.AppResources.PreviousMonths;
+                        DataCollectionProgress = 0.8;
+                    }
+                    DaysLeftText = $" {days} {Resources.Strings.AppResources.DaysLeft}";
+                    DataCollectionProgress = (requiredDays - days) / requiredDays;
+
                 }
-                DaysLeftText = $" {days} {Resources.Strings.AppResources.DaysLeft}";
-                DataCollectionProgress = (requiredDays - days) / requiredDays;
+                else
+                {
+                    DaysLeftText = $" {90} {Resources.Strings.AppResources.DaysLeft}";
+                    DataCollectionProgress = 0;
+                }
+                    
             }
         }
         public void Create_Chart()
