@@ -10,7 +10,6 @@
     BackgroundColor="#252A36"
     
     FlyoutBackgroundColor="#1A1F2B"
-    
     Shell.ForegroundColor="White"
     FlyoutBehavior="Flyout">
 

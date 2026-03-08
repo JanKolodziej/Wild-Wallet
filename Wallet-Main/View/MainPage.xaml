@@ -365,7 +365,7 @@
             </CollectionView.ItemTemplate>
 
             <CollectionView.Footer>
-                <BoxView HeightRequest="100" Color="Transparent"/>
+                <BoxView HeightRequest="100" Color="#1A1F2B"/>
             </CollectionView.Footer>
         </CollectionView>
 

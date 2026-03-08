@@ -36,6 +36,7 @@
                         <lvc:CartesianChart 
                             Series="{Binding SeriesList}" 
                             XAxes="{Binding XAxes}" 
+                            YAxes="{Binding YAxes}"
                             LegendPosition="Hidden"
                             TooltipPosition="Top"
                             BackgroundColor="#273446"

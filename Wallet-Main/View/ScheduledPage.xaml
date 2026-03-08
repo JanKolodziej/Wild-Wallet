@@ -54,17 +54,18 @@
                         <SwipeView.LeftItems>
                             <SwipeItems Mode="Execute">
                                 <SwipeItemView BackgroundColor="#EF5350"
-                                       Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPageViewModel}}, Path=Delete_TransactionCommand}"
-                                       CommandParameter="{Binding .}">      
+                                   Command="{Binding Source={RelativeSource AncestorType={x:Type local:ScheduledViewModel}}, Path=Delete_TransactionCommand}"
+                                   CommandParameter="{Binding .}">
 
                                     <VerticalStackLayout VerticalOptions="Center" 
                                          HorizontalOptions="Center" 
                                          WidthRequest="90" 
                                          Spacing="5">
 
-                                        <Label Text="🗑️" 
-                                           FontSize="24" 
-                                           HorizontalOptions="Center" />
+                                        <Image Source="delete.svg" 
+                                           HeightRequest="20" 
+                                           WidthRequest="20" 
+                                           HorizontalOptions="Center"/>
 
                                         <Label Text="{x:Static strings:AppResources.Delete}" 
                                            TextColor="White" 

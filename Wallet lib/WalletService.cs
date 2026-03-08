@@ -151,8 +151,12 @@ namespace Wallet_lib
         public async Task Delete_Automated_Transaction(AutomatedTransaction automatedTransaction)
         {
             automatedTransaction.Category = null;
-            _context.AutomatedTransactions.Remove(automatedTransaction);
-            await _context.SaveChangesAsync();
+            var trackedtransaction = _context.AutomatedTransactions.FirstOrDefault(t => t.Id == automatedTransaction.Id);
+            if (trackedtransaction != null)
+            {
+                _context.AutomatedTransactions.Remove(trackedtransaction);
+                await _context.SaveChangesAsync();
+            }
         }
         public async Task<decimal> Get_Balance_To_Date(DateTime date)
         {

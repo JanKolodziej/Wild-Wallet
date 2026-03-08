@@ -51,7 +51,7 @@ namespace Wallet_Main
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<Wallet_lib.WalletContext>();
-                db.Database.EnsureDeleted();
+                //db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
 
 

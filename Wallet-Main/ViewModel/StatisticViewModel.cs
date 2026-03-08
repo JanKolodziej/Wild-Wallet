@@ -202,7 +202,7 @@ namespace Wallet_Main
                     Name = "Wydatki miesięczne",
                     Fill = new SolidColorPaint(SKColors.White),
                     MinGeometrySize = 5,
-                    ZIndex=3
+                    ZIndex=3 
                 }
 
             };
@@ -223,7 +223,7 @@ namespace Wallet_Main
                 {
                     NamePaint = new SolidColorPaint(SKColors.WhiteSmoke),
                     LabelsPaint = new SolidColorPaint(SKColors.WhiteSmoke),
-                    Labeler = value => value.ToString("C"),
+                    Labeler = value => value.ToString("C0"),
                     TextSize=10,
                     SeparatorsPaint = new SolidColorPaint(SKColors.WhiteSmoke)
                     {
