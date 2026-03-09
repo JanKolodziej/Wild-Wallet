@@ -141,7 +141,7 @@
   <data name="ShoppingCategory" xml:space="preserve">
     <value>Zakupy</value>
   </data>
-  <data name="SubscrbtionCategory" xml:space="preserve">
+  <data name="SubscriptionCategory" xml:space="preserve">
     <value>Subskrypcje</value>
   </data>
   <data name="TransportCategory" xml:space="preserve">

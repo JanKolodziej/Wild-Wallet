@@ -369,39 +369,42 @@
             </CollectionView.Footer>
         </CollectionView>
 
-        <Grid HorizontalOptions="End"
-              VerticalOptions="End"
+        <Grid 
               Margin="20"
-              WidthRequest="200" 
-              HeightRequest="300"
+              ColumnDefinitions="70,Auto"
+              RowDefinitions="50,60,60"
               InputTransparent="True"
-              CascadeInputTransparent="False">
+              CascadeInputTransparent="False"
+              HorizontalOptions="End"
+              VerticalOptions="End">
 
-            <HorizontalStackLayout x:Name="IncomeBtn" 
-                                   Spacing="15" 
-                                   HorizontalOptions="End" 
-                                   VerticalOptions="End"
-                                   Opacity="0"
-                                   Scale="0.8"
-                                   ZIndex="1"
-                                   InputTransparent="True"
-                                   TranslationY="0">
-                <Border BackgroundColor="#263238" StrokeShape="RoundRectangle 8" Padding="8,4" VerticalOptions="Center" StrokeThickness="0">
+            <Border x:Name="IncomeLabel"  
+                    Grid.Row="0" 
+                    Grid.Column="0" 
+                    Opacity="0"
+                    BackgroundColor="#263238" 
+                    StrokeShape="RoundRectangle 8"
+                    Padding="8,4" 
+                    VerticalOptions="Center" 
+                    StrokeThickness="0">
                     <Label Text="{x:Static strings:AppResources.Income}" TextColor="White" FontSize="12" FontAttributes="Bold"/>
                 </Border>
-                <Button Text="+" 
+            <Button Text="+" 
+                    Opacity="0"
+                    x:Name="IncomeBtn"
                         Command="{Binding New_IncomeCommand}"
+                    Grid.Row="0"
+                    Grid.Column="1"
                         BackgroundColor="#2E7D32"
                         TextColor="White"
                         FontSize="20"
                         CornerRadius="25" HeightRequest="50" WidthRequest="50" InputTransparent="False">
-                    <Button.Shadow>
-                        <Shadow Brush="Black" Offset="0,4" Opacity="0.5" Radius="5"/>
-                    </Button.Shadow>
-                </Button>
-            </HorizontalStackLayout>
+                <Button.Shadow>
+                    <Shadow Brush="Black" Offset="0,4" Opacity="0.5" Radius="5"/>
+                </Button.Shadow>
+            </Button>
 
-            <HorizontalStackLayout x:Name="ExpenseBtn" 
+            <!--<HorizontalStackLayout x:Name="ExpenseBtn" 
                                    Spacing="15"
                                    HorizontalOptions="End" 
                                    VerticalOptions="End"
@@ -409,21 +412,25 @@
                                    ZIndex="1"
                                    Scale="0.8"
                                    InputTransparent="True"
-                                   TranslationY="0">
-                <Border BackgroundColor="#263238" StrokeShape="RoundRectangle 8" Padding="8,4" VerticalOptions="Center" StrokeThickness="0">
+                                   TranslationY="0">-->
+            <Border Opacity="0" x:Name="ExpenseLabel"  Grid.Row="1" Grid.Column="0" BackgroundColor="#263238" StrokeShape="RoundRectangle 8" Padding="8,4" VerticalOptions="Center" StrokeThickness="0">
                     <Label Text="{x:Static strings:AppResources.Expense}" TextColor="White" FontSize="12" FontAttributes="Bold"/>
                 </Border>
                 <Button Text="-" 
+                        Opacity="0"
                         Command="{Binding New_ExpenseCommand}"
                         BackgroundColor="#C62828"
+                        x:Name="ExpenseBtn"
+                        Grid.Row="1"
+                        Grid.Column="1"
                         TextColor="White"
                         FontSize="20"
-                        CornerRadius="25" HeightRequest="50" WidthRequest="50" InputTransparent="False">
+                        CornerRadius="27" HeightRequest="55" WidthRequest="55" InputTransparent="False">
                     <Button.Shadow>
                         <Shadow Brush="Black" Offset="0,4" Opacity="0.5" Radius="5"/>
                     </Button.Shadow>
                 </Button>
-            </HorizontalStackLayout>
+           
 
             <Button x:Name="MainFab"
                     Text="+"
@@ -432,6 +439,8 @@
                     BackgroundColor="#00BFA5"
                     HeightRequest="60"
                     WidthRequest="60"
+                    Grid.Row="2"
+                    Grid.Column="1"
                     CornerRadius="30"
                     HorizontalOptions="End"
                     VerticalOptions="End"

@@ -222,22 +222,24 @@ namespace Wallet_Main
 
             new LineSeries<double> {
                 Values = lowerBound,
+                IsVisibleAtLegend= false,
                 Fill  = new SolidColorPaint(SKColor.Parse("#273446")),
                 ZIndex=-1 ,
                 Stroke = null,
                 GeometryFill = null,
                 GeometryStroke = null,
+                
             },
 
             new LineSeries<double>
             {
                 Values = upperBound,
-                Name = $"Niepewność \u00B1{u*2:N1}",
+                  IsVisibleAtLegend= false,
                 Fill = new SolidColorPaint(SKColors.CadetBlue.WithAlpha(40)),
                 Stroke = null,
                 GeometryFill = null,
                 GeometryStroke = null,
-                ZIndex=-2
+                ZIndex=-2,
             },
                 new LineSeries<double>
                 {
@@ -245,13 +247,13 @@ namespace Wallet_Main
                     Fill = null,
                     Stroke = new SolidColorPaint(SKColors.CadetBlue, 3) { PathEffect = new DashEffect(new float[] { 10, 5 }) },
                     GeometrySize = 10,
-                    Name = "Prognoza",
+                    Name = Resources.Strings.AppResources.BalanceProjection,
 
                 },
                  new ScatterSeries<double>
                 {
                     Values = values,
-                    Name = "Wydatki miesięczne",
+                    Name = Resources.Strings.AppResources.MonthlyBalance,
                     Fill = new SolidColorPaint(SKColors.White),
                     MinGeometrySize = 5,
                     ZIndex=3 
@@ -266,7 +268,8 @@ namespace Wallet_Main
                     LabelsPaint = new SolidColorPaint(SKColors.WhiteSmoke),
                     NamePaint = new SolidColorPaint(SKColors.WhiteSmoke),
                     LabelsRotation = 45,
-                    TextSize=10
+                    TextSize=10,
+                    
                 }
             };
             YAxes = new Axis[]

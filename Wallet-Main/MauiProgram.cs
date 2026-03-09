@@ -66,7 +66,7 @@ namespace Wallet_Main
                         new() { Name=Resources.Strings.CategoryNames.SportCategory, Type="Expense", Icon="🏀", Color="#7E5B32" }, //change
                         new() { Name=Resources.Strings.CategoryNames.HobbyCategory, Type="Expense", Icon="🎮", Color="#7F57A2" },//change
                         new() { Name=Resources.Strings.CategoryNames.EntertainmentCategory,  Type="Expense", Icon="🎬", Color="#EC407A" },
-                        new() { Name=Resources.Strings.CategoryNames.SubscrbtionCategory,Type="Expense", Icon="📱", Color="#FF7043" },
+                        new() { Name=Resources.Strings.CategoryNames.SubscriptionCategory,Type="Expense", Icon="📱", Color="#FF7043" },
                         new() { Name=Resources.Strings.CategoryNames.GiftsCategory,  Type="Expense",  Icon="🎁", Color="#AB47BC" },
                         new() { Name=Resources.Strings.CategoryNames.OtherCategory,      Type="Expense", Icon="📦", Color="#BDBDBD" },
 

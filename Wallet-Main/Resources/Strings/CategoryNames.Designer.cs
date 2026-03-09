@@ -187,11 +187,11 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Subscrbtions.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Subscription.
         /// </summary>
-        internal static string SubscrbtionCategory {
+        internal static string SubscriptionCategory {
             get {
-                return ResourceManager.GetString("SubscrbtionCategory", resourceCulture);
+                return ResourceManager.GetString("SubscriptionCategory", resourceCulture);
             }
         }
         

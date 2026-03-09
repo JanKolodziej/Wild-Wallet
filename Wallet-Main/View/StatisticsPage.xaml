@@ -60,8 +60,8 @@
                                     Series="{Binding SeriesList}" 
                                     XAxes="{Binding XAxes}" 
                                     YAxes="{Binding YAxes}"
-                                    LegendPosition="Hidden"
-                                    TooltipPosition="Top"
+                                    TooltipPosition="Hidden"
+                                    LegendPosition="Bottom"
                                     BackgroundColor="#273446"
                                     Opacity="1"/>
 
