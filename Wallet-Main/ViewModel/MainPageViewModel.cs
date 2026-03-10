@@ -4,6 +4,7 @@ using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 using System.Collections.ObjectModel;
 using Wallet_lib;
 namespace Wallet_Main
@@ -132,9 +133,11 @@ namespace Wallet_Main
             }
             
             series.Values = values;
+            series.YToolTipLabelFormatter = (chartPoint) => $"{chartPoint.Coordinate.PrimaryValue:C0}";
             SeriesList = new ISeries[]
             {
                 series
+                
             };
             XAxes = new Axis[]
             {
@@ -157,6 +160,7 @@ namespace Wallet_Main
                     {
                         Color = SkiaSharp.SKColors.Gray,
                         StrokeThickness = 2
+
                     }
                 }
             };

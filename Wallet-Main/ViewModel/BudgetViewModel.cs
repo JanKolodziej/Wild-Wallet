@@ -56,5 +56,11 @@ namespace Wallet_Main
         {
 
         }
+        [RelayCommand]
+        public async Task Delete_Budget(BudgetWrapperDisplay budget)
+        {
+            await _service.Delete_Budget(budget.BudgetWrapper.Budget);
+            await Load_Data();
+        }
     }
 }

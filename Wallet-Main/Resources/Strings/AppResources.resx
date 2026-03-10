@@ -279,4 +279,10 @@
   <data name="Balance" xml:space="preserve">
     <value>Balance</value>
   </data>
+  <data name="NoBudgets" xml:space="preserve">
+    <value>No Budets</value>
+  </data>
+  <data name="AddBudgets" xml:space="preserve">
+    <value>Add Budgets to keep an eye on your expenses</value>
+  </data>
 </root>

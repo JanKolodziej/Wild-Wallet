@@ -11,10 +11,53 @@
         
 
     <CollectionView ItemsSource="{Binding Budgets}">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Padding="30, 100, 30, 30">
+                    <Label Text="⏳" FontSize="60" HorizontalOptions="Center"/>
+                    <Label Text="{x:Static strings:AppResources.NoBudgets}" 
+                       TextColor="White" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center"/>
+                    <Label Text="{x:Static strings:AppResources.AddBudgets}" 
+                       TextColor="#B0BEC5" 
+                       FontSize="14" 
+                       HorizontalTextAlignment="Center" 
+                       HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="local:BudgetWrapperDisplay">
-                <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15" Margin="10" StrokeThickness="0">
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItemView BackgroundColor="#EF5350"
+                   Command="{Binding Source={RelativeSource AncestorType={x:Type local:BudgetViewModel}}, Path=Delete_BudgetCommand}"
+                   CommandParameter="{Binding .}">
+
+                                    <VerticalStackLayout VerticalOptions="Center" 
+                     HorizontalOptions="Center" 
+                     WidthRequest="90" 
+                     Spacing="5">
+
+                                        <Image Source="delete.svg" 
+                           HeightRequest="20" 
+                           WidthRequest="20" 
+                           HorizontalOptions="Center"/>
+
+                                        <Label Text="{x:Static strings:AppResources.Delete}" 
+                   TextColor="White" 
+                   FontSize="13" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+                                    </VerticalStackLayout>
+
+                                </SwipeItemView>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        
+                        <Border Style="{StaticResource ElevatedCardBorderStyle}" Padding="15" Margin="10" StrokeThickness="0">
                     <VerticalStackLayout Spacing="10">
 
                         <Grid ColumnDefinitions="Auto, *, Auto">
@@ -80,6 +123,7 @@
                                 CommandParameter="{Binding .}"/>
                         </Border.GestureRecognizers>
                     </Border>
+                        </SwipeView>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

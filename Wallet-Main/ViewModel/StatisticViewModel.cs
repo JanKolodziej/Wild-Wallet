@@ -257,6 +257,7 @@ namespace Wallet_Main
                     Fill = new SolidColorPaint(SKColors.White),
                     MinGeometrySize = 5,
                     ZIndex=3 
+                    
                 }
 
             };

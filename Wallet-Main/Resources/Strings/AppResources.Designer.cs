@@ -79,6 +79,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add Budgets to keep an eye on your expenses.
+        /// </summary>
+        internal static string AddBudgets {
+            get {
+                return ResourceManager.GetString("AddBudgets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add First Transaction.
         /// </summary>
         internal static string AddFirstTransaction {
@@ -336,6 +345,15 @@ namespace Wallet_Main.Resources.Strings {
         internal static string NoAutomatedtransaction {
             get {
                 return ResourceManager.GetString("NoAutomatedtransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu No Budets.
+        /// </summary>
+        internal static string NoBudgets {
+            get {
+                return ResourceManager.GetString("NoBudgets", resourceCulture);
             }
         }
         

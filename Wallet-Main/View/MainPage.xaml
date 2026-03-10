@@ -372,9 +372,7 @@
         <Grid 
               Margin="20"
               ColumnDefinitions="70,Auto"
-              RowDefinitions="60,60,60"
-              InputTransparent="True"
-              CascadeInputTransparent="False"
+              RowDefinitions="70,70,70"
               HorizontalOptions="End"
               VerticalOptions="End">
 
