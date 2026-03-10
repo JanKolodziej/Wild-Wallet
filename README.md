@@ -45,9 +45,9 @@ The project is built following software engineering best practices:
 
 I am currently working on expanding the application's capabilities:
 
-* [ ] **Full Transaction Editing:** Ability to modify amount, date, and category.
+* [x] **Full Transaction Editing:** Ability to modify amount, date, and category.
 * [ ] **Wallets:** Multi-account support (Cash, Bank Account, Savings).
-* [ ] **Category Management:** Custom categories with icons and colors.
+* [x] **Category Management:** Custom categories with icons and colors.
 * [ ] **Google Play** My biggest dream *aside from beeing employed*
 
 ---
