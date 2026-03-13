@@ -15,6 +15,7 @@
             {
                 vm.Refresh_DataCommand.Execute(null);
             }
+
         }
         private bool _isMenuOpen = false;
 

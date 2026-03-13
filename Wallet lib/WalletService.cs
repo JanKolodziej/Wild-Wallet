@@ -91,6 +91,19 @@ namespace Wallet_lib
         {
             return await _context.Transactions.SumAsync(t => t.Amount);
         }
+        public async Task<decimal> Get_Balance_Month_Async(DateTime date)
+        {
+            return await _context.Transactions.Where(t => t.Date.Month == date.Month && t.Date.Year == date.Year).SumAsync(t=>t.Amount);
+        }
+        public async Task<decimal> Get_Expenses_Month_Async(DateTime date)
+        {
+            return await _context.Transactions.Where(t => t.Date.Month == date.Month && t.Date.Year == date.Year && t.Amount>0).SumAsync(t => t.Amount);
+        }
+        public async Task<decimal> Get_Income_Month_Async(DateTime date)
+        {
+            return await _context.Transactions.Where(t => t.Date.Month == date.Month && t.Date.Year == date.Year && t.Amount < 0).SumAsync(t => t.Amount);
+        }
+
         /// <summary>
         /// Calculates income in a given month
         /// </summary>
@@ -272,5 +285,10 @@ namespace Wallet_lib
             _context.Budgets.Update(budget);
             await _context.SaveChangesAsync();
         }
+
+        //public async Task<decimal> Get_Months_Continious_Usage()
+        //{
+        //    //Taki streak przez ile miesięcy ktoś używa aplikacji 
+        //}
     }
 }

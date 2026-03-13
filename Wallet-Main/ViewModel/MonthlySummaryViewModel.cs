@@ -1,0 +1,181 @@
+﻿using CommunityToolkit.Mvvm.Input;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Wallet_Main.Resources.Strings;
+using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
+
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+
+namespace Wallet_Main
+{
+    public partial class MonthlySummaryViewModel
+    {
+        public List<Wallet_lib.Transactions> Transactions { get; set; }
+        public decimal Balance { get; set; }
+        public decimal Expenses { get; set; }
+        public decimal Income { get; set; }
+        public decimal ExpensesLastMonth { get; set; }
+        public decimal IncomeLastMonth { get; set; }
+        public string SummaryMonth { get; set; }
+        public ObservableCollection<ISeries> Series { get; set; } = new();
+        public bool AreThereExpenses { get; set; }
+        public int SavingStreak { get; set; }
+        public int AchievedBudgets { get; set; }
+        public int FailedBudgets { get; set; }
+        public List<Wallet_lib.BudgetWrapper> Budgets;
+        private readonly Wallet_lib.WalletService _service;
+
+        //Trend properties
+        public string IncomeTrendIcon { get; set; }
+        public string ExpenseTrendIcon { get; set; }
+        public string IncomeTrendText { get; set; }
+        public string ExpenseTrendText { get; set; }
+        public string IncomeTrendColor { get; set; }
+        public string ExpenseTrendColor { get; set; }
+        //********
+        public string SelectedCategoryName { get; set; }
+        public string SelectedCategoryIcon { get; set; }
+        public decimal SelectedCategoryAmount { get; set; }
+
+        public bool IsCategorySelected { get; set; }
+
+        public MonthlySummaryViewModel(List<Wallet_lib.Transactions> transactions,Wallet_lib.WalletService service)
+        {
+            _service = service;
+            Transactions = transactions;
+            Expenses =Math.Abs( transactions.Where(t => t.Amount < 0).Sum(t => t.Amount));
+            Income = transactions.Where(t => t.Amount > 0).Sum(t => t.Amount);
+            Balance = Income - Expenses;
+            SummaryMonth = AppResources.SummaryMonth + " " + transactions.Last().Date.ToString("MMMM");
+            
+            Create_Chart();
+            SavingStreak=3;
+            FailedBudgets = 2;
+            AchievedBudgets = 6;
+            Load_Data();
+
+
+
+        }
+        //public void SelectCategory(Wallet_lib.Categories category, decimal amount)
+        //{
+        //    SelectedCategoryName = category.Name;
+        //    SelectedCategoryIcon = category.Icon;
+        //    SelectedCategoryAmount = amount;
+        //    IsCategorySelected = true;
+
+        //    //OnPropertyChanged(nameof(SelectedCategoryName));
+        //    //OnPropertyChanged(nameof(SelectedCategoryIcon));
+        //    //OnPropertyChanged(nameof(SelectedCategoryAmount));
+        //    //OnPropertyChanged(nameof(IsCategorySelected));
+        //}
+
+
+        [RelayCommand]
+        public async void Load_Data()
+        {
+            Budgets = await _service.Get_All_Budget_Wrapper();
+            ExpensesLastMonth = Math.Abs(await _service.Get_Expenses_Month_Async(DateTime.Now.AddMonths(-2)));
+            IncomeLastMonth = await _service.Get_Income_Month_Async(DateTime.Now.AddMonths(-2));
+
+            //Calculate trends
+            decimal income_trend = Income - IncomeLastMonth;
+            decimal expense_trend = Expenses - ExpensesLastMonth;
+            decimal income_percentage = IncomeLastMonth != 0 ? (income_trend) / IncomeLastMonth * 100 : 0;
+            decimal expense_percentage = ExpensesLastMonth != 0 ? (expense_trend) / ExpensesLastMonth * 100 : 0;
+
+            if(IncomeLastMonth == 0 && Income > 0)
+            {
+                IncomeTrendIcon = "▲";
+                IncomeTrendText = $"{income_trend:C0}";
+                IncomeTrendColor = "#4CAF50";
+            }
+            else if (Income>IncomeLastMonth)
+            {
+                IncomeTrendIcon = "▲";
+                IncomeTrendText = $"{income_percentage:F0}%  {income_trend:C0}";
+                IncomeTrendColor = "#4CAF50"; 
+            }
+            else if (Income < IncomeLastMonth)
+            {
+                IncomeTrendIcon = "▼";
+                IncomeTrendText = $"{income_percentage:F0}%  {income_trend:C0}"; ;
+                IncomeTrendColor = "#F44336"; 
+            }
+            else
+            {
+                IncomeTrendIcon = "-";
+                IncomeTrendText = $"{income_percentage:F0}%  {income_trend:C0}";
+                IncomeTrendColor = "#9E9E9E"; 
+
+            }
+
+            if(ExpensesLastMonth == 0 && Expenses > 0)
+            {
+                ExpenseTrendIcon = "▲";
+                ExpenseTrendText = $"{expense_trend:C0}";
+                ExpenseTrendColor = "#F44336";
+            }
+            else if (Expenses > ExpensesLastMonth)
+            {
+                ExpenseTrendIcon = "▲";
+                ExpenseTrendText = $"{expense_percentage:F0}%  {expense_trend:C0}";
+                ExpenseTrendColor = "#F44336";
+            }
+            else if (Expenses < ExpensesLastMonth)
+            {
+                ExpenseTrendIcon = "▼";
+                ExpenseTrendText = $"{expense_percentage:F0}%  {expense_trend:C0}"; ;
+                ExpenseTrendColor = "#4CAF50";
+            }
+            else
+            {
+                ExpenseTrendIcon = "=";
+                ExpenseTrendText = $"{expense_percentage:F0}%  {expense_trend:C0}";
+                ExpenseTrendColor = "#9E9E9E";
+
+            }
+
+        }
+        [RelayCommand]
+        public async Task Close_Logic()
+        {
+            await Shell.Current.Navigation.PopModalAsync();
+        }
+        public void Create_Chart()
+        {
+            var data = Transactions.Where(t => t.Amount < 0)
+                .GroupBy(t => t.Category)
+                .Select(g => new { Category = g.Key, Total = g.Sum(t => t.Amount) })
+                .ToList();
+            if (data.Count == 0)
+            {
+                AreThereExpenses = false;
+                return;
+            }
+            AreThereExpenses = true;
+            foreach (var item in data)
+            {
+                Series.Add(new PieSeries<decimal>
+                {
+                    Name = item.Category.Name,
+                    Values = new decimal[] { Math.Abs( item.Total )},
+                    Fill= new SolidColorPaint(SKColor.Parse(item.Category.Color)),
+                    MaxRadialColumnWidth = 30,
+                    CornerRadius=5
+                });
+            }
+            
+
+        }
+    }
+}
+

@@ -43,6 +43,8 @@ namespace Wallet_Main
             builder.Services.AddTransient<ScheduledPage>();
             builder.Services.AddTransient<BudgetViewModel>();
             builder.Services.AddTransient<BudgetPage>();
+            //builder.Services.AddTransient<MonthlySummaryViewModel>();
+            //builder.Services.AddTransient<MonthlySummaryPage>();
 
             //builder.Services.AddTransientPopup<CategoryPopUp, CategoryPopUpViewModel>();
             //builder.Services.AddTransientPopup<AddCategoryPopUp, AddCategoryViewModel>();

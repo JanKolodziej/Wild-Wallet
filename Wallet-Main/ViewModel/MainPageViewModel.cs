@@ -4,9 +4,12 @@ using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SkiaSharp;
 using System.Collections.ObjectModel;
 using Wallet_lib;
+using Microsoft.Maui.Storage;
+using System.Threading.Tasks;
 namespace Wallet_Main
 {
     public partial class MainPageViewModel : ObservableObject
@@ -68,14 +71,31 @@ namespace Wallet_Main
             Expenses = 0;
             Balance = 0;
             Income = 0;
+            Show_Summary();
+        }
+        public async Task Show_Summary()
+        {
+            DateTime lastmonth= Date.AddMonths(-1);
+            string preferencesKey = $"SummaryShown_{lastmonth.Month}_{lastmonth.Year}";
+            if (Preferences.Default.Get(preferencesKey, false))  //Summary has been shown for this month
+            {
+                return;
+            }
+            else
+            {
+                List<Transactions> transactionsLastmonth = await _service.Get_Transaction_month(lastmonth);
+                bool wasUsingApp = transactionsLastmonth.Any();
+                if (wasUsingApp)
+                {
+                    await Shell.Current.Navigation.PushModalAsync(new MonthlySummaryPage(new MonthlySummaryViewModel(transactionsLastmonth,_service)));
+                }
+                    
+            }
+                
         }
 
         public async Task Import_Data()
         {
-            //var cat = await _service.Get_All_Categories_Async();
-            //CategoriesList = new ObservableCollection<Categories>(cat);
-            //var ac = await _service.Get_Accounts_Async();
-            //AccountList = new ObservableCollection<Wallet_lib.Accounts>(ac);
             var data = await _service.Get_Transaction_month(Date);
             TransactionsList = new ObservableCollection<Transactions>(data);
 
@@ -84,7 +104,7 @@ namespace Wallet_Main
             GroupedTransactionsList = new ObservableCollection<GroupedTransactions>(groups);
 
             Income = await _service.Get_Income_Async(Date);
-            Expenses =Math.Abs(await _service.Get_Expenses_Async(Date));
+            Expenses = Math.Abs(await _service.Get_Expenses_Async(Date));
             Balance = await _service.Get_Balance_To_Date(Date);
             var upcoming = await _service.Get_Close_Automated_Transactions();
             UpcomingTransactionsList = new ObservableCollection<AutomatedTransaction>(upcoming);

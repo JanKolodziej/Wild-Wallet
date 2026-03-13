@@ -169,6 +169,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Congratulations!.
+        /// </summary>
+        internal static string Congratulations {
+            get {
+                return ResourceManager.GetString("Congratulations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Daily.
         /// </summary>
         internal static string Daily {
@@ -237,6 +246,15 @@ namespace Wallet_Main.Resources.Strings {
         internal static string Expenses {
             get {
                 return ResourceManager.GetString("Expenses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Expense Structure.
+        /// </summary>
+        internal static string ExpenseStructure {
+            get {
+                return ResourceManager.GetString("ExpenseStructure", resourceCulture);
             }
         }
         
@@ -466,6 +484,87 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu In this month you managed to save.
+        /// </summary>
+        internal static string SummaryBalance {
+            get {
+                return ResourceManager.GetString("SummaryBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu In this month you spent more than you earnt by .
+        /// </summary>
+        internal static string SummaryBalanceOnMinus {
+            get {
+                return ResourceManager.GetString("SummaryBalanceOnMinus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu You have used our app for.
+        /// </summary>
+        internal static string SummaryHowLongUsesApp {
+            get {
+                return ResourceManager.GetString("SummaryHowLongUsesApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Let see how it went with your budget!.
+        /// </summary>
+        internal static string SummaryLetSee {
+            get {
+                return ResourceManager.GetString("SummaryLetSee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Summary of.
+        /// </summary>
+        internal static string SummaryMonth {
+            get {
+                return ResourceManager.GetString("SummaryMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu You have no expenses this month..
+        /// </summary>
+        internal static string SummaryNoExpenses {
+            get {
+                return ResourceManager.GetString("SummaryNoExpenses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu How did you achieve this?.
+        /// </summary>
+        internal static string SummaryNoExpenses2 {
+            get {
+                return ResourceManager.GetString("SummaryNoExpenses2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu It is more than on a previous month by .
+        /// </summary>
+        internal static string SummarySavedMoreThenBefore {
+            get {
+                return ResourceManager.GetString("SummarySavedMoreThenBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu 🎉 Your Month In Numbers.
+        /// </summary>
+        internal static string SummaryYourMonth {
+            get {
+                return ResourceManager.GetString("SummaryYourMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tame your expenses.
         /// </summary>
         internal static string TameYourExpenses {
@@ -543,6 +642,15 @@ namespace Wallet_Main.Resources.Strings {
         internal static string WildWallet {
             get {
                 return ResourceManager.GetString("WildWallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wild Wallet Wrapped.
+        /// </summary>
+        internal static string Wrapped {
+            get {
+                return ResourceManager.GetString("Wrapped", resourceCulture);
             }
         }
         

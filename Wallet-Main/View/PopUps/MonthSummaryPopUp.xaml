@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
+               xmlns:local="clr-namespace:Wallet_Main"
+               x:Class="Wallet_Main.MonthSummaryPopUp"
+               x:DataType="local:MonthSummaryPopUp"
+               Color="Transparent"
+               CanBeDismissedByTappingOutsideOfPopup="True"
+               VerticalOptions="End"
+               xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">
+
+
+    <Border StrokeShape="RoundRectangle 20,20,0,0"
+        x:Name="MainPop"
+        BackgroundColor="#1E222D"
+        VerticalOptions="End" 
+        HorizontalOptions="Fill"
+        Padding="0">
+        <Border.GestureRecognizers>
+            <PanGestureRecognizer PanUpdated="OnPanUpdated"/>
+        </Border.GestureRecognizers>
+
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+
+            <BoxView Grid.Row="0" 
+             Color="Gray" 
+             HeightRequest="5" 
+             WidthRequest="50" 
+             CornerRadius="2" 
+             HorizontalOptions="Center" 
+             Margin="0,10,0,10"/>
+            <Label Grid.Row="1" 
+            Text="{Binding BalanceText}" 
+            TextColor="White" 
+            FontAttributes="Bold" 
+            FontSize="18" 
+            HorizontalOptions="Center" 
+            Margin="0,25,0,10"/>
+
+            <Label Grid.Row="1" 
+           Text="{Binding BalanceText}" 
+           TextColor="White" 
+           FontAttributes="Bold" 
+           FontSize="18" 
+           HorizontalOptions="Center" 
+           Margin="0,25,0,10"/>
+
+            <Label Grid.Row="2" 
+            x:Name="BalanceNumber"
+            
+            TextColor="White" 
+            FontAttributes="Bold" 
+            FontSize="18" 
+            HorizontalOptions="Center" 
+            Margin="0,25,0,10"/>
+        </Grid>
+    </Border>
+
+</toolkit:Popup>

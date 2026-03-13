@@ -27,8 +27,8 @@
 		<ApplicationId>com.jankolodziej.wildwallet</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
-		<ApplicationVersion>4</ApplicationVersion>
+		<ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+		<ApplicationVersion>5</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
@@ -99,25 +99,25 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>CategoryNames.resx</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\AddBudgetPopUp.xaml.cs">
+	  <Compile Update="View\PopUps\AddBudgetPopUp.xaml.cs">
 	    <DependentUpon>AddBudgetPopUp.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\ScheduledPage.xaml.cs">
+	  <Compile Update="View\Views\ScheduledPage.xaml.cs">
 	    <DependentUpon>ScheduledPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\AddCategoryPopUp.xaml.cs">
+	  <Compile Update="View\PopUps\AddCategoryPopUp.xaml.cs">
 	    <DependentUpon>AddCategoryPopUp.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\AddTransactionPage.xaml.cs">
+	  <Compile Update="View\Views\AddTransactionPage.xaml.cs">
 	    <DependentUpon>AddTransactionPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Resources\Styles\Styles_cards.xaml.cs">
 	    <DependentUpon>Styles_cards.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\MainPage.xaml.cs">
+	  <Compile Update="View\Views\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\StatisticsPage.xaml.cs">
+	  <Compile Update="View\Views\StatisticsPage.xaml.cs">
 	    <DependentUpon>StatisticsPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -134,28 +134,34 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="View\BudgetPage.xaml">
+	  <MauiXaml Update="View\Views\BudgetPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\AddBudgetPopUp.xaml">
+	  <MauiXaml Update="View\PopUps\AddBudgetPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\ScheduledPage.xaml">
+	  <MauiXaml Update="View\PopUps\MonthSummaryPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\AddCategoryPopUp.xaml">
+	  <MauiXaml Update="View\Views\MonthlySummaryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\AddTransactionPage.xaml">
+	  <MauiXaml Update="View\Views\ScheduledPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\PopUps\AddCategoryPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Views\AddTransactionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\Styles_cards.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\CategoryPopUp.xaml">
+	  <MauiXaml Update="View\PopUps\CategoryPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\StatisticsPage.xaml">
+	  <MauiXaml Update="View\Views\StatisticsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

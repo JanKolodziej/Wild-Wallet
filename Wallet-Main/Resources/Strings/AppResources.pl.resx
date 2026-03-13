@@ -285,4 +285,40 @@
   <data name="AddBudgets" xml:space="preserve">
     <value>Dodaj budżety aby mieć na oku swoje wydatki</value>
   </data>
+  <data name="SummaryBalance" xml:space="preserve">
+    <value>W tym miesiącu udało ci się zaosczędzić</value>
+  </data>
+  <data name="SummaryBalanceOnMinus" xml:space="preserve">
+    <value>W tym miesiącu wydałeś więcej niż zarobiłeś o </value>
+  </data>
+  <data name="Congratulations" xml:space="preserve">
+    <value>Gratulacje!</value>
+  </data>
+  <data name="Wrapped" xml:space="preserve">
+    <value>Wild Wallet Wrapped</value>
+  </data>
+  <data name="SummarySavedMoreThenBefore" xml:space="preserve">
+    <value>To więcej niż w poprzednim miesiącu o </value>
+  </data>
+  <data name="SummaryHowLongUsesApp" xml:space="preserve">
+    <value>Używasz już naszej aplikacji przez </value>
+  </data>
+  <data name="ExpenseStructure" xml:space="preserve">
+    <value>Struktura wydatków</value>
+  </data>
+  <data name="SummaryYourMonth" xml:space="preserve">
+    <value>🎉 Twój Miesiąc w Liczbach</value>
+  </data>
+  <data name="SummaryMonth" xml:space="preserve">
+    <value>Podsumowanie miesiąca</value>
+  </data>
+  <data name="SummaryLetSee" xml:space="preserve">
+    <value>Zobaczmy, jak Ci poszło z budżetem!</value>
+  </data>
+  <data name="SummaryNoExpenses" xml:space="preserve">
+    <value>W tym miesiącu nie masz żadnych wydatków.</value>
+  </data>
+  <data name="SummaryNoExpenses2" xml:space="preserve">
+    <value>Jak udało ci się to osiągnąć?</value>
+  </data>
 </root>

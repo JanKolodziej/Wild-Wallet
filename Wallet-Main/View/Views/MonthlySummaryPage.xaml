@@ -1,0 +1,414 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             x:Class="Wallet_Main.MonthlySummaryPage"
+             xmlns:local="clr-namespace:Wallet_Main"
+             BackgroundColor="#141824"
+             xmlns:models="clr-namespace:Wallet_lib;assembly=Wallet_lib"
+             NavigationPage.HasNavigationBar="False"
+             x:DataType="local:MonthlySummaryViewModel"
+             xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">    
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="25">
+
+        <!-- HEADER -->
+        <VerticalStackLayout Grid.Row="0" Spacing="8" Margin="0,30,0,25">
+
+            <Label Text="{x:Static strings:AppResources.SummaryYourMonth}"
+                   TextColor="#00E5C3"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="{Binding SummaryMonth}"
+                   TextColor="White"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="{x:Static strings:AppResources.SummaryLetSee}"
+                   TextColor="#9FA8B4"
+                   FontSize="14"
+                   HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+
+
+        <!-- CONTENT -->
+        <ScrollView Grid.Row="1">
+
+            <VerticalStackLayout Spacing="22">
+
+                <!-- SAVINGS CARD -->
+                <Border BackgroundColor="#1E2533"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="25">
+
+                    <Border.Shadow>
+                        <Shadow Brush="#000000"
+                                Offset="0,6"
+                                Opacity="0.35"
+                                Radius="14"/>
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+
+                        <Label Text="{x:Static strings:AppResources.MonthlyBalance}"
+                               TextColor="#9FA8B4"
+                               FontSize="14"
+                               HorizontalOptions="Center"/>
+
+                        <Label Text="{Binding Balance,StringFormat='{0:C0}'}"
+                               TextColor="#00E5C3"
+                               FontSize="40"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <!-- INCOME / EXPENSE -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="18">
+
+                    <!-- INCOME -->
+                    <Border BackgroundColor="#1E2533"
+            StrokeShape="RoundRectangle 22"
+            Padding="20">
+
+                        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="6">
+
+                            <!-- HEADER -->
+                            <Label Text="{x:Static strings:AppResources.Incomes}"
+                   TextColor="#9FA8B4"
+                   FontSize="13"
+                   FontAttributes="Bold"/>
+
+                            <!-- VALUE -->
+                            <Label Grid.Row="1"
+                   Text="{Binding Income, StringFormat='{0:C0}'}"
+                   TextColor="White"
+                   FontSize="28"
+                   FontAttributes="Bold"/>
+
+                            <!-- TREND -->
+                            <Border Grid.Row="2"
+                    BackgroundColor="#203A2C"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="8,4"
+                    HorizontalOptions="Start">
+
+                                <HorizontalStackLayout Spacing="4">
+
+                                    <Label Text="{Binding IncomeTrendIcon}"
+                           TextColor="{Binding IncomeTrendColor}"
+                           FontSize="13"
+                           FontAttributes="Bold"/>
+
+                                    <Label Text="{Binding IncomeTrendText}"
+                           TextColor="{Binding IncomeTrendColor}"
+                           FontSize="12"
+                           FontAttributes="Bold"/>
+
+                                </HorizontalStackLayout>
+
+                            </Border>
+
+                        </Grid>
+
+                    </Border>
+
+
+                    <!-- EXPENSES -->
+                    <Border Grid.Column="1"
+            BackgroundColor="#1E2533"
+            StrokeShape="RoundRectangle 22"
+            Padding="20">
+
+                        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="6">
+
+                            <Label Text="{x:Static strings:AppResources.Expenses}"
+                   TextColor="#9FA8B4"
+                   FontSize="13"
+                   FontAttributes="Bold"/>
+
+                            <Label Grid.Row="1"
+                   Text="{Binding Expenses, StringFormat='{0:C0}'}"
+                   TextColor="White"
+                   FontSize="28"
+                   FontAttributes="Bold"/>
+
+                            <Border Grid.Row="2"
+                    BackgroundColor="#3A2020"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="8,4"
+                    HorizontalOptions="Start">
+                               
+
+                                <HorizontalStackLayout Spacing="4">
+
+                                    <Label Text="{Binding ExpenseTrendIcon}"
+                           TextColor="{Binding ExpenseTrendColor}"
+                           FontSize="13"
+                           FontAttributes="Bold"/>
+
+                                    <Label Text="{Binding ExpenseTrendText}"
+                           TextColor="{Binding ExpenseTrendColor}"
+                           FontSize="12"
+                           FontAttributes="Bold"/>
+
+                                </HorizontalStackLayout>
+
+                            </Border>
+
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+
+                <Grid>
+
+                    <!-- EMPTY STATE -->
+                    <Border BackgroundColor="#1B2233"
+            StrokeShape="RoundRectangle 20"
+            Padding="25">
+
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border"
+                         Binding="{Binding AreThereExpenses}"
+                         Value="True">
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                        </Border.Triggers>
+
+                        <VerticalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Center">
+
+                            <Label Text="🎉"
+                   FontSize="40"
+                   HorizontalOptions="Center"/>
+
+                            <Label Text="{x:Static strings:AppResources.Congratulations}"
+                   TextColor="White"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+                            <Label Text="{x:Static strings:AppResources.SummaryNoExpenses}"
+                   TextColor="#9FA8B4"
+                   FontSize="14"
+                   HorizontalTextAlignment="Center"/>
+
+                            <Label Text="{x:Static strings:AppResources.SummaryNoExpenses2}"
+                   TextColor="#00E5C3"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+                        </VerticalStackLayout>
+
+                    </Border>
+
+
+                    <!-- PIE CHART -->
+                    <Border BackgroundColor="#1B2233"
+        StrokeShape="RoundRectangle 20"
+        Padding="15"
+        HeightRequest="350">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding AreThereExpenses}" Value="False">
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                        </Border.Triggers>
+
+                        <Grid RowDefinitions="Auto, *">
+
+                            <Label Grid.Row="0" 
+               Text="Struktura wydatków"
+               TextColor="White"
+               FontAttributes="Bold"
+               Margin="0,0,0,15"/>
+
+                            <Grid HeightRequest="300" Grid.Row="1">
+
+                                <lvc:PieChart Series="{Binding Series}"
+                  AnimationsSpeed="00:00:00.500"
+                  BackgroundColor="#1B2233"/>
+
+                                <!-- CENTER PANEL -->
+                                <VerticalStackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center"               
+                         InputTransparent="True"
+                         Spacing="4">
+                                    
+
+                                    <!-- ICON -->
+                                    <Label Text="{Binding SelectedCategoryIcon}"
+               FontSize="26"
+               HorizontalOptions="Center"
+               IsVisible="{Binding IsCategorySelected}"/>
+
+                                    <!-- NAME -->
+                                    <Label Text="{Binding SelectedCategoryName}"
+               FontSize="13"
+               TextColor="#B0BEC5"
+               HorizontalOptions="Center"
+               IsVisible="{Binding IsCategorySelected}"/>
+
+                                    <!-- VALUE -->
+                                    <Label Text="{Binding SelectedCategoryAmount, StringFormat='{0:C0}'}"
+               FontSize="22"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               IsVisible="{Binding IsCategorySelected}"/>
+
+                                    <!-- DEFAULT TEXT -->
+                                    <VerticalStackLayout IsVisible="{Binding IsCategorySelected}"
+                             Spacing="2">
+
+                                        <Label Text="Suma wydatków"
+                   TextColor="#B0BEC5"
+                   FontSize="12"
+                   HorizontalOptions="Center"/>
+
+                                        <Label Text="{Binding Expenses, StringFormat='{0:C0}'}"
+                   TextColor="White"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+                                    </VerticalStackLayout>
+
+                                </VerticalStackLayout>
+
+                            </Grid>
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+                <Border BackgroundColor="#1B2233"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="20">
+
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="🎯 Cele budżetowe"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="White"/>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+
+                            <Border BackgroundColor="#203A2C"
+                                    StrokeShape="RoundRectangle 15"
+                                    Padding="15">
+
+                                <VerticalStackLayout>
+
+                                    <Label Text="Udało się"
+                                           TextColor="#4CAF50"
+                                           FontAttributes="Bold"/>
+
+                                    <Label Text="{Binding AchievedBudgets}"
+                                           FontSize="22"
+                                           TextColor="White"
+                                           FontAttributes="Bold"/>
+
+                                </VerticalStackLayout>
+
+                            </Border>
+
+                            <Border BackgroundColor="#3A2020"
+                                    StrokeShape="RoundRectangle 15"
+                                    Padding="15">
+
+                                <VerticalStackLayout>
+
+                                    <Label Text="Przekroczone"
+                                           TextColor="#EF5350"
+                                           FontAttributes="Bold"/>
+
+                                    <Label Text="{Binding FailedBudgets}"
+                                           FontSize="22"
+                                           TextColor="White"
+                                           FontAttributes="Bold"/>
+
+                                </VerticalStackLayout>
+
+                            </Border>
+
+                        </Grid>
+
+                    </VerticalStackLayout>
+
+                </Border>
+                <Border BackgroundColor="#1B2233"
+        StrokeShape="RoundRectangle 20"
+        Padding="20">
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+
+                        
+                        <Label Grid.Column="0"
+               Text="🔥"
+               FontSize="36"
+               VerticalOptions="Center"/>
+
+                       
+                        <VerticalStackLayout Grid.Column="1"
+                             Spacing="2"
+                             VerticalOptions="Center">
+
+                            <Label Text="Streak oszczędzania"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+
+                            <Label Text="{Binding SavingStreak}"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="#00E5C3"/>
+
+                            <Label Text="Miesięcy z rzędu z oszczędnościami"
+                   FontSize="12"
+                   TextColor="#9FA8B4"/>
+
+                        </VerticalStackLayout>
+
+                    </Grid>
+
+                </Border>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+
+        <!-- BUTTON -->
+        <Button Grid.Row="2"
+                Text="Wróć do portfela"
+                BackgroundColor="#00E5C3"
+                TextColor="#141824"
+                FontAttributes="Bold"
+                FontSize="16"
+                HeightRequest="55"
+                CornerRadius="28"
+                Margin="0,25,0,15"
+                Command="{Binding Close_LogicCommand}">
+
+            <Button.Shadow>
+                <Shadow Brush="#00E5C3"
+                        Offset="0,6"
+                        Opacity="0.5"
+                        Radius="12"/>
+            </Button.Shadow>
+
+        </Button>
+
+    </Grid>
+
+</ContentPage>
