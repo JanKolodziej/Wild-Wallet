@@ -321,4 +321,34 @@
   <data name="SummaryNoExpenses2" xml:space="preserve">
     <value>Jak udało ci się to osiągnąć?</value>
   </data>
+  <data name="SummaryExpenseStructure" xml:space="preserve">
+    <value>Kategorie Wydatków</value>
+  </data>
+  <data name="SummaryExpenseStructureDescription" xml:space="preserve">
+    <value>Zobacz, gdzie w tym miesiącu uciekły pieniądze</value>
+  </data>
+  <data name="YourBudgetsDescription" xml:space="preserve">
+    <value>Ziarko do ziarka, a będzie miarka</value>
+  </data>
+  <data name="AddYourFirstBudget" xml:space="preserve">
+    <value>Ustaw pierwszy budżet aby kontrolować swoje wydatki.</value>
+  </data>
+  <data name="AddBudget" xml:space="preserve">
+    <value>Dodaj Budżet</value>
+  </data>
+  <data name="SummaryGoalAchieved" xml:space="preserve">
+    <value>Cel Osiągnięty</value>
+  </data>
+  <data name="Summarybudgetexceeded" xml:space="preserve">
+    <value>Budżet Przekroczony</value>
+  </data>
+  <data name="SummarySavingsStreak" xml:space="preserve">
+    <value>Seria Oszczędzania</value>
+  </data>
+  <data name="SummaryMonthsInRow" xml:space="preserve">
+    <value>Miesiące z rzędu oszczędzania</value>
+  </data>
+  <data name="SummaryGoBackToWallet" xml:space="preserve">
+    <value>Wróć Do Swojego Portfela</value>
+  </data>
 </root>

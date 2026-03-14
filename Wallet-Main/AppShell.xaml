@@ -79,7 +79,7 @@
     </FlyoutItem>
 
     <FlyoutItem Title="{x:Static strings:AppResources.YourBudgets}" FlyoutIcon="target.svg">
-        <ShellContent ContentTemplate="{DataTemplate local:BudgetPage}" />
+        <ShellContent ContentTemplate="{DataTemplate local:BudgetPage}" Route="budgets"/>
     </FlyoutItem>
 
 </Shell>

@@ -13,10 +13,11 @@ using SkiaSharp;
 
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Wallet_Main
 {
-    public partial class MonthlySummaryViewModel
+    public partial class MonthlySummaryViewModel:ObservableObject
     {
         public List<Wallet_lib.Transactions> Transactions { get; set; }
         public decimal Balance { get; set; }
@@ -30,7 +31,7 @@ namespace Wallet_Main
         public int SavingStreak { get; set; }
         public int AchievedBudgets { get; set; }
         public int FailedBudgets { get; set; }
-        public List<Wallet_lib.BudgetWrapper> Budgets;
+        public List<Wallet_lib.BudgetWrapper> Budgets { get; set; }
         private readonly Wallet_lib.WalletService _service;
 
         //Trend properties
@@ -44,10 +45,20 @@ namespace Wallet_Main
         public string SelectedCategoryName { get; set; }
         public string SelectedCategoryIcon { get; set; }
         public decimal SelectedCategoryAmount { get; set; }
+        public string BudgetSummary { get; set; }
+        public bool ThereAreNotBudgets { get; set; }
 
         public bool IsCategorySelected { get; set; }
+        // Zmienne sterujące środkiem koła
+        [ObservableProperty]
+        private string centerIcon ="💸";
+        [ObservableProperty]
+        private string centerTitle = AppResources.Expenses;
 
-        public MonthlySummaryViewModel(List<Wallet_lib.Transactions> transactions,Wallet_lib.WalletService service)
+        [ObservableProperty]
+        private decimal centerValue;
+
+        public MonthlySummaryViewModel(List<Wallet_lib.Transactions> transactions,Wallet_lib.WalletService service,int streak)
         {
             _service = service;
             Transactions = transactions;
@@ -55,36 +66,33 @@ namespace Wallet_Main
             Income = transactions.Where(t => t.Amount > 0).Sum(t => t.Amount);
             Balance = Income - Expenses;
             SummaryMonth = AppResources.SummaryMonth + " " + transactions.Last().Date.ToString("MMMM");
-            
+            CenterValue=Expenses;
             Create_Chart();
-            SavingStreak=3;
-            FailedBudgets = 2;
-            AchievedBudgets = 6;
+            SavingStreak=streak;
             Load_Data();
 
 
 
         }
-        //public void SelectCategory(Wallet_lib.Categories category, decimal amount)
-        //{
-        //    SelectedCategoryName = category.Name;
-        //    SelectedCategoryIcon = category.Icon;
-        //    SelectedCategoryAmount = amount;
-        //    IsCategorySelected = true;
 
-        //    //OnPropertyChanged(nameof(SelectedCategoryName));
-        //    //OnPropertyChanged(nameof(SelectedCategoryIcon));
-        //    //OnPropertyChanged(nameof(SelectedCategoryAmount));
-        //    //OnPropertyChanged(nameof(IsCategorySelected));
-        //}
 
 
         [RelayCommand]
         public async void Load_Data()
         {
-            Budgets = await _service.Get_All_Budget_Wrapper();
+            Budgets = await _service.Get_All_Budget_Wrapper(DateTime.Now.AddMonths(-1));
             ExpensesLastMonth = Math.Abs(await _service.Get_Expenses_Month_Async(DateTime.Now.AddMonths(-2)));
             IncomeLastMonth = await _service.Get_Income_Month_Async(DateTime.Now.AddMonths(-2));
+            int numerator = 0;
+            foreach(var budget in Budgets)
+            {
+                if(budget.IsInBudget)
+                {
+                    numerator++;
+                }
+            }
+            BudgetSummary = $"{numerator}/{Budgets.Count}";
+            ThereAreNotBudgets = !Budgets.Any();
 
             //Calculate trends
             decimal income_trend = Income - IncomeLastMonth;
@@ -164,14 +172,35 @@ namespace Wallet_Main
             AreThereExpenses = true;
             foreach (var item in data)
             {
-                Series.Add(new PieSeries<decimal>
+                var serie=new PieSeries<decimal>
                 {
                     Name = item.Category.Name,
                     Values = new decimal[] { Math.Abs( item.Total )},
                     Fill= new SolidColorPaint(SKColor.Parse(item.Category.Color)),
                     MaxRadialColumnWidth = 30,
-                    CornerRadius=5
-                });
+                    CornerRadius=5,
+                    IsHoverable=false,
+                   
+                };
+                serie.DataPointerDown += (chart, points) =>
+                {
+                    foreach (var other in Series)
+                    {
+                        if (other is PieSeries<decimal> pieSeria)
+                        {
+                            pieSeria.Pushout = 0;
+                        }
+                    }
+                    serie.Pushout = 30;
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        
+                        CenterTitle = serie.Name; 
+                        CenterValue = Math.Abs(item.Total); 
+                        CenterIcon = item.Category.Icon; 
+                    });
+                };
+                Series.Add(serie);
             }
             
 

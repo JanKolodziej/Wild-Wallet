@@ -77,6 +77,7 @@ namespace Wallet_Main
         {
             DateTime lastmonth= Date.AddMonths(-1);
             string preferencesKey = $"SummaryShown_{lastmonth.Month}_{lastmonth.Year}";
+             
             if (Preferences.Default.Get(preferencesKey, false))  //Summary has been shown for this month
             {
                 return;
@@ -87,7 +88,24 @@ namespace Wallet_Main
                 bool wasUsingApp = transactionsLastmonth.Any();
                 if (wasUsingApp)
                 {
-                    await Shell.Current.Navigation.PushModalAsync(new MonthlySummaryPage(new MonthlySummaryViewModel(transactionsLastmonth,_service)));
+                    DateTime dateToCheck = Date.AddMonths(-2);
+                    int streak = 1;
+                    for (int i = 0; i < 120; i++)//Random number
+                    {
+                        dateToCheck = dateToCheck.AddMonths(-i);
+                        string key = $"SummaryShown_{dateToCheck.Month}_{dateToCheck.Year}";
+                        if (Preferences.Default.Get(key, false))
+                        {
+                            streak++;
+                        }
+                        else
+                        {
+                            Preferences.Default.Set(preferencesKey, true);
+                            await Shell.Current.Navigation.PushModalAsync(new MonthlySummaryPage(new MonthlySummaryViewModel(transactionsLastmonth, _service,streak)));
+                            break;
+                        }
+                    }
+                    
                 }
                     
             }
@@ -109,7 +127,7 @@ namespace Wallet_Main
             var upcoming = await _service.Get_Close_Automated_Transactions();
             UpcomingTransactionsList = new ObservableCollection<AutomatedTransaction>(upcoming);
 
-            var budgets = await _service.Get_All_Budget_Wrapper();
+            var budgets = await _service.Get_All_Budget_Wrapper(DateTime.Now);
             BudgetWrapperList = new ObservableCollection<BudgetWrapperDisplay>(budgets.Select(b => new BudgetWrapperDisplay { BudgetWrapper = b }));
 
             await Create_chart();

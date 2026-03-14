@@ -254,14 +254,15 @@ namespace Wallet_lib
             }).ToListAsync();
             return data;
         }
-        public async Task<List<BudgetWrapper>> Get_All_Budget_Wrapper()
+        public async Task<List<BudgetWrapper>> Get_All_Budget_Wrapper(DateTime date)
         {
             var budgets = await _context.Budgets.Include(b => b.Category).ToListAsync();
             List<BudgetWrapper> budgetWrappers = new List<BudgetWrapper>();
             foreach (var item in budgets)
             {
-                decimal spent = await _context.Transactions.Where(t => t.CategoryId == item.CategoryId && t.Date.Month == DateTime.Now.Month).SumAsync(t => t.Amount);
-                budgetWrappers.Add(new BudgetWrapper(item, spent));
+                decimal spent = await _context.Transactions.Where(t => t.CategoryId == item.CategoryId 
+                && t.Date.Month == date.Month && t.Date.Year == date.Year).SumAsync(t => t.Amount);
+                budgetWrappers.Add(new BudgetWrapper(item, spent, date));
             }
             return budgetWrappers;
         }

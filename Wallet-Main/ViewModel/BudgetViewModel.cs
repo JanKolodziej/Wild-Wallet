@@ -22,7 +22,7 @@ namespace Wallet_Main
         }
         public async Task Load_Data()
         {
-            var data = await _service.Get_All_Budget_Wrapper();
+            var data = await _service.Get_All_Budget_Wrapper(DateTime.Now);
             Budgets = new(data.Select(b => new BudgetWrapperDisplay { BudgetWrapper = b }));
         }
         [RelayCommand]

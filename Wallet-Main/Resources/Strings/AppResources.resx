@@ -321,4 +321,34 @@
   <data name="SummaryNoExpenses2" xml:space="preserve">
     <value>How did you achieve this?</value>
   </data>
+  <data name="SummaryExpenseStructure" xml:space="preserve">
+    <value>Expense Categorie</value>
+  </data>
+  <data name="SummaryExpenseStructureDescription" xml:space="preserve">
+    <value>See Where The Money Goes</value>
+  </data>
+  <data name="YourBudgetsDescription" xml:space="preserve">
+    <value>A Penny Saved Is A Penny Earned </value>
+  </data>
+  <data name="AddYourFirstBudget" xml:space="preserve">
+    <value>Set your first budget to control your spending.</value>
+  </data>
+  <data name="AddBudget" xml:space="preserve">
+    <value>Add Budget</value>
+  </data>
+  <data name="SummaryGoalAchieved" xml:space="preserve">
+    <value>Goal Achieved</value>
+  </data>
+  <data name="Summarybudgetexceeded" xml:space="preserve">
+    <value>Budget Exceeded</value>
+  </data>
+  <data name="SummarySavingsStreak" xml:space="preserve">
+    <value>Savings Streak</value>
+  </data>
+  <data name="SummaryMonthsInRow" xml:space="preserve">
+    <value>Months in a row of saving</value>
+  </data>
+  <data name="SummaryGoBackToWallet" xml:space="preserve">
+    <value>Go Back To Your Wallet</value>
+  </data>
 </root>
