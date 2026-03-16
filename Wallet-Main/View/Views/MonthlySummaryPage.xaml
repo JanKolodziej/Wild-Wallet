@@ -261,7 +261,7 @@
                     <Border BackgroundColor="#1B2233"
         StrokeShape="RoundRectangle 20"
         Padding="15"
-        HeightRequest="350">
+        HeightRequest="400">
                         <Border.Triggers>
                             <DataTrigger TargetType="Border" Binding="{Binding AreThereExpenses}" Value="False">
                                 <Setter Property="IsVisible" Value="False"/>

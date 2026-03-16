@@ -351,4 +351,13 @@
   <data name="SummaryGoBackToWallet" xml:space="preserve">
     <value>Go Back To Your Wallet</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MonthSummary" xml:space="preserve">
+    <value>Month Summary</value>
+  </data>
+  <data name="SeeHowYourMothLoo" xml:space="preserve">
+    <value>See what your month looked like</value>
+  </data>
 </root>

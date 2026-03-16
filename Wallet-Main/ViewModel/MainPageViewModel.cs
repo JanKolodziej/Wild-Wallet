@@ -5,11 +5,12 @@ using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Maui.Storage;
 using SkiaSharp;
 using System.Collections.ObjectModel;
-using Wallet_lib;
-using Microsoft.Maui.Storage;
+using System.IO;
 using System.Threading.Tasks;
+using Wallet_lib;
 namespace Wallet_Main
 {
     public partial class MainPageViewModel : ObservableObject
@@ -46,6 +47,8 @@ namespace Wallet_Main
         private Axis[] yAxes = Array.Empty<Axis>();
 
         public bool ZeroTransactions => !TransactionsList.Any();
+        [ObservableProperty]
+        private bool showSummaryBanner;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(DateLabel))]
@@ -72,44 +75,75 @@ namespace Wallet_Main
             Balance = 0;
             Income = 0;
             Show_Summary();
+
+            
+        }
+        public async Task Show_Summary_Banner()
+        {
+            string preferencesKey = $"SummaryShown_{Date.Month}_{Date.Year}";
+            if(Preferences.Default.Get(preferencesKey,false))
+            {
+                ShowSummaryBanner = true;
+            }
+            else           
+            {
+                ShowSummaryBanner = false;
+            }
         }
         public async Task Show_Summary()
         {
+
             DateTime lastmonth= Date.AddMonths(-1);
             string preferencesKey = $"SummaryShown_{lastmonth.Month}_{lastmonth.Year}";
-             
+
+     
+
+
             if (Preferences.Default.Get(preferencesKey, false))  //Summary has been shown for this month
             {
                 return;
             }
             else
             {
-                List<Transactions> transactionsLastmonth = await _service.Get_Transaction_month(lastmonth);
-                bool wasUsingApp = transactionsLastmonth.Any();
-                if (wasUsingApp)
+                if(await Summary_Logic(lastmonth))
                 {
-                    DateTime dateToCheck = Date.AddMonths(-2);
-                    int streak = 1;
-                    for (int i = 0; i < 120; i++)//Random number
-                    {
-                        dateToCheck = dateToCheck.AddMonths(-i);
-                        string key = $"SummaryShown_{dateToCheck.Month}_{dateToCheck.Year}";
-                        if (Preferences.Default.Get(key, false))
-                        {
-                            streak++;
-                        }
-                        else
-                        {
-                            Preferences.Default.Set(preferencesKey, true);
-                            await Shell.Current.Navigation.PushModalAsync(new MonthlySummaryPage(new MonthlySummaryViewModel(transactionsLastmonth, _service,streak)));
-                            break;
-                        }
-                    }
-                    
+                    Preferences.Default.Set(preferencesKey, true);
                 }
-                    
+                
             }
                 
+        }
+        public async Task<bool> Summary_Logic(DateTime date)
+        {
+            List<Transactions> transactionsInMonth = await _service.Get_Transaction_month(date);
+            bool wasUsingApp = transactionsInMonth.Any();
+            if (wasUsingApp)
+            {
+                DateTime dateToCheck = date.AddMonths(-1);
+                int streak = 1;
+                for (int i = 0; i < 120; i++)//Random number
+                {
+                    dateToCheck = dateToCheck.AddMonths(-i);
+                    string key = $"SummaryShown_{dateToCheck.Month}_{dateToCheck.Year}";
+                    if (Preferences.Default.Get(key, false))
+                    {
+                        streak++;
+                    }
+                    else
+                    {
+                        
+                        await Shell.Current.Navigation.PushModalAsync(new MonthlySummaryPage(new MonthlySummaryViewModel(transactionsInMonth, _service, streak)));
+                        return true;
+                    }
+                }
+
+            }
+            return false;
+        }
+        [RelayCommand]
+        public async Task Show_Past_Summary()
+        {
+            await Summary_Logic(Date);
         }
 
         public async Task Import_Data()
@@ -131,6 +165,7 @@ namespace Wallet_Main
             BudgetWrapperList = new ObservableCollection<BudgetWrapperDisplay>(budgets.Select(b => new BudgetWrapperDisplay { BudgetWrapper = b }));
 
             await Create_chart();
+            await Show_Summary_Banner();
         }
         [RelayCommand]
         public async Task Refresh_Data()
@@ -147,6 +182,7 @@ namespace Wallet_Main
             ObservableCollection<DateTimePoint> values = new();
             List<Transactions> transactionsChart = new(TransactionsList.ToList());
             DateTime firstDayOfMonth = new(Date.Year, Date.Month, 1);
+            //We add point at first day of month
             if (transactionsChart.Last().Date.Date != firstDayOfMonth)
             {
                 values.Add(new(firstDayOfMonth, amount));
@@ -169,7 +205,14 @@ namespace Wallet_Main
                 values.Add(element);
 
             }
-            
+            DateTime lastDayOfMonth = new(Date.Year, Date.Month, DateTime.DaysInMonth(Date.Year, Date.Month));
+            //We add point at last day of month if it is history
+            if (values.Last().DateTime.Date != lastDayOfMonth && lastDayOfMonth < DateTime.Now.Date)
+            {
+                values.Add(new(lastDayOfMonth, amount));
+            }
+
+
             series.Values = values;
             series.YToolTipLabelFormatter = (chartPoint) => $"{chartPoint.Coordinate.PrimaryValue:C0}";
             SeriesList = new ISeries[]

@@ -358,6 +358,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Month Summary.
+        /// </summary>
+        internal static string MonthSummary {
+            get {
+                return ResourceManager.GetString("MonthSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu New Budget.
         /// </summary>
         internal static string NewBudget {
@@ -471,6 +480,24 @@ namespace Wallet_Main.Resources.Strings {
         internal static string ScheduledTransactions {
             get {
                 return ResourceManager.GetString("ScheduledTransactions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu See what your month looked like.
+        /// </summary>
+        internal static string SeeHowYourMothLoo {
+            get {
+                return ResourceManager.GetString("SeeHowYourMothLoo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Settings.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         

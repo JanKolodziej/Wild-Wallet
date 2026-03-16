@@ -81,5 +81,9 @@
     <FlyoutItem Title="{x:Static strings:AppResources.YourBudgets}" FlyoutIcon="target.svg">
         <ShellContent ContentTemplate="{DataTemplate local:BudgetPage}" Route="budgets"/>
     </FlyoutItem>
+    
+    <FlyoutItem Title="{x:Static strings:AppResources.Settings}" FlyoutIcon="settings.svg">
+        <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />
+    </FlyoutItem>
 
 </Shell>

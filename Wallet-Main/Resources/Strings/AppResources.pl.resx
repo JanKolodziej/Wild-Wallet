@@ -351,4 +351,13 @@
   <data name="SummaryGoBackToWallet" xml:space="preserve">
     <value>Wróć Do Swojego Portfela</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="MonthSummary" xml:space="preserve">
+    <value>Podsumowanie miesiąca</value>
+  </data>
+  <data name="SeeHowYourMothLoo" xml:space="preserve">
+    <value>Zobacz jak wyglądał Twój miesiąc</value>
+  </data>
 </root>
