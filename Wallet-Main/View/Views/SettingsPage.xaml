@@ -1,7 +1,198 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Wallet_Main.SettingsPage"
-             >
-    <Button Text="Export" Command="{Binding Export_TransactionsCommand}" /> 
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Wallet_Main.SettingsPage"
+    BackgroundColor="#141824"
+    Padding="20">
+
+    <ScrollView>
+
+        <VerticalStackLayout Spacing="25">
+
+            <!-- HEADER -->
+            <Label
+                Text="Ustawienia"
+                FontSize="26"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+
+            <!-- WALUTA -->
+            <Border
+                BackgroundColor="#1C2436"
+                Stroke="#2B344A"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 18"
+                Padding="18">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="💱 Waluta"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="White"/>
+
+                    <Picker
+                        Title="Wybierz walutę"
+                        ItemsSource="{Binding Currencies}"
+                        ItemDisplayBinding="{Binding Code}"
+                        SelectedItem="{Binding SelectedCurrency}"
+                        TextColor="White"
+                        BackgroundColor="#263046"/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- JĘZYK -->
+            <Border
+                BackgroundColor="#1C2436"
+                Stroke="#2B344A"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 18"
+                Padding="18">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="🌍 Język aplikacji"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="White"/>
+
+                    <Picker
+                        Title="Wybierz język"
+                        ItemsSource="{Binding Languages}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedLanguage}"
+                        TextColor="White"
+                        BackgroundColor="#263046"/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <Border
+    BackgroundColor="#1C2436"
+    Stroke="#2B344A"
+    StrokeThickness="1"
+    StrokeShape="RoundRectangle 18"
+    Padding="18">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <!-- TITLE -->
+                    <Label
+            Text="📁 Dane aplikacji"
+            FontSize="16"
+            FontAttributes="Bold"
+            TextColor="White"/>
+
+                    <!-- ACTIONS -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+
+                        <!-- IMPORT -->
+                        <Border
+                Grid.Column="0"
+                BackgroundColor="#263046"
+                StrokeShape="RoundRectangle 16"
+                Padding="16">
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ImportCommand}"/>
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                    HorizontalOptions="Center"
+                    Spacing="8">
+
+                                <Border
+                        BackgroundColor="#3B82F633"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        StrokeShape="RoundRectangle 12">
+
+                                    <Image
+                            Source="download.png"
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"/>
+                                </Border>
+
+                                <Label
+                        Text="Import"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="13"/>
+
+                                <Label
+                        Text="Wczytaj dane"
+                        TextColor="#9CA3AF"
+                        FontSize="11"
+                        HorizontalTextAlignment="Center"/>
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+
+                        <!-- EXPORT -->
+                        <Border
+                Grid.Column="1"
+                BackgroundColor="#263046"
+                StrokeShape="RoundRectangle 16"
+                Padding="16">
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Export_TransactionsCommand}"/>
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout
+                    HorizontalOptions="Center"
+                    Spacing="8">
+
+                                <Border
+                        BackgroundColor="#00BFA533"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        StrokeShape="RoundRectangle 12">
+
+                                    <Image
+                            Source="upload.png"
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"/>
+                                </Border>
+
+                                <Label
+                        Text="Export"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="13"/>
+
+                                <Label
+                        Text="Zapisz dane"
+                        TextColor="#9CA3AF"
+                        FontSize="11"
+                        HorizontalTextAlignment="Center"/>
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
 </ContentPage>

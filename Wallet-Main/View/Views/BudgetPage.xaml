@@ -73,7 +73,7 @@
                                             <FormattedString>
                                                 <Span Text="{x:Static strings:AppResources.Spent}" />
                                                 <Span Text=": " />
-                                                <Span Text="{Binding BudgetWrapper.Spent, StringFormat='{0:C0}'}" />
+                                                    <Span Text="{Binding BudgetWrapper.Spent, Converter={StaticResource CurrencyFormat}}" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -110,7 +110,7 @@
                                     </AbsoluteLayout>
                                 </Border>
 
-                                <Label Text="{Binding BudgetWrapper.Budget.Goal, StringFormat='Cel: {0:C0}'}" 
+                                    <Label Text="{Binding BudgetWrapper.Budget.Goal, Converter={StaticResource CurrencyFormat}}" 
                                    TextColor="#90A4AE" 
                                    FontSize="11" 
                                    HorizontalOptions="End"/>

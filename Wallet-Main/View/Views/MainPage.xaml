@@ -121,7 +121,7 @@
                                     </Border>
                                     <Label Grid.Column="1" Text="{x:Static strings:AppResources.Incomes}" TextColor="#E8F5E9" FontSize="12" FontAttributes="Bold" VerticalOptions="Center" TextTransform="Uppercase"/>
                                 </Grid>
-                                <Label Text="{Binding Income, StringFormat='{0:C0}'}" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="0,5,0,0"/>
+                                <Label Text="{Binding Income, Converter={StaticResource CurrencyFormat}}" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="0,5,0,0"/>
                             </VerticalStackLayout>
                         </Border>
 
@@ -143,7 +143,7 @@
                                     </Border>
                                     <Label Grid.Column="1" Text="{x:Static strings:AppResources.Expenses}" TextColor="#FFEBEE" FontSize="12" FontAttributes="Bold" VerticalOptions="Center" TextTransform="Uppercase"/>
                                 </Grid>
-                                <Label Text="{Binding Expenses, StringFormat='{0:C0}'}" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="0,5,0,0"/>
+                                <Label Text="{Binding Expenses, Converter={StaticResource CurrencyFormat}}" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="0,5,0,0"/>
                             </VerticalStackLayout>
                         </Border>
 
@@ -232,55 +232,107 @@
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate x:DataType="local:BudgetWrapperDisplay">
 
-                                        <Border Style="{StaticResource ElevatedCardBorderStyle}" 
-                                            Padding="15" 
-                                            WidthRequest="220" 
-                                            StrokeThickness="0">
-                                            <VerticalStackLayout Spacing="10">
 
-                                                <Grid ColumnDefinitions="Auto, *">
-                                                    <Border Grid.Column="0" StrokeShape="RoundRectangle 20" HeightRequest="40" WidthRequest="40" BackgroundColor="{Binding BudgetWrapper.Budget.Category.Color}" StrokeThickness="0">
-                                                        <Label Text="{Binding BudgetWrapper.Budget.Category.Icon}" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Border
+                                        WidthRequest="220"
+                                        BackgroundColor="#263046"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 16"
+                                        Padding="0">
+
+                                            <VerticalStackLayout Spacing="0">
+
+
+
+                                                <!-- CONTENT -->
+                                                <VerticalStackLayout Padding="16" Spacing="12">
+
+                                                    <!-- HEADER -->
+                                                    <Grid ColumnDefinitions="Auto,*"
+                                                    ColumnSpacing="10">
+
+                                                        <!-- ICON -->
+                                                        <Border
+                                                        BackgroundColor="{Binding BudgetWrapper.Budget.Category.Color}"
+                                                        StrokeShape="RoundRectangle 14"
+                                                        HeightRequest="36"
+                                                        WidthRequest="36">
+
+                                                            <Label
+                                                            Text="{Binding BudgetWrapper.Budget.Category.Icon}"
+                                                            FontSize="18"
+                                                            HorizontalOptions="Center"
+                                                            VerticalOptions="Center"/>
+
+                                                        </Border>
+
+                                                        <!-- CATEGORY -->
+                                                        <VerticalStackLayout
+                                                        Grid.Column="1"
+                                                        VerticalOptions="Center"
+                                                        Spacing="2">
+
+                                                            <Label
+                                                            Text="{Binding BudgetWrapper.Budget.Category.Name}"
+                                                            TextColor="White"
+                                                            FontAttributes="Bold"
+                                                            FontSize="14"
+                                                            LineBreakMode="TailTruncation"/>
+
+                                                            <Label FontSize="12">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+
+                                                                        <Span
+                                                                        Text="{Binding BudgetWrapper.Spent, Converter={StaticResource CurrencyFormat}}"
+                                                                        TextColor="White"
+                                                                        FontAttributes="Bold"/>
+
+                                                                        <Span
+                                                                        Text=" / "
+                                                                        TextColor="#9CA3AF"/>
+
+                                                                        <Span
+                                                                            Text="{Binding BudgetWrapper.Budget.Goal, Converter={StaticResource CurrencyFormat}}"
+                                                                            TextColor="#9CA3AF"/>
+
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+
+                                                        </VerticalStackLayout>
+
+                                                    </Grid>
+
+
+                                                    <!-- PROGRESS -->
+                                                    <Border
+                                                        BackgroundColor="#2E3748"
+                                                        StrokeShape="RoundRectangle 8"
+                                                        HeightRequest="10">
+
+                                                        <ProgressBar
+                                                        Progress="{Binding BudgetWrapper.Percentage}"
+                                                        ProgressColor="{Binding BudgetWrapper.ProgressColor}"
+                                                        BackgroundColor="Transparent"/>
+
                                                     </Border>
 
-                                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
-                                                        <Label Text="{Binding BudgetWrapper.Budget.Category.Name}" TextColor="White" FontAttributes="Bold" FontSize="14" LineBreakMode="TailTruncation"/>
-                                                        <Label TextColor="#90A4AE" FontSize="12">
-                                                            <Label.FormattedText>
-                                                                <FormattedString>
-                                                                    <Span Text="{x:Static strings:AppResources.Spent}" />
 
-                                                                    <Span Text=": " />
 
-                                                                    <Span Text="{Binding BudgetWrapper.Spent, StringFormat='{0:C0}'}" />
-                                                                </FormattedString>
-                                                            </Label.FormattedText>
-                                                        </Label>
-                                                    </VerticalStackLayout>
-                                                </Grid>
+                                                    <Label
+                                                    Text="{Binding BudgetWrapper.Percentage, StringFormat='{0:P0}'}"
+                                                    TextColor="#9CA3AF"
+                                                    FontSize="11"/>
 
-                                                <Border Stroke="#4B5563" StrokeThickness="1" StrokeShape="RoundRectangle 4" BackgroundColor="#2E3748" Padding="0">
-                                                    <AbsoluteLayout HeightRequest="8">
 
-                                                        <ProgressBar Progress="{Binding BudgetWrapper.Percentage}" 
-                                                             ProgressColor="{Binding BudgetWrapper.ProgressColor}" 
-                                                             BackgroundColor="Transparent"
-                                                             AbsoluteLayout.LayoutFlags="All"
-                                                             AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
 
-                                                        <BoxView Color="White" WidthRequest="2"
-                                                             AbsoluteLayout.LayoutFlags="PositionProportional, HeightProportional"
-                                                             AbsoluteLayout.LayoutBounds="{Binding MarkerBounds}">
-                                                            <BoxView.Shadow>
-                                                                <Shadow Brush="Black" Offset="0,0" Radius="2" Opacity="0.8"/>
-                                                            </BoxView.Shadow>
-                                                        </BoxView>
-                                                    </AbsoluteLayout>
-                                                </Border>
 
-                                                <Label Text="{Binding BudgetWrapper.Budget.Goal, StringFormat='Cel: {0:C0}'}" TextColor="#6B7280" FontSize="10" HorizontalOptions="End"/>
+
+                                                </VerticalStackLayout>
 
                                             </VerticalStackLayout>
+
                                         </Border>
 
                                     </DataTemplate>
@@ -332,7 +384,7 @@
                                             </VerticalStackLayout>
 
                                             <Label Grid.Column="3" 
-                                                   Text="{Binding Amount, StringFormat='{0:C0}'}"
+                                                   Text="{Binding Amount, Converter={StaticResource CurrencyFormat}}"
                                                    TextColor="White"
                                                    FontAttributes="Bold"
                                                    FontSize="15"
@@ -422,7 +474,7 @@
                                 </VerticalStackLayout>
 
                                 <Label Grid.Column="2" 
-                                       Text="{Binding Amount, StringFormat='{0:C0}'}"
+                                       Text="{Binding Amount, Converter={StaticResource CurrencyFormat}}"
                                        TextColor="White"
                                        FontAttributes="Bold"
                                        FontSize="15"

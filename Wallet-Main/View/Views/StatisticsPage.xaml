@@ -123,7 +123,7 @@
 
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
                                     <Label Text="{x:Static strings:AppResources.Income}" FontSize="10" TextColor="#80CBC4" TextTransform="Uppercase"/>
-                                <Label Text="{Binding MonthlyStat.Income, StringFormat='{0:C0}'}" 
+                                    <Label Text="{Binding MonthlyStat.Income, Converter={StaticResource CurrencyFormat}}" 
                                        TextColor="#00BFA5" 
                                        FontAttributes="Bold"
                                        FontSize="15"/>
@@ -131,7 +131,7 @@
 
                             <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="2">
                                 <Label Text="{x:Static strings:AppResources.Expenses}" FontSize="10" TextColor="#EF9A9A" TextTransform="Uppercase"/>
-                                <Label Text="{Binding MonthlyStat.Expenses, StringFormat='{0:C0}'}" 
+                                    <Label Text="{Binding MonthlyStat.Expenses, Converter={StaticResource CurrencyFormat}}" 
                                        TextColor="#EF5350" 
                                        FontAttributes="Bold"
                                        FontSize="15"/>
@@ -172,7 +172,7 @@
                                                LineBreakMode="TailTruncation"/>
 
                                             <Label Grid.Column="2"
-                                               Text="{Binding Balance, StringFormat='{0:C}'}"
+                                               Text="{Binding Balance, Converter={StaticResource CurrencyFormat}}"
                                                VerticalOptions="Center"
                                                FontAttributes="Bold"
                                                FontSize="13"

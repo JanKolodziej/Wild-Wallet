@@ -25,7 +25,8 @@ namespace Wallet_Main
                 string title = string.Empty;
                 if (transaction.Title != null)
                 {
-                     title = transaction.Title.Replace(';', ' ');
+                    title = transaction.Title.Replace(';', ' ');
+                    title = title.Replace("/n", " ");
                 }
 
                
