@@ -360,4 +360,37 @@
   <data name="SeeHowYourMothLoo" xml:space="preserve">
     <value>See what your month looked like</value>
   </data>
+  <data name="Currency" xml:space="preserve">
+    <value>💱 Currency</value>
+  </data>
+  <data name="ChooseCurrency" xml:space="preserve">
+    <value>Choose Currency</value>
+  </data>
+  <data name="AppData" xml:space="preserve">
+    <value>📁 App Data</value>
+  </data>
+  <data name="ImportData" xml:space="preserve">
+    <value>Import Data</value>
+  </data>
+  <data name="SaveData" xml:space="preserve">
+    <value>Save Data</value>
+  </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Choose file with data</value>
+  </data>
+  <data name="SuccessAdded1" xml:space="preserve">
+    <value>Success! Added</value>
+  </data>
+  <data name="SuccessAdded2" xml:space="preserve">
+    <value>new transactions</value>
+  </data>
+  <data name="NewCategories" xml:space="preserve">
+    <value>new categories</value>
+  </data>
+  <data name="and" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="RestartApp" xml:space="preserve">
+    <value>Restart App for the change to work properly</value>
+  </data>
 </root>

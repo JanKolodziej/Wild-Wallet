@@ -93,7 +93,7 @@
                                     <Label Text="{x:Static strings:AppResources.ScheduledTransaction}" TextColor="#90A4AE" FontSize="11"/>
                                 </VerticalStackLayout>
 
-                                <Label Grid.Column="2" Text="{Binding Amount, StringFormat='{0:C0}'}" TextColor="White" FontAttributes="Bold" FontSize="15" VerticalOptions="Center"/>
+                                <Label Grid.Column="2" Text="{Binding Amount, Converter={StaticResource CurrencyFormat}}" TextColor="White" FontAttributes="Bold" FontSize="15" VerticalOptions="Center"/>
                             </Grid>
                         </Border>
                     </SwipeView>

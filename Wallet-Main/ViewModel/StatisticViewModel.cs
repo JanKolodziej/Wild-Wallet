@@ -7,6 +7,7 @@ using LiveChartsCore.SkiaSharpView.Painting.Effects;
 using SkiaSharp;
 using System.Collections.ObjectModel;
 using Wallet_lib;
+using Wallet_Main.Converters;
 
 namespace Wallet_Main
 {
@@ -120,7 +121,7 @@ namespace Wallet_Main
             {
                 new Axis
                 {
-                    Labeler = value => value.ToString("C0"), 
+                    Labeler = value => (string)CurrencyConverterHelper.Convert(value), 
                     LabelsPaint = new SolidColorPaint(SKColors.LightGray),
                     TextSize = 12,
                     MinLimit=0,
@@ -279,7 +280,7 @@ namespace Wallet_Main
                 {
                     NamePaint = new SolidColorPaint(SKColors.WhiteSmoke),
                     LabelsPaint = new SolidColorPaint(SKColors.WhiteSmoke),
-                    Labeler = value => value.ToString("C0"),
+                    Labeler = value => (string)CurrencyConverterHelper.Convert(value),
                     TextSize=10,
                     SeparatorsPaint = new SolidColorPaint(SKColors.WhiteSmoke)
                     {

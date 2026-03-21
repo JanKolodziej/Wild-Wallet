@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using Wallet_lib;
+using Wallet_Main.Converters;
 namespace Wallet_Main
 {
     public partial class MainPageViewModel : ObservableObject
@@ -214,7 +215,7 @@ namespace Wallet_Main
 
 
             series.Values = values;
-            series.YToolTipLabelFormatter = (chartPoint) => $"{chartPoint.Coordinate.PrimaryValue:C0}";
+            series.YToolTipLabelFormatter = (chartPoint) => $"{CurrencyConverterHelper.Convert(chartPoint.Coordinate.PrimaryValue)}";
             SeriesList = new ISeries[]
             {
                 series

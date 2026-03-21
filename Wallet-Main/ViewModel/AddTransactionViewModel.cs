@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
-using Wallet_lib;
 using System.Globalization;
+using Wallet_lib;
 
 namespace Wallet_Main
 {
@@ -52,8 +53,9 @@ namespace Wallet_Main
             Resources.Strings.AppResources.Monthly,
             Resources.Strings.AppResources.Yearly 
         ];
-        public string IsoCurencySymbol { get; } = new RegionInfo(CultureInfo.CurrentCulture.Name).ISOCurrencySymbol;
-
+        public string IsoCurencySymbol { get; } = Preferences.Default.Get("UserCurrencyIso", new RegionInfo(CultureInfo.CurrentCulture.Name).ISOCurrencySymbol);
+    
+        
         private readonly Wallet_lib.WalletService _service;
         public AddTransactionViewModel(Wallet_lib.WalletService service)
         {

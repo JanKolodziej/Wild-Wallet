@@ -115,6 +115,24 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu and.
+        /// </summary>
+        internal static string and {
+            get {
+                return ResourceManager.GetString("and", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu 📁 App Data.
+        /// </summary>
+        internal static string AppData {
+            get {
+                return ResourceManager.GetString("AppData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Balance.
         /// </summary>
         internal static string Balance {
@@ -160,6 +178,24 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Choose Currency.
+        /// </summary>
+        internal static string ChooseCurrency {
+            get {
+                return ResourceManager.GetString("ChooseCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Choose file with data.
+        /// </summary>
+        internal static string ChooseFile {
+            get {
+                return ResourceManager.GetString("ChooseFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Choose Frequency.
         /// </summary>
         internal static string ChooseFrequency {
@@ -192,6 +228,15 @@ namespace Wallet_Main.Resources.Strings {
         internal static string Congratulations {
             get {
                 return ResourceManager.GetString("Congratulations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu 💱 Currency.
+        /// </summary>
+        internal static string Currency {
+            get {
+                return ResourceManager.GetString("Currency", resourceCulture);
             }
         }
         
@@ -304,6 +349,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Import Data.
+        /// </summary>
+        internal static string ImportData {
+            get {
+                return ResourceManager.GetString("ImportData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Income.
         /// </summary>
         internal static string Income {
@@ -376,6 +430,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu new categories.
+        /// </summary>
+        internal static string NewCategories {
+            get {
+                return ResourceManager.GetString("NewCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu New Category.
         /// </summary>
         internal static string NewCategory {
@@ -439,11 +502,29 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Restart App for the change to work properly.
+        /// </summary>
+        internal static string RestartApp {
+            get {
+                return ResourceManager.GetString("RestartApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Save.
         /// </summary>
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Save Data.
+        /// </summary>
+        internal static string SaveData {
+            get {
+                return ResourceManager.GetString("SaveData", resourceCulture);
             }
         }
         
@@ -525,6 +606,24 @@ namespace Wallet_Main.Resources.Strings {
         internal static string Statistics {
             get {
                 return ResourceManager.GetString("Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Success! Added.
+        /// </summary>
+        internal static string SuccessAdded1 {
+            get {
+                return ResourceManager.GetString("SuccessAdded1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu new transactions.
+        /// </summary>
+        internal static string SuccessAdded2 {
+            get {
+                return ResourceManager.GetString("SuccessAdded2", resourceCulture);
             }
         }
         

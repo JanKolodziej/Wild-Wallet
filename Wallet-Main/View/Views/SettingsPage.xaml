@@ -3,7 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Wallet_Main.SettingsPage"
     BackgroundColor="#141824"
-    Padding="20">
+    Padding="20"
+    xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">
 
     <ScrollView>
 
@@ -11,7 +12,7 @@
 
             <!-- HEADER -->
             <Label
-                Text="Ustawienia"
+                Text="{x:Static strings:AppResources.Settings}"
                 FontSize="26"
                 FontAttributes="Bold"
                 TextColor="White"/>
@@ -28,16 +29,17 @@
                 <VerticalStackLayout Spacing="12">
 
                     <Label
-                        Text="💱 Waluta"
+                        Text="{x:Static strings:AppResources.Currency}"
                         FontSize="16"
                         FontAttributes="Bold"
                         TextColor="White"/>
 
                     <Picker
-                        Title="Wybierz walutę"
+                        Title="{x:Static strings:AppResources.ChooseCurrency}"
                         ItemsSource="{Binding Currencies}"
                         ItemDisplayBinding="{Binding Code}"
                         SelectedItem="{Binding SelectedCurrency}"
+                        
                         TextColor="White"
                         BackgroundColor="#263046"/>
 
@@ -46,33 +48,7 @@
             </Border>
 
 
-            <!-- JĘZYK -->
-            <Border
-                BackgroundColor="#1C2436"
-                Stroke="#2B344A"
-                StrokeThickness="1"
-                StrokeShape="RoundRectangle 18"
-                Padding="18">
-
-                <VerticalStackLayout Spacing="12">
-
-                    <Label
-                        Text="🌍 Język aplikacji"
-                        FontSize="16"
-                        FontAttributes="Bold"
-                        TextColor="White"/>
-
-                    <Picker
-                        Title="Wybierz język"
-                        ItemsSource="{Binding Languages}"
-                        ItemDisplayBinding="{Binding Name}"
-                        SelectedItem="{Binding SelectedLanguage}"
-                        TextColor="White"
-                        BackgroundColor="#263046"/>
-
-                </VerticalStackLayout>
-
-            </Border>
+            
 
 
             <Border
@@ -86,7 +62,7 @@
 
                     <!-- TITLE -->
                     <Label
-            Text="📁 Dane aplikacji"
+            Text="{x:Static strings:AppResources.AppData}"
             FontSize="16"
             FontAttributes="Bold"
             TextColor="White"/>
@@ -127,14 +103,8 @@
                         Text="Import"
                         TextColor="White"
                         FontAttributes="Bold"
+                                    HorizontalOptions="Center"
                         FontSize="13"/>
-
-                                <Label
-                        Text="Wczytaj dane"
-                        TextColor="#9CA3AF"
-                        FontSize="11"
-                        HorizontalTextAlignment="Center"/>
-
                             </VerticalStackLayout>
 
                         </Border>
@@ -173,13 +143,10 @@
                         Text="Export"
                         TextColor="White"
                         FontAttributes="Bold"
+                                    HorizontalOptions="Center"
                         FontSize="13"/>
 
-                                <Label
-                        Text="Zapisz dane"
-                        TextColor="#9CA3AF"
-                        FontSize="11"
-                        HorizontalTextAlignment="Center"/>
+
 
                             </VerticalStackLayout>
 

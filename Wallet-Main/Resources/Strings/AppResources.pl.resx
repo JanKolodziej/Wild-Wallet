@@ -360,4 +360,37 @@
   <data name="SeeHowYourMothLoo" xml:space="preserve">
     <value>Zobacz jak wyglądał Twój miesiąc</value>
   </data>
+  <data name="Currency" xml:space="preserve">
+    <value>💱 Waluta</value>
+  </data>
+  <data name="ChooseCurrency" xml:space="preserve">
+    <value>Wybierz Walute</value>
+  </data>
+  <data name="AppData" xml:space="preserve">
+    <value>📁 Dane aplikacji</value>
+  </data>
+  <data name="ImportData" xml:space="preserve">
+    <value>Wczytaj Dane</value>
+  </data>
+  <data name="SaveData" xml:space="preserve">
+    <value>Zapisz Dane</value>
+  </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Wybierz plik z danymi</value>
+  </data>
+  <data name="SuccessAdded1" xml:space="preserve">
+    <value>Sukces! Dodano </value>
+  </data>
+  <data name="SuccessAdded2" xml:space="preserve">
+    <value>nowych transakcji</value>
+  </data>
+  <data name="NewCategories" xml:space="preserve">
+    <value>nowych kategory</value>
+  </data>
+  <data name="and" xml:space="preserve">
+    <value>i</value>
+  </data>
+  <data name="RestartApp" xml:space="preserve">
+    <value>Zrestartuj aplikacje aby zmiana waluty działała</value>
+  </data>
 </root>

@@ -14,6 +14,7 @@ using SkiaSharp;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Wallet_Main.Converters;
 
 namespace Wallet_Main
 {
@@ -103,25 +104,25 @@ namespace Wallet_Main
             if(IncomeLastMonth == 0 && Income > 0)
             {
                 IncomeTrendIcon = "▲";
-                IncomeTrendText = $"{income_trend:C0}";
+                IncomeTrendText = $"{CurrencyConverterHelper.Convert(income_trend)}";
                 IncomeTrendColor = "#4CAF50";
             }
             else if (Income>IncomeLastMonth)
             {
                 IncomeTrendIcon = "▲";
-                IncomeTrendText = $"{income_percentage:F0}%  {income_trend:C0}";
+                IncomeTrendText = $"{income_percentage:F0}%  {CurrencyConverterHelper.Convert(income_trend)}";
                 IncomeTrendColor = "#4CAF50"; 
             }
             else if (Income < IncomeLastMonth)
             {
                 IncomeTrendIcon = "▼";
-                IncomeTrendText = $"{income_percentage:F0}%  {income_trend:C0}"; ;
+                IncomeTrendText = $"{income_percentage:F0}%  {CurrencyConverterHelper.Convert(income_trend)}"; ;
                 IncomeTrendColor = "#F44336"; 
             }
             else
             {
                 IncomeTrendIcon = "-";
-                IncomeTrendText = $"{income_percentage:F0}%  {income_trend:C0}";
+                IncomeTrendText = $"{income_percentage:F0}%  {CurrencyConverterHelper.Convert(income_trend)}";
                 IncomeTrendColor = "#9E9E9E"; 
 
             }
@@ -135,19 +136,19 @@ namespace Wallet_Main
             else if (Expenses > ExpensesLastMonth)
             {
                 ExpenseTrendIcon = "▲";
-                ExpenseTrendText = $"{expense_percentage:F0}%  {expense_trend:C0}";
+                ExpenseTrendText = $"{expense_percentage:F0}%  {CurrencyConverterHelper.Convert(expense_trend)}";
                 ExpenseTrendColor = "#F44336";
             }
             else if (Expenses < ExpensesLastMonth)
             {
                 ExpenseTrendIcon = "▼";
-                ExpenseTrendText = $"{expense_percentage:F0}%  {expense_trend:C0}"; ;
+                ExpenseTrendText = $"{expense_percentage:F0}%  {CurrencyConverterHelper.Convert(expense_trend)}"; ;
                 ExpenseTrendColor = "#4CAF50";
             }
             else
             {
                 ExpenseTrendIcon = "=";
-                ExpenseTrendText = $"{expense_percentage:F0}%  {expense_trend:C0}";
+                ExpenseTrendText = $"{expense_percentage:F0}%  {CurrencyConverterHelper.Convert(expense_trend)}";
                 ExpenseTrendColor = "#9E9E9E";
 
             }
