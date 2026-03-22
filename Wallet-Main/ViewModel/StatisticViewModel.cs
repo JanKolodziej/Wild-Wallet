@@ -81,7 +81,7 @@ namespace Wallet_Main
                     MonthlyStatList.Last().MonthlyStat.Expenses += transaction.Amount;
                 }
                 CategoriesStat? k = MonthlyStatList.Last().MonthlyStat.CategoriesStats.FirstOrDefault(c => c.Category == transaction.Category);
-                if(k == null)
+                if (k == null)
                 {
                     MonthlyStatList.Last().MonthlyStat.CategoriesStats.Add(new(transaction.Category, transaction.Amount));
                 }
@@ -93,7 +93,7 @@ namespace Wallet_Main
 
 
             }
-            
+
         }
         public void Histogram_Chart()
         {
@@ -121,7 +121,7 @@ namespace Wallet_Main
             {
                 new Axis
                 {
-                    Labeler = value => (string)CurrencyConverterHelper.Convert(value), 
+                    Labeler = value => (string)CurrencyConverterHelper.Convert(value),
                     LabelsPaint = new SolidColorPaint(SKColors.LightGray),
                     TextSize = 12,
                     MinLimit=0,
@@ -138,10 +138,10 @@ namespace Wallet_Main
             }
             else
             {
-                
+
                 if (TransactionsList.Any())
                 {
-                     DateTime date = TransactionsList.First().Date.AddMonths(3);
+                    DateTime date = TransactionsList.First().Date.AddMonths(3);
                     DateTime requiredDate = new(date.Year, date.Month, 1);
                     int requiredDays = (requiredDate - TransactionsList.Last().Date).Days;
                     int days = (requiredDate - DateTime.Now.Date).Days;
@@ -159,7 +159,7 @@ namespace Wallet_Main
                     DaysLeftText = $" {90} {Resources.Strings.AppResources.DaysLeft}";
                     DataCollectionProgress = 0;
                 }
-                    
+
             }
         }
         public void Create_Chart()
@@ -229,7 +229,7 @@ namespace Wallet_Main
                 Stroke = null,
                 GeometryFill = null,
                 GeometryStroke = null,
-                
+
             },
 
             new LineSeries<double>
@@ -257,8 +257,8 @@ namespace Wallet_Main
                     Name = Resources.Strings.AppResources.MonthlyBalance,
                     Fill = new SolidColorPaint(SKColors.White),
                     MinGeometrySize = 5,
-                    ZIndex=3 
-                    
+                    ZIndex=3
+
                 }
 
             };
@@ -271,7 +271,7 @@ namespace Wallet_Main
                     NamePaint = new SolidColorPaint(SKColors.WhiteSmoke),
                     LabelsRotation = 45,
                     TextSize=10,
-                    
+
                 }
             };
             YAxes = new Axis[]
@@ -294,7 +294,7 @@ namespace Wallet_Main
         [RelayCommand]
         private void Expand_Month(MonthlyStatService monthlyStat)
         {
-            if(monthlyStat != null)
+            if (monthlyStat != null)
             {
                 monthlyStat.IsExpanded = !monthlyStat.IsExpanded;
             }

@@ -1,10 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace Wallet_Main
 {
@@ -21,7 +15,7 @@ namespace Wallet_Main
                 Wallet_lib.FrequencyOnceA.Month => Resources.Strings.AppResources.Monthly,
                 Wallet_lib.FrequencyOnceA.Year => Resources.Strings.AppResources.Yearly,
             };
-        }   
+        }
         public GroupedAutomatedTransactions(Wallet_lib.FrequencyOnceA frequency, IEnumerable<Wallet_lib.AutomatedTransaction> transactions) : base(transactions)
         {
             Frequency = frequency;

@@ -1,24 +1,16 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wallet_Main.Resources.Strings;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
-using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
-
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 using Wallet_Main.Converters;
+using Wallet_Main.Resources.Strings;
 
 namespace Wallet_Main
 {
-    public partial class MonthlySummaryViewModel:ObservableObject
+    public partial class MonthlySummaryViewModel : ObservableObject
     {
         public List<Wallet_lib.Transactions> Transactions { get; set; }
         public decimal Balance { get; set; }
@@ -52,24 +44,24 @@ namespace Wallet_Main
         public bool IsCategorySelected { get; set; }
         // Zmienne sterujące środkiem koła
         [ObservableProperty]
-        private string centerIcon ="💸";
+        private string centerIcon = "💸";
         [ObservableProperty]
         private string centerTitle = AppResources.Expenses;
 
         [ObservableProperty]
         private decimal centerValue;
 
-        public MonthlySummaryViewModel(List<Wallet_lib.Transactions> transactions,Wallet_lib.WalletService service,int streak)
+        public MonthlySummaryViewModel(List<Wallet_lib.Transactions> transactions, Wallet_lib.WalletService service, int streak)
         {
             _service = service;
             Transactions = transactions;
-            Expenses =Math.Abs( transactions.Where(t => t.Amount < 0).Sum(t => t.Amount));
+            Expenses = Math.Abs(transactions.Where(t => t.Amount < 0).Sum(t => t.Amount));
             Income = transactions.Where(t => t.Amount > 0).Sum(t => t.Amount);
             Balance = Income - Expenses;
             SummaryMonth = AppResources.SummaryMonth + " " + transactions.Last().Date.ToString("MMMM");
-            CenterValue=Expenses;
+            CenterValue = Expenses;
             Create_Chart();
-            SavingStreak=streak;
+            SavingStreak = streak;
             Load_Data();
 
 
@@ -85,9 +77,9 @@ namespace Wallet_Main
             ExpensesLastMonth = Math.Abs(await _service.Get_Expenses_Month_Async(DateTime.Now.AddMonths(-2)));
             IncomeLastMonth = await _service.Get_Income_Month_Async(DateTime.Now.AddMonths(-2));
             int numerator = 0;
-            foreach(var budget in Budgets)
+            foreach (var budget in Budgets)
             {
-                if(budget.IsInBudget)
+                if (budget.IsInBudget)
                 {
                     numerator++;
                 }
@@ -101,33 +93,33 @@ namespace Wallet_Main
             decimal income_percentage = IncomeLastMonth != 0 ? (income_trend) / IncomeLastMonth * 100 : 0;
             decimal expense_percentage = ExpensesLastMonth != 0 ? (expense_trend) / ExpensesLastMonth * 100 : 0;
 
-            if(IncomeLastMonth == 0 && Income > 0)
+            if (IncomeLastMonth == 0 && Income > 0)
             {
                 IncomeTrendIcon = "▲";
                 IncomeTrendText = $"{CurrencyConverterHelper.Convert(income_trend)}";
                 IncomeTrendColor = "#4CAF50";
             }
-            else if (Income>IncomeLastMonth)
+            else if (Income > IncomeLastMonth)
             {
                 IncomeTrendIcon = "▲";
                 IncomeTrendText = $"{income_percentage:F0}%  {CurrencyConverterHelper.Convert(income_trend)}";
-                IncomeTrendColor = "#4CAF50"; 
+                IncomeTrendColor = "#4CAF50";
             }
             else if (Income < IncomeLastMonth)
             {
                 IncomeTrendIcon = "▼";
                 IncomeTrendText = $"{income_percentage:F0}%  {CurrencyConverterHelper.Convert(income_trend)}"; ;
-                IncomeTrendColor = "#F44336"; 
+                IncomeTrendColor = "#F44336";
             }
             else
             {
                 IncomeTrendIcon = "-";
                 IncomeTrendText = $"{income_percentage:F0}%  {CurrencyConverterHelper.Convert(income_trend)}";
-                IncomeTrendColor = "#9E9E9E"; 
+                IncomeTrendColor = "#9E9E9E";
 
             }
 
-            if(ExpensesLastMonth == 0 && Expenses > 0)
+            if (ExpensesLastMonth == 0 && Expenses > 0)
             {
                 ExpenseTrendIcon = "▲";
                 ExpenseTrendText = $"{expense_trend:C0}";
@@ -173,15 +165,15 @@ namespace Wallet_Main
             AreThereExpenses = true;
             foreach (var item in data)
             {
-                var serie=new PieSeries<decimal>
+                var serie = new PieSeries<decimal>
                 {
                     Name = item.Category.Name,
-                    Values = new decimal[] { Math.Abs( item.Total )},
-                    Fill= new SolidColorPaint(SKColor.Parse(item.Category.Color)),
+                    Values = new decimal[] { Math.Abs(item.Total) },
+                    Fill = new SolidColorPaint(SKColor.Parse(item.Category.Color)),
                     MaxRadialColumnWidth = 30,
-                    CornerRadius=5,
-                    IsHoverable=false,
-                   
+                    CornerRadius = 5,
+                    IsHoverable = false,
+
                 };
                 serie.DataPointerDown += (chart, points) =>
                 {
@@ -195,15 +187,15 @@ namespace Wallet_Main
                     serie.Pushout = 30;
                     MainThread.BeginInvokeOnMainThread(() =>
                     {
-                        
-                        CenterTitle = serie.Name; 
-                        CenterValue = Math.Abs(item.Total); 
-                        CenterIcon = item.Category.Icon; 
+
+                        CenterTitle = serie.Name;
+                        CenterValue = Math.Abs(item.Total);
+                        CenterIcon = item.Category.Icon;
                     });
                 };
                 Series.Add(serie);
             }
-            
+
 
         }
     }

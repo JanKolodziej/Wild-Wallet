@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wallet_lib;
+﻿using Wallet_lib;
 
 namespace Wallet_Main
 {

@@ -1,19 +1,15 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Wallet_lib;
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
 
 namespace Wallet_Main
 {
-    public partial class SettingsViewModel:ObservableObject
+    public partial class SettingsViewModel : ObservableObject
     {
         [ObservableProperty]
         private Currency selectedCurrency;
@@ -48,7 +44,7 @@ namespace Wallet_Main
                 SelectedCurrency = Currencies[0];
             }
         }
-        partial void OnSelectedCurrencyChanged(Currency oldValue,Currency newvalue)
+        partial void OnSelectedCurrencyChanged(Currency oldValue, Currency newvalue)
         {
             if (SelectedCurrency == Currencies[0])
             {
@@ -63,14 +59,14 @@ namespace Wallet_Main
 
 #if ANDROID
 
-            if(oldValue!=null)
+            if (oldValue != null)
             {
 
-            string text = $"{Resources.Strings.AppResources.RestartApp}";
-            var pop2 = Toast.Make(text, ToastDuration.Long, 14);
-             pop2.Show();
-             }
-            
+                string text = $"{Resources.Strings.AppResources.RestartApp}";
+                var pop2 = Toast.Make(text, ToastDuration.Long, 14);
+                pop2.Show();
+            }
+
 #endif
         }
 
@@ -78,9 +74,9 @@ namespace Wallet_Main
         public async Task Export_Transactions()
         {
             var transactions = await _service.Get_All_Transactions_Async();
-            var to_export =new StringBuilder();
+            var to_export = new StringBuilder();
             to_export.AppendLine("Id;Date;Amount;Title;CategoryName;CategoryType;CategoryIcon;CategoryColor;AccountId");
-            foreach (var transaction in transactions) 
+            foreach (var transaction in transactions)
             {
                 string title = string.Empty;
                 if (transaction.Title != null)
@@ -89,7 +85,7 @@ namespace Wallet_Main
                     title = title.Replace("/n", " ");
                 }
 
-               
+
                 to_export.AppendLine($"{transaction.Id};{transaction.Date.ToString("yyyy-MM-dd")};{transaction.Amount};" +
                     $"{title};{transaction.Category.Name};{transaction.Category.Type};{transaction.Category.Icon}" +
                     $";{transaction.Category.Color};{transaction.AccountId}");
@@ -121,7 +117,7 @@ namespace Wallet_Main
             if (file == null) return;
             using var stream = await file.OpenReadAsync();
             using var reader = new StreamReader(stream);
-            string content =reader.ReadToEnd();
+            string content = reader.ReadToEnd();
             string[] lines = content.Split('\n');
             List<Categories> list = await _service.Get_All_Categories_Async();
             int categoriesAdded = 0;
@@ -130,7 +126,7 @@ namespace Wallet_Main
             {
 
                 string[] elements = lines[i].Split(";");
-                if(elements.Length ==9)
+                if (elements.Length == 9)
                 {
                     DateTime date = DateTime.ParseExact(elements[1], "yyyy-MM-dd", CultureInfo.InvariantCulture);
                     decimal amount = Convert.ToDecimal(elements[2]);
@@ -141,11 +137,11 @@ namespace Wallet_Main
                     string categoryColor = elements[7];
                     int accountId = 1;
                     string account = elements[8].Trim();
-                    if(account != string.Empty && account!= null)
+                    if (account != string.Empty && account != null)
                     {
-                        accountId= Convert.ToInt32(elements[8]);
+                        accountId = Convert.ToInt32(elements[8]);
                     }
-                    
+
                     var cat = list.FirstOrDefault(c => c.Icon == categoryicon
                         && c.Type == categoryType && c.Name == categoryName &&
                         categoryColor == c.Color);
@@ -169,7 +165,7 @@ namespace Wallet_Main
                     }
                 }
 
-                
+
 
 
             }

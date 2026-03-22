@@ -4,12 +4,7 @@ using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Maui.Storage;
-using SkiaSharp;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Threading.Tasks;
 using Wallet_lib;
 using Wallet_Main.Converters;
 namespace Wallet_Main
@@ -22,7 +17,7 @@ namespace Wallet_Main
         private decimal balance;
         [ObservableProperty]
         private decimal expenses;
-       
+
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(HasUpcomingTransactions))]
         private ObservableCollection<AutomatedTransaction> upcomingTransactionsList = new ObservableCollection<AutomatedTransaction>();
@@ -77,16 +72,16 @@ namespace Wallet_Main
             Income = 0;
             Show_Summary();
 
-            
+
         }
         public async Task Show_Summary_Banner()
         {
             string preferencesKey = $"SummaryShown_{Date.Month}_{Date.Year}";
-            if(Preferences.Default.Get(preferencesKey,false))
+            if (Preferences.Default.Get(preferencesKey, false))
             {
                 ShowSummaryBanner = true;
             }
-            else           
+            else
             {
                 ShowSummaryBanner = false;
             }
@@ -94,10 +89,10 @@ namespace Wallet_Main
         public async Task Show_Summary()
         {
 
-            DateTime lastmonth= Date.AddMonths(-1);
+            DateTime lastmonth = Date.AddMonths(-1);
             string preferencesKey = $"SummaryShown_{lastmonth.Month}_{lastmonth.Year}";
 
-     
+
 
 
             if (Preferences.Default.Get(preferencesKey, false))  //Summary has been shown for this month
@@ -106,13 +101,13 @@ namespace Wallet_Main
             }
             else
             {
-                if(await Summary_Logic(lastmonth))
+                if (await Summary_Logic(lastmonth))
                 {
                     Preferences.Default.Set(preferencesKey, true);
                 }
-                
+
             }
-                
+
         }
         public async Task<bool> Summary_Logic(DateTime date)
         {
@@ -132,7 +127,7 @@ namespace Wallet_Main
                     }
                     else
                     {
-                        
+
                         await Shell.Current.Navigation.PushModalAsync(new MonthlySummaryPage(new MonthlySummaryViewModel(transactionsInMonth, _service, streak)));
                         return true;
                     }
@@ -219,7 +214,7 @@ namespace Wallet_Main
             SeriesList = new ISeries[]
             {
                 series
-                
+
             };
             XAxes = new Axis[]
             {

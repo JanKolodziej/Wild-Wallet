@@ -22,7 +22,7 @@ namespace Wallet_lib
     }
     public class CategoriesStat
     {
-       public Categories Category {  get; set; }
+        public Categories Category { get; set; }
         public decimal Balance { get; set; }
         public CategoriesStat(Categories categories, decimal balance)
         {

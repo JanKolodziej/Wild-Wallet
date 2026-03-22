@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using Wallet_lib;
@@ -49,13 +48,13 @@ namespace Wallet_Main
         public List<string> TypesFrequency { get; } =
         [
             Resources.Strings.AppResources.Daily,
-            Resources.Strings.AppResources.Weekly, 
+            Resources.Strings.AppResources.Weekly,
             Resources.Strings.AppResources.Monthly,
-            Resources.Strings.AppResources.Yearly 
+            Resources.Strings.AppResources.Yearly
         ];
         public string IsoCurencySymbol { get; } = Preferences.Default.Get("UserCurrencyIso", new RegionInfo(CultureInfo.CurrentCulture.Name).ISOCurrencySymbol);
-    
-        
+
+
         private readonly Wallet_lib.WalletService _service;
         public AddTransactionViewModel(Wallet_lib.WalletService service)
         {
@@ -82,7 +81,7 @@ namespace Wallet_Main
                 }
 
             }
-            else if(result == null)
+            else if (result == null)
             {
                 SelectedCategory = Categories.FirstOrDefault(c => c.Name == Resources.Strings.CategoryNames.OtherCategory && c.Type == Categories.Last().Type);
             }
@@ -101,9 +100,9 @@ namespace Wallet_Main
 
             }
         }
-        partial void OnAutomatedTransaction1Changed( AutomatedTransaction? value)
+        partial void OnAutomatedTransaction1Changed(AutomatedTransaction? value)
         {
-            if(value != null)
+            if (value != null)
             {
                 Date = value.NextTime;
                 Title = value.Name;
@@ -135,11 +134,11 @@ namespace Wallet_Main
                         Categories.Add(category);
                     }
                 }
-                if(TransactionToEdit==null && AutomatedTransaction1 == null)
+                if (TransactionToEdit == null && AutomatedTransaction1 == null)
                 {
                     await Show_Category_PopUp();
                 }
-                
+
             }
         }
         public async void Load_Data()
@@ -162,16 +161,17 @@ namespace Wallet_Main
 
                 if (TransactionToEdit == null && AutomatedTransaction1 == null)
                 {
-                    if(IsAutomatedTransaction)
+                    if (IsAutomatedTransaction)
                     {
                         AutomatedTransaction automatedTransaction = new()
-                        { Name = Title, 
+                        {
+                            Name = Title,
                             Amount = _amount,
-                            NextTime = Date, 
-                            CategoryId = SelectedCategory.Id, 
-                            Frequency =(FrequencyOnceA) Frequency, 
-                            AccountId = AccountId ,
-                            
+                            NextTime = Date,
+                            CategoryId = SelectedCategory.Id,
+                            Frequency = (FrequencyOnceA)Frequency,
+                            AccountId = AccountId,
+
                         };
                         await _service.Add_AutomatedTransaction(automatedTransaction);
                     }
@@ -179,7 +179,7 @@ namespace Wallet_Main
                     {
                         _service.Add_Transaction(new(Date, _amount, Title, SelectedCategory.Id, AccountId));
                     }
-                        
+
                     await Shell.Current.GoToAsync("..");
                 }
                 else
@@ -188,9 +188,9 @@ namespace Wallet_Main
                     {
                         AutomatedTransaction1.AccountId = AccountId;
                         AutomatedTransaction1.CategoryId = SelectedCategory.Id;
-                        if(AutomatedTransaction1.Frequency != (FrequencyOnceA) Frequency)
+                        if (AutomatedTransaction1.Frequency != (FrequencyOnceA)Frequency)
                         {
-                            AutomatedTransaction1.Frequency = (FrequencyOnceA) Frequency;
+                            AutomatedTransaction1.Frequency = (FrequencyOnceA)Frequency;
                             AutomatedTransaction1.NextTime = Date;
                         }
                         AutomatedTransaction1.Amount = _amount;

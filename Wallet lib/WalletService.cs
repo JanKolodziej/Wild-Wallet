@@ -93,11 +93,11 @@ namespace Wallet_lib
         }
         public async Task<decimal> Get_Balance_Month_Async(DateTime date)
         {
-            return await _context.Transactions.Where(t => t.Date.Month == date.Month && t.Date.Year == date.Year).SumAsync(t=>t.Amount);
+            return await _context.Transactions.Where(t => t.Date.Month == date.Month && t.Date.Year == date.Year).SumAsync(t => t.Amount);
         }
         public async Task<decimal> Get_Expenses_Month_Async(DateTime date)
         {
-            return await _context.Transactions.Where(t => t.Date.Month == date.Month && t.Date.Year == date.Year && t.Amount>0).SumAsync(t => t.Amount);
+            return await _context.Transactions.Where(t => t.Date.Month == date.Month && t.Date.Year == date.Year && t.Amount > 0).SumAsync(t => t.Amount);
         }
         public async Task<decimal> Get_Income_Month_Async(DateTime date)
         {
@@ -260,7 +260,7 @@ namespace Wallet_lib
             List<BudgetWrapper> budgetWrappers = new List<BudgetWrapper>();
             foreach (var item in budgets)
             {
-                decimal spent = await _context.Transactions.Where(t => t.CategoryId == item.CategoryId 
+                decimal spent = await _context.Transactions.Where(t => t.CategoryId == item.CategoryId
                 && t.Date.Month == date.Month && t.Date.Year == date.Year).SumAsync(t => t.Amount);
                 budgetWrappers.Add(new BudgetWrapper(item, spent, date));
             }

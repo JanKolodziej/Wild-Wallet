@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Wallet_lib
 {
     public enum FrequencyOnceA
     {
-        Day=0,
-        Week =1,
+        Day = 0,
+        Week = 1,
         Month = 2,
         Year = 3,
     }
@@ -19,7 +14,7 @@ namespace Wallet_lib
         public int Id { get; set; }
         public string? Name { get; set; }
         public decimal Amount { get; set; }
-        public int CategoryId {  get; set; }
+        public int CategoryId { get; set; }
         public int? AccountId { get; set; }
 
         [ForeignKey(nameof(CategoryId))]

@@ -1,9 +1,7 @@
 using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using Wallet_lib;
-using static SkiaSharp.HarfBuzz.SKShaper;
 
 namespace Wallet_Main;
 
@@ -22,7 +20,7 @@ public partial class AddBudgetPopUp : Popup
     }
     private readonly WalletService _service;
     public Wallet_lib.Budget? Budget { get; set; }
-    public AddBudgetPopUp(List<Categories> categories, WalletService service,Wallet_lib.Budget? budget)
+    public AddBudgetPopUp(List<Categories> categories, WalletService service, Wallet_lib.Budget? budget)
     {
         InitializeComponent();
         var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
@@ -71,7 +69,7 @@ public partial class AddBudgetPopUp : Popup
 
     private void AmountEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if(decimal.TryParse(e.NewTextValue, out _) && SelectedCategory != null)
+        if (decimal.TryParse(e.NewTextValue, out _) && SelectedCategory != null)
         {
             SaveButton.IsEnabled = true;
         }

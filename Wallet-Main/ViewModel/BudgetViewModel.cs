@@ -1,16 +1,10 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wallet_lib;
 
 namespace Wallet_Main
 {
-    public partial class BudgetViewModel :ObservableObject
+    public partial class BudgetViewModel : ObservableObject
     {
         [ObservableProperty]
         private List<BudgetWrapperDisplay> budgets;
@@ -48,7 +42,7 @@ namespace Wallet_Main
                         budgetToUpdate.BudgetWrapper.Budget.Goal = newBudget.Goal;
                     }
                 }
-                    await Load_Data();
+                await Load_Data();
             }
         }
 

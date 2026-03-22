@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wallet_lib
+﻿namespace Wallet_lib
 {
     public class BudgetWrapper
     {
@@ -39,7 +33,7 @@ namespace Wallet_lib
             {
                 Percentage = 0;
             }
-            if(Date.Month == DateTime.Now.Month && Date.Year == DateTime.Now.Year)
+            if (Date.Month == DateTime.Now.Month && Date.Year == DateTime.Now.Year)
             {
                 ExpectedPercentage = DateTime.Now.Day / (double)DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
             }
@@ -47,7 +41,7 @@ namespace Wallet_lib
             {
                 ExpectedPercentage = 1.0;
             }
-                
+
 
         }
     }

@@ -3,7 +3,6 @@ using LiveChartsCore.SkiaSharpView.Maui;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
-using Wallet_lib;
 
 namespace Wallet_Main
 {
@@ -62,7 +61,7 @@ namespace Wallet_Main
                         new() { Name=Resources.Strings.CategoryNames.EatingOutCategory,  Type="Expense", Icon="🍔", Color="#EF5350" },
                         new() { Name=Resources.Strings.CategoryNames.HouseCategory,       Type="Expense", Icon="🏠", Color="#42A5F5" },
                         new() { Name=Resources.Strings.CategoryNames.TransportCategory, Type="Expense", Icon="🚗", Color="#7E57C2" },
-                        new() { Name=Resources.Strings.CategoryNames.SportCategory, Type="Expense", Icon="🏀", Color="#F57C00" }, 
+                        new() { Name=Resources.Strings.CategoryNames.SportCategory, Type="Expense", Icon="🏀", Color="#F57C00" },
                         new() { Name=Resources.Strings.CategoryNames.HobbyCategory, Type="Expense", Icon="🎮", Color="#5E35B1" },
                         new() { Name=Resources.Strings.CategoryNames.EntertainmentCategory,  Type="Expense", Icon="🎬", Color="#EC407A" },
                         new() { Name=Resources.Strings.CategoryNames.SubscriptionCategory,Type="Expense", Icon="📱", Color="#FF7043" },

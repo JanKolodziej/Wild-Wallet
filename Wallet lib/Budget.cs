@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Wallet_lib
 {
     public class Budget
     {
         public int Id { get; set; }
-        
+
         public int CategoryId { get; set; }
         [ForeignKey(nameof(CategoryId))]
         public Categories Category { get; set; }
@@ -18,7 +13,7 @@ namespace Wallet_lib
         public Budget()
         {
         }
-         public Budget(int categoryId, decimal goal,Categories categories)
+        public Budget(int categoryId, decimal goal, Categories categories)
         {
             CategoryId = categoryId;
             Goal = goal;

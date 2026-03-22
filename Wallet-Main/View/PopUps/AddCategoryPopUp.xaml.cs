@@ -90,9 +90,9 @@ public partial class AddCategoryPopUp : Popup
     }
     public void On_Form_Changed(object sender, EventArgs e)
     {
-        if(CategoryName.Text != "" && CategoryName.Text != null)
+        if (CategoryName.Text != "" && CategoryName.Text != null)
         {
-            if(SelectedColor.SelectedItem != null && SelectedIcon.SelectedItem != null)
+            if (SelectedColor.SelectedItem != null && SelectedIcon.SelectedItem != null)
             {
                 Zapisz_Button.IsEnabled = true;
                 return;
@@ -103,13 +103,13 @@ public partial class AddCategoryPopUp : Popup
     public void On_Save_Clicked(object sender, EventArgs e)
     {
         string? icon = SelectedIcon.SelectedItem.ToString();
-        if ( icon != null)
+        if (icon != null)
         {
             Color color = (Color)SelectedColor.SelectedItem;
             Wallet_lib.Categories category = new(CategoryName.Text, Type, icon, color.ToHex());
             Close(category);
         }
-        
+
     }
 
 

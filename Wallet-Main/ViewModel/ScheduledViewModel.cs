@@ -1,17 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wallet_lib;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Wallet_Main
 {
-    public partial class ScheduledViewModel:ObservableObject
+    public partial class ScheduledViewModel : ObservableObject
     {
         private readonly WalletService _service;
         [ObservableProperty]
@@ -26,7 +20,7 @@ namespace Wallet_Main
             var data = await _service.Get_All_Automated_Transactions_Async();
 
             var groups = data.GroupBy(t => t.Frequency).Select(t => new GroupedAutomatedTransactions(t.Key, t.ToList())).
-                OrderByDescending(t=>t.Frequency).ToList();
+                OrderByDescending(t => t.Frequency).ToList();
             AutomatedTransactionsList = new ObservableCollection<GroupedAutomatedTransactions>(groups);
         }
 
