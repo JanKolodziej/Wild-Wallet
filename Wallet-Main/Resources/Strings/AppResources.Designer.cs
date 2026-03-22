@@ -376,6 +376,15 @@ namespace Wallet_Main.Resources.Strings {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Main Account.
+        /// </summary>
+        internal static string MainAccount {
+            get {
+                return ResourceManager.GetString("MainAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Main Page.
         /// </summary>
         internal static string MainPage {
@@ -534,6 +543,15 @@ namespace Wallet_Main.Resources.Strings {
         internal static string SaveTransaction {
             get {
                 return ResourceManager.GetString("SaveTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Savings Account.
+        /// </summary>
+        internal static string SavingsAccount {
+            get {
+                return ResourceManager.GetString("SavingsAccount", resourceCulture);
             }
         }
         

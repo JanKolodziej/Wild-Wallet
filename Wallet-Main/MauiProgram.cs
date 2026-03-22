@@ -46,9 +46,6 @@ namespace Wallet_Main
             builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddTransient<SettingsPage>();
 
-            //builder.Services.AddTransientPopup<CategoryPopUp, CategoryPopUpViewModel>();
-            //builder.Services.AddTransientPopup<AddCategoryPopUp, AddCategoryViewModel>();
-
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
             {
@@ -65,18 +62,18 @@ namespace Wallet_Main
                         new() { Name=Resources.Strings.CategoryNames.EatingOutCategory,  Type="Expense", Icon="🍔", Color="#EF5350" },
                         new() { Name=Resources.Strings.CategoryNames.HouseCategory,       Type="Expense", Icon="🏠", Color="#42A5F5" },
                         new() { Name=Resources.Strings.CategoryNames.TransportCategory, Type="Expense", Icon="🚗", Color="#7E57C2" },
-                        new() { Name=Resources.Strings.CategoryNames.SportCategory, Type="Expense", Icon="🏀", Color="#7E5B32" }, //change
-                        new() { Name=Resources.Strings.CategoryNames.HobbyCategory, Type="Expense", Icon="🎮", Color="#7F57A2" },//change
+                        new() { Name=Resources.Strings.CategoryNames.SportCategory, Type="Expense", Icon="🏀", Color="#F57C00" }, 
+                        new() { Name=Resources.Strings.CategoryNames.HobbyCategory, Type="Expense", Icon="🎮", Color="#5E35B1" },
                         new() { Name=Resources.Strings.CategoryNames.EntertainmentCategory,  Type="Expense", Icon="🎬", Color="#EC407A" },
                         new() { Name=Resources.Strings.CategoryNames.SubscriptionCategory,Type="Expense", Icon="📱", Color="#FF7043" },
                         new() { Name=Resources.Strings.CategoryNames.GiftsCategory,  Type="Expense",  Icon="🎁", Color="#AB47BC" },
                         new() { Name=Resources.Strings.CategoryNames.OtherCategory,      Type="Expense", Icon="📦", Color="#BDBDBD" },
 
-                        new() { Name=Resources.Strings.CategoryNames.PaycheckCategory,   Type="Income",  Icon="💵 ", Color="#66BB6A" },
+                        new() { Name=Resources.Strings.CategoryNames.PaycheckCategory,   Type="Income",  Icon="💵", Color="#66BB6A" },
                         new() { Name=Resources.Strings.CategoryNames.BisnesCategory,    Type="Income",  Icon="📈", Color="#9CCC65" },
                         new() { Name=Resources.Strings.CategoryNames.GiftsCategory,  Type="Income",  Icon="🎁", Color="#AB47BC" },
                         new() { Name=Resources.Strings.CategoryNames.InterestCategory,   Type="Income",  Icon="🏦", Color="#29B6F6" },
-                        new() { Name=Resources.Strings.CategoryNames.OtherCategory,   Type="Income",  Icon="💸", Color="#29B6F6" }//change
+                        new() { Name=Resources.Strings.CategoryNames.OtherCategory,   Type="Income",  Icon="💸", Color="#26A69A" }
 
 
                     });
@@ -87,8 +84,8 @@ namespace Wallet_Main
                 {
                     db.Accounts.AddRange(new List<Wallet_lib.Accounts>
                     {
-                        new Wallet_lib.Accounts { Id =1,Name="Konto Główne" },
-                        new Wallet_lib.Accounts { Id =2,Name="Konto Oszczędnościowe" }
+                        new Wallet_lib.Accounts { Id =1,Name=Resources.Strings.AppResources.MainAccount },
+                        new Wallet_lib.Accounts { Id =2,Name=Resources.Strings.AppResources.SavingsAccount }
 
                     });
                     db.SaveChanges();

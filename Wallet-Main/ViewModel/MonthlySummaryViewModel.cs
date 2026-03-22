@@ -162,8 +162,8 @@ namespace Wallet_Main
         public void Create_Chart()
         {
             var data = Transactions.Where(t => t.Amount < 0)
-                .GroupBy(t => t.Category)
-                .Select(g => new { Category = g.Key, Total = g.Sum(t => t.Amount) })
+                .GroupBy(t => t.Category.Id)
+                .Select(g => new { Category = g.First().Category, Total = g.Sum(t => t.Amount) })
                 .ToList();
             if (data.Count == 0)
             {

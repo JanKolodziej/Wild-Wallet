@@ -393,4 +393,10 @@
   <data name="RestartApp" xml:space="preserve">
     <value>Restart App for the change to work properly</value>
   </data>
+  <data name="MainAccount" xml:space="preserve">
+    <value>Main Account</value>
+  </data>
+  <data name="SavingsAccount" xml:space="preserve">
+    <value>Savings Account</value>
+  </data>
 </root>
