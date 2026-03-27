@@ -1,22 +1,28 @@
 # 💰 Wild Wallet - Personal Finance Manager
 
+<a href="https://play.google.com/store/apps/details?id=com.jankolodziej.wildwallet&pcampaignid=web_share">
+    <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="60">
+</a>
+
 ![.NET](https://img.shields.io/badge/.NET%208-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ![MAUI](https://img.shields.io/badge/MAUI-purple?style=for-the-badge&logo=dotnet&logoColor=white)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
 
-**Wild Wallet** is a modern, minimalist mobile application for personal budget management. The project focuses on high performance, clean architecture (**MVVM**), and an aesthetic Dark Mode designed in a "Fintech" style.
+**Wild Wallet** is a modern, minimalist mobile application for personal budget management, officially available on **Google Play**. The project focuses on high performance, clean architecture (**MVVM**), privacy (Offline-first), and an aesthetic Dark Mode designed in a "Fintech" style.
 
-The app allows users to track financial flows in real-time, analyze expenses via interactive charts, and maintain control over their wallet without unnecessary distractions.
+The app allows users to track financial flows in real-time, analyze expenses via interactive charts, build saving habits, and maintain control over their wallet without unnecessary distractions.
 
 ---
 
-## 📱 App Overview (Screenshots)
+## 📱 App Overview
 
-| 📊 Main Dashboard | 📝 Transaction History | 📈 Balance Projection|
-|:---:|:---:|:---:|
-| <img src="assets/screen1.png" alt="Dashboard" width="280"> | <img src="assets/screen2.png" alt="History List" width="280"> | <img src="assets/screen3.png" alt="Balance projection" width="280"> |
-| *Trend analysis & Balance* | *Detailed operation list* | *Future Balance Projection* |
+<p align="center">
+  <img src="assets/showcase.png" alt="Wild Wallet Showcase" width="100%">
+</p>
+<p align="center">
+  <i>Wild Wallet in action - Dashboard, Transaction History, and Balance Projection.</i>
+</p>
 
 ---
 
@@ -34,10 +40,13 @@ The project is built following software engineering best practices:
 
 - [x] **Finance Tracking:** Seamless recording of income and expenses.
 - [x] **Visual Analysis:** Interactive line charts showing financial trends.
-- [x] **Smart Dashboard:** Tiles with a quick summary of the current balance.
-- [x] **Local Database:** All data is stored securely on the device (SQLite).
+- [x] **Saving Streak:** Gamified system motivating users to save money consistently month by month.
+- [x] **Smart Dashboard:** Tiles with a quick summary of the current balance and dynamic gradients.
+- [x] **Multi-Currency Support:** Dynamic currency formatting (PLN, EUR, USD, etc.) based on user preference or device region.
+- [x] **Data Portability:** Secure CSV export and import capabilities ensuring users own their data.
+- [x] **Local Database:** All data is stored securely on the device (SQLite) - no cloud dependency.
 - [x] **Dark Mode:** User interface designed in a modern "Fintech Dark" theme.
-- [x] **Linear Regression** App can estimate your future balance based on historic data
+- [x] **Linear Regression:** App can estimate your future balance based on historic data.
 
 ---
 
@@ -45,22 +54,12 @@ The project is built following software engineering best practices:
 
 I am currently working on expanding the application's capabilities:
 
-* [x] **Full Transaction Editing:** Ability to modify amount, date, and category.
-* [ ] **Wallets:** Multi-account support (Cash, Bank Account, Savings).
-* [x] **Category Management:** Custom categories with icons and colors.
-* [ ] **Google Play** My biggest dream *aside from beeing employed*
+- [x] **Google Play Release:** My biggest dream (aside from being employed) has been achieved! 🎉
+- [x] **Full Transaction Editing:** Ability to modify amount, date, and category.
+- [x] **Category Management:** Custom categories with icons and colors.
+- [ ] **Wallets:** Multi-account support (Cash, Bank Account, Savings).
+- [ ] **Biometric Security:** App lock via Fingerprint/FaceID.
 
----
-
-## 📥 How to Run
-
-1.  Clone the repository:
-    ```bash
-    git clone [https://github.com/YourUsername/WalletMAUI.git](https://github.com/YourUsername/WalletMAUI.git)
-    ```
-2.  Open the solution in **Visual Studio 2022**.
-3.  Ensure you have the **.NET Multi-platform App UI development** workload installed.
-4.  Build and run on an Android Emulator or a physical device.
 
 ---
 
