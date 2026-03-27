@@ -330,14 +330,7 @@
                                                         </BoxView>
                                                         </AbsoluteLayout>
 
-                                                        <BoxView Color="White" WidthRequest="2"
-                                                             AbsoluteLayout.LayoutFlags="PositionProportional, HeightProportional"
-                                                             AbsoluteLayout.LayoutBounds="{Binding MarkerBounds}">              
-                                                            <BoxView.Shadow>
-                                                                <Shadow Brush="Black" Offset="0,0" Radius="2" Opacity="0.8"/>
-                                                            </BoxView.Shadow>
-                                                        </BoxView>
-                                                        </AbsoluteLayout>
+                                                       
 
                                                     </Border>
 
