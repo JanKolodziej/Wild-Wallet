@@ -18,7 +18,7 @@ The app allows users to track financial flows in real-time, analyze expenses via
 ## 📱 App Overview
 
 <p align="center">
-  <img src="assets/showcase.png" alt="Wild Wallet Showcase" width="100%">
+  <img src="assets/Ujarzmijswojewydatki(2).png" alt="Wild Wallet Showcase" width="100%">
 </p>
 <p align="center">
   <i>Wild Wallet in action - Dashboard, Transaction History, and Balance Projection.</i>
