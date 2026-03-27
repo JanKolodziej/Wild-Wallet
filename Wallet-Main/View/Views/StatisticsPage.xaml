@@ -27,7 +27,7 @@
                 <VerticalStackLayout Spacing="20" Padding="15">
 
                     <Border Style="{StaticResource CardBorderStyle}" IsVisible="{Binding IsNotEnoughData, Converter={toolkit:InvertedBoolConverter}}">
-                        <Grid HeightRequest="350">
+                        <Grid >
                             <VerticalStackLayout Spacing="10">
                                 <Label Text="{x:Static strings:AppResources.MonthlyBalance}" 
                                    TextColor="WhiteSmoke" 

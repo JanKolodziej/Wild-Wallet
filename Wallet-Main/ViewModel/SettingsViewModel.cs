@@ -14,9 +14,9 @@ namespace Wallet_Main
         [ObservableProperty]
         private Currency selectedCurrency;
         [ObservableProperty]
-        private ObservableCollection<Currency> currencies = new()
+        private ObservableCollection<Wallet_lib.Currency> currencies = new()
         {
-            new Currency { Flag = "🌍",Name ="System Currency", Code ="Auto", Iso ="Auto" },
+            new("Auto","System Currency","Auto","🌍"),
             new Currency { Iso = "PLN", Name = "Polski Złoty", Flag = "🇵🇱",Code="zł"},
             new Currency { Iso = "EUR", Name = "Euro", Flag = "🇪🇺",Code="€" },
             new Currency { Iso = "USD", Name = "Dolar amerykański", Flag = "🇺🇸",Code="$"},

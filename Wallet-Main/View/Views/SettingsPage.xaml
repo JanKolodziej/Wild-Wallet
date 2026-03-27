@@ -6,7 +6,7 @@
     Padding="20"
     xmlns:strings="clr-namespace:Wallet_Main.Resources.Strings">
 
-    <ScrollView>
+    <ScrollView VerticalScrollBarVisibility="Never">
 
         <VerticalStackLayout Spacing="25">
 

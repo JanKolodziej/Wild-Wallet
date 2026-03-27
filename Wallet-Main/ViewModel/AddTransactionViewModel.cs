@@ -83,7 +83,11 @@ namespace Wallet_Main
             }
             else if (result == null)
             {
-                SelectedCategory = Categories.FirstOrDefault(c => c.Name == Resources.Strings.CategoryNames.OtherCategory && c.Type == Categories.Last().Type);
+                if(SelectedCategory == null)
+                {
+                    SelectedCategory = Categories.FirstOrDefault(c => c.Name == Resources.Strings.CategoryNames.OtherCategory && c.Type == Categories.Last().Type);
+                }
+                    
             }
         }
 
@@ -214,6 +218,17 @@ namespace Wallet_Main
                 }
 
             }
+
+        }
+
+        [RelayCommand]
+        private async Task Delete()
+        {
+            await _service.Delete_Transaction(TransactionToEdit);
+            await Shell.Current.GoToAsync("..");
+
+
+
 
         }
 

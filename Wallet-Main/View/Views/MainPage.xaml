@@ -82,7 +82,7 @@
                         VerticalOptions="Fill"
                         HorizontalOptions="Fill"
                         ZIndex="99">
-                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" Padding="30">
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15" >
                                 <Label Text="📊" FontSize="50" HorizontalOptions="Center"/>
 
                                     <Label Text="{x:Static strings:AppResources.AddFirstTransaction}"
@@ -310,11 +310,25 @@
                                                         BackgroundColor="#2E3748"
                                                         StrokeShape="RoundRectangle 8"
                                                         HeightRequest="10">
+                                                        <AbsoluteLayout HeightRequest="8">
+                                                            
+                                                        
 
                                                         <ProgressBar
                                                         Progress="{Binding BudgetWrapper.Percentage}"
                                                         ProgressColor="{Binding BudgetWrapper.ProgressColor}"
-                                                        BackgroundColor="Transparent"/>
+                                                        BackgroundColor="Transparent"
+                                                        AbsoluteLayout.LayoutFlags="All"
+                                                        AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
+                                                            
+                                                        <BoxView Color="White" WidthRequest="2"
+                                                             AbsoluteLayout.LayoutFlags="PositionProportional, HeightProportional"
+                                                             AbsoluteLayout.LayoutBounds="{Binding MarkerBounds}">              
+                                                            <BoxView.Shadow>
+                                                                <Shadow Brush="Black" Offset="0,0" Radius="2" Opacity="0.8"/>
+                                                            </BoxView.Shadow>
+                                                        </BoxView>
+                                                        </AbsoluteLayout>
 
                                                         <BoxView Color="White" WidthRequest="2"
                                                              AbsoluteLayout.LayoutFlags="PositionProportional, HeightProportional"

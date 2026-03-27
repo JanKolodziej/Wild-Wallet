@@ -88,6 +88,7 @@
 	  <ProjectReference Include="..\Wallet lib\Wallet_lib.csproj" />
 	</ItemGroup>
 
+
 	<ItemGroup>
 	  <Compile Update="Resources\Strings\AppResources.Designer.cs">
 	    <DesignTime>True</DesignTime>
