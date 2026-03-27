@@ -4,7 +4,7 @@
     <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="60">
 </a>
 
-![.NET](https://img.shields.io/badge/.NET%208-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![.NET](https://img.shields.io/badge/.NET%209-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ![MAUI](https://img.shields.io/badge/MAUI-purple?style=for-the-badge&logo=dotnet&logoColor=white)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
@@ -30,7 +30,7 @@ The app allows users to track financial flows in real-time, analyze expenses via
 
 The project is built following software engineering best practices:
 
-* **Framework:** .NET MAUI (.NET 8)
+* **Framework:** .NET MAUI (.NET 9)
 * **Pattern:** MVVM (Model-View-ViewModel) using `CommunityToolkit.Mvvm`.
 * **Database:** SQLite + **Entity Framework Core** (Code First approach).
 * **Visualization:** LiveCharts2 (Dynamic Cartesian charts).
